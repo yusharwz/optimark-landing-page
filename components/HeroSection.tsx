@@ -21,9 +21,9 @@ export function HeroSection() {
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-24 lg:pb-32">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:gap-20">
+        <div className="flex flex-col lg:flex-row lg:items-center gap-20">
           {/* Content */}
-          <div className="flex-1 space-y-8">
+          <div className="flex-[3] space-y-8">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -70,7 +70,7 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="mt-12 lg:mt-0 flex-1"
+            className="mt-12 lg:mt-0 flex-[2]"
           >
             <BrowserMockup />
           </motion.div>
@@ -82,7 +82,7 @@ export function HeroSection() {
 
 function BrowserMockup() {
   return (
-    <div className="relative mx-auto max-w-xl">
+    <div className="relative mx-auto max-w-2xl">
       <Image
         src="/images/hero-illustration.svg"
         alt="Ilustrasi dashboard Optimark"
