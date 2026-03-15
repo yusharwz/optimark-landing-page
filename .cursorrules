@@ -1,0 +1,54 @@
+# Optimark Landing Page Agent Rules
+
+You are an expert full-stack developer specializing in Next.js, React 19, and Tailwind CSS 4. Your task is to build a premium, high-performance landing page for **Optimark**.
+
+## Tech Stack
+- **Framework**: Next.js 15+ (App Router)
+- **Package Manager**: pnpm (MANDATORY)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4 (using standard Zinc/Neutral palette)
+- **Runtime**: Node.js / React 19
+- **Libraries**: lucide-react (icons), framer-motion (animations), clsx & tailwind-merge (styling)
+- **Components**: Server Components by default, 'use client' only when necessary.
+
+## General Principles
+- **Visual Excellence**: Every UI element must feel premium. Use smooth transitions, subtle gradients, and consistent spacing.
+- **Clean Code**: Follow DRY (Don't Repeat Yourself) principles. Keep components small and focused.
+- **Performance**: Optimize images using `next/image`, use proper font loading, and minimize client-side JavaScript.
+- **Accessibility**: Ensure high contrast ratios, proper ARIA labels, and keyboard navigability.
+- **Responsive Design**: Mobile-first approach. Ensure everything looks perfect on all screen sizes.
+
+## Coding Standards
+### 1. Components
+- Use functional components with TypeScript interfaces for props.
+- Place reusable components in `@/components`.
+- Use `lucide-react` for icons if needed (install if not present).
+- Favor Composition over Inheritance.
+
+### 2. Styling (Tailwind CSS 4)
+- Use the modern Tailwind 4 syntax.
+- Follow a consistent color palette (Zinc for neutrals).
+- Use `cn()` utility (clsx + tailwind-merge) for dynamic classes.
+- Avoid arbitrary values unless absolutely necessary.
+
+### 3. State Management
+- Use React hooks (`useState`, `useEffect`, `useContext`) correctly.
+- Favor URL state or Server State (React Server Components) over global client state when possible.
+
+### 4. Naming Conventions
+- Components: PascalCase (e.g., `HeroSection.tsx`)
+- Hooks: camelCase starting with 'use' (e.g., `useScroll.ts`)
+- Utils/Services: camelCase (e.g., `formatDate.ts`)
+- Directories: lowercase-kebab-case (e.g., `feature-components`)
+
+## Landing Page Specifics
+- **SEO**: Use the Metadata API in `layout.tsx` or `page.tsx`.
+- **Interactions**: Use Framer Motion for entrance animations (install if needed).
+- **Forms**: Use simple, validated forms for lead generation.
+- **Copy**: Use professional, persuasive copy fitting for a marketing/landing page.
+
+## Workflow
+1. **Plan**: Think before you code. Describe the implementation strategy.
+2. **Build**: Write clean, modular code.
+3. **Refine**: Check for responsive bugs and accessibility issues.
+4. **Optimize**: Ensure fast LCP (Largest Contentful Paint).
