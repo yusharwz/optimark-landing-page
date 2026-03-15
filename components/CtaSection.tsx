@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { useRef } from "react";
 import { Button } from "@/components/base/buttons/button";
@@ -36,7 +35,7 @@ export function CtaSection() {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden py-20 lg:py-32 min-h-[1200px]"
+      className="relative overflow-hidden py-16 lg:py-32 min-h-[700px] lg:min-h-[1200px]"
     >
       {/* Swatch background */}
       <motion.div
@@ -50,7 +49,7 @@ export function CtaSection() {
       />
 
       {/* Vertically stacked images */}
-      <div className="relative mx-auto max-w-6xl h-[1000px]">
+      <div className="relative mx-auto hidden h-[900px] max-w-6xl lg:block">
         {/* Image 1 - top, narrowest */}
         <motion.div
           style={{ y: y1, opacity: opacity1, scale: scale1 }}
@@ -112,15 +111,28 @@ export function CtaSection() {
 
       </div>
 
+      {/* Mobile single image */}
+      <div className="relative mx-auto mt-4 block w-full max-w-xl px-4 lg:hidden">
+        <div className="relative overflow-hidden rounded-3xl border border-[#94C748] bg-[#F3F9E8]">
+          <Image
+            src="/images/cta-figma/cta-image.png"
+            alt=""
+            width={1184}
+            height={720}
+            className="h-auto w-full"
+          />
+        </div>
+      </div>
+
       {/* CTA Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8 -mt-32"
+        className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
       >
-        <h2 className="text-3xl font-semibold text-[#1E280E] sm:text-4xl">
+        <h2 className="text-2xl font-semibold text-[#1E280E] sm:text-3xl lg:text-4xl">
           Siap mengembangkan bisnis digital Anda?
         </h2>
-        <p className="mt-4 text-lg text-[#535862]">
+        <p className="mt-3 text-base text-[#535862] sm:mt-4 sm:text-lg">
           Mulai gratis hari ini. Tidak perlu kartu kredit.
         </p>
         <motion.div

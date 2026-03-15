@@ -40,16 +40,16 @@ export function HeroSection() {
       />
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-32 lg:pt-28">
-        <div className="flex flex-col gap-20 lg:flex-row lg:items-center">
+        <div className="flex flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-20">
           {/* Content */}
-          <div className="flex-[3] space-y-8">
+          <div className="flex-[3] space-y-6 text-center lg:space-y-8 lg:text-left">
             <motion.div
               variants={heroBadge}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 rounded-full border border-[#D9D6FE] bg-[#F4F3FF] px-4 py-2"
+              className="inline-flex items-center gap-2 rounded-full border border-[#D9D6FE] bg-[#F4F3FF] px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="text-sm font-medium text-[#5925DC]">
+              <span className="font-medium text-[#5925DC]">
                 Platform all-in-one digital marketing
               </span>
             </motion.div>
@@ -60,11 +60,11 @@ export function HeroSection() {
               animate="visible"
               className="space-y-6"
             >
-              <h1 className="text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]">
+              <h1 className="text-balance text-3xl font-bold tracking-tight text-[#1E280E] sm:text-4xl lg:text-[3.5rem] lg:leading-[1.1]">
                 Semua tools digital marketing dalam satu platform
               </h1>
               <motion.div variants={heroDescription}>
-                <p className="max-w-xl text-xl text-[#535862]">
+                <p className="mx-auto max-w-xl text-base text-[#535862] sm:text-lg lg:mx-0">
                   Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten
                   lebih cepat dengan bantuan AI.
                 </p>
@@ -76,6 +76,7 @@ export function HeroSection() {
                 href="#"
                 color="primary"
                 size="lg"
+                className="mt-4 w-full sm:w-auto sm:px-8"
               >
                 Coba Gratis
               </Button>
@@ -88,7 +89,7 @@ export function HeroSection() {
             variants={heroImage}
             initial="hidden"
             animate="visible"
-            className="mt-12 flex-[2] lg:mt-0"
+            className="mt-8 flex-[2] lg:mt-0"
           >
             <BrowserMockup />
           </motion.div>
