@@ -1,0 +1,50 @@
+name: Deploy Landing Page
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - 'v*'
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  deploy:
+    name: Deploy Landing Page
+    runs-on: self-hosted
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env.local file from secrets
+        run: |
+          echo "${{ secrets.ENV_LOCAL }}" > .env.local
+          echo "✅ Created .env.local file"
+
+      - name: Deploy Landing Page with Docker Compose
+        run: |
+          set -e
+          echo "🚀 Starting landing page deployment..."
+
+          # Ensure network exists
+          echo "🌐 Creating network if not exists..."
+          docker network create digimar-network || true
+
+          # Build and recreate services without full shutdown
+          echo "🔨 Building & recreating services..."
+          docker compose up -d --build --remove-orphans
+
+          # Show status
+          echo "📊 Container status:"
+          docker compose ps
+
+          # Show logs (last 20 lines)
+          echo "📋 Recent logs:"
+          docker compose logs --tail=20
+
+          echo "✅ Landing page deployment completed!"
