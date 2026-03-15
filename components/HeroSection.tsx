@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/base/buttons/button";
-import { useRef } from "react";
+import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
+import { useCallback, useRef, useState } from "react";
 import {
   heroBadge,
   heroTitle,
@@ -14,6 +15,22 @@ import {
 
 export function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const el = containerRef.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    setMousePos({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+    });
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setMousePos(null);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -26,18 +43,20 @@ export function HeroSection() {
     <section
       ref={containerRef}
       className="relative flex min-h-screen items-center overflow-hidden"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
-      {/* Swatch background */}
+      {/* Interactive dot grid background (replaces hero-swatch.png) */}
       <motion.div
-        className="absolute inset-0 opacity-10"
-        style={{
-          y,
-          backgroundImage: "url('/images/hero-swatch.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px 400px",
-        }}
+        className="absolute inset-0 pointer-events-none"
+        style={{ y }}
         aria-hidden
-      />
+      >
+        <InteractiveDotGrid
+          className="absolute inset-0 w-full h-full"
+          mousePosition={mousePos}
+        />
+      </motion.div>
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-32 lg:pt-28">
         <div className="flex flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-20">
