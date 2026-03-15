@@ -2,79 +2,57 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { MessageCircle, Share2, Youtube, MessageSquare, type LucideIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const platforms = [
-  { name: "Instagram", icon: MessageCircle, color: "text-[#E4405F]" },
-  { name: "Facebook", icon: Share2, color: "text-[#1877F2]" },
-  { name: "TikTok", icon: Youtube, color: "text-[#000000]" },
-  { name: "Threads", icon: MessageSquare, color: "text-[#000000]" },
+  { name: "Instagram", icon: "/images/connect/instagram.svg" },
+  { name: "Facebook", icon: "/images/connect/facebook.svg" },
+  { name: "TikTok", icon: "/images/connect/tiktok.svg" },
+  { name: "Threads", icon: "/images/connect/threads.svg" },
+  { name: "Blibli", icon: "/images/connect/blibli.svg" },
+  { name: "Shopee", icon: "/images/connect/shopee.svg" },
+  { name: "TikTok Shop", icon: "/images/connect/tiktokshop.svg" },
+  { name: "Shopee", icon: "/images/connect/shopee.svg" },
 ];
 
 export function ConnectSection() {
   return (
-    <motion.section
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      className="border-t border-[#E9EAEB] bg-white py-20 lg:py-28"
-    >
+    <section className="border-t border-b border-[#E9EAEB] bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-3xl font-semibold text-[#1E280E] sm:text-4xl">
-            Hubungkan ke berbagai akun
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-[#535862]">
-            Kelola semua platform media sosial Anda dari satu dashboard.
-          </p>
-        </div>
-
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-8">
-          {platforms.map((platform) => (
-            <motion.div
-              key={platform.name}
-              whileHover={{ scale: 1.05 }}
-              className={cn(
-                "flex h-20 w-20 items-center justify-center rounded-2xl",
-                "border border-[#E9EAEB] bg-[#FAFAFA]",
-                "transition-colors hover:border-[#D5D7DA] hover:bg-white",
-              )}
-            >
-              <platform.icon className={cn("h-10 w-10", platform.color)} strokeWidth={1.5} />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-6">
-          <div className="flex items-center gap-3 rounded-xl border border-[#E9EAEB] bg-[#FAFAFA] px-6 py-4">
-            <Image
-              src="/images/avatar-optimark.png"
-              alt="Optimark"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <div>
-              <p className="text-sm font-medium text-[#1E280E]">optimark.ai</p>
-              <p className="text-xs text-[#535862]">Terhubung</p>
+        <div className="flex flex-col lg:flex-row lg:items-center">
+          {/* Text Section */}
+          <div className="flex shrink-0 items-center justify-center lg:w-64 border-x border-[#E9EAEB] py-8">
+            <div className="w-full text-center">
+              <h2 className="text-lg font-bold text-[#1E280E] lg:text-xl mx-8">
+                Hubungkan ke berbagai akun
+              </h2>
             </div>
           </div>
-          <div className="flex items-center gap-3 rounded-xl border border-[#E9EAEB] bg-[#FAFAFA] px-6 py-4">
-            <Image
-              src="/images/logo-instagram.png"
-              alt="Instagram"
-              width={40}
-              height={40}
-              className="rounded-full"
-            />
-            <div>
-              <p className="text-sm font-medium text-[#1E280E]">Instagram</p>
-              <p className="text-xs text-[#535862]">Siap dihubungkan</p>
-            </div>
+
+          {/* Platform Cards */}
+          <div className="flex w-full flex-1 flex-wrap items-center lg:flex-nowrap">
+            {platforms.map((platform, index) => (
+              <motion.div
+                key={platform.name}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.05 }}
+                className="flex flex-1 h-full items-center justify-center border-r border-[#E9EAEB]"
+              >
+                <div className="flex flex-col items-center gap-5 py-8">
+                  <Image
+                    src={platform.icon}
+                    alt={platform.name}
+                    width={48}
+                    height={48}
+                    className="h-12 w-auto"
+                  />
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 }
