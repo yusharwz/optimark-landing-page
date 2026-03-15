@@ -1,15 +1,33 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import {
   Calendar,
   BarChart3,
   Megaphone,
   Sparkles,
+  LucideIcon,
 } from "lucide-react";
 import { FeatureCard } from "@/components/base/feature-card";
+import {
+  fadeInUp,
+  staggerContainer,
+  staggerItem,
+  featureCardHover,
+} from "@/lib/animations";
+import { useRef } from "react";
 
-const features = [
+interface Feature {
+  id: string;
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  badge?: string;
+  comingSoon?: boolean;
+  coverImage?: string;
+}
+
+const features: Feature[] = [
   {
     id: "perencana",
     title: "Perencana Konten",
@@ -17,6 +35,7 @@ const features = [
       "Membantu menjadwalkan dan mengelola postingan konten secara otomatis di berbagai platform media sosial.",
     icon: Calendar,
     badge: "Available Now",
+    coverImage: "/images/features-perencanaan-konten.svg",
   },
   {
     id: "seo",
@@ -44,32 +63,53 @@ const features = [
 ];
 
 export function FeaturesSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [50, -50]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+
   return (
-    <section className="bg-[#F5F5F5] py-20 lg:py-28">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section ref={containerRef} className="relative overflow-hidden px-6 py-16 sm:px-12 lg:px-24 lg:py-24" style={{ background: 'linear-gradient(180deg, rgba(255, 255, 255, 1) 49%, rgba(242, 248, 231, 1) 100%)' }}>
+      <motion.div style={{ y, opacity }} className="mx-auto flex max-w-7xl flex-col gap-16 relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 text-center"
+          variants={fadeInUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center"
         >
-          <h2 className="text-3xl font-semibold text-[#1E280E] sm:text-4xl">
+          <motion.h2
+            variants={fadeInUp}
+            className="text-4xl font-bold text-[#1E280E] sm:text-5xl lg:text-[3.5rem]"
+          >
             Semua kebutuhan bisnis Anda ada disini
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-base text-[#535862]">
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="mx-auto mt-6 max-w-2xl text-lg text-[#535862]"
+          >
             Kami menyediakan berbagai fitur unggulan untuk membantu strategi pemasaran digital
             menjadi lebih efektif dan efisien.
-          </p>
+          </motion.p>
         </motion.div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid gap-8 sm:grid-cols-2 lg:gap-10"
+        >
           {features.map((feature, index) => (
             <motion.div
               key={feature.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
+              variants={staggerItem}
+              whileHover="hover"
+              className="h-full"
             >
               <FeatureCard
                 icon={feature.icon}
@@ -77,11 +117,12 @@ export function FeaturesSection() {
                 description={feature.description}
                 badge={feature.badge}
                 comingSoon={feature.comingSoon}
+                coverImage={feature.coverImage}
               />
             </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }

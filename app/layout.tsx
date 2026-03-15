@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { RouteProvider } from "@/providers/route-provider";
+import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -45,9 +46,11 @@ export default function RootLayout({
         className={`${inter.variable} font-sans antialiased smooth-scroll`}
         suppressHydrationWarning
       >
-        <ThemeProvider>
-          <RouteProvider>{children}</RouteProvider>
-        </ThemeProvider>
+        <SmoothScrollProvider>
+          <ThemeProvider>
+            <RouteProvider>{children}</RouteProvider>
+          </ThemeProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
