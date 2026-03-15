@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { Send, Archive, Calendar } from "lucide-react";
 import { Button } from "@/components/base/buttons/button";
 import { useRef } from "react";
 import {
@@ -22,16 +20,18 @@ export function HeroSection() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.95]);
 
   return (
-    <section ref={containerRef} className="relative overflow-hidden min-h-screen">
+    <section
+      ref={containerRef}
+      className="relative flex min-h-screen items-center overflow-hidden"
+    >
       {/* Swatch background */}
       <motion.div
-        style={{ y, opacity }}
         className="absolute inset-0 opacity-10"
         style={{
+          y,
           backgroundImage: "url('/images/hero-swatch.png')",
           backgroundRepeat: "repeat",
           backgroundSize: "400px 400px",
@@ -39,8 +39,8 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-16 pb-24 lg:pt-32 lg:pb-40">
-        <div className="flex flex-col lg:flex-row lg:items-center gap-20">
+      <div className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-32 lg:pt-28">
+        <div className="flex flex-col gap-20 lg:flex-row lg:items-center">
           {/* Content */}
           <div className="flex-[3] space-y-8">
             <motion.div
@@ -84,11 +84,11 @@ export function HeroSection() {
 
           {/* Browser mockup + app preview */}
           <motion.div
-            style={{ y, opacity, scale }}
+            style={{ y, scale }}
             variants={heroImage}
             initial="hidden"
             animate="visible"
-            className="mt-12 lg:mt-0 flex-[2]"
+            className="mt-12 flex-[2] lg:mt-0"
           >
             <BrowserMockup />
           </motion.div>
