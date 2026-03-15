@@ -37,7 +37,7 @@ export function Header() {
             className={cn(
               "inline-flex h-10 items-center justify-center rounded-lg px-5 text-sm font-semibold",
               "bg-[#5925DC] text-white",
-              "transition-colors hover:bg-[#4c1fc4]"
+              "transition-colors hover:bg-[#4c1fc4]",
             )}
           >
             Coba Gratis

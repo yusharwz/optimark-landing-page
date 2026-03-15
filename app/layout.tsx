@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import { ThemeProvider } from "@/providers/theme-provider";
+import { RouteProvider } from "@/providers/route-provider";
+import "@/styles/globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -14,6 +16,10 @@ export const metadata: Metadata = {
     "Semua tools digital marketing dalam satu platform. Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI.",
 };
 
+export const viewport: Viewport = {
+  colorScheme: "light",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,8 +27,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <body className={`${inter.variable} font-sans antialiased`}>
-        {children}
+      <body
+        className={`${inter.variable} font-sans antialiased smooth-scroll`}
+        suppressHydrationWarning
+      >
+        <ThemeProvider>
+          <RouteProvider>{children}</RouteProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

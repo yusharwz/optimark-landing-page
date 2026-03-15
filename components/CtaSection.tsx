@@ -25,7 +25,7 @@ export function CtaSection() {
           className={cn(
             "mt-8 inline-flex h-14 items-center justify-center rounded-lg px-10 text-base font-semibold",
             "bg-[#5925DC] text-white shadow-lg shadow-[#5925DC]/25",
-            "transition-colors hover:bg-[#4c1fc4]"
+            "transition-colors hover:bg-[#4c1fc4]",
           )}
         >
           Coba Sekarang

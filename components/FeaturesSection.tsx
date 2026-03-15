@@ -47,8 +47,7 @@ const features = [
   {
     id: "ai",
     title: "AI Content Maker",
-    description:
-      "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan.",
+    description: "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan.",
     icon: Sparkles,
     comingSoon: true,
   },
@@ -68,8 +67,8 @@ export function FeaturesSection() {
             Semua kebutuhan bisnis Anda ada disini
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-[#535862]">
-            Kami menyediakan berbagai fitur unggulan untuk membantu strategi
-            pemasaran digital menjadi lebih efektif dan efisien.
+            Kami menyediakan berbagai fitur unggulan untuk membantu strategi pemasaran digital
+            menjadi lebih efektif dan efisien.
           </p>
         </motion.div>
 
@@ -83,19 +82,15 @@ export function FeaturesSection() {
               transition={{ delay: index * 0.1 }}
               className={cn(
                 "flex flex-col overflow-hidden rounded-3xl border border-[#E9EAEB] bg-white shadow-sm",
-                "transition-shadow hover:shadow-md"
+                "transition-shadow hover:shadow-md",
               )}
             >
               <div className="flex flex-1 flex-col p-6">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-[#5925DC]/10 shadow-sm">
                   <feature.icon className="h-6 w-6 text-[#5925DC]" />
                 </div>
-                <h3 className="text-xl font-semibold text-[#1E280E]">
-                  {feature.title}
-                </h3>
-                <p className="mt-2 flex-1 text-base text-[#535862]">
-                  {feature.description}
-                </p>
+                <h3 className="text-xl font-semibold text-[#1E280E]">{feature.title}</h3>
+                <p className="mt-2 flex-1 text-base text-[#535862]">{feature.description}</p>
 
                 {feature.comingSoon && (
                   <span className="mt-4 inline-flex w-fit items-center rounded-full bg-[#E9EAEB] px-3 py-1 text-xs font-medium text-[#535862]">

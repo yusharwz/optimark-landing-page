@@ -2,13 +2,7 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import {
-  MessageCircle,
-  Share2,
-  Youtube,
-  MessageSquare,
-  type LucideIcon,
-} from "lucide-react";
+import { MessageCircle, Share2, Youtube, MessageSquare, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const platforms = [
@@ -44,13 +38,10 @@ export function ConnectSection() {
               className={cn(
                 "flex h-20 w-20 items-center justify-center rounded-2xl",
                 "border border-[#E9EAEB] bg-[#FAFAFA]",
-                "transition-colors hover:border-[#D5D7DA] hover:bg-white"
+                "transition-colors hover:border-[#D5D7DA] hover:bg-white",
               )}
             >
-              <platform.icon
-                className={cn("h-10 w-10", platform.color)}
-                strokeWidth={1.5}
-              />
+              <platform.icon className={cn("h-10 w-10", platform.color)} strokeWidth={1.5} />
             </motion.div>
           ))}
         </div>
