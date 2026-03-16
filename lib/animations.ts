@@ -227,7 +227,7 @@ export const featureCardHover = {
     y: -8,
     transition: {
       duration: 0.3,
-      ease: [0.16, 1, 0.3, 1],
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
 };

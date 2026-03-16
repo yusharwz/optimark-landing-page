@@ -6,8 +6,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-  // Improve build performance
-  swcMinify: true,
 };
 
 export default nextConfig;

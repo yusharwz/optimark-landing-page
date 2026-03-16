@@ -8,7 +8,6 @@ import type {
   ReactNode,
 } from "react";
 import { isValidElement } from "react";
-import type { Placement } from "react-aria";
 import type {
   ButtonProps as AriaButtonProps,
   LinkProps as AriaLinkProps,
@@ -39,7 +38,7 @@ export interface CommonProps {
   /** The tooltip to display when hovering over the button */
   tooltip?: string;
   /** The placement of the tooltip */
-  tooltipPlacement?: Placement;
+  tooltipPlacement?: 'top' | 'bottom' | 'left' | 'right';
 }
 
 /**
