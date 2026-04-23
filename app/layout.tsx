@@ -41,15 +41,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="id">
+    <html lang="id" suppressHydrationWarning>
       <body
         className={`${inter.variable} font-sans antialiased smooth-scroll`}
-        suppressHydrationWarning
       >
         <SmoothScrollProvider>
           <ThemeProvider>
             <RouteProvider>{children}</RouteProvider>
-          </ThemeProvider>
+          </ThemeProvider>  
         </SmoothScrollProvider>
       </body>
     </html>
