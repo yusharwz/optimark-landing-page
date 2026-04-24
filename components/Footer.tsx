@@ -75,15 +75,6 @@ export function Footer() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
-              <a
-                href="mailto:admin@usahakreatif.co.id"
-                className="inline-flex items-center rounded-full border border-[#E9EAEB] bg-white/70 px-4 py-2 text-sm font-medium text-[#1E280E] backdrop-blur-sm transition-colors hover:border-[#94C748] hover:bg-white"
-              >
-                admin@usahakreatif.co.id
-              </a>
-
-              <span className="hidden h-7 w-px bg-[#E9EAEB] sm:block" aria-hidden />
-
               <div className="flex items-center gap-3">
                 <span className="text-xs font-medium text-[#717680]">
                   Ikuti kami
