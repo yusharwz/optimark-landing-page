@@ -4,6 +4,7 @@ import { FeaturesSection } from "@/components/FeaturesSection";
 import { ConnectSection } from "@/components/ConnectSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
+import { ScrollUpButton } from "@/components/ScrollUpButton";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
+      <ScrollUpButton threshold={0.85} />
     </div>
   );
 }
