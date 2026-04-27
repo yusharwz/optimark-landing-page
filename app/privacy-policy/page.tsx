@@ -2,9 +2,12 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/base/buttons/button";
-import { fadeInUp, staggerContainer, staggerItem, heroButton } from "@/lib/animations";
+import { staggerContainer, staggerItem, heroButton } from "@/lib/animations";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
+import { Header } from "@/components/Header";
+import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { useCallback, useRef, useState } from "react";
+import { ArrowLeft } from "lucide-react";
 
 export default function PrivacyPolicyPage() {
   const containerRef = useRef<HTMLElement>(null);
@@ -16,48 +19,60 @@ export default function PrivacyPolicyPage() {
   });
 
   const y = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const onMouseMove = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    setMousePos({ x: e.clientX, y: e.clientY });
+  }, []);
 
   return (
-    <section 
-      ref={containerRef}
-      className="relative min-h-screen bg-white overflow-hidden"
-    >
-      {/* Interactive dot grid background */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none"
-        style={{ y }}
-        aria-hidden
+    <>
+      <Header />
+      <section
+        ref={containerRef}
+        onMouseMove={onMouseMove}
+        className="relative min-h-screen bg-white overflow-hidden"
       >
-        <InteractiveDotGrid
-          className="absolute inset-0 w-full h-full"
-          mousePosition={mousePos}
-        />
-      </motion.div>
+        {/* Interactive dot grid background */}
+        <motion.div
+          className="absolute inset-0 pointer-events-none"
+          style={{ y }}
+          aria-hidden
+        >
+          <InteractiveDotGrid
+            className="absolute inset-0 w-full h-full"
+            mousePosition={mousePos}
+          />
+        </motion.div>
 
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-        className="relative z-10 mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8"
-      >
-        <motion.div variants={staggerItem} className="space-y-8">
-          <div>
-            <h1 className="text-balance text-3xl font-bold tracking-tight text-[#1E280E] sm:text-4xl">
-              KEBIJAKAN PRIVASI OPTIMARK
-            </h1>
-            <p className="mt-2 text-sm text-[#535862]">
-              Terakhir diperbarui: 23 April 2026
-            </p>
-          </div>
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={staggerContainer}
+          className="relative z-10 mx-auto max-w-4xl px-4 pb-16 pt-28 sm:px-6 lg:px-8"
+        >
+          <motion.div variants={staggerItem} className="space-y-8">
+            <div>
+              <motion.div variants={heroButton} initial="hidden" animate="visible">
+                <Button href="/" color="secondary" size="sm" iconLeading={ArrowLeft}>
+                  Back
+                </Button>
+              </motion.div>
+
+              <h1 className="mt-4 text-balance text-3xl font-bold tracking-tight text-[#1E280E] sm:text-4xl">
+                KEBIJAKAN PRIVASI OPTIMARK
+              </h1>
+              <p className="mt-2 text-sm text-[#535862]">
+                Terakhir diperbarui: 23 April 2026
+              </p>
+            </div>
 
           <section className="space-y-4">
             <h2 className="text-2xl font-semibold text-[#1E280E]">1. Pendahuluan</h2>
           <p className="text-base text-[#535862] sm:text-lg lg:mx-0">
-            Selamat datang di Optimark ("Kami", "Kita", atau "Optimark").
+            Selamat datang di Optimark (&quot;Kami&quot;, &quot;Kita&quot;, atau &quot;Optimark&quot;).
             Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan,
             menyimpan, dan melindungi informasi pribadi Anda saat menggunakan platform
             digital marketing all-in-one kami, termasuk situs web, aplikasi, dan layanan
-            terkait (secara bersama-sama disebut "Layanan").
+            terkait (secara bersama-sama disebut &quot;Layanan&quot;).
           </p>
           <p className="text-base text-[#535862] sm:text-lg lg:mx-0">
             Dengan mengakses atau menggunakan Layanan kami, Anda menyetujui praktik yang
@@ -445,7 +460,7 @@ export default function PrivacyPolicyPage() {
           <p className="text-base text-[#535862] sm:text-lg lg:mx-0">
             Kami berhak memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan
             akan berlaku efektif segera setelah dipublikasikan di halaman ini dengan tanggal
-            "Terakhir diperbarui" yang direvisi. Kami akan memberitahukan perubahan material
+            &quot;Terakhir diperbarui&quot; yang direvisi. Kami akan memberitahukan perubahan material
             melalui:
           </p>
           <ul className="text-base text-[#535862] sm:text-lg lg:mx-0">
@@ -479,18 +494,10 @@ export default function PrivacyPolicyPage() {
           </p>
           </section>
 
-          <motion.div variants={heroButton} initial="hidden" animate="visible">
-            <Button
-              href="/"
-              color="primary"
-              size="lg"
-              className="mt-4 w-full sm:w-auto sm:px-8"
-            >
-              Kembali ke Beranda
-            </Button>
           </motion.div>
         </motion.div>
-      </motion.div>
-    </section>
+      </section>
+      <ScrollUpButton threshold={0.85} />
+    </>
   );
 }
