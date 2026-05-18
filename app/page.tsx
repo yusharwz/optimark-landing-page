@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
+import { PricingSection } from "@/components/PricingSection";
 import { ConnectSection } from "@/components/ConnectSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
@@ -15,6 +16,7 @@ export default function Home() {
         <div id="features">
           <FeaturesSection />
         </div>
+        <PricingSection />
         <ConnectSection />
         <CtaSection />
       </main>
