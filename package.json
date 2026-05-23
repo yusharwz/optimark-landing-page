@@ -42,5 +42,6 @@
     "prettier": "^3.4.2",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.28.2"
 }
