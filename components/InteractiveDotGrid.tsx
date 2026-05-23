@@ -12,12 +12,20 @@ const INERTIA = 0.12;
 
 interface InteractiveDotGridProps {
   className?: string;
+  dotSize?: number;
+  dotGap?: number;
+  gridWidth?: number;
+  gridHeight?: number;
   /** Mouse position relative to the grid container (from parent section) */
   mousePosition?: { x: number; y: number } | null;
 }
 
 export function InteractiveDotGrid({
   className = "",
+  dotSize = DOT_RADIUS,
+  dotGap = DOT_SPACING,
+  gridWidth,
+  gridHeight,
   mousePosition = null,
 }: InteractiveDotGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -77,10 +85,10 @@ export function InteractiveDotGrid({
 
     const mouse = mouseRef.current;
 
-    for (let cx = 8; cx < w + DOT_SPACING; cx += DOT_SPACING) {
-      for (let cy = 8; cy < h + DOT_SPACING; cy += DOT_SPACING) {
+    for (let cx = 8; cx < w + dotGap; cx += dotGap) {
+      for (let cy = 8; cy < h + dotGap; cy += dotGap) {
         let opacity = BASE_OPACITY;
-        let radius = DOT_RADIUS;
+        let radius = dotSize;
 
         if (mouse) {
           const dx = mouse.x - cx;
@@ -90,7 +98,7 @@ export function InteractiveDotGrid({
             const t = 1 - dist / INTERACT_RADIUS;
             const ease = t * t;
             opacity = BASE_OPACITY + (HOVER_OPACITY - BASE_OPACITY) * ease;
-            radius = DOT_RADIUS + (HOVER_RADIUS - DOT_RADIUS) * ease;
+            radius = dotSize + (HOVER_RADIUS - dotSize) * ease;
           }
         }
 
@@ -100,7 +108,7 @@ export function InteractiveDotGrid({
         ctx.fill();
       }
     }
-  }, []);
+  }, [dotGap, dotSize]);
 
   useEffect(() => {
     const loop = () => {
@@ -111,5 +119,15 @@ export function InteractiveDotGrid({
     return () => cancelAnimationFrame(rafRef.current);
   }, [draw]);
 
-  return <canvas ref={canvasRef} className={className} aria-hidden />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className={className}
+      style={{
+        width: gridWidth,
+        height: gridHeight,
+      }}
+      aria-hidden
+    />
+  );
 }
