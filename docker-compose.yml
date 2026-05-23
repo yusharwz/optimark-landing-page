@@ -1,20 +1,24 @@
-version: '3.9'
+version: "3.9"
 
 services:
   landing-page:
-    build:
-      context: .
-      dockerfile: ./Dockerfile
-    container_name: digimar-landing-page
+    image: ${LANDING_PAGE_IMAGE:-ghcr.io/ukindo/optimark-landing-page}:${IMAGE_TAG:-latest}
+    container_name: optimark.landing-page
     restart: unless-stopped
     ports:
-      - '3002:3000'
+      - "127.0.0.1:3500:3000"
     env_file:
       - .env.local
     networks:
       - digimar-network
     healthcheck:
-      test: ['CMD', 'node', '-e', "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"]
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "require('http').get('http://localhost:3000', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})",
+        ]
       interval: 30s
       timeout: 10s
       retries: 3

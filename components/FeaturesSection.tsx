@@ -86,14 +86,13 @@ export function FeaturesSection() {
             variants={fadeInUp}
             className="text-4xl font-bold text-[#1E280E] sm:text-5xl lg:text-[3.5rem]"
           >
-            Semua kebutuhan bisnis Anda ada disini
+            Otomatisasikan Pertumbuhan Bisnis Anda dengan Teknologi AI
           </motion.h2>
           <motion.p
             variants={fadeInUp}
             className="mx-auto mt-6 max-w-2xl text-lg text-[#535862]"
           >
-            Kami menyediakan berbagai fitur unggulan untuk membantu strategi pemasaran digital
-            menjadi lebih efektif dan efisien.
+            Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.
           </motion.p>
         </motion.div>
 

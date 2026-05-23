@@ -66,13 +66,13 @@ export function HeroSection() {
               variants={heroBadge}
               initial="hidden"
               animate="visible"
-              className="inline-flex items-center gap-2 rounded-full border border-[#D9D6FE] bg-[#F4F3FF] px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="font-medium text-[#5925DC]">
-                Platform all-in-one digital marketing
+              <span className="font-semibold text-brand-700">
+                🚀 Platform Automasi Pemasaran Digital Berbasis AI
               </span>
             </motion.div>
-
+ 
             <motion.div
               variants={heroTitle}
               initial="hidden"
@@ -80,12 +80,11 @@ export function HeroSection() {
               className="space-y-6"
             >
               <h1 className="text-balance text-3xl font-bold tracking-tight text-[#1E280E] sm:text-4xl lg:text-[3.5rem] lg:leading-[1.1]">
-                Semua tools digital marketing dalam satu platform
+                Otomatisasikan Seluruh Pemasaran Digital Anda dengan Kekuatan AI
               </h1>
               <motion.div variants={heroDescription}>
                 <p className="mx-auto max-w-xl text-base text-[#535862] sm:text-lg lg:mx-0">
-                  Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten
-                  lebih cepat dengan bantuan AI.
+                  Optimark mengotomatiskan perencanaan konten media sosial, riset SEO, pembuatan materi kreatif, hingga pengoptimalan iklan Facebook & Instagram Anda secara cerdas dalam satu platform terintegrasi.
                 </p>
               </motion.div>
             </motion.div>

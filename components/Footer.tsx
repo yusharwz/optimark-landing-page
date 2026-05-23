@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 const PRODUCT_STATUS = [
-  { label: "Perencana Konten", status: "Coming Soon" },
+  { label: "Perencana Konten", status: "Available" },
   { label: "SEO Analyzer", status: "Coming Soon" },
   { label: "Ads Manager", status: "Coming Soon" },
   { label: "AI Content Maker", status: "Coming Soon" },
@@ -13,8 +13,8 @@ const PRODUCT_STATUS = [
 
 const LINKS = {
   platform: [
-    { label: "Fitur Unggulan", href: "/#features" },
-    { label: "Mulai Sekarang", href: "/#cta" },
+    { label: "Fitur Unggulan", href: "/features" },
+    { label: "Pilihan Harga", href: "/pricing" },
   ],
   company: [
     { label: "Kebijakan Privasi", href: "/privacy-policy" },

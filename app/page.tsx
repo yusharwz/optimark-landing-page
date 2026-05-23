@@ -16,7 +16,7 @@ export default function Home() {
         <div id="features">
           <FeaturesSection />
         </div>
-        <PricingSection />
+        <PricingSection showEstimator={false} />
         <ConnectSection />
         <CtaSection />
       </main>

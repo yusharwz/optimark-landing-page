@@ -161,7 +161,11 @@ const TOPUP_PACKAGES = [
   { tokens: 2500, price: 1875000 },
 ];
 
-export function PricingSection() {
+interface PricingSectionProps {
+  showEstimator?: boolean;
+}
+
+export function PricingSection({ showEstimator = true }: PricingSectionProps = {}) {
   // State for slider values
   const [sliderValues, setSliderValues] = useState<Record<string, number>>({
     captions: 0,
@@ -267,8 +271,8 @@ export function PricingSection() {
           exit={{ opacity: 0, y: -20 }}
           className="fixed left-1/2 top-8 z-50 -translate-x-1/2"
         >
-          <div className="flex items-center gap-3 rounded-full border border-[#5925DC]/20 bg-white px-6 py-3 shadow-lg">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#5925DC]/10">
+          <div className="flex items-center gap-3 rounded-full border border-[#94C748]/20 bg-white px-6 py-3 shadow-lg">
+            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#94C748]/10">
               <span className="text-xl">🚀</span>
             </div>
             <div>
@@ -331,7 +335,7 @@ export function PricingSection() {
               {/* Popular Badge */}
               {tier.isPopular && (
                 <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#5925DC] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
                       <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
@@ -345,7 +349,7 @@ export function PricingSection() {
               <div
                 className={`flex h-full flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl ${
                   tier.isPopular
-                    ? "border-[#5925DC] ring-2 ring-[#5925DC]/10"
+                    ? "border-[#94C748] ring-2 ring-[#94C748]/10"
                     : "border-[#E9EAEB]"
                 }`}
               >
@@ -373,8 +377,8 @@ export function PricingSection() {
 
                 {/* Tokens */}
                 <div className="mt-4 text-center">
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F3FF] px-3 py-1.5">
-                    <span className="text-sm font-medium text-[#5925DC]">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 border border-brand-100">
+                    <span className="text-sm font-medium text-brand-700">
                       {tier.tokensPerMonth.toLocaleString("id-ID")} tokens/bulan
                     </span>
                   </div>
@@ -421,186 +425,188 @@ export function PricingSection() {
         </motion.div>
 
         {/* Usage Calculator */}
-        <motion.div variants={fadeInUp} className="mt-24">
-          <div className="text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-[#F4F3FF] px-4 py-2 text-sm font-semibold text-[#5925DC]">
-              <Sliders className="h-4 w-4" />
-              Usage Estimator
-            </div>
-            <h2 className="text-3xl font-bold text-[#1E280E] sm:text-4xl">
-              Not Sure Which Plan to Pick?
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[#535862]">
-              Estimate your monthly AI usage and we&apos;ll recommend the most cost-efficient plan
-              for you.
-            </p>
-          </div>
-
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1fr,340px]">
-            {/* Sliders Card */}
-            <div className="rounded-2xl border border-[#E9EAEB] bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-bold text-[#1E280E]">
-                How active is your marketing?
-              </h3>
-              <p className="mt-2 text-sm text-[#535862]">
-                Adjust the sliders to match your typical monthly activity. Rough estimates are
-                fine.
+        {showEstimator && (
+          <motion.div variants={fadeInUp} className="mt-24">
+            <div className="text-center">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 border border-brand-100">
+                <Sliders className="h-4 w-4" />
+                Usage Estimator
+              </div>
+              <h2 className="text-3xl font-bold text-[#1E280E] sm:text-4xl">
+                Not Sure Which Plan to Pick?
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-[#535862]">
+                Estimate your monthly AI usage and we&apos;ll recommend the most cost-efficient plan
+                for you.
               </p>
-
-              <div className="mt-8 space-y-6">
-                {SLIDER_CONFIGS.map((config) => (
-                  <div key={config.id}>
-                    <div className="mb-2 flex items-baseline justify-between">
-                      <label
-                        htmlFor={`slider-${config.id}`}
-                        className="text-sm font-semibold text-[#1E280E]"
-                      >
-                        {config.label}
-                      </label>
-                      <span className="text-sm font-bold text-[#94C748]">
-                        {sliderValues[config.id]}
-                      </span>
-                    </div>
-                    <input
-                      id={`slider-${config.id}`}
-                      type="range"
-                      min="0"
-                      max={config.max}
-                      value={sliderValues[config.id]}
-                      onChange={(e) => handleSliderChange(config.id, parseInt(e.target.value))}
-                      className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#F2F4F7] outline-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#94C748] [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(148,199,72,0.15)] [&::-webkit-slider-thumb]:transition-shadow hover:[&::-webkit-slider-thumb]:shadow-[0_0_0_6px_rgba(148,199,72,0.18)]"
-                    />
-                    <p className="mt-1 text-xs text-[#98A2B3]">{config.hint}</p>
-                  </div>
-                ))}
-              </div>
-
-              {/* Token Breakdown */}
-              {totalTokens > 0 && (
-                <div className="mt-8 rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
-                  <div className="mb-3 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
-                    Token Breakdown
-                  </div>
-                  <div className="space-y-2">
-                    {SLIDER_CONFIGS.map((config) => {
-                      const tokens = sliderValues[config.id] * config.tokensPerUnit;
-                      if (tokens === 0) return null;
-                      return (
-                        <div
-                          key={config.id}
-                          className="flex justify-between text-xs text-[#535862]"
-                        >
-                          <span>
-                            {config.label.split(" / ")[0]} ×{sliderValues[config.id]}
-                          </span>
-                          <strong className="font-bold text-[#1E280E]">{tokens} tokens</strong>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-              )}
             </div>
 
-            {/* Result Card */}
-            <div className="rounded-2xl border border-[#E9EAEB] bg-white shadow-sm lg:sticky lg:top-24">
-              <div
-                className="rounded-t-2xl p-6"
-                style={{
-                  background: "linear-gradient(135deg, #1e7a48 0%, #2D9E5F 100%)",
-                }}
-              >
-                <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-white/70">
-                  Estimated Tokens / Month
-                </div>
-                <div className="text-5xl font-bold text-white">
-                  {totalTokens.toLocaleString("id-ID")}
-                </div>
-                <div className="mt-1 text-xs text-white/60">
-                  ≈ Rp {totalTokens.toLocaleString("id-ID")},000 in AI value
-                </div>
-              </div>
+            <div className="mt-12 grid gap-8 lg:grid-cols-[1fr,340px]">
+              {/* Sliders Card */}
+              <div className="rounded-2xl border border-[#E9EAEB] bg-white p-8 shadow-sm">
+                <h3 className="text-xl font-bold text-[#1E280E]">
+                  How active is your marketing?
+                </h3>
+                <p className="mt-2 text-sm text-[#535862]">
+                  Adjust the sliders to match your typical monthly activity. Rough estimates are
+                  fine.
+                </p>
 
-              <div className="space-y-4 p-6">
-                {/* Recommended Plan */}
-                <div className="rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
-                  <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
-                    Recommended Plan
-                  </div>
-                  <div
-                    className="text-2xl font-bold"
-                    style={{ color: recommendedPlan.isPopular ? "#5925DC" : "#1E280E" }}
-                  >
-                    {recommendedPlan.name}
-                  </div>
-                  <div className="text-xs text-[#535862]">
-                    {recommendedPlan.id === "free" && "Start with the basics"}
-                    {recommendedPlan.id === "starter" && "Great for daily content workflows"}
-                    {recommendedPlan.id === "pro" && "Best for active, growing businesses"}
-                    {recommendedPlan.id === "business" && "For brands and agencies at scale"}
-                  </div>
+                <div className="mt-8 space-y-6">
+                  {SLIDER_CONFIGS.map((config) => (
+                    <div key={config.id}>
+                      <div className="mb-2 flex items-baseline justify-between">
+                        <label
+                          htmlFor={`slider-${config.id}`}
+                          className="text-sm font-semibold text-[#1E280E]"
+                        >
+                          {config.label}
+                        </label>
+                        <span className="text-sm font-bold text-[#94C748]">
+                          {sliderValues[config.id]}
+                        </span>
+                      </div>
+                      <input
+                        id={`slider-${config.id}`}
+                        type="range"
+                        min="0"
+                        max={config.max}
+                        value={sliderValues[config.id]}
+                        onChange={(e) => handleSliderChange(config.id, parseInt(e.target.value))}
+                        className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#F2F4F7] outline-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#94C748] [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(148,199,72,0.15)] [&::-webkit-slider-thumb]:transition-shadow hover:[&::-webkit-slider-thumb]:shadow-[0_0_0_6px_rgba(148,199,72,0.18)]"
+                      />
+                      <p className="mt-1 text-xs text-[#98A2B3]">{config.hint}</p>
+                    </div>
+                  ))}
                 </div>
 
-                {/* Top-up Warning */}
-                {additionalTokensNeeded > 0 && recommendedTopup && (
-                  <div className="rounded-xl border border-[#FCD34D] bg-[#FFFBEB] p-4">
-                    <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#B45309]">
-                      Additional Tokens Needed
+                {/* Token Breakdown */}
+                {totalTokens > 0 && (
+                  <div className="mt-8 rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
+                    <div className="mb-3 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
+                      Token Breakdown
                     </div>
-                    <div className="text-lg font-bold text-[#92400E]">
-                      +{additionalTokensNeeded} Tokens
-                    </div>
-                    <div className="text-xs text-[#A16207]">
-                      Suggested: {recommendedTopup.tokens.toLocaleString("id-ID")} Token pack (~Rp{" "}
-                      {(recommendedTopup.price / 1000).toFixed(0)}k)
+                    <div className="space-y-2">
+                      {SLIDER_CONFIGS.map((config) => {
+                        const tokens = sliderValues[config.id] * config.tokensPerUnit;
+                        if (tokens === 0) return null;
+                        return (
+                          <div
+                            key={config.id}
+                            className="flex justify-between text-xs text-[#535862]"
+                          >
+                            <span>
+                              {config.label.split(" / ")[0]} ×{sliderValues[config.id]}
+                            </span>
+                            <strong className="font-bold text-[#1E280E]">{tokens} tokens</strong>
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 )}
+              </div>
 
-                {/* Cost Breakdown */}
-                <div className="space-y-3 border-t border-[#E9EAEB] pt-4">
-                  <div className="flex justify-between text-xs text-[#535862]">
-                    <span>Plan cost</span>
-                    <span className="font-bold text-[#1E280E]">
-                      {recommendedPlan.price === 0
-                        ? "Free"
-                        : `Rp ${(recommendedPlan.price / 1000).toFixed(0)}k/mo`}
-                    </span>
+              {/* Result Card */}
+              <div className="rounded-2xl border border-[#E9EAEB] bg-white shadow-sm lg:sticky lg:top-24">
+                <div
+                  className="rounded-t-2xl p-6"
+                  style={{
+                    background: "linear-gradient(135deg, #1e7a48 0%, #2D9E5F 100%)",
+                  }}
+                >
+                  <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-white/70">
+                    Estimated Tokens / Month
                   </div>
-                  <div className="flex justify-between text-xs text-[#535862]">
-                    <span>Est. top-up</span>
-                    <span className="font-bold text-[#1E280E]">
-                      {recommendedTopup
-                        ? `~Rp ${(recommendedTopup.price / 1000).toFixed(0)}k`
-                        : "Not needed"}
-                    </span>
+                  <div className="text-5xl font-bold text-white">
+                    {totalTokens.toLocaleString("id-ID")}
                   </div>
-                  <div className="flex justify-between border-t border-[#E9EAEB] pt-3 text-sm font-bold">
-                    <span className="text-[#1E280E]">Total / month</span>
-                    <span className="text-[#94C748]">
-                      {recommendedPlan.price === 0 && !recommendedTopup
-                        ? "Free"
-                        : `~Rp ${((recommendedPlan.price + (recommendedTopup?.price || 0)) / 1000).toFixed(0)}k/mo`}
-                    </span>
+                  <div className="mt-1 text-xs text-white/60">
+                    ≈ Rp {totalTokens.toLocaleString("id-ID")},000 in AI value
                   </div>
                 </div>
 
-                {/* CTA */}
-                <Button
-                  onClick={handleComingSoon}
-                  color="primary"
-                  size="lg"
-                  className="w-full"
-                >
-                  <span className="flex items-center justify-center gap-2">
-                    {totalTokens === 0 ? "Get Started Free" : `Choose ${recommendedPlan.name}`}
-                    <ArrowRight className="h-4 w-4" />
-                  </span>
-                </Button>
+                <div className="space-y-4 p-6">
+                  {/* Recommended Plan */}
+                  <div className="rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
+                    <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
+                      Recommended Plan
+                    </div>
+                    <div
+                      className="text-2xl font-bold"
+                      style={{ color: recommendedPlan.isPopular ? "#94C748" : "#1E280E" }}
+                    >
+                      {recommendedPlan.name}
+                    </div>
+                    <div className="text-xs text-[#535862]">
+                      {recommendedPlan.id === "free" && "Start with the basics"}
+                      {recommendedPlan.id === "starter" && "Great for daily content workflows"}
+                      {recommendedPlan.id === "pro" && "Best for active, growing businesses"}
+                      {recommendedPlan.id === "business" && "For brands and agencies at scale"}
+                    </div>
+                  </div>
+
+                  {/* Top-up Warning */}
+                  {additionalTokensNeeded > 0 && recommendedTopup && (
+                    <div className="rounded-xl border border-[#FCD34D] bg-[#FFFBEB] p-4">
+                      <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#B45309]">
+                        Additional Tokens Needed
+                      </div>
+                      <div className="text-lg font-bold text-[#92400E]">
+                        +{additionalTokensNeeded} Tokens
+                      </div>
+                      <div className="text-xs text-[#A16207]">
+                        Suggested: {recommendedTopup.tokens.toLocaleString("id-ID")} Token pack (~Rp{" "}
+                        {(recommendedTopup.price / 1000).toFixed(0)}k)
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Cost Breakdown */}
+                  <div className="space-y-3 border-t border-[#E9EAEB] pt-4">
+                    <div className="flex justify-between text-xs text-[#535862]">
+                      <span>Plan cost</span>
+                      <span className="font-bold text-[#1E280E]">
+                        {recommendedPlan.price === 0
+                          ? "Free"
+                          : `Rp ${(recommendedPlan.price / 1000).toFixed(0)}k/mo`}
+                      </span>
+                    </div>
+                    <div className="flex justify-between text-xs text-[#535862]">
+                      <span>Est. top-up</span>
+                      <span className="font-bold text-[#1E280E]">
+                        {recommendedTopup
+                          ? `~Rp ${(recommendedTopup.price / 1000).toFixed(0)}k`
+                          : "Not needed"}
+                      </span>
+                    </div>
+                    <div className="flex justify-between border-t border-[#E9EAEB] pt-3 text-sm font-bold">
+                      <span className="text-[#1E280E]">Total / month</span>
+                      <span className="text-[#94C748]">
+                        {recommendedPlan.price === 0 && !recommendedTopup
+                          ? "Free"
+                          : `~Rp ${((recommendedPlan.price + (recommendedTopup?.price || 0)) / 1000).toFixed(0)}k/mo`}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <Button
+                    onClick={handleComingSoon}
+                    color="primary"
+                    size="lg"
+                    className="w-full"
+                  >
+                    <span className="flex items-center justify-center gap-2">
+                      {totalTokens === 0 ? "Get Started Free" : `Choose ${recommendedPlan.name}`}
+                      <ArrowRight className="h-4 w-4" />
+                    </span>
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
-        </motion.div>
+          </motion.div>
+        )}
 
         {/* Bottom CTA */}
         <motion.div
@@ -611,7 +617,7 @@ export function PricingSection() {
             Butuh paket custom?{" "}
             <a
               href="mailto:admin@usahakreatif.co.id"
-              className="font-semibold text-[#5925DC] underline decoration-[#5925DC]/30 underline-offset-4 transition-colors hover:decoration-[#5925DC]"
+              className="font-semibold text-[#94C748] underline decoration-[#94C748]/30 underline-offset-4 transition-colors hover:decoration-[#94C748]"
             >
               Hubungi kami
             </a>
