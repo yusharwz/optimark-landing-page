@@ -3,7 +3,9 @@
 import { useCallback, useState } from "react";
 import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { ArrowUp } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
+import { SCROLL_UP_THRESHOLD } from "@/config/site";
 import { cx } from "@/utils/cx";
 
 export type ScrollUpButtonProps = {
@@ -13,10 +15,11 @@ export type ScrollUpButtonProps = {
 };
 
 export function ScrollUpButton({
-  threshold = 0.85,
+  threshold = SCROLL_UP_THRESHOLD,
   className,
-  ariaLabel = "Scroll to top",
+  ariaLabel,
 }: ScrollUpButtonProps) {
+  const t = useTranslations("scrollUp");
   const [visible, setVisible] = useState(false);
   const { scrollYProgress } = useScroll();
 
@@ -43,11 +46,10 @@ export function ScrollUpButton({
         color="secondary"
         size="sm"
         iconLeading={ArrowUp}
-        aria-label={ariaLabel}
+        aria-label={ariaLabel ?? t("label")}
         onClick={scrollToTop}
         className="rounded-full shadow-md"
       />
     </motion.div>
   );
 }
-

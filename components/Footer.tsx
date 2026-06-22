@@ -1,43 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { FOOTER_PRODUCT_KEYS, SITE, SOCIAL_LINKS } from "@/config/site";
+import { Link } from "@/i18n/navigation";
 
-const PRODUCT_STATUS = [
-  { label: "Perencana Konten", status: "Coming Soon" },
-  { label: "SEO Analyzer", status: "Coming Soon" },
-  { label: "Ads Manager", status: "Coming Soon" },
-  { label: "AI Content Maker", status: "Coming Soon" },
-] as const;
-
-const LINKS = {
-  platform: [
-    { label: "Fitur Unggulan", href: "/#features" },
-    { label: "Mulai Sekarang", href: "/#cta" },
-  ],
-  company: [
-    { label: "Kebijakan Privasi", href: "/privacy-policy" },
-    { label: "Kontak", href: "mailto:admin@usahakreatif.co.id" },
-  ],
-} as const;
-
-const SOCIALS = [
-  { name: "Instagram", href: "https://instagram.com", icon: "/images/connect/instagram.svg" },
-  { name: "Facebook", href: "https://facebook.com", icon: "/images/connect/facebook.svg" },
-  { name: "TikTok", href: "https://tiktok.com", icon: "/images/connect/tiktok.svg" },
-] as const;
+const FOOTER_GRADIENT =
+  "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(242,248,231,1) 100%)";
 
 export function Footer() {
+  const t = useTranslations("footer");
+
   return (
     <footer
       className="relative overflow-hidden border-t border-[#E9EAEB]"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(242,248,231,1) 100%)",
-      }}
+      style={{ background: FOOTER_GRADIENT }}
     >
-      {/* Decorative swatch background */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.04]"
@@ -60,39 +39,39 @@ export function Footer() {
             <Link href="/" className="group inline-flex items-center gap-3">
               <Image
                 src="/images/optimark-logo.svg"
-                alt="Optimark"
+                alt={SITE.brandName}
                 width={36}
                 height={36}
                 className="transition-transform duration-300 group-hover:scale-105"
               />
               <span className="text-lg font-semibold tracking-tight text-[#1E280E]">
-                Optimark
+                {SITE.brandName}
               </span>
             </Link>
 
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#535862]">
-              Platform all-in-one digital marketing untuk bantu bisnis Anda berkembang.
+              {t("tagline")}
             </p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-3">
                 <span className="text-xs font-medium text-[#717680]">
-                  Ikuti kami
+                  {t("followUs")}
                 </span>
                 <div className="flex items-center gap-2">
-                  {SOCIALS.map((s) => (
+                  {SOCIAL_LINKS.map((social) => (
                     <motion.a
-                      key={s.name}
-                      href={s.href}
+                      key={social.name}
+                      href={social.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      aria-label={s.name}
+                      aria-label={social.name}
                       whileHover={{ y: -2 }}
                       className="group flex h-9 w-9 items-center justify-center rounded-full border border-[#E9EAEB] bg-white/70 shadow-[0_1px_0_rgba(16,24,40,0.02)] transition-all hover:border-[#94C748] hover:bg-white hover:shadow-sm"
                     >
                       <Image
-                        src={s.icon}
-                        alt={s.name}
+                        src={social.icon}
+                        alt={social.name}
                         width={18}
                         height={18}
                         className="h-[18px] w-[18px] object-contain opacity-90 transition-opacity group-hover:opacity-100"
@@ -112,19 +91,17 @@ export function Footer() {
               transition={{ duration: 0.5, delay: 0.05 }}
             >
               <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                Produk
+                {t("product")}
               </h3>
               <ul className="mt-4 space-y-3">
-                {PRODUCT_STATUS.map((p) => (
+                {FOOTER_PRODUCT_KEYS.map((key) => (
                   <li
-                    key={p.label}
+                    key={key}
                     className="flex items-center justify-between gap-3 text-sm text-[#535862]"
                   >
-                    <span>{p.label}</span>
-                    <span
-                      className="shrink-0 rounded-full border border-[#E9EAEB] bg-white/60 px-1.5 py-0.5 text-[10px] font-medium text-[#717680]"
-                    >
-                      {p.status}
+                    <span>{t(`products.${key}`)}</span>
+                    <span className="shrink-0 rounded-full border border-[#E9EAEB] bg-white/60 px-1.5 py-0.5 text-[10px] font-medium text-[#717680]">
+                      {t("comingSoon")}
                     </span>
                   </li>
                 ))}
@@ -138,19 +115,25 @@ export function Footer() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                Platform
+                {t("platform")}
               </h3>
               <ul className="mt-4 space-y-3">
-                {LINKS.platform.map((l) => (
-                  <li key={l.href}>
-                    <Link
-                      href={l.href}
-                      className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
-                    >
-                      {l.label}
-                    </Link>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    href="/#features"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.features")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/#cta"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.getStarted")}
+                  </Link>
+                </li>
               </ul>
             </motion.div>
 
@@ -161,32 +144,35 @@ export function Footer() {
               transition={{ duration: 0.5, delay: 0.15 }}
             >
               <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                Perusahaan
+                {t("company")}
               </h3>
               <ul className="mt-4 space-y-3">
-                {LINKS.company.map((l) => (
-                  <li key={l.href}>
-                    <a
-                      href={l.href}
-                      className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
-                    >
-                      {l.label}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <Link
+                    href="/privacy-policy"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.privacy")}
+                  </Link>
+                </li>
+                <li>
+                  <a
+                    href={`mailto:${SITE.contactEmail}`}
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.contact")}
+                  </a>
+                </li>
               </ul>
             </motion.div>
           </div>
         </div>
 
-        {/* Divider */}
         <div className="mt-12 h-px w-full bg-linear-to-r from-transparent via-[#E9EAEB] to-transparent lg:mt-16" />
 
-        {/* Bottom bar */}
         <div className="mt-6 flex flex-col items-center justify-between gap-3 text-sm sm:flex-row">
           <p className="text-[#717680]">
-            © {new Date().getFullYear()} OPTIMARK, PT Usaha Kreatif Indonesia.
-            All rights reserved.
+            {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>
       </div>

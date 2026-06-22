@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cx } from "@/utils/cx";
 
 export interface FeatureBadgeProps {
   children: React.ReactNode;
@@ -8,7 +8,7 @@ export interface FeatureBadgeProps {
 export function FeatureBadge({ children, className }: FeatureBadgeProps) {
   return (
     <span
-      className={cn(
+      className={cx(
         "inline-flex w-fit items-center justify-center gap-2 rounded-full",
         "bg-[#FAFAFA] px-2 py-[2px]",
         "border border-[#E9EAEB]",

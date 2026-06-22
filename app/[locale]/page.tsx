@@ -6,8 +6,18 @@ import { ConnectSection } from "@/components/ConnectSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
+import { SCROLL_UP_THRESHOLD } from "@/config/site";
+import { resolveLocale } from "@/lib/locale";
+import { setRequestLocale } from "next-intl/server";
 
-export default function Home() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function Home({ params }: Props) {
+  const { locale: localeParam } = await params;
+  setRequestLocale(resolveLocale(localeParam));
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -21,7 +31,7 @@ export default function Home() {
         <CtaSection />
       </main>
       <Footer />
-      <ScrollUpButton threshold={0.85} />
+      <ScrollUpButton threshold={SCROLL_UP_THRESHOLD} />
     </div>
   );
 }

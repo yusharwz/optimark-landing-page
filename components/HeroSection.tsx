@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import { useCallback, useRef, useState } from "react";
@@ -14,6 +15,7 @@ import {
 } from "@/lib/animations";
 
 export function HeroSection() {
+  const t = useTranslations("hero");
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
 
@@ -46,31 +48,27 @@ export function HeroSection() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Interactive dot grid background (replaces hero-swatch.png) */}
       <motion.div
-        className="absolute inset-0 pointer-events-none"
+        className="pointer-events-none absolute inset-0"
         style={{ y }}
         aria-hidden
       >
         <InteractiveDotGrid
-          className="absolute inset-0 w-full h-full"
+          className="absolute inset-0 h-full w-full"
           mousePosition={mousePos}
         />
       </motion.div>
 
       <div className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-32 lg:pt-28">
         <div className="flex flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-20">
-          {/* Content */}
-          <div className="flex-[3] space-y-6 text-center lg:space-y-8 lg:text-left">
+          <div className="flex-3 space-y-6 text-center lg:space-y-8 lg:text-left">
             <motion.div
               variants={heroBadge}
               initial="hidden"
               animate="visible"
               className="inline-flex items-center gap-2 rounded-full border border-[#D9D6FE] bg-[#F4F3FF] px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="font-medium text-[#5925DC]">
-                Platform all-in-one digital marketing
-              </span>
+              <span className="font-medium text-[#5925DC]">{t("badge")}</span>
             </motion.div>
 
             <motion.div
@@ -80,12 +78,11 @@ export function HeroSection() {
               className="space-y-6"
             >
               <h1 className="text-balance text-3xl font-bold tracking-tight text-[#1E280E] sm:text-4xl lg:text-[3.5rem] lg:leading-[1.1]">
-                Semua tools digital marketing dalam satu platform
+                {t("title")}
               </h1>
               <motion.div variants={heroDescription}>
                 <p className="mx-auto max-w-xl text-base text-[#535862] sm:text-lg lg:mx-0">
-                  Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten
-                  lebih cepat dengan bantuan AI.
+                  {t("description")}
                 </p>
               </motion.div>
             </motion.div>
@@ -97,20 +94,19 @@ export function HeroSection() {
                 size="lg"
                 className="mt-4 w-full sm:w-auto sm:px-8"
               >
-                Coba Gratis
+                {t("cta")}
               </Button>
             </motion.div>
           </div>
 
-          {/* Browser mockup + app preview */}
           <motion.div
             style={{ y, scale }}
             variants={heroImage}
             initial="hidden"
             animate="visible"
-            className="mt-8 flex-[2] lg:mt-0"
+            className="mt-8 flex-2 lg:mt-0"
           >
-            <BrowserMockup />
+            <BrowserMockup alt={t("imageAlt")} />
           </motion.div>
         </div>
       </div>
@@ -118,7 +114,7 @@ export function HeroSection() {
   );
 }
 
-function BrowserMockup() {
+function BrowserMockup({ alt }: { alt: string }) {
   const { scrollYProgress } = useScroll();
   const y = useTransform(scrollYProgress, [0, 0.5], [0, -100]);
   const rotate = useTransform(scrollYProgress, [0, 0.5], [0, 2]);
@@ -127,7 +123,7 @@ function BrowserMockup() {
     <motion.div style={{ y, rotate }} className="relative mx-auto max-w-2xl">
       <Image
         src="/images/hero-illustration.svg"
-        alt="Ilustrasi dashboard Optimark"
+        alt={alt}
         width={800}
         height={640}
         priority
