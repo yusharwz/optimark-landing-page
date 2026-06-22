@@ -120,7 +120,7 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <Link
-                    href="/#features"
+                    href="/features"
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
                     {t("links.features")}
@@ -128,10 +128,10 @@ export function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/#cta"
+                    href="/pricing"
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
-                    {t("links.getStarted")}
+                    {t("links.pricing")}
                   </Link>
                 </li>
               </ul>

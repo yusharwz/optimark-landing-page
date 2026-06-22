@@ -8,7 +8,13 @@
     "description": "Kebijakan Privasi Optimark - Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
   },
   "header": {
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "toggleMenu": "Buka menu",
+    "nav": {
+      "home": "Beranda",
+      "features": "Fitur",
+      "pricing": "Harga"
+    }
   },
   "localeSwitcher": {
     "label": "Bahasa",
@@ -55,6 +61,24 @@
     "tokensPerMonth": "{count} tokens/bulan",
     "customPlan": "Butuh paket custom?",
     "contactUs": "Hubungi kami",
+    "comingSoonTitle": "Coming Soon!",
+    "comingSoonDescription": "Fitur ini akan segera hadir",
+    "estimator": {
+      "badge": "Usage Estimator",
+      "title": "Belum Yakin Paket Mana yang Tepat?",
+      "subtitle": "Estimasi penggunaan AI bulanan Anda dan kami akan merekomendasikan paket paling hemat untuk Anda.",
+      "slidersTitle": "Seberapa aktif pemasaran Anda?",
+      "slidersSubtitle": "Sesuaikan slider dengan aktivitas bulanan Anda. Perkiraan kasar sudah cukup.",
+      "breakdown": "Rincian Token",
+      "estimatedTokens": "Estimasi Token / Bulan",
+      "recommendedPlan": "Paket Direkomendasikan",
+      "additionalTokens": "Token Tambahan Diperlukan",
+      "suggestedTopup": "Saran: paket {tokens} Token (~Rp {price}k)",
+      "planCost": "Biaya paket",
+      "topupCost": "Est. top-up",
+      "notNeeded": "Tidak diperlukan",
+      "totalPerMonth": "Total / bulan"
+    },
     "tiers": {
       "free": {
         "name": "Free",
@@ -105,6 +129,7 @@
     "comingSoon": "Coming Soon",
     "links": {
       "features": "Fitur Unggulan",
+      "pricing": "Pilihan Harga",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "contact": "Kontak"

@@ -8,7 +8,13 @@
     "description": "Optimark Privacy Policy - Learn how we collect, use, and protect your personal information."
   },
   "header": {
-    "comingSoon": "Coming soon"
+    "comingSoon": "Coming soon",
+    "toggleMenu": "Toggle menu",
+    "nav": {
+      "home": "Home",
+      "features": "Features",
+      "pricing": "Pricing"
+    }
   },
   "localeSwitcher": {
     "label": "Language",
@@ -55,6 +61,24 @@
     "tokensPerMonth": "{count} tokens/month",
     "customPlan": "Need a custom plan?",
     "contactUs": "Contact us",
+    "comingSoonTitle": "Coming Soon!",
+    "comingSoonDescription": "This feature is coming soon",
+    "estimator": {
+      "badge": "Usage Estimator",
+      "title": "Not Sure Which Plan to Pick?",
+      "subtitle": "Estimate your monthly AI usage and we'll recommend the most cost-efficient plan for you.",
+      "slidersTitle": "How active is your marketing?",
+      "slidersSubtitle": "Adjust the sliders to match your typical monthly activity. Rough estimates are fine.",
+      "breakdown": "Token Breakdown",
+      "estimatedTokens": "Estimated Tokens / Month",
+      "recommendedPlan": "Recommended Plan",
+      "additionalTokens": "Additional Tokens Needed",
+      "suggestedTopup": "Suggested: {tokens} Token pack (~Rp {price}k)",
+      "planCost": "Plan cost",
+      "topupCost": "Est. top-up",
+      "notNeeded": "Not needed",
+      "totalPerMonth": "Total / month"
+    },
     "tiers": {
       "free": {
         "name": "Free",
@@ -105,6 +129,7 @@
     "comingSoon": "Coming Soon",
     "links": {
       "features": "Features",
+      "pricing": "Pricing",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "contact": "Contact"

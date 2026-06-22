@@ -1,7 +1,7 @@
 # Multi-stage build for optimal performance and minimal image size
 
 # Stage 1: Dependencies (cached layer)
-FROM node:20-alpine AS deps
+FROM node:22-alpine AS deps
 
 # Install dumb-init for proper signal handling
 RUN apk add --no-cache dumb-init
@@ -21,7 +21,7 @@ RUN \
   fi
 
 # Stage 2: Builder
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 WORKDIR /app
 
@@ -40,7 +40,7 @@ RUN npx next telemetry disable
 RUN npm run build
 
 # Stage 3: Runner (Production)
-FROM node:20-alpine AS runner
+FROM node:22-alpine AS runner
 
 WORKDIR /app
 

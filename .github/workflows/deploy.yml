@@ -4,15 +4,21 @@ on:
   push:
     branches: [main]
     tags:
-      - 'v*'
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
 
 env:
   REGISTRY: ghcr.io
+  IMAGE_NAME: optimark-landing-page
 
 jobs:
-  deploy:
-    name: Deploy Landing Page
-    runs-on: self-hosted
+  build:
+    name: Build and Push Image
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
     environment:
       name: production
@@ -26,25 +32,125 @@ jobs:
           echo "${{ secrets.ENV_LOCAL }}" > .env.local
           echo "✅ Created .env.local file"
 
-      - name: Deploy Landing Page with Docker Compose
+      - name: Set image metadata
+        id: image
+        shell: bash
         run: |
-          set -e
-          echo "🚀 Starting landing page deployment..."
+          OWNER_LC="$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            TAG="${GITHUB_REF#refs/tags/v}"
+          else
+            SHORT_SHA="${GITHUB_SHA::7}"
+            TAG="sha-${SHORT_SHA}"
+          fi
+          echo "name=${REGISTRY}/${OWNER_LC}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
 
-          # Ensure network exists
-          echo "🌐 Creating network if not exists..."
-          docker network create digimar-network || true
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-          # Build and recreate services without full shutdown
-          echo "🔨 Building & recreating services..."
-          docker compose up -d --build --remove-orphans
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-          # Show status
-          echo "📊 Container status:"
-          docker compose ps
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: |
+            ${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}
+            ${{ steps.image.outputs.name }}:production
+          cache-from: type=registry,ref=${{ steps.image.outputs.name }}:buildcache
+          cache-to: type=registry,ref=${{ steps.image.outputs.name }}:buildcache,mode=max
+          provenance: false
 
-          # Show logs (last 20 lines)
-          echo "📋 Recent logs:"
-          docker compose logs --tail=20
+  deploy:
+    name: Deploy Production
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+    environment:
+      name: production
 
-          echo "✅ Landing page deployment completed!"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create .env.local file from secrets
+        run: |
+          echo "${{ secrets.ENV_LOCAL }}" > .env.local
+          echo "✅ Created .env.local file"
+
+      - name: Set deployment metadata
+        id: deploy
+        shell: bash
+        run: |
+          OWNER_LC="$(echo "${GITHUB_REPOSITORY_OWNER}" | tr '[:upper:]' '[:lower:]')"
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            TAG="${GITHUB_REF#refs/tags/v}"
+          else
+            SHORT_SHA="${GITHUB_SHA::7}"
+            TAG="sha-${SHORT_SHA}"
+          fi
+          IMAGE_PREFIX="${REGISTRY}/${OWNER_LC}"
+          echo "image=${IMAGE_PREFIX}/${{ env.IMAGE_NAME }}" >> "$GITHUB_OUTPUT"
+          echo "tag=${TAG}" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare SSH
+        env:
+          PRODUCTION_SSH_KEY: ${{ secrets.PRODUCTION_SSH_KEY }}
+          PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+          PRODUCTION_PORT: ${{ secrets.PRODUCTION_PORT }}
+        run: |
+          PRODUCTION_HOST="$(printf '%s' "$PRODUCTION_HOST" | tr -d '[:space:]')"
+          PRODUCTION_PORT="$(printf '%s' "${PRODUCTION_PORT:-22}" | tr -d '[:space:]')"
+          mkdir -p ~/.ssh
+          printf '%s\n' "$PRODUCTION_SSH_KEY" > ~/.ssh/production_key
+          chmod 600 ~/.ssh/production_key
+          ssh-keyscan -p "$PRODUCTION_PORT" "$PRODUCTION_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload compose and config files
+        env:
+          PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+          PRODUCTION_USER: ${{ secrets.PRODUCTION_USER }}
+          PRODUCTION_PORT: ${{ secrets.PRODUCTION_PORT }}
+          PRODUCTION_DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+        run: |
+          PRODUCTION_HOST="$(printf '%s' "$PRODUCTION_HOST" | tr -d '[:space:]')"
+          PRODUCTION_USER="$(printf '%s' "$PRODUCTION_USER" | tr -d '[:space:]')"
+          PRODUCTION_PORT="$(printf '%s' "${PRODUCTION_PORT:-22}" | tr -d '[:space:]')"
+          if [[ ! "$PRODUCTION_USER" =~ ^[a-z_][a-z0-9_-]*[$]?$ ]]; then
+            echo "Invalid PRODUCTION_USER."
+            exit 1
+          fi
+          ssh -i ~/.ssh/production_key -p "$PRODUCTION_PORT" "$PRODUCTION_USER@$PRODUCTION_HOST" "mkdir -p '$PRODUCTION_DEPLOY_PATH'"
+          scp -i ~/.ssh/production_key -P "$PRODUCTION_PORT" docker-compose.yml "$PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_DEPLOY_PATH/docker-compose.yml"
+          scp -i ~/.ssh/production_key -P "$PRODUCTION_PORT" .env.local "$PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_DEPLOY_PATH/.env.local"
+
+      - name: Pull and restart production container
+        env:
+          LANDING_PAGE_IMAGE: ${{ steps.deploy.outputs.image }}
+          IMAGE_TAG: ${{ steps.deploy.outputs.tag }}
+          PRODUCTION_HOST: ${{ secrets.PRODUCTION_HOST }}
+          PRODUCTION_USER: ${{ secrets.PRODUCTION_USER }}
+          PRODUCTION_PORT: ${{ secrets.PRODUCTION_PORT }}
+          PRODUCTION_DEPLOY_PATH: ${{ secrets.PRODUCTION_DEPLOY_PATH }}
+          GHCR_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PRODUCTION_HOST="$(printf '%s' "$PRODUCTION_HOST" | tr -d '[:space:]')"
+          PRODUCTION_USER="$(printf '%s' "$PRODUCTION_USER" | tr -d '[:space:]')"
+          PRODUCTION_PORT="$(printf '%s' "${PRODUCTION_PORT:-22}" | tr -d '[:space:]')"
+          ssh -i ~/.ssh/production_key -p "$PRODUCTION_PORT" "$PRODUCTION_USER@$PRODUCTION_HOST" \
+            "cd '$PRODUCTION_DEPLOY_PATH' \
+              && echo '$GHCR_PASSWORD' | docker login ${{ env.REGISTRY }} -u '${{ github.actor }}' --password-stdin \
+              && LANDING_PAGE_IMAGE='$LANDING_PAGE_IMAGE' IMAGE_TAG='$IMAGE_TAG' docker compose -f docker-compose.yml pull landing-page \
+              && (docker rm -f optimark.landing-page 2>/dev/null || true) \
+              && LANDING_PAGE_IMAGE='$LANDING_PAGE_IMAGE' IMAGE_TAG='$IMAGE_TAG' docker compose -f docker-compose.yml up -d --no-build --remove-orphans landing-page \
+              && LANDING_PAGE_IMAGE='$LANDING_PAGE_IMAGE' IMAGE_TAG='$IMAGE_TAG' docker compose -f docker-compose.yml ps landing-page \
+              && LANDING_PAGE_IMAGE='$LANDING_PAGE_IMAGE' IMAGE_TAG='$IMAGE_TAG' docker compose -f docker-compose.yml logs --tail=20 landing-page"

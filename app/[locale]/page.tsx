@@ -26,7 +26,7 @@ export default async function Home({ params }: Props) {
         <div id="features">
           <FeaturesSection />
         </div>
-        <PricingSection />
+        <PricingSection showEstimator={false} />
         <ConnectSection />
         <CtaSection />
       </main>
