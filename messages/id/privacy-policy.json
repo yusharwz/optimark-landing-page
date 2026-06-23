@@ -1,0 +1,490 @@
+{
+  "blocks": [
+    {
+      "type": "h2",
+      "text": "1. Pendahuluan"
+    },
+    {
+      "type": "p",
+      "text": "Selamat datang di Optimark (\"Kami\", \"Kita\", atau \"Optimark\"). Kebijakan Privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, menyimpan, dan melindungi informasi pribadi Anda saat menggunakan platform digital marketing all-in-one kami, termasuk situs web, aplikasi, dan layanan terkait (secara bersama-sama disebut \"Layanan\")."
+    },
+    {
+      "type": "p",
+      "text": "Dengan mengakses atau menggunakan Layanan kami, Anda menyetujui praktik yang dijelaskan dalam Kebijakan Privasi ini. Jika Anda tidak menyetujui kebijakan ini, mohon untuk tidak menggunakan Layanan kami."
+    },
+    {
+      "type": "h2",
+      "text": "2. Pengontrol Data"
+    },
+    {
+      "type": "p",
+      "text": "Pengontrol data untuk informasi pribadi Anda adalah:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "- PT Usaha Kreatif Indonesia",
+        "- Alamat: alamat perusahaan - menyusul",
+        "- Email: admin@usahakreatif.co.id",
+        "- Telepon: nomor telepon - menyusul"
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "3. Informasi yang Kami Kumpulkan"
+    },
+    {
+      "type": "h3",
+      "text": "3.1 Informasi yang Anda Berikan Secara Langsung"
+    },
+    {
+      "type": "ul",
+      "items": [
+        {
+          "html": "<strong>Informasi Akun:</strong> Nama lengkap, alamat email, nomor telepon, nama perusahaan, dan kata sandi saat Anda mendaftar akun."
+        },
+        {
+          "html": "<strong>Informasi Profil:</strong> Foto profil, jabatan, dan informasi bisnis yang Anda tambahkan ke profil Anda."
+        },
+        {
+          "html": "<strong>Informasi Pembayaran:</strong> Data yang diperlukan untuk memproses pembayaran, termasuk informasi tagihan. Kami tidak menyimpan data kartu kredit secara langsung; pemrosesan pembayaran dilakukan melalui penyedia layanan pembayaran pihak ketiga yang aman."
+        },
+        {
+          "html": "<strong>Konten dan Data Pemasaran:</strong> Konten yang Anda buat, jadwal postingan, data kampanye iklan, hasil analisis SEO, dan konten yang dihasilkan oleh fitur AI Content Maker."
+        },
+        {
+          "html": "<strong>Komunikasi:</strong> Pesan, umpan balik, dan korespondensi yang Anda kirimkan kepada kami melalui formulir kontak, email, atau fitur dukungan pelanggan."
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "3.2 Informasi yang Dikumpulkan Secara Otomatis"
+    },
+    {
+      "type": "ul",
+      "items": [
+        {
+          "html": "<strong>Data Penggunaan:</strong> Informasi tentang bagaimana Anda menggunakan Layanan, termasuk halaman yang dikunjungi, fitur yang digunakan, waktu akses, durasi penggunaan, dan frekuensi penggunaan."
+        },
+        {
+          "html": "<strong>Data Perangkat dan Teknis:</strong> Jenis perangkat, sistem operasi, jenis browser, alamat IP, pengidentifikasi perangkat unik, resolusi layar, dan bahasa browser."
+        },
+        {
+          "html": "<strong>Cookie dan Teknologi Pelacakan:</strong> Kami menggunakan cookie, web beacon, dan teknologi serupa untuk mengumpulkan informasi tentang aktivitas browsing Anda. Lihat Bagian 6 untuk informasi lebih lanjut."
+        },
+        {
+          "html": "<strong>Data Analitik:</strong> Metrik kinerja konten, data interaksi pengguna, dan statistik terkait kampanye pemasaran Anda."
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "3.3 Informasi dari Pihak Ketiga"
+    },
+    {
+      "type": "ul",
+      "items": [
+        {
+          "html": "<strong>Akun Media Sosial dan Platform E-Commerce:</strong> Saat Anda menghubungkan akun Instagram, Facebook, TikTok, Threads, Blibli, Shopee, atau TikTok Shop ke Layanan kami, kami menerima informasi dari platform tersebut sesuai dengan izin yang Anda berikan, termasuk:",
+          "subitems": [
+            "- Informasi profil akun",
+            "- Metrik dan analitik postingan",
+            "- Data performa kampanye iklan",
+            "- Data interaksi audiens"
+          ]
+        },
+        {
+          "html": "<strong>Penyedia Layanan Login Sosial:</strong> Jika Anda memilih untuk mendaftar atau masuk menggunakan akun media sosial pihak ketiga, kami menerima informasi dasar profil dari penyedia tersebut."
+        },
+        {
+          "html": "<strong>Mitra Bisnis:</strong> Informasi yang dibagikan oleh mitra bisnis kami untuk tujuan peningkatan layanan."
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "4. Tujuan Penggunaan Informasi"
+    },
+    {
+      "type": "p",
+      "text": "Kami menggunakan informasi pribadi Anda untuk tujuan berikut:"
+    },
+    {
+      "type": "h3",
+      "text": "4.1 Menyediakan dan Meningkatkan Layanan"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Menyediakan, mengoperasikan, dan memelihara Layanan",
+        "Membuat dan mengelola akun Anda",
+        "Memproses pembayaran dan transaksi",
+        "Menghubungkan dan menyinkronkan data dari platform media sosial dan e-commerce yang terhubung",
+        "Menyediakan fitur Perencana Konten, SEO Analyzer, Ads Manager, dan AI Content Maker",
+        "Mengirim notifikasi terkait Layanan, termasuk pembaruan jadwal konten dan laporan kampanye"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "4.2 Personalisasi dan Pengembangan"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Mempersonalisasi pengalaman pengguna Anda",
+        "Mengembangkan fitur dan layanan baru",
+        "Melakukan analisis tren dan pola penggunaan untuk peningkatan Layanan",
+        "Mengoptimalkan kinerja dan keamanan platform"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "4.3 Komunikasi"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Mengirimkan informasi teknis, pembaruan, dan pemberitahuan terkait Layanan",
+        "Menanggapi pertanyaan, permintaan dukungan, dan umpan balik",
+        "Mengirimkan informasi promosi dan penawaran khusus (dengan persetujuan Anda)"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "4.4 Keamanan dan Kepatuhan"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Mendeteksi, mencegah, dan mengatasi aktivitas penipuan, penyalahgunaan, atau pelanggaran keamanan",
+        "Mematuhi kewajiban hukum dan peraturan yang berlaku",
+        "Menegakkan perjanjian dan ketentuan kami"
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "5. Dasar Hukum Pemrosesan Data"
+    },
+    {
+      "type": "p",
+      "text": "Kami memproses data pribadi Anda berdasarkan dasar hukum berikut:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        {
+          "html": "<strong>Persetujuan:</strong> Ketika Anda memberikan persetujuan secara eksplisit untuk pemrosesan data tertentu, seperti pemasaran langsung atau penggunaan cookie non-esensial."
+        },
+        {
+          "html": "<strong>Pelaksanaan Kontrak:</strong> Ketika pemrosesan diperlukan untuk memenuhi kontrak dengan Anda, termasuk penyediaan Layanan yang Anda minta."
+        },
+        {
+          "html": "<strong>Kepentingan yang Sah:</strong> Ketika pemrosesan diperlukan untuk tujuan yang sah, seperti keamanan, pencegahan penipuan, dan peningkatan Layanan."
+        },
+        {
+          "html": "<strong>Kewajiban Hukum:</strong> Ketika pemrosesan diperlukan untuk mematuhi hukum dan peraturan yang berlaku."
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "6. Cookie dan Teknologi Pelacakan"
+    },
+    {
+      "type": "h3",
+      "text": "6.1 Jenis Cookie yang Kami Gunakan"
+    },
+    {
+      "type": "p",
+      "html": "a) <strong>Cookie Esensial</strong>"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tujuan: Diperlukan untuk fungsi dasar Layanan",
+        "Contoh: Otentikasi sesi, preferensi keamanan"
+      ]
+    },
+    {
+      "type": "p",
+      "html": "b) <strong>Cookie Fungsional</strong>"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tujuan: Mengingat pilihan dan preferensi Anda",
+        "Contoh: Bahasa, pengaturan tampilan"
+      ]
+    },
+    {
+      "type": "p",
+      "html": "c) <strong>Cookie Analitik</strong>"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tujuan: Membantu kami memahami penggunaan Layanan",
+        "Contoh: Google Analytics, data penggunaan fitur"
+      ]
+    },
+    {
+      "type": "p",
+      "html": "d) <strong>Cookie Pemasaran</strong>"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tujuan: Digunakan untuk menampilkan iklan yang relevan",
+        "Contoh: Piksel pelacakan konversi, retargeting"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "6.2 Pengelolaan Cookie"
+    },
+    {
+      "type": "p",
+      "text": "Anda dapat mengelola preferensi cookie Anda melalui pengaturan browser Anda. Perlu diperhatikan bahwa menonaktifkan cookie tertentu dapat memengaruhi fungsionalitas Layanan."
+    },
+    {
+      "type": "h2",
+      "text": "7. Berbagi dan Pengungkapan Informasi"
+    },
+    {
+      "type": "h3",
+      "text": "7.1 Kami Dapat Membagikan Informasi Anda Kepada:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        {
+          "html": "<strong>Penyedia Layanan Pihak Ketiga:</strong> Perusahaan yang membantu kami menyediakan Layanan, termasuk hosting, pemrosesan pembayaran, analitik, dukungan pelanggan, dan pengiriman email. Penyedia layanan ini terikat oleh perjanjian kerahasiaan dan hanya dapat menggunakan data sesuai instruksi kami."
+        },
+        {
+          "html": "<strong>Platform Terhubung:</strong> Instagram, Facebook, TikTok, Threads, Blibli, Shopee, dan TikTok Shop sesuai dengan yang diperlukan untuk menyediakan fitur integrasi."
+        },
+        {
+          "html": "<strong>Kewajiban Hukum:</strong> Jika diwajibkan oleh hukum, proses hukum, permintaan pemerintah, atau peraturan yang berlaku."
+        },
+        {
+          "html": "<strong>Transaksi Korporasi:</strong> Dalam konteks merger, akuisisi, penjualan aset, atau transfer bisnis, informasi Anda dapat dialihkan kepada pihak yang terkait."
+        }
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "7.2 Kami Tidak Akan:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Menjual informasi pribadi Anda kepada pihak ketiga",
+        "Membagikan informasi pribadi Anda untuk tujuan pemasaran pihak ketiga tanpa persetujuan Anda",
+        "Menggunakan informasi Anda dengan cara yang bertentangan dengan Kebijakan Privasi ini"
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "8. Penyimpanan dan Keamanan Data"
+    },
+    {
+      "type": "h3",
+      "text": "8.1 Penyimpanan Data"
+    },
+    {
+      "type": "p",
+      "text": "Kami menyimpan informasi pribadi Anda selama diperlukan untuk memenuhi tujuan yang dijelaskan dalam Kebijakan Privasi ini, atau selama diwajibkan oleh hukum. Kriteria yang kami gunakan untuk menentukan periode penyimpanan meliputi:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Durasi hubungan bisnis kami dengan Anda",
+        "Apakah ada kewajiban hukum yang mengharuskan penyimpanan data",
+        "Apakah penyimpanan diperlukan untuk penyelesaian sengketa atau penegakan perjanjian"
+      ]
+    },
+    {
+      "type": "h3",
+      "text": "8.2 Keamanan Data"
+    },
+    {
+      "type": "p",
+      "text": "Kami menerapkan langkah-langkah keamanan teknis dan organisasi yang wajar untuk melindungi informasi pribadi Anda, termasuk:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Enkripsi data saat transit (SSL/TLS) dan saat disimpan",
+        "Pembatasan akses terhadap data pribadi hanya kepada karyawan yang membutuhkan",
+        "Pemantauan keamanan secara berkala",
+        "Cadangan data (backup) secara teratur",
+        "Pelatihan keamanan untuk staf yang menangani data pribadi"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Meskipun demikian, tidak ada metode transmisi atau penyimpanan elektronik yang sepenuhnya aman. Kami tidak dapat menjamin keamanan mutlak dari data Anda."
+    },
+    {
+      "type": "h2",
+      "text": "9. Hak-Hak Anda"
+    },
+    {
+      "type": "p",
+      "text": "Sebagai pengguna, Anda memiliki hak-hak berikut terkait data pribadi Anda:"
+    },
+    {
+      "type": "h3",
+      "text": "9.1 Hak Akses"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak meminta salinan informasi pribadi yang kami simpan tentang Anda."
+    },
+    {
+      "type": "h3",
+      "text": "9.2 Hak Koreksi"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak meminta perbaikan atas informasi pribadi yang tidak akurat atau tidak lengkap."
+    },
+    {
+      "type": "h3",
+      "text": "9.3 Hak Penghapusan"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak meminta penghapusan informasi pribadi Anda, dengan tunduk pada kewajiban hukum yang mengharuskan kami menyimpan data tertentu."
+    },
+    {
+      "type": "h3",
+      "text": "9.4 Hak Pembatasan Pemrosesan"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak meminta pembatasan pemrosesan informasi pribadi Anda dalam keadaan tertentu."
+    },
+    {
+      "type": "h3",
+      "text": "9.5 Hak Portabilitas Data"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak menerima informasi pribadi Anda dalam format yang terstruktur, umum digunakan, dan dapat dibaca mesin."
+    },
+    {
+      "type": "h3",
+      "text": "9.6 Hak Keberatan"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak menolak pemrosesan informasi pribadi Anda untuk tujuan tertentu, termasuk pemasaran langsung."
+    },
+    {
+      "type": "h3",
+      "text": "9.7 Hak Terkait Keputusan Otomatis"
+    },
+    {
+      "type": "p",
+      "text": "Anda berhak tidak menjadi subjek keputusan yang sepenuhnya otomatis, termasuk pembuatan profil, yang menghasilkan efek hukum atau serupa yang signifikan bagi Anda."
+    },
+    {
+      "type": "p",
+      "html": "Untuk menggunakan hak-hak tersebut, silakan hubungi kami di <a href=\"mailto:admin@usahakreatif.co.id\" class=\"text-[#535862] underline\">admin@usahakreatif.co.id</a>. Kami akan merespons permintaan Anda dalam waktu paling lambat 30 hari kerja."
+    },
+    {
+      "type": "h2",
+      "text": "10. Penanganan Data AI Content Maker"
+    },
+    {
+      "type": "p",
+      "text": "Fitur AI Content Maker kami memproses konten dan instruksi yang Anda berikan untuk menghasilkan konten pemasaran. Ketentuan berikut berlaku:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Input yang Anda berikan ke fitur AI digunakan semata-mata untuk menghasilkan output yang Anda minta",
+        "Kami dapat menggunakan data penggunaan secara agregat dan anonim untuk meningkatkan kualitas model AI kami",
+        "Kami tidak menggunakan output yang dihasilkan AI untuk melatih model yang dibagikan kepada pihak ketiga tanpa persetujuan Anda",
+        "Anda bertanggung jawab untuk memastikan konten yang Anda buat menggunakan fitur AI mematuhi hukum yang berlaku dan tidak melanggar hak pihak ketiga"
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "11. Transfer Data Internasional"
+    },
+    {
+      "type": "p",
+      "text": "Informasi pribadi Anda mungkin ditransfer ke dan diproses di negara selain negara tempat tinggal Anda. Kami memastikan bahwa transfer data internasional dilakukan dengan perlindungan yang memadai, termasuk:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Penggunaan klausul kontrak standar yang disetujui oleh otoritas yang berwenang",
+        "Pemastian bahwa penerima data memiliki tingkat perlindungan data yang memadai",
+        "Kepatuhan terhadap peraturan perlindungan data yang berlaku di yurisdiksi terkait"
+      ]
+    },
+    {
+      "type": "h2",
+      "text": "12. Tautan ke Situs Pihak Ketiga"
+    },
+    {
+      "type": "p",
+      "text": "Layanan kami mungkin berisi tautan ke situs web atau layanan pihak ketiga yang tidak dioperasikan oleh kami. Kami tidak bertanggung jawab atas praktik privasi situs web pihak ketiga tersebut. Kami menyarankan Anda untuk membaca kebijakan privasi setiap situs yang Anda kunjungi."
+    },
+    {
+      "type": "h2",
+      "text": "13. Privasi Anak"
+    },
+    {
+      "type": "p",
+      "text": "Layanan kami tidak ditujukan untuk anak-anak di bawah usia 18 tahun. Kami tidak secara sadar mengumpulkan informasi pribadi dari anak-anak. Jika kami mengetahui bahwa kami telah mengumpulkan data pribadi dari anak di bawah usia 18 tahun, kami akan segera menghapus informasi tersebut."
+    },
+    {
+      "type": "h2",
+      "text": "14. Perubahan Kebijakan Privasi"
+    },
+    {
+      "type": "p",
+      "text": "Kami berhak memperbarui Kebijakan Privasi ini dari waktu ke waktu. Perubahan akan berlaku efektif segera setelah dipublikasikan di halaman ini dengan tanggal \"Terakhir diperbarui\" yang direvisi. Kami akan memberitahukan perubahan material melalui:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Pemberitahuan email ke alamat email yang terdaftar",
+        "Pemberitahuan di dalam platform Layanan",
+        "Pengumuman di situs web kami"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Penggunaan Layanan yang berkelanjutan setelah perubahan menjadi efektif merupakan penerimaan Anda terhadap kebijakan yang direvisi."
+    },
+    {
+      "type": "h2",
+      "text": "15. Hubungi Kami"
+    },
+    {
+      "type": "p",
+      "text": "Jika Anda memiliki pertanyaan, kekhawatiran, atau permintaan terkait Kebijakan Privasi ini atau praktik penanganan data kami, silakan hubungi:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "PT Usaha Kreatif Indonesia",
+        {
+          "html": "Email: <a href=\"mailto:admin@usahakreatif.co.id\" class=\"text-[#535862] underline\">admin@usahakreatif.co.id</a>"
+        },
+        "Alamat: alamat perusahaan - menyusul",
+        "Telepon: nomor telepon - menyusul"
+      ]
+    },
+    {
+      "type": "p",
+      "text": "Kami akan berusaha merespons semua permintaan dalam waktu 30 hari kerja."
+    }
+  ]
+}

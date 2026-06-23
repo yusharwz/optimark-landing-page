@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "title": "OPTIMARK - Platform All-in-One Digital Marketing",
+    "description": "Semua tools digital marketing dalam satu platform. Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI."
+  },
+  "privacyMetadata": {
+    "title": "Kebijakan Privasi - OPTIMARK",
+    "description": "Kebijakan Privasi Optimark - Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+  },
+  "header": {
+    "comingSoon": "Coming soon",
+    "toggleMenu": "Buka menu",
+    "nav": {
+      "home": "Beranda",
+      "features": "Fitur",
+      "pricing": "Harga"
+    }
+  },
+  "localeSwitcher": {
+    "label": "Bahasa",
+    "id": "Indonesia",
+    "en": "English"
+  },
+  "hero": {
+    "badge": "Platform all-in-one digital marketing",
+    "title": "Semua tools digital marketing dalam satu platform",
+    "description": "Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI.",
+    "cta": "Coba Gratis",
+    "imageAlt": "Ilustrasi dashboard Optimark"
+  },
+  "features": {
+    "title": "Semua kebutuhan bisnis Anda ada disini",
+    "subtitle": "Kami menyediakan berbagai fitur unggulan untuk membantu strategi pemasaran digital menjadi lebih efektif dan efisien.",
+    "availableNow": "Available Now",
+    "comingSoon": "Coming soon",
+    "items": {
+      "perencana": {
+        "title": "Perencana Konten",
+        "description": "Membantu menjadwalkan dan mengelola postingan konten secara otomatis di berbagai platform media sosial."
+      },
+      "seo": {
+        "title": "SEO Analyzer",
+        "description": "Analisis kata kunci dan optimasi konten dengan teknologi analisis kata kunci terbaru."
+      },
+      "ads": {
+        "title": "Ads Manager",
+        "description": "Kelola dan optimalkan kampanye iklan untuk meningkatkan traffic dan konversi secara signifikan."
+      },
+      "ai": {
+        "title": "AI Content Maker",
+        "description": "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Pilih Paket yang Tepat untuk Bisnis Anda",
+    "subtitle": "Mulai gratis dan tingkatkan ke paket berbayar kapan pun Anda siap. Semua paket termasuk update gratis.",
+    "mostPopular": "Most Popular",
+    "free": "Gratis",
+    "perMonth": "/bulan",
+    "tokensPerMonth": "{count} tokens/bulan",
+    "customPlan": "Butuh paket custom?",
+    "contactUs": "Hubungi kami",
+    "comingSoonTitle": "Coming Soon!",
+    "comingSoonDescription": "Fitur ini akan segera hadir",
+    "estimator": {
+      "badge": "Usage Estimator",
+      "title": "Belum Yakin Paket Mana yang Tepat?",
+      "subtitle": "Estimasi penggunaan AI bulanan Anda dan kami akan merekomendasikan paket paling hemat untuk Anda.",
+      "slidersTitle": "Seberapa aktif pemasaran Anda?",
+      "slidersSubtitle": "Sesuaikan slider dengan aktivitas bulanan Anda. Perkiraan kasar sudah cukup.",
+      "breakdown": "Rincian Token",
+      "estimatedTokens": "Estimasi Token / Bulan",
+      "recommendedPlan": "Paket Direkomendasikan",
+      "additionalTokens": "Token Tambahan Diperlukan",
+      "suggestedTopup": "Saran: paket {tokens} Token (~Rp {price}k)",
+      "planCost": "Biaya paket",
+      "topupCost": "Est. top-up",
+      "notNeeded": "Tidak diperlukan",
+      "totalPerMonth": "Total / bulan"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "cta": "Mulai Gratis"
+      },
+      "starter": {
+        "name": "Starter",
+        "cta": "Pilih Starter"
+      },
+      "pro": {
+        "name": "Pro",
+        "cta": "Pilih Pro"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "cta": "Hubungi Kami"
+      }
+    },
+    "features": {
+      "contentPlanner": "Perencana Konten",
+      "socialAccounts1": "1 Akun Media Sosial",
+      "socialAccounts5": "5 Akun Media Sosial",
+      "socialAccounts15": "15 Akun Media Sosial",
+      "socialAccountsUnlimited": "Unlimited Akun Media Sosial",
+      "basicScheduling": "Penjadwalan Konten Dasar",
+      "advancedScheduling": "Penjadwalan Konten Advanced",
+      "seoAnalyzer": "SEO Analyzer",
+      "adsManager": "Ads Manager",
+      "aiContentMaker": "AI Content Maker",
+      "analyticsDashboard": "Analytics Dashboard",
+      "prioritySupport": "Priority Support"
+    }
+  },
+  "connect": {
+    "title": "Hubungkan ke berbagai akun"
+  },
+  "cta": {
+    "title": "Siap mengembangkan bisnis digital Anda?",
+    "description": "Mulai gratis hari ini. Tidak perlu kartu kredit.",
+    "button": "Coba Sekarang"
+  },
+  "footer": {
+    "tagline": "Platform all-in-one digital marketing untuk bantu bisnis Anda berkembang.",
+    "followUs": "Ikuti kami",
+    "product": "Produk",
+    "platform": "Platform",
+    "company": "Perusahaan",
+    "comingSoon": "Coming Soon",
+    "links": {
+      "features": "Fitur Unggulan",
+      "pricing": "Pilihan Harga",
+      "getStarted": "Mulai Sekarang",
+      "privacy": "Kebijakan Privasi",
+      "contact": "Kontak"
+    },
+    "products": {
+      "contentPlanner": "Perencana Konten",
+      "seoAnalyzer": "SEO Analyzer",
+      "adsManager": "Ads Manager",
+      "aiContentMaker": "AI Content Maker"
+    },
+    "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
+  },
+  "scrollUp": {
+    "label": "Scroll ke atas"
+  },
+  "privacy": {
+    "back": "Back",
+    "title": "KEBIJAKAN PRIVASI OPTIMARK",
+    "lastUpdated": "Terakhir diperbarui: 23 April 2026"
+  }
+}

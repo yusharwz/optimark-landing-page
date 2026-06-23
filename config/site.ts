@@ -1,0 +1,29 @@
+export const SITE = {
+  contactEmail: "admin@usahakreatif.co.id",
+  brandName: "Optimark",
+} as const;
+
+export const SCROLL_UP_THRESHOLD = 0.85;
+
+export const SOCIAL_LINKS = [
+  { name: "Instagram", href: "https://instagram.com", icon: "/images/connect/instagram.svg" },
+  { name: "Facebook", href: "https://facebook.com", icon: "/images/connect/facebook.svg" },
+  { name: "TikTok", href: "https://tiktok.com", icon: "/images/connect/tiktok.svg" },
+] as const;
+
+export const CONNECT_PLATFORMS = [
+  { name: "Instagram", icon: "/images/connect/instagram.svg" },
+  { name: "Facebook", icon: "/images/connect/facebook.svg" },
+  { name: "TikTok", icon: "/images/connect/tiktok.svg" },
+  { name: "Threads", icon: "/images/connect/threads.svg" },
+  { name: "Blibli", icon: "/images/connect/blibli.svg" },
+  { name: "Shopee", icon: "/images/connect/shopee.svg" },
+  { name: "TikTok Shop", icon: "/images/connect/tiktokshop.svg" },
+] as const;
+
+export const FOOTER_PRODUCT_KEYS = [
+  "contentPlanner",
+  "seoAnalyzer",
+  "adsManager",
+  "aiContentMaker",
+] as const;

@@ -1,0 +1,153 @@
+{
+  "metadata": {
+    "title": "OPTIMARK - All-in-One Digital Marketing Platform",
+    "description": "All digital marketing tools in one platform. Schedule content, boost SEO visibility, optimize ads, and create content faster with AI assistance."
+  },
+  "privacyMetadata": {
+    "title": "Privacy Policy - OPTIMARK",
+    "description": "Optimark Privacy Policy - Learn how we collect, use, and protect your personal information."
+  },
+  "header": {
+    "comingSoon": "Coming soon",
+    "toggleMenu": "Toggle menu",
+    "nav": {
+      "home": "Home",
+      "features": "Features",
+      "pricing": "Pricing"
+    }
+  },
+  "localeSwitcher": {
+    "label": "Language",
+    "id": "Indonesia",
+    "en": "English"
+  },
+  "hero": {
+    "badge": "All-in-one digital marketing platform",
+    "title": "All digital marketing tools in one platform",
+    "description": "Schedule content, boost SEO visibility, optimize ads, and create content faster with AI assistance.",
+    "cta": "Try for Free",
+    "imageAlt": "Optimark dashboard illustration"
+  },
+  "features": {
+    "title": "Everything your business needs is here",
+    "subtitle": "We provide premium features to help your digital marketing strategy become more effective and efficient.",
+    "availableNow": "Available Now",
+    "comingSoon": "Coming soon",
+    "items": {
+      "perencana": {
+        "title": "Content Planner",
+        "description": "Helps schedule and manage content posts automatically across various social media platforms."
+      },
+      "seo": {
+        "title": "SEO Analyzer",
+        "description": "Keyword analysis and content optimization with the latest keyword analysis technology."
+      },
+      "ads": {
+        "title": "Ads Manager",
+        "description": "Manage and optimize ad campaigns to significantly increase traffic and conversions."
+      },
+      "ai": {
+        "title": "AI Content Maker",
+        "description": "Create quality content with AI assistance for relevant results."
+      }
+    }
+  },
+  "pricing": {
+    "title": "Choose the Right Plan for Your Business",
+    "subtitle": "Start for free and upgrade to a paid plan whenever you're ready. All plans include free updates.",
+    "mostPopular": "Most Popular",
+    "free": "Free",
+    "perMonth": "/month",
+    "tokensPerMonth": "{count} tokens/month",
+    "customPlan": "Need a custom plan?",
+    "contactUs": "Contact us",
+    "comingSoonTitle": "Coming Soon!",
+    "comingSoonDescription": "This feature is coming soon",
+    "estimator": {
+      "badge": "Usage Estimator",
+      "title": "Not Sure Which Plan to Pick?",
+      "subtitle": "Estimate your monthly AI usage and we'll recommend the most cost-efficient plan for you.",
+      "slidersTitle": "How active is your marketing?",
+      "slidersSubtitle": "Adjust the sliders to match your typical monthly activity. Rough estimates are fine.",
+      "breakdown": "Token Breakdown",
+      "estimatedTokens": "Estimated Tokens / Month",
+      "recommendedPlan": "Recommended Plan",
+      "additionalTokens": "Additional Tokens Needed",
+      "suggestedTopup": "Suggested: {tokens} Token pack (~Rp {price}k)",
+      "planCost": "Plan cost",
+      "topupCost": "Est. top-up",
+      "notNeeded": "Not needed",
+      "totalPerMonth": "Total / month"
+    },
+    "tiers": {
+      "free": {
+        "name": "Free",
+        "cta": "Start Free"
+      },
+      "starter": {
+        "name": "Starter",
+        "cta": "Choose Starter"
+      },
+      "pro": {
+        "name": "Pro",
+        "cta": "Choose Pro"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "cta": "Contact Us"
+      }
+    },
+    "features": {
+      "contentPlanner": "Content Planner",
+      "socialAccounts1": "1 Social Media Account",
+      "socialAccounts5": "5 Social Media Accounts",
+      "socialAccounts15": "15 Social Media Accounts",
+      "socialAccountsUnlimited": "Unlimited Social Media Accounts",
+      "basicScheduling": "Basic Content Scheduling",
+      "advancedScheduling": "Advanced Content Scheduling",
+      "seoAnalyzer": "SEO Analyzer",
+      "adsManager": "Ads Manager",
+      "aiContentMaker": "AI Content Maker",
+      "analyticsDashboard": "Analytics Dashboard",
+      "prioritySupport": "Priority Support"
+    }
+  },
+  "connect": {
+    "title": "Connect to various accounts"
+  },
+  "cta": {
+    "title": "Ready to grow your digital business?",
+    "description": "Start for free today. No credit card required.",
+    "button": "Try Now"
+  },
+  "footer": {
+    "tagline": "All-in-one digital marketing platform to help your business grow.",
+    "followUs": "Follow us",
+    "product": "Product",
+    "platform": "Platform",
+    "company": "Company",
+    "comingSoon": "Coming Soon",
+    "links": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "getStarted": "Get Started",
+      "privacy": "Privacy Policy",
+      "contact": "Contact"
+    },
+    "products": {
+      "contentPlanner": "Content Planner",
+      "seoAnalyzer": "SEO Analyzer",
+      "adsManager": "Ads Manager",
+      "aiContentMaker": "AI Content Maker"
+    },
+    "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
+  },
+  "scrollUp": {
+    "label": "Scroll to top"
+  },
+  "privacy": {
+    "back": "Back",
+    "title": "OPTIMARK PRIVACY POLICY",
+    "lastUpdated": "Last updated: April 23, 2026"
+  }
+}

@@ -1,22 +1,25 @@
 "use client";
 
-import Link from "next/link";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Button } from "@/components/base/buttons/button";
+import { useTranslations } from "next-intl";
+import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/base/buttons/button";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { SITE } from "@/config/site";
+import { Link, usePathname } from "@/i18n/navigation";
+
+const NAV_LINK_KEYS = [
+  { key: "home", href: "/" },
+  { key: "features", href: "/features" },
+  { key: "pricing", href: "/pricing" },
+] as const;
 
 export function Header() {
+  const t = useTranslations("header");
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { name: "Beranda", href: "/" },
-    { name: "Fitur", href: "/features" },
-    { name: "Harga", href: "/pricing" },
-  ];
 
   const isActive = (href: string) => {
     if (href === "/") {
@@ -26,40 +29,38 @@ export function Header() {
   };
 
   return (
-    <header className="fixed top-4 left-4 right-4 z-50">
+    <header className="fixed left-4 right-4 top-4 z-50">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-2xl bg-white/85 backdrop-blur-md border border-gray-100/50 shadow-sm p-4">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-3 group">
+        <div className="rounded-2xl border border-gray-100/50 bg-white/85 p-4 shadow-sm backdrop-blur-md">
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" className="group flex items-center gap-3">
               <Image
                 src="/images/optimark-logo.svg"
-                alt="Optimark"
+                alt={SITE.brandName}
                 width={32}
                 height={32}
                 priority
                 className="transition-transform duration-300 group-hover:scale-105"
               />
-              <span className="text-sm font-bold tracking-tight text-gray-900">
-                Optimark
+              <span className="text-sm font-semibold tracking-tight text-gray-900">
+                {SITE.brandName}
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => {
+            <nav className="hidden items-center gap-8 md:flex">
+              {NAV_LINK_KEYS.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative text-sm font-medium transition-colors py-1.5 px-3 rounded-lg ${
+                    className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                       active
                         ? "text-[#94C748]"
-                        : "text-gray-600 hover:text-gray-900 hover:bg-gray-50/50"
+                        : "text-gray-600 hover:bg-gray-50/50 hover:text-gray-900"
                     }`}
                   >
-                    {link.name}
+                    {t(`nav.${link.key}`)}
                     {active && (
                       <motion.div
                         layoutId="activeNav"
@@ -72,19 +73,18 @@ export function Header() {
               })}
             </nav>
 
-            {/* CTA Button / Mobile Menu Toggle */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3">
+              <LanguageSwitcher />
               <div className="hidden md:block">
                 <Button color="primary" size="sm">
-                  Coming soon
+                  {t("comingSoon")}
                 </Button>
               </div>
 
-              {/* Hamburger Button */}
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden flex h-9 w-9 items-center justify-center rounded-lg border border-gray-100 bg-gray-50/50 text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900"
-                aria-label="Toggle menu"
+                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-100 bg-gray-50/50 text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 md:hidden"
+                aria-label={t("toggleMenu")}
               >
                 {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
@@ -92,7 +92,6 @@ export function Header() {
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
@@ -100,28 +99,28 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="md:hidden mt-2 rounded-2xl border border-gray-100 bg-white p-4 shadow-lg flex flex-col gap-3"
+              className="mt-2 flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-4 shadow-lg md:hidden"
             >
-              {navLinks.map((link) => {
+              {NAV_LINK_KEYS.map((link) => {
                 const active = isActive(link.href);
                 return (
                   <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`text-sm font-medium p-3 rounded-xl transition-colors ${
+                    className={`rounded-xl p-3 text-sm font-medium transition-colors ${
                       active
-                        ? "bg-[#94C748]/10 text-[#94C748] font-bold"
+                        ? "bg-[#94C748]/10 font-bold text-[#94C748]"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
                     }`}
                   >
-                    {link.name}
+                    {t(`nav.${link.key}`)}
                   </Link>
                 );
               })}
-              <div className="border-t border-gray-100 pt-3 mt-1">
+              <div className="mt-1 border-t border-gray-100 pt-3">
                 <Button color="primary" size="lg" className="w-full justify-center">
-                  Coming soon
+                  {t("comingSoon")}
                 </Button>
               </div>
             </motion.div>

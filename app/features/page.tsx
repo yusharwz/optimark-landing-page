@@ -119,8 +119,7 @@ export default function FeaturesPage() {
                     icon={feat.icon}
                     title={feat.title}
                     description={feat.description}
-                    badge={feat.badge}
-                    comingSoon={feat.comingSoon}
+                    badge={feat.badge ?? (feat.comingSoon ? "Coming soon" : undefined)}
                     coverImage={feat.coverImage}
                   />
                 </Link>

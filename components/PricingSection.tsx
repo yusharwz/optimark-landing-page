@@ -1,104 +1,17 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useMemo, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
+import { ArrowRight, Check, Sliders, X } from "lucide-react";
 import { Button } from "@/components/base/buttons/button";
-import { Check, X, Sliders, ArrowRight } from "lucide-react";
+import { PRICING_TIERS } from "@/config/pricing";
+import { SITE } from "@/config/site";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
-interface Feature {
-  name: string;
-  included: boolean;
-}
+const SECTION_GRADIENT =
+  "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(242, 248, 231, 1) 100%)";
 
-interface PricingTier {
-  id: string;
-  name: string;
-  price: number;
-  tokensPerMonth: number;
-  features: Feature[];
-  isPopular?: boolean;
-  ctaText: string;
-  ctaLink: string;
-}
-
-// Hardcoded pricing tiers (TBD: will be fetched from Back Office API)
-const PRICING_TIERS: PricingTier[] = [
-  {
-    id: "free",
-    name: "Free",
-    price: 0,
-    tokensPerMonth: 50,
-    ctaText: "Get Started",
-    ctaLink: "#",
-    features: [
-      { name: "1 business workspace", included: true },
-      { name: "Manual content scheduling", included: true },
-      { name: "Basic performance dashboard", included: true },
-      { name: "AI content writing", included: false },
-      { name: "Marketplace intelligence", included: false },
-      { name: "SEO & article automation", included: false },
-      { name: "Ad campaign management", included: false },
-    ],
-  },
-  {
-    id: "starter",
-    name: "Starter",
-    price: 199000,
-    tokensPerMonth: 200,
-    ctaText: "Choose Starter",
-    ctaLink: "#",
-    features: [
-      { name: "Up to 3 business workspaces", included: true },
-      { name: "Instagram & Facebook connect", included: true },
-      { name: "AI-written captions & copy", included: true },
-      { name: "AI article writer", included: true },
-      { name: "Smart post scheduling", included: true },
-      { name: "Full performance dashboard", included: true },
-      { name: "Marketplace intelligence", included: false },
-      { name: "SEO tools", included: false },
-    ],
-  },
-  {
-    id: "pro",
-    name: "Pro",
-    price: 499000,
-    tokensPerMonth: 600,
-    ctaText: "Choose Pro",
-    ctaLink: "#",
-    isPopular: true,
-    features: [
-      { name: "Up to 5 business workspaces", included: true },
-      { name: "Instagram & Facebook connect", included: true },
-      { name: "AI content, articles & visuals", included: true },
-      { name: "Smart post scheduling", included: true },
-      { name: "Rank tracker & keyword research", included: true },
-      { name: "Site audit & content optimizer", included: true },
-      { name: "Backlink analysis", included: true },
-      { name: "Marketplace intelligence", included: true },
-      { name: "Google Ads & campaign management", included: true },
-    ],
-  },
-  {
-    id: "business",
-    name: "Business",
-    price: 999000,
-    tokensPerMonth: 1500,
-    ctaText: "Choose Business",
-    ctaLink: "#",
-    features: [
-      { name: "Up to 10 business workspaces", included: true },
-      { name: "Instagram & Facebook connect", included: true },
-      { name: "Everything in Pro", included: true },
-      { name: "Auto-generated client reports", included: true },
-      { name: "Payment gateway integration", included: true },
-      { name: "Support desk & ticketing", included: true },
-      { name: "Priority support", included: true },
-    ],
-  },
-];
-
-// Slider configuration for usage calculator
 interface SliderConfig {
   id: string;
   label: string;
@@ -152,7 +65,6 @@ const SLIDER_CONFIGS: SliderConfig[] = [
   },
 ];
 
-// Top-up packages
 const TOPUP_PACKAGES = [
   { tokens: 100, price: 100000 },
   { tokens: 300, price: 270000 },
@@ -166,7 +78,7 @@ interface PricingSectionProps {
 }
 
 export function PricingSection({ showEstimator = true }: PricingSectionProps = {}) {
-  // State for slider values
+  const t = useTranslations("pricing");
   const [sliderValues, setSliderValues] = useState<Record<string, number>>({
     captions: 0,
     articles: 0,
@@ -175,51 +87,43 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
     marketplace: 0,
     ads: 0,
   });
-
-  // State for notification
   const [showNotification, setShowNotification] = useState(false);
 
-  // Calculate total tokens needed
   const totalTokens = useMemo(() => {
     return SLIDER_CONFIGS.reduce((sum, config) => {
       return sum + (sliderValues[config.id] || 0) * config.tokensPerUnit;
     }, 0);
   }, [sliderValues]);
 
-  // Get recommended plan based on tokens and features
   const recommendedPlan = useMemo(() => {
-    // Check if user needs Pro-only features
     const needsProFeatures =
       sliderValues.seo > 0 ||
       sliderValues.marketplace > 0 ||
       sliderValues.ads > 0 ||
       sliderValues.images > 0;
 
-    // Check if user needs Starter-only features
     const needsStarterFeatures =
       sliderValues.captions > 0 || sliderValues.articles > 0;
 
-    // Find plan by token capacity
-    let planByTokens = PRICING_TIERS[0]; // Default to Free
+    let planByTokens = PRICING_TIERS[0];
     for (let i = PRICING_TIERS.length - 1; i >= 0; i--) {
       if (totalTokens <= PRICING_TIERS[i].tokensPerMonth) {
         planByTokens = PRICING_TIERS[i];
       }
     }
 
-    // Override based on features needed
     if (needsProFeatures) {
-      const proIndex = PRICING_TIERS.findIndex((t) => t.id === "pro");
+      const proIndex = PRICING_TIERS.findIndex((tier) => tier.id === "pro");
       if (totalTokens > PRICING_TIERS[proIndex].tokensPerMonth) {
-        return PRICING_TIERS.find((t) => t.id === "business") || PRICING_TIERS[proIndex];
+        return PRICING_TIERS.find((tier) => tier.id === "enterprise") || PRICING_TIERS[proIndex];
       }
       return PRICING_TIERS[proIndex];
     }
 
     if (needsStarterFeatures) {
-      const starterIndex = PRICING_TIERS.findIndex((t) => t.id === "starter");
+      const starterIndex = PRICING_TIERS.findIndex((tier) => tier.id === "starter");
       if (totalTokens > PRICING_TIERS[starterIndex].tokensPerMonth) {
-        const proIndex = PRICING_TIERS.findIndex((t) => t.id === "pro");
+        const proIndex = PRICING_TIERS.findIndex((tier) => tier.id === "pro");
         return PRICING_TIERS[proIndex];
       }
       return PRICING_TIERS[starterIndex];
@@ -228,12 +132,10 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
     return planByTokens;
   }, [totalTokens, sliderValues]);
 
-  // Calculate additional tokens needed
   const additionalTokensNeeded = useMemo(() => {
     return Math.max(0, totalTokens - recommendedPlan.tokensPerMonth);
   }, [totalTokens, recommendedPlan]);
 
-  // Get recommended top-up package
   const recommendedTopup = useMemo(() => {
     if (additionalTokensNeeded === 0) return null;
 
@@ -243,7 +145,6 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
       }
     }
 
-    // If more than 2500 tokens needed, calculate multiple 1000-token packages
     const multiplier = Math.ceil(additionalTokensNeeded / 1000);
     return {
       tokens: multiplier * 1000,
@@ -251,19 +152,17 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
     };
   }, [additionalTokensNeeded]);
 
-  // Handle slider change
   const handleSliderChange = (id: string, value: number) => {
     setSliderValues((prev) => ({ ...prev, [id]: value }));
   };
 
-  // Handle button click - show coming soon notification
   const handleComingSoon = () => {
     setShowNotification(true);
     setTimeout(() => setShowNotification(false), 3000);
   };
+
   return (
     <section className="relative overflow-hidden px-6 py-16 sm:px-12 lg:px-24 lg:py-24">
-      {/* Coming Soon Notification */}
       {showNotification && (
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -276,23 +175,15 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
               <span className="text-xl">🚀</span>
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#1E280E]">Coming Soon!</p>
-              <p className="text-xs text-[#535862]">Fitur ini akan segera hadir</p>
+              <p className="text-sm font-semibold text-[#1E280E]">{t("comingSoonTitle")}</p>
+              <p className="text-xs text-[#535862]">{t("comingSoonDescription")}</p>
             </div>
           </div>
         </motion.div>
       )}
 
-      {/* Background gradient matching landing page */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(242, 248, 231, 1) 100%)",
-        }}
-      />
+      <div className="absolute inset-0" style={{ background: SECTION_GRADIENT }} />
 
-      {/* Decorative swatch background */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.03]"
@@ -310,42 +201,33 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
       >
-        {/* Header */}
         <motion.div variants={fadeInUp} className="text-center">
-          <h1 className="text-4xl font-bold text-[#1E280E] sm:text-5xl lg:text-[3.5rem]">
-            Pilih Paket yang Tepat untuk Bisnis Anda
-          </h1>
+          <h2 className="text-4xl font-bold text-[#1E280E] sm:text-5xl lg:text-[3.5rem]">
+            {t("title")}
+          </h2>
           <p className="mx-auto mt-6 max-w-2xl text-lg text-[#535862]">
-            Mulai gratis dan tingkatkan ke paket berbayar kapan pun Anda siap. Semua paket
-            termasuk update gratis.
+            {t("subtitle")}
           </p>
         </motion.div>
 
-        {/* Pricing Cards */}
         <motion.div
           variants={staggerContainer}
           className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {PRICING_TIERS.map((tier, index) => (
-            <motion.div
-              key={tier.id}
-              variants={staggerItem}
-              className="relative flex flex-col"
-            >
-              {/* Popular Badge */}
+          {PRICING_TIERS.map((tier) => (
+            <motion.div key={tier.id} variants={staggerItem} className="relative flex flex-col">
               {tier.isPopular && (
                 <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
                     <span className="relative flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75"></span>
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-white"></span>
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-white" />
                     </span>
-                    Most Popular
+                    {t("mostPopular")}
                   </span>
                 </div>
               )}
 
-              {/* Card */}
               <div
                 className={`flex h-full flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl ${
                   tier.isPopular
@@ -353,16 +235,18 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                     : "border-[#E9EAEB]"
                 }`}
               >
-                {/* Tier Name */}
                 <div className="text-center">
-                  <h3 className="text-xl font-bold text-[#1E280E]">{tier.name}</h3>
+                  <h3 className="text-xl font-bold text-[#1E280E]">
+                    {t(`tiers.${tier.id}.name`)}
+                  </h3>
                 </div>
 
-                {/* Price */}
                 <div className="mt-6 text-center">
                   {tier.price === 0 ? (
                     <div className="flex items-baseline justify-center">
-                      <span className="text-5xl font-bold text-[#1E280E]">Gratis</span>
+                      <span className="text-5xl font-bold text-[#1E280E]">
+                        {t("free")}
+                      </span>
                     </div>
                   ) : (
                     <div className="flex items-baseline justify-center gap-1">
@@ -370,24 +254,26 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                       <span className="text-5xl font-bold text-[#1E280E]">
                         {(tier.price / 1000).toFixed(0)}K
                       </span>
-                      <span className="text-lg font-medium text-[#535862]">/bulan</span>
+                      <span className="text-lg font-medium text-[#535862]">
+                        {t("perMonth")}
+                      </span>
                     </div>
                   )}
                 </div>
 
-                {/* Tokens */}
                 <div className="mt-4 text-center">
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-3 py-1.5 border border-brand-100">
-                    <span className="text-sm font-medium text-brand-700">
-                      {tier.tokensPerMonth.toLocaleString("id-ID")} tokens/bulan
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F3FF] px-3 py-1.5">
+                    <span className="text-sm font-medium text-[#5925DC]">
+                      {t("tokensPerMonth", {
+                        count: tier.tokensPerMonth.toLocaleString(),
+                      })}
                     </span>
                   </div>
                 </div>
 
-                {/* Features List */}
                 <ul className="mt-8 flex-1 space-y-4">
-                  {tier.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start gap-3">
+                  {tier.featureKeys.map((feature) => (
+                    <li key={feature.key} className="flex items-start gap-3">
                       {feature.included ? (
                         <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#94C748]/10">
                           <Check className="h-3.5 w-3.5 text-[#94C748]" strokeWidth={3} />
@@ -402,13 +288,12 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                           feature.included ? "text-[#1E280E]" : "text-[#98A2B3]"
                         }`}
                       >
-                        {feature.name}
+                        {t(`features.${feature.key}`)}
                       </span>
                     </li>
                   ))}
                 </ul>
 
-                {/* CTA Button */}
                 <div className="mt-8">
                   <Button
                     onClick={handleComingSoon}
@@ -416,7 +301,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                     size="lg"
                     className="w-full"
                   >
-                    {tier.ctaText}
+                    {t(`tiers.${tier.id}.cta`)}
                   </Button>
                 </div>
               </div>
@@ -424,32 +309,28 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
           ))}
         </motion.div>
 
-        {/* Usage Calculator */}
         {showEstimator && (
           <motion.div variants={fadeInUp} className="mt-24">
             <div className="text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700 border border-brand-100">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-brand-100 bg-brand-50 px-4 py-2 text-sm font-semibold text-brand-700">
                 <Sliders className="h-4 w-4" />
-                Usage Estimator
+                {t("estimator.badge")}
               </div>
               <h2 className="text-3xl font-bold text-[#1E280E] sm:text-4xl">
-                Not Sure Which Plan to Pick?
+                {t("estimator.title")}
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-[#535862]">
-                Estimate your monthly AI usage and we&apos;ll recommend the most cost-efficient plan
-                for you.
+                {t("estimator.subtitle")}
               </p>
             </div>
 
             <div className="mt-12 grid gap-8 lg:grid-cols-[1fr,340px]">
-              {/* Sliders Card */}
               <div className="rounded-2xl border border-[#E9EAEB] bg-white p-8 shadow-sm">
                 <h3 className="text-xl font-bold text-[#1E280E]">
-                  How active is your marketing?
+                  {t("estimator.slidersTitle")}
                 </h3>
                 <p className="mt-2 text-sm text-[#535862]">
-                  Adjust the sliders to match your typical monthly activity. Rough estimates are
-                  fine.
+                  {t("estimator.slidersSubtitle")}
                 </p>
 
                 <div className="mt-8 space-y-6">
@@ -472,7 +353,9 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                         min="0"
                         max={config.max}
                         value={sliderValues[config.id]}
-                        onChange={(e) => handleSliderChange(config.id, parseInt(e.target.value))}
+                        onChange={(e) =>
+                          handleSliderChange(config.id, parseInt(e.target.value))
+                        }
                         className="h-1.5 w-full cursor-pointer appearance-none rounded-full bg-[#F2F4F7] outline-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#94C748] [&::-webkit-slider-thumb]:shadow-[0_0_0_3px_rgba(148,199,72,0.15)] [&::-webkit-slider-thumb]:transition-shadow hover:[&::-webkit-slider-thumb]:shadow-[0_0_0_6px_rgba(148,199,72,0.18)]"
                       />
                       <p className="mt-1 text-xs text-[#98A2B3]">{config.hint}</p>
@@ -480,11 +363,10 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                   ))}
                 </div>
 
-                {/* Token Breakdown */}
                 {totalTokens > 0 && (
                   <div className="mt-8 rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
                     <div className="mb-3 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
-                      Token Breakdown
+                      {t("estimator.breakdown")}
                     </div>
                     <div className="space-y-2">
                       {SLIDER_CONFIGS.map((config) => {
@@ -498,7 +380,9 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                             <span>
                               {config.label.split(" / ")[0]} ×{sliderValues[config.id]}
                             </span>
-                            <strong className="font-bold text-[#1E280E]">{tokens} tokens</strong>
+                            <strong className="font-bold text-[#1E280E]">
+                              {tokens} tokens
+                            </strong>
                           </div>
                         );
                       })}
@@ -507,7 +391,6 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                 )}
               </div>
 
-              {/* Result Card */}
               <div className="rounded-2xl border border-[#E9EAEB] bg-white shadow-sm lg:sticky lg:top-24">
                 <div
                   className="rounded-t-2xl p-6"
@@ -516,81 +399,72 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                   }}
                 >
                   <div className="mb-1 text-xs font-semibold uppercase tracking-wider text-white/70">
-                    Estimated Tokens / Month
+                    {t("estimator.estimatedTokens")}
                   </div>
                   <div className="text-5xl font-bold text-white">
-                    {totalTokens.toLocaleString("id-ID")}
-                  </div>
-                  <div className="mt-1 text-xs text-white/60">
-                    ≈ Rp {totalTokens.toLocaleString("id-ID")},000 in AI value
+                    {totalTokens.toLocaleString()}
                   </div>
                 </div>
 
                 <div className="space-y-4 p-6">
-                  {/* Recommended Plan */}
                   <div className="rounded-xl border border-[#E9EAEB] bg-[#F9FAFB] p-4">
                     <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#98A2B3]">
-                      Recommended Plan
+                      {t("estimator.recommendedPlan")}
                     </div>
                     <div
                       className="text-2xl font-bold"
-                      style={{ color: recommendedPlan.isPopular ? "#94C748" : "#1E280E" }}
+                      style={{
+                        color: recommendedPlan.isPopular ? "#94C748" : "#1E280E",
+                      }}
                     >
-                      {recommendedPlan.name}
-                    </div>
-                    <div className="text-xs text-[#535862]">
-                      {recommendedPlan.id === "free" && "Start with the basics"}
-                      {recommendedPlan.id === "starter" && "Great for daily content workflows"}
-                      {recommendedPlan.id === "pro" && "Best for active, growing businesses"}
-                      {recommendedPlan.id === "business" && "For brands and agencies at scale"}
+                      {t(`tiers.${recommendedPlan.id}.name`)}
                     </div>
                   </div>
 
-                  {/* Top-up Warning */}
                   {additionalTokensNeeded > 0 && recommendedTopup && (
                     <div className="rounded-xl border border-[#FCD34D] bg-[#FFFBEB] p-4">
                       <div className="mb-1 text-xs font-bold uppercase tracking-wider text-[#B45309]">
-                        Additional Tokens Needed
+                        {t("estimator.additionalTokens")}
                       </div>
                       <div className="text-lg font-bold text-[#92400E]">
                         +{additionalTokensNeeded} Tokens
                       </div>
                       <div className="text-xs text-[#A16207]">
-                        Suggested: {recommendedTopup.tokens.toLocaleString("id-ID")} Token pack (~Rp{" "}
-                        {(recommendedTopup.price / 1000).toFixed(0)}k)
+                        {t("estimator.suggestedTopup", {
+                          tokens: recommendedTopup.tokens.toLocaleString(),
+                          price: (recommendedTopup.price / 1000).toFixed(0),
+                        })}
                       </div>
                     </div>
                   )}
 
-                  {/* Cost Breakdown */}
                   <div className="space-y-3 border-t border-[#E9EAEB] pt-4">
                     <div className="flex justify-between text-xs text-[#535862]">
-                      <span>Plan cost</span>
+                      <span>{t("estimator.planCost")}</span>
                       <span className="font-bold text-[#1E280E]">
                         {recommendedPlan.price === 0
-                          ? "Free"
+                          ? t("free")
                           : `Rp ${(recommendedPlan.price / 1000).toFixed(0)}k/mo`}
                       </span>
                     </div>
                     <div className="flex justify-between text-xs text-[#535862]">
-                      <span>Est. top-up</span>
+                      <span>{t("estimator.topupCost")}</span>
                       <span className="font-bold text-[#1E280E]">
                         {recommendedTopup
                           ? `~Rp ${(recommendedTopup.price / 1000).toFixed(0)}k`
-                          : "Not needed"}
+                          : t("estimator.notNeeded")}
                       </span>
                     </div>
                     <div className="flex justify-between border-t border-[#E9EAEB] pt-3 text-sm font-bold">
-                      <span className="text-[#1E280E]">Total / month</span>
+                      <span className="text-[#1E280E]">{t("estimator.totalPerMonth")}</span>
                       <span className="text-[#94C748]">
                         {recommendedPlan.price === 0 && !recommendedTopup
-                          ? "Free"
+                          ? t("free")
                           : `~Rp ${((recommendedPlan.price + (recommendedTopup?.price || 0)) / 1000).toFixed(0)}k/mo`}
                       </span>
                     </div>
                   </div>
 
-                  {/* CTA */}
                   <Button
                     onClick={handleComingSoon}
                     color="primary"
@@ -598,7 +472,9 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                     className="w-full"
                   >
                     <span className="flex items-center justify-center gap-2">
-                      {totalTokens === 0 ? "Get Started Free" : `Choose ${recommendedPlan.name}`}
+                      {totalTokens === 0
+                        ? t("tiers.free.cta")
+                        : t(`tiers.${recommendedPlan.id}.cta`)}
                       <ArrowRight className="h-4 w-4" />
                     </span>
                   </Button>
@@ -608,18 +484,14 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
           </motion.div>
         )}
 
-        {/* Bottom CTA */}
-        <motion.div
-          variants={fadeInUp}
-          className="mt-16 text-center"
-        >
+        <motion.div variants={fadeInUp} className="mt-16 text-center">
           <p className="text-sm text-[#535862]">
-            Butuh paket custom?{" "}
+            {t("customPlan")}{" "}
             <a
-              href="mailto:admin@usahakreatif.co.id"
-              className="font-semibold text-[#94C748] underline decoration-[#94C748]/30 underline-offset-4 transition-colors hover:decoration-[#94C748]"
+              href={`mailto:${SITE.contactEmail}`}
+              className="font-semibold text-[#5925DC] underline decoration-[#5925DC]/30 underline-offset-4 transition-colors hover:decoration-[#5925DC]"
             >
-              Hubungi kami
+              {t("contactUs")}
             </a>
           </p>
         </motion.div>

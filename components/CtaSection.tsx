@@ -3,16 +3,17 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
 
 export function CtaSection() {
+  const t = useTranslations("cta");
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end end"],
   });
 
-  // Vertical stack animations - images appear from bottom with much longer scroll travel
   const y1 = useTransform(scrollYProgress, [0, 0.4], [300, -100]);
   const opacity1 = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
   const scale1 = useTransform(scrollYProgress, [0, 0.4], [0.8, 1]);
@@ -34,10 +35,10 @@ export function CtaSection() {
 
   return (
     <section
+      id="cta"
       ref={containerRef}
-      className="relative overflow-hidden py-16 lg:py-32 min-h-[700px] lg:min-h-[1200px]"
+      className="relative min-h-[700px] overflow-hidden py-16 lg:min-h-[1200px] lg:py-32"
     >
-      {/* Swatch background */}
       <motion.div
         className="absolute inset-0 opacity-5"
         style={{
@@ -48,12 +49,10 @@ export function CtaSection() {
         aria-hidden
       />
 
-      {/* Vertically stacked images */}
       <div className="relative mx-auto hidden h-[900px] max-w-6xl lg:block">
-        {/* Image 1 - top, narrowest */}
         <motion.div
           style={{ y: y1, opacity: opacity1, scale: scale1 }}
-          className="absolute top-0 left-[10%] w-[884px] z-10"
+          className="absolute left-[10%] top-0 z-10 w-[884px]"
         >
           <Image
             src="/images/cta/1.svg"
@@ -64,10 +63,9 @@ export function CtaSection() {
           />
         </motion.div>
 
-        {/* Image 2 - second from top */}
         <motion.div
           style={{ y: y2, opacity: opacity2, scale: scale2 }}
-          className="absolute top-[52px] left-[8%] w-[984px] z-20"
+          className="absolute left-[8%] top-[52px] z-20 w-[984px]"
         >
           <Image
             src="/images/cta/2.svg"
@@ -78,10 +76,9 @@ export function CtaSection() {
           />
         </motion.div>
 
-        {/* Image 3 - third from top */}
         <motion.div
           style={{ y: y3, opacity: opacity3, scale: scale3 }}
-          className="absolute top-[102px] left-[5%] w-[1084px] z-30"
+          className="absolute left-[5%] top-[102px] z-30 w-[1084px]"
         >
           <Image
             src="/images/cta/3.svg"
@@ -92,13 +89,12 @@ export function CtaSection() {
           />
         </motion.div>
 
-        {/* Image 4 - bottom, widest, with green tint */}
         <motion.div
           style={{ y: y4, opacity: opacity4, scale: scale4 }}
-          className="absolute top-[200px] left-0 w-[1184px] z-40"
+          className="absolute left-0 top-[200px] z-40 w-[1184px]"
         >
-          <div className="relative rounded-3xl shadow-2xl border border-[#94C748]">
-            <div className="absolute inset-0 bg-[#94C748]/12 rounded-3xl" />
+          <div className="relative rounded-3xl border border-[#94C748] shadow-2xl">
+            <div className="absolute inset-0 rounded-3xl bg-[#94C748]/12" />
             <Image
               src="/images/cta/4.svg"
               alt=""
@@ -108,10 +104,8 @@ export function CtaSection() {
             />
           </div>
         </motion.div>
-
       </div>
 
-      {/* Mobile single image */}
       <div className="relative mx-auto mt-4 block w-full max-w-xl px-4 lg:hidden">
         <div className="relative overflow-hidden rounded-3xl border border-[#94C748] bg-[#F3F9E8]">
           <Image
@@ -124,16 +118,15 @@ export function CtaSection() {
         </div>
       </div>
 
-      {/* CTA Content */}
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
       >
         <h2 className="text-2xl font-semibold text-[#1E280E] sm:text-3xl lg:text-4xl">
-          Siap mengembangkan bisnis digital Anda?
+          {t("title")}
         </h2>
         <p className="mt-3 text-base text-[#535862] sm:mt-4 sm:text-lg">
-          Mulai gratis hari ini. Tidak perlu kartu kredit.
+          {t("description")}
         </p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -142,7 +135,7 @@ export function CtaSection() {
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <Button href="#" size="xl" className="mt-8">
-            Coba Sekarang
+            {t("button")}
           </Button>
         </motion.div>
       </motion.div>
