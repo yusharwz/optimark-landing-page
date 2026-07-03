@@ -1,0 +1,106 @@
+{
+  "blocks": [
+    {
+      "type": "p",
+      "html": "These Terms of Service (\"Terms\") govern your access to and use of Optimark, an AI-powered marketing platform provided by OPTIMARK (\"we\", \"us\", or \"our\"). By creating an account or using the Service, you agree to be bound by these Terms. If you do not agree, please do not use the Service."
+    },
+    { "type": "h2", "text": "1. Acceptance of Terms" },
+    {
+      "type": "p",
+      "text": "By accessing or using Optimark, you confirm that you are at least 18 years old (or the age of majority in your jurisdiction) and are capable of entering into a binding agreement. If you use the Service on behalf of an organization, you represent that you are authorized to accept these Terms on its behalf."
+    },
+    { "type": "h2", "text": "2. Description of the Service" },
+    {
+      "type": "p",
+      "text": "Optimark provides AI-assisted marketing tools, which may include AI content generation, content planning and scheduling, SEO analysis, and related features. Features may be added, changed, or removed over time. Some features may be offered on a \"coming soon\" or beta basis and are provided as-is."
+    },
+    { "type": "h2", "text": "3. Accounts and Registration" },
+    {
+      "type": "ul",
+      "items": [
+        "You are responsible for providing accurate information when creating your account.",
+        "You are responsible for maintaining the confidentiality of your login credentials and for all activity under your account.",
+        "You must notify us promptly of any unauthorized use of your account."
+      ]
+    },
+    { "type": "h2", "text": "4. Tokens, Plans, and Billing" },
+    {
+      "type": "p",
+      "text": "Certain features consume tokens or require a paid subscription plan. By purchasing a plan or token package, you agree to the applicable pricing and billing terms displayed at the time of purchase."
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Tokens are consumed as you use paid features and may expire according to your plan.",
+        "Subscription fees are billed in advance on a recurring basis unless otherwise stated.",
+        "Except where required by law, payments and tokens are non-refundable once used.",
+        "We may change pricing prospectively; changes will not affect the current paid billing period."
+      ]
+    },
+    { "type": "h2", "text": "5. Acceptable Use" },
+    {
+      "type": "p",
+      "text": "You agree not to use the Service to:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Violate any applicable law or regulation.",
+        "Generate or distribute unlawful, infringing, deceptive, defamatory, or harmful content.",
+        "Infringe the intellectual property or privacy rights of others.",
+        "Attempt to reverse engineer, disrupt, or gain unauthorized access to the Service.",
+        "Resell or redistribute the Service without our written permission."
+      ]
+    },
+    { "type": "h2", "text": "6. Your Content" },
+    {
+      "type": "p",
+      "text": "You retain ownership of the content and materials you submit to the Service (\"Your Content\"). You grant us a limited license to host, process, and use Your Content solely to operate and improve the Service. You are responsible for ensuring you have the necessary rights to Your Content."
+    },
+    { "type": "h2", "text": "7. AI-Generated Output" },
+    {
+      "type": "p",
+      "text": "The Service uses artificial intelligence to generate output. AI output may be inaccurate, incomplete, or not unique to you. You are responsible for reviewing, editing, and verifying any AI-generated output before relying on or publishing it. We do not guarantee that output is free of third-party rights or fit for a particular purpose."
+    },
+    { "type": "h2", "text": "8. Intellectual Property" },
+    {
+      "type": "p",
+      "text": "The Service, including its software, design, and trademarks, is owned by us or our licensors and is protected by law. These Terms do not grant you any rights to our intellectual property except the limited right to use the Service as permitted."
+    },
+    { "type": "h2", "text": "9. Third-Party Services" },
+    {
+      "type": "p",
+      "text": "The Service may integrate with or link to third-party platforms and services. We are not responsible for third-party content, policies, or practices, and your use of them is at your own risk and subject to their terms."
+    },
+    { "type": "h2", "text": "10. Termination" },
+    {
+      "type": "p",
+      "text": "You may stop using the Service at any time. We may suspend or terminate your access if you breach these Terms or if we discontinue the Service. Upon termination, your right to use the Service ends, though provisions that by their nature should survive will remain in effect."
+    },
+    { "type": "h2", "text": "11. Disclaimers" },
+    {
+      "type": "p",
+      "text": "The Service is provided \"as is\" and \"as available\" without warranties of any kind, whether express or implied, including warranties of merchantability, fitness for a particular purpose, and non-infringement. We do not warrant that the Service will be uninterrupted, secure, or error-free."
+    },
+    { "type": "h2", "text": "12. Limitation of Liability" },
+    {
+      "type": "p",
+      "text": "To the maximum extent permitted by law, we will not be liable for any indirect, incidental, special, consequential, or punitive damages, or for any loss of profits, data, or goodwill arising from your use of the Service. Our total liability for any claim will not exceed the amount you paid us for the Service in the twelve months preceding the claim."
+    },
+    { "type": "h2", "text": "13. Changes to These Terms" },
+    {
+      "type": "p",
+      "text": "We may update these Terms from time to time. If we make material changes, we will provide reasonable notice. Your continued use of the Service after changes take effect constitutes acceptance of the updated Terms."
+    },
+    { "type": "h2", "text": "14. Governing Law" },
+    {
+      "type": "p",
+      "text": "These Terms are governed by the laws of the Republic of Indonesia, without regard to its conflict of law principles. Any disputes will be subject to the jurisdiction of the competent courts in Indonesia."
+    },
+    { "type": "h2", "text": "15. Contact Us" },
+    {
+      "type": "p",
+      "html": "If you have any questions about these Terms, please contact us at <a href=\"mailto:admin@usahakreatif.co.id\">admin@usahakreatif.co.id</a>."
+    }
+  ]
+}

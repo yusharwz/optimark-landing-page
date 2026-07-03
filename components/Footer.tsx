@@ -17,16 +17,6 @@ export function Footer() {
       className="relative overflow-hidden border-t border-[#E9EAEB]"
       style={{ background: FOOTER_GRADIENT }}
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.04]"
-        style={{
-          backgroundImage: "url('/images/hero-swatch.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px 400px",
-        }}
-      />
-
       <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <motion.div
@@ -153,6 +143,14 @@ export function Footer() {
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
                     {t("links.privacy")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/terms-of-service"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.terms")}
                   </Link>
                 </li>
                 <li>

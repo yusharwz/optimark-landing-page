@@ -15,25 +15,15 @@ import {
   Activity,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { useTranslations } from "next-intl";
 
 export default function SeoAnalyzerPage() {
-  const deepFeatures = [
-    {
-      title: "Keyword Research & Explorer",
-      description: "Cari tahu volume pencarian bulanan, estimasi nilai BPK, dan tingkat kesulitan kata kunci (Keyword Difficulty) dari database SEO global kami.",
-      icon: Search,
-    },
-    {
-      title: "Audit Kualitas Konten (On-Page)",
-      description: "Editor teks kami akan langsung menganalisis konten artikel Anda dan memberikan rekomendasi keyword density, struktur tag heading, dan keterbacaan.",
-      icon: FileCheck,
-    },
-    {
-      title: "Rank Tracker & Kompetitor",
-      description: "Pantau pergerakan posisi artikel Anda di halaman pencarian Google serta pantau strategi kata kunci kompetitor terdekat Anda secara berkala.",
-      icon: TrendingUp,
-    },
-  ];
+  const t = useTranslations("featureDetail");
+  const cardIcons = [Search, FileCheck, TrendingUp];
+  const checks = t.raw("seo.checks") as string[];
+  const deepFeatures = (
+    t.raw("seo.cards") as { title: string; description: string }[]
+  ).map((card, i) => ({ ...card, icon: cardIcons[i] }));
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -68,7 +58,7 @@ export default function SeoAnalyzerPage() {
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#535862] hover:text-[#94C748] transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              Kembali ke Semua Fitur
+              {t("back")}
             </Link>
           </motion.div>
 
@@ -82,29 +72,23 @@ export default function SeoAnalyzerPage() {
             >
               <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-500/10 px-4 py-1.5 text-xs font-semibold text-[#1E280E] border border-blue-500/20">
                 <BarChart3 className="h-3 w-3 text-blue-500" />
-                Segera Hadir - Tahap Pengujian Beta
+                {t("seo.badge")}
               </span>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
-                SEO Analyzer & Penulisan Artikel Optimal
+                {t("seo.title")}
               </h1>
               <p className="mt-6 text-lg text-[#535862] leading-relaxed">
-                Tulis artikel yang langsung dicintai Google. Dapatkan rekomendasi optimasi secara real-time saat Anda sedang menulis untuk memastikan konten Anda menduduki halaman pertama mesin pencari.
+                {t("seo.description")}
               </p>
 
               {/* Checkmarks */}
               <div className="mt-8 space-y-4">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Analisis kepadatan kata kunci secara otomatis</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Penghitung skor kualitas konten 0-100</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Saran internal-linking & alt-image yang presisi</span>
-                </div>
+                {checks.map((check) => (
+                  <div key={check} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
+                    <span className="text-[#1E280E] font-medium">{check}</span>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -171,7 +155,7 @@ export default function SeoAnalyzerPage() {
           {/* Deep Feature List */}
           <div className="mt-28">
             <h2 className="text-3xl font-bold text-[#1E280E] text-center mb-16">
-              Kemampuan Utama SEO Analyzer
+              {t("seo.deepTitle")}
             </h2>
 
             <motion.div
