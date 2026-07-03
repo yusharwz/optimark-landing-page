@@ -1,0 +1,106 @@
+{
+  "blocks": [
+    {
+      "type": "p",
+      "html": "Ketentuan Layanan (\"Ketentuan\") ini mengatur akses dan penggunaan Anda atas Optimark, platform pemasaran berbasis AI yang disediakan oleh OPTIMARK (\"kami\"). Dengan membuat akun atau menggunakan Layanan, Anda menyetujui untuk terikat oleh Ketentuan ini. Jika Anda tidak menyetujuinya, mohon untuk tidak menggunakan Layanan."
+    },
+    { "type": "h2", "text": "1. Penerimaan Ketentuan" },
+    {
+      "type": "p",
+      "text": "Dengan mengakses atau menggunakan Optimark, Anda menyatakan bahwa Anda berusia minimal 18 tahun (atau usia dewasa menurut hukum di wilayah Anda) dan mampu membuat perjanjian yang mengikat. Jika Anda menggunakan Layanan atas nama sebuah organisasi, Anda menyatakan bahwa Anda berwenang untuk menerima Ketentuan ini atas nama organisasi tersebut."
+    },
+    { "type": "h2", "text": "2. Deskripsi Layanan" },
+    {
+      "type": "p",
+      "text": "Optimark menyediakan perangkat pemasaran berbantuan AI, yang dapat mencakup pembuatan konten dengan AI, perencanaan dan penjadwalan konten, analisis SEO, serta fitur terkait lainnya. Fitur dapat ditambah, diubah, atau dihapus dari waktu ke waktu. Sebagian fitur mungkin ditawarkan dalam status \"segera hadir\" atau beta dan disediakan apa adanya."
+    },
+    { "type": "h2", "text": "3. Akun dan Pendaftaran" },
+    {
+      "type": "ul",
+      "items": [
+        "Anda bertanggung jawab memberikan informasi yang akurat saat membuat akun.",
+        "Anda bertanggung jawab menjaga kerahasiaan kredensial login serta seluruh aktivitas pada akun Anda.",
+        "Anda wajib segera memberi tahu kami jika terjadi penggunaan akun tanpa izin."
+      ]
+    },
+    { "type": "h2", "text": "4. Token, Paket, dan Penagihan" },
+    {
+      "type": "p",
+      "text": "Fitur tertentu memerlukan token atau paket langganan berbayar. Dengan membeli paket atau paket token, Anda menyetujui harga dan ketentuan penagihan yang berlaku sebagaimana ditampilkan pada saat pembelian."
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Token digunakan seiring pemakaian fitur berbayar dan dapat kedaluwarsa sesuai paket Anda.",
+        "Biaya langganan ditagih di muka secara berulang, kecuali dinyatakan lain.",
+        "Kecuali diwajibkan oleh hukum, pembayaran dan token tidak dapat dikembalikan setelah digunakan.",
+        "Kami dapat mengubah harga untuk periode berikutnya; perubahan tidak memengaruhi periode penagihan berbayar yang sedang berjalan."
+      ]
+    },
+    { "type": "h2", "text": "5. Penggunaan yang Diizinkan" },
+    {
+      "type": "p",
+      "text": "Anda setuju untuk tidak menggunakan Layanan untuk:"
+    },
+    {
+      "type": "ul",
+      "items": [
+        "Melanggar hukum atau peraturan yang berlaku.",
+        "Membuat atau menyebarkan konten yang melanggar hukum, melanggar hak, menyesatkan, memfitnah, atau merugikan.",
+        "Melanggar hak kekayaan intelektual atau privasi pihak lain.",
+        "Mencoba merekayasa balik, mengganggu, atau memperoleh akses tidak sah ke Layanan.",
+        "Menjual kembali atau mendistribusikan ulang Layanan tanpa izin tertulis dari kami."
+      ]
+    },
+    { "type": "h2", "text": "6. Konten Anda" },
+    {
+      "type": "p",
+      "text": "Anda tetap memiliki kepemilikan atas konten dan materi yang Anda kirimkan ke Layanan (\"Konten Anda\"). Anda memberi kami lisensi terbatas untuk meng-host, memproses, dan menggunakan Konten Anda semata-mata untuk mengoperasikan dan meningkatkan Layanan. Anda bertanggung jawab memastikan bahwa Anda memiliki hak yang diperlukan atas Konten Anda."
+    },
+    { "type": "h2", "text": "7. Keluaran yang Dihasilkan AI" },
+    {
+      "type": "p",
+      "text": "Layanan menggunakan kecerdasan buatan untuk menghasilkan keluaran. Keluaran AI dapat tidak akurat, tidak lengkap, atau tidak bersifat unik untuk Anda. Anda bertanggung jawab meninjau, menyunting, dan memverifikasi setiap keluaran AI sebelum mengandalkan atau mempublikasikannya. Kami tidak menjamin bahwa keluaran bebas dari hak pihak ketiga atau sesuai untuk tujuan tertentu."
+    },
+    { "type": "h2", "text": "8. Kekayaan Intelektual" },
+    {
+      "type": "p",
+      "text": "Layanan, termasuk perangkat lunak, desain, dan mereknya, dimiliki oleh kami atau pemberi lisensi kami dan dilindungi oleh hukum. Ketentuan ini tidak memberi Anda hak apa pun atas kekayaan intelektual kami, kecuali hak terbatas untuk menggunakan Layanan sebagaimana diizinkan."
+    },
+    { "type": "h2", "text": "9. Layanan Pihak Ketiga" },
+    {
+      "type": "p",
+      "text": "Layanan dapat terintegrasi dengan atau menautkan ke platform dan layanan pihak ketiga. Kami tidak bertanggung jawab atas konten, kebijakan, atau praktik pihak ketiga, dan penggunaannya menjadi risiko Anda sendiri serta tunduk pada ketentuan mereka."
+    },
+    { "type": "h2", "text": "10. Pengakhiran" },
+    {
+      "type": "p",
+      "text": "Anda dapat berhenti menggunakan Layanan kapan saja. Kami dapat menangguhkan atau mengakhiri akses Anda jika Anda melanggar Ketentuan ini atau jika kami menghentikan Layanan. Setelah pengakhiran, hak Anda untuk menggunakan Layanan berakhir, meskipun ketentuan yang berdasarkan sifatnya harus tetap berlaku akan tetap berlaku."
+    },
+    { "type": "h2", "text": "11. Penafian" },
+    {
+      "type": "p",
+      "text": "Layanan disediakan \"sebagaimana adanya\" dan \"sebagaimana tersedia\" tanpa jaminan apa pun, baik tersurat maupun tersirat, termasuk jaminan kelayakan jual, kesesuaian untuk tujuan tertentu, dan tidak melanggar hak. Kami tidak menjamin bahwa Layanan akan berjalan tanpa gangguan, aman, atau bebas dari kesalahan."
+    },
+    { "type": "h2", "text": "12. Batasan Tanggung Jawab" },
+    {
+      "type": "p",
+      "text": "Sejauh diizinkan oleh hukum, kami tidak bertanggung jawab atas kerugian tidak langsung, insidental, khusus, konsekuensial, atau punitif, maupun atas hilangnya keuntungan, data, atau reputasi yang timbul dari penggunaan Layanan oleh Anda. Total tanggung jawab kami atas klaim apa pun tidak akan melebihi jumlah yang Anda bayarkan kepada kami untuk Layanan dalam dua belas bulan sebelum klaim tersebut."
+    },
+    { "type": "h2", "text": "13. Perubahan Ketentuan" },
+    {
+      "type": "p",
+      "text": "Kami dapat memperbarui Ketentuan ini dari waktu ke waktu. Jika kami melakukan perubahan yang material, kami akan memberikan pemberitahuan yang wajar. Penggunaan Layanan yang berkelanjutan setelah perubahan berlaku dianggap sebagai penerimaan atas Ketentuan yang diperbarui."
+    },
+    { "type": "h2", "text": "14. Hukum yang Berlaku" },
+    {
+      "type": "p",
+      "text": "Ketentuan ini diatur oleh hukum Republik Indonesia, tanpa memperhatikan prinsip pertentangan hukumnya. Setiap sengketa akan tunduk pada yurisdiksi pengadilan yang berwenang di Indonesia."
+    },
+    { "type": "h2", "text": "15. Hubungi Kami" },
+    {
+      "type": "p",
+      "html": "Jika Anda memiliki pertanyaan mengenai Ketentuan ini, silakan hubungi kami di <a href=\"mailto:admin@usahakreatif.co.id\">admin@usahakreatif.co.id</a>."
+    }
+  ]
+}

@@ -1,21 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { FeatureCard } from "@/components/base/feature-card";
-import {
-  Calendar,
-  BarChart3,
-  Megaphone,
-  Sparkles,
-  Zap,
-} from "lucide-react";
-import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { BentoFeatureCard } from "@/components/BentoFeatureCard";
+import { Reveal } from "@/components/motion/Reveal";
+import { Calendar, BarChart3, Sparkles, Zap } from "lucide-react";
+import { fadeInUp } from "@/lib/animations";
 
 // Features mapping matching the exact items in the homepage FeaturesSection
+// AI Content Maker is the featured tile (tall, left column of the bento grid),
+// so it is listed first.
 const features = [
+  {
+    id: "ai",
+    routeId: "ai-content-maker",
+    title: "AI Content Maker",
+    description: "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan.",
+    icon: Sparkles,
+    comingSoon: true,
+    featured: true,
+  },
   {
     id: "perencana",
     routeId: "perencana-konten",
@@ -33,23 +38,6 @@ const features = [
     description:
       "Analisis kata kunci dan optimasi konten dengan teknologi analisis kata kunci terbaru.",
     icon: BarChart3,
-    comingSoon: true,
-  },
-  {
-    id: "ads",
-    routeId: "ads-manager",
-    title: "Ads Manager",
-    description:
-      "Kelola dan optimalkan kampanye iklan untuk meningkatkan traffic dan konversi secara signifikan.",
-    icon: Megaphone,
-    comingSoon: true,
-  },
-  {
-    id: "ai",
-    routeId: "ai-content-maker",
-    title: "AI Content Maker",
-    description: "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan.",
-    icon: Sparkles,
     comingSoon: true,
   },
 ];
@@ -99,33 +87,25 @@ export default function FeaturesPage() {
             </p>
           </motion.div>
 
-          {/* Grid Layout of Features utilizing the exact homepage FeatureCard component */}
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-100px" }}
-            className="grid gap-8 sm:grid-cols-2 lg:gap-10"
+          {/* Bento grid, matching the homepage features section */}
+          <Reveal
+            stagger
+            y={20}
+            className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6"
           >
             {features.map((feat) => (
-              <motion.div
+              <BentoFeatureCard
                 key={feat.id}
-                variants={staggerItem}
-                whileHover="hover"
-                className="h-full cursor-pointer"
-              >
-                <Link href={`/features/${feat.routeId}`} className="block h-full transition-transform hover:-translate-y-1.5 duration-300">
-                  <FeatureCard
-                    icon={feat.icon}
-                    title={feat.title}
-                    description={feat.description}
-                    badge={feat.badge ?? (feat.comingSoon ? "Coming soon" : undefined)}
-                    coverImage={feat.coverImage}
-                  />
-                </Link>
-              </motion.div>
+                href={`/features/${feat.routeId}`}
+                icon={feat.icon}
+                title={feat.title}
+                description={feat.description}
+                badge={feat.badge ?? (feat.comingSoon ? "Coming soon" : undefined)}
+                coverImage={feat.coverImage}
+                className={feat.featured ? "sm:row-span-2" : undefined}
+              />
             ))}
-          </motion.div>
+          </Reveal>
         </div>
       </main>
 

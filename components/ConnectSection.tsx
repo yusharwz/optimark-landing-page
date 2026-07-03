@@ -9,7 +9,7 @@ export function ConnectSection() {
   const t = useTranslations("connect");
 
   return (
-    <section className="overflow-x-hidden border-b border-t border-[#E9EAEB] bg-white">
+    <section className="relative z-10 overflow-x-hidden border-b border-t border-[#E9EAEB] bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row lg:items-center">
           <div className="flex shrink-0 items-center justify-center border-[#E9EAEB] py-6 lg:w-64 lg:border-x lg:py-8">

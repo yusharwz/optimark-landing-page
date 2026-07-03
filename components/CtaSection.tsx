@@ -122,10 +122,10 @@ export function CtaSection() {
         style={{ y: contentY, opacity: contentOpacity }}
         className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
       >
-        <h2 className="text-2xl font-semibold text-[#1E280E] sm:text-3xl lg:text-4xl">
+        <h2 className="text-display text-4xl sm:text-5xl lg:text-6xl">
           {t("title")}
         </h2>
-        <p className="mt-3 text-base text-[#535862] sm:mt-4 sm:text-lg">
+        <p className="text-lead mx-auto mt-5 max-w-xl text-lg sm:text-xl">
           {t("description")}
         </p>
         <motion.div
@@ -134,7 +134,7 @@ export function CtaSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <Button href="#" size="xl" className="mt-8">
+          <Button href="/pricing" size="xl" className="mt-10 sm:px-10">
             {t("button")}
           </Button>
         </motion.div>

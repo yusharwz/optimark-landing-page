@@ -4,6 +4,7 @@ import type { PrivacyPolicyMessages } from "./privacy-policy";
 
 type Messages = typeof messages & {
   privacyPolicy: PrivacyPolicyMessages;
+  termsOfService: PrivacyPolicyMessages;
 };
 
 declare module "next-intl" {

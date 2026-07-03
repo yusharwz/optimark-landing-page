@@ -14,27 +14,20 @@ import {
   Layout,
   Instagram,
   Facebook,
+  Bookmark,
+  MessageSquare,
+  PenTool,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { useTranslations } from "next-intl";
 
 export default function ContentPlannerPage() {
-  const deepFeatures = [
-    {
-      title: "Kalender Visual Serbaguna",
-      description: "Lihat dan jadwalkan semua postingan media sosial Anda dalam satu kalender terpadu. Ubah waktu postingan dengan mudah.",
-      icon: Layout,
-    },
-    {
-      title: "Koneksi Multi-Akun Instan",
-      description: "Hubungkan profil Facebook Pages dan Instagram Business secara aman lewat integrasi OAuth resmi tanpa batas akun.",
-      icon: Share2,
-    },
-    {
-      title: "Waktu Posting Optimal (Smart Queue)",
-      description: "Optimark menganalisis kapan audiens Anda paling aktif dan menyarankan waktu publikasi otomatis demi memaksimalkan impresi.",
-      icon: Clock,
-    },
-  ];
+  const t = useTranslations("featureDetail");
+  const cardIcons = [Bookmark, MessageSquare, PenTool];
+  const checks = t.raw("perencana.checks") as string[];
+  const deepFeatures = (
+    t.raw("perencana.cards") as { title: string; description: string }[]
+  ).map((card, i) => ({ ...card, icon: cardIcons[i] }));
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -69,7 +62,7 @@ export default function ContentPlannerPage() {
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#535862] hover:text-[#94C748] transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />
-              Kembali ke Semua Fitur
+              {t("back")}
             </Link>
           </motion.div>
 
@@ -83,29 +76,23 @@ export default function ContentPlannerPage() {
             >
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#1E280E] border border-[#94C748]/20">
                 <Calendar className="h-3 w-3 text-[#94C748]" />
-                Modul Unggulan - Tersedia Sekarang
+                {t("perencana.badge")}
               </span>
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
-                Perencana Konten Otomatis & Cerdas
+                {t("perencana.title")}
               </h1>
               <p className="mt-6 text-lg text-[#535862] leading-relaxed">
-                Kelola, jadwalkan, dan publikasikan konten Anda ke berbagai halaman Facebook dan profil Instagram Business dari satu dashboard pusat yang intuitif. Hemat jam kerja tim marketing Anda setiap minggu.
+                {t("perencana.description")}
               </p>
 
               {/* Checkmarks */}
               <div className="mt-8 space-y-4">
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Auto-publishing tanpa perlu konfirmasi manual</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Workspace terpisah untuk setiap brand/klien Anda</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
-                  <span className="text-[#1E280E] font-medium">Asset library terpusat untuk menyimpan draft visual</span>
-                </div>
+                {checks.map((check) => (
+                  <div key={check} className="flex items-center gap-3">
+                    <CheckCircle2 className="h-5 w-5 text-[#94C748]" />
+                    <span className="text-[#1E280E] font-medium">{check}</span>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -180,7 +167,7 @@ export default function ContentPlannerPage() {
           {/* Deep Feature List */}
           <div className="mt-28">
             <h2 className="text-3xl font-bold text-[#1E280E] text-center mb-16">
-              Teknologi Cerdas di Balik Postingan Anda
+              {t("perencana.deepTitle")}
             </h2>
 
             <motion.div

@@ -31,7 +31,7 @@ export function Header() {
   return (
     <header className="fixed left-4 right-4 top-4 z-50">
       <div className="mx-auto max-w-7xl">
-        <div className="rounded-2xl border border-gray-100/50 bg-white/85 p-4 shadow-sm backdrop-blur-md">
+        <div className="rounded-2xl border border-transparent bg-transparent p-4 shadow-none backdrop-blur-none transition-all duration-300 hover:border-gray-100/50 hover:bg-white/85 hover:shadow-sm hover:backdrop-blur-md focus-within:border-gray-100/50 focus-within:bg-white/85 focus-within:shadow-sm focus-within:backdrop-blur-md">
           <div className="flex items-center justify-between gap-4">
             <Link href="/" className="group flex items-center gap-3">
               <Image
@@ -76,8 +76,8 @@ export function Header() {
             <div className="flex items-center gap-3">
               <LanguageSwitcher />
               <div className="hidden md:block">
-                <Button color="primary" size="sm">
-                  {t("comingSoon")}
+                <Button href="https://staging.app.optimark.ai/login" color="primary" size="sm">
+                  {t("signIn")}
                 </Button>
               </div>
 
@@ -119,8 +119,8 @@ export function Header() {
                 );
               })}
               <div className="mt-1 border-t border-gray-100 pt-3">
-                <Button color="primary" size="lg" className="w-full justify-center">
-                  {t("comingSoon")}
+                <Button href="https://staging.app.optimark.ai" color="primary" size="lg" className="w-full justify-center">
+                  Try Free
                 </Button>
               </div>
             </motion.div>
