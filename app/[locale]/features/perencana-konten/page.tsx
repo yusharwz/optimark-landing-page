@@ -14,16 +14,13 @@ import {
   Layout,
   Instagram,
   Facebook,
-  Bookmark,
-  MessageSquare,
-  PenTool,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { useTranslations } from "next-intl";
 
 export default function ContentPlannerPage() {
   const t = useTranslations("featureDetail");
-  const cardIcons = [Bookmark, MessageSquare, PenTool];
+  const cardIcons = [Layout, Share2, Clock];
   const checks = t.raw("perencana.checks") as string[];
   const deepFeatures = (
     t.raw("perencana.cards") as { title: string; description: string }[]

@@ -118,6 +118,11 @@
       "prioritySupport": "Priority Support"
     }
   },
+  "featuresPage": {
+    "badge": "🤖 AI Automation Suite",
+    "title": "Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda",
+    "subtitle": "Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis."
+  },
   "connect": {
     "title": "Hubungkan ke berbagai akun"
   },

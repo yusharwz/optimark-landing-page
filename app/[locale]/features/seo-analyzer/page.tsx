@@ -13,16 +13,13 @@ import {
   FileCheck,
   TrendingUp,
   Activity,
-  Bookmark,
-  MessageSquare,
-  PenTool,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { useTranslations } from "next-intl";
 
 export default function SeoAnalyzerPage() {
   const t = useTranslations("featureDetail");
-  const cardIcons = [Bookmark, MessageSquare, PenTool];
+  const cardIcons = [Search, FileCheck, TrendingUp];
   const checks = t.raw("seo.checks") as string[];
   const deepFeatures = (
     t.raw("seo.cards") as { title: string; description: string }[]
@@ -158,7 +155,7 @@ export default function SeoAnalyzerPage() {
           {/* Deep Feature List */}
           <div className="mt-28">
             <h2 className="text-3xl font-bold text-[#1E280E] text-center mb-16">
-              Kemampuan Utama SEO Analyzer
+              {t("seo.deepTitle")}
             </h2>
 
             <motion.div

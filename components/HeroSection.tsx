@@ -26,13 +26,13 @@ export function HeroSection() {
       // Pin + scrub only on desktop with motion allowed. matchMedia auto-reverts
       // the effect (and any pinning) when the query stops matching.
       const mm = gsap.matchMedia();
-      gsap.to("h1", { duration: 5 ,text: `${t("title")}`, speed: 3});
+      gsap.to("h1", { duration: 5 ,text: `${t("title")}`});
       split = SplitText.create("p", { type: "lines" });
       animation = gsap.from(split.lines, {
         rotationX: -100,
         transformOrigin: "50% 50% -160px",
         opacity: 0,
-        duration: 4, 
+        duration: 5, 
         ease: "power3",
         stagger: 0.02
       });

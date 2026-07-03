@@ -6,17 +6,30 @@ import { Footer } from "@/components/Footer";
 import { BentoFeatureCard } from "@/components/BentoFeatureCard";
 import { Reveal } from "@/components/motion/Reveal";
 import { Calendar, BarChart3, Sparkles, Zap } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { fadeInUp } from "@/lib/animations";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { TextPlugin } from "gsap/TextPlugin";
+import { SplitText } from "gsap/SplitText";
+import { useRef } from "react";
+import { useTranslations } from "next-intl";
 
-// Features mapping matching the exact items in the homepage FeaturesSection
+// Structural mapping only — copy (title/description/badge) comes from i18n.
 // AI Content Maker is the featured tile (tall, left column of the bento grid),
 // so it is listed first.
-const features = [
+type FeatureItem = {
+  id: "ai" | "perencana" | "seo";
+  routeId: string;
+  icon: LucideIcon;
+  comingSoon?: boolean;
+  featured?: boolean;
+  coverImage?: string;
+};
+
+const features: FeatureItem[] = [
   {
     id: "ai",
     routeId: "ai-content-maker",
-    title: "AI Content Maker",
-    description: "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan.",
     icon: Sparkles,
     comingSoon: true,
     featured: true,
@@ -24,25 +37,47 @@ const features = [
   {
     id: "perencana",
     routeId: "perencana-konten",
-    title: "Perencana Konten",
-    description:
-      "Membantu menjadwalkan dan mengelola postingan konten secara otomatis di berbagai platform media sosial.",
     icon: Calendar,
-    badge: "Available Now",
     coverImage: "/images/features-perencanaan-konten.svg",
   },
   {
     id: "seo",
     routeId: "seo-analyzer",
-    title: "SEO Analyzer",
-    description:
-      "Analisis kata kunci dan optimasi konten dengan teknologi analisis kata kunci terbaru.",
     icon: BarChart3,
     comingSoon: true,
   },
 ];
 
 export default function FeaturesPage() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const t = useTranslations("features");
+  const tp = useTranslations("featuresPage");
+  gsap.registerPlugin(TextPlugin);
+  gsap.registerPlugin(SplitText);
+  let split;
+
+  useGSAP(
+    () => {
+      SplitText.create("p", {
+        type: "words,lines",
+        linesClass: "line",
+        autoSplit: true,
+        mask: "lines",
+        onSplit: (self) => {
+          split = gsap.from(self.lines, {
+            duration: 4,
+            yPercent: 100,
+            opacity: 0,
+            stagger: 0.1,
+            ease: "expo.out",
+          });
+          return split;
+        }
+      })
+    },
+    { scope: sectionRef },
+  );
+
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
       <Header />
@@ -66,7 +101,7 @@ export default function FeaturesPage() {
         }}
       />
 
-      <main className="relative z-10 pt-32 pb-24 px-6 sm:px-12 lg:px-24">
+      <main ref={sectionRef} className="relative z-10 pt-32 pb-24 px-6 sm:px-12 lg:px-24">
         <div className="mx-auto max-w-7xl">
           {/* Header Section */}
           <motion.div
@@ -77,13 +112,13 @@ export default function FeaturesPage() {
           >
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#1E280E] border border-[#94C748]/20">
               <Zap className="h-3 w-3 text-[#94C748]" />
-              🤖 AI Automation Suite
+              {tp("badge")}
             </span>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
-              Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda
+              {tp("title")}
             </h1>
             <p className="mt-6 text-lg text-[#535862] leading-relaxed">
-              Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.
+              {tp("subtitle")}
             </p>
           </motion.div>
 
@@ -98,9 +133,9 @@ export default function FeaturesPage() {
                 key={feat.id}
                 href={`/features/${feat.routeId}`}
                 icon={feat.icon}
-                title={feat.title}
-                description={feat.description}
-                badge={feat.badge ?? (feat.comingSoon ? "Coming soon" : undefined)}
+                title={t(`items.${feat.id}.title`)}
+                description={t(`items.${feat.id}.description`)}
+                badge={feat.comingSoon ? t("comingSoon") : t("availableNow")}
                 coverImage={feat.coverImage}
                 className={feat.featured ? "sm:row-span-2" : undefined}
               />

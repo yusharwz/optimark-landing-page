@@ -118,6 +118,11 @@
       "prioritySupport": "Priority Support"
     }
   },
+  "featuresPage": {
+    "badge": "🤖 AI Automation Suite",
+    "title": "One AI Platform to Automate Your Entire Marketing",
+    "subtitle": "Optimark unifies four artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically."
+  },
   "connect": {
     "title": "Connect to various accounts"
   },
