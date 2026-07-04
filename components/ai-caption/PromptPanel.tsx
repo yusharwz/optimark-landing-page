@@ -24,11 +24,17 @@ export function PromptPanel({
       <p className="text-sm text-[#535862]">Prompt</p>
 
       <div className="mt-3 flex min-h-[180px] flex-col rounded-xl border border-[#E9EAEB] p-3">
-        <p className="ai-caption__prompt flex-1 text-sm text-[#1E280E]">
-          {typedText}
-          {showCaret && (
-            <span className="ml-0.5 inline-block h-[1.05em] w-px animate-pulse bg-[#1E280E] align-text-bottom" />
-          )}
+        <p
+          className="ai-caption__prompt flex-1 text-sm text-[#1E280E]"
+          translate="no"
+        >
+          <span>{typedText}</span>
+          <span
+            aria-hidden
+            className={`ml-0.5 inline-block h-[1.05em] w-px animate-pulse bg-[#1E280E] align-text-bottom ${
+              showCaret ? "" : "invisible"
+            }`}
+          />
         </p>
 
         <div className="mt-3 flex items-center justify-between">

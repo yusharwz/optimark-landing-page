@@ -19,7 +19,7 @@ type BentoFeatureCardProps = {
 };
 
 const CARD_CLASS =
-  "group relative flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
+  "group relative grid grid-cols-[65fr_35fr] items-start gap-6 overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
 
 /**
  * The bento-style feature card used on both the homepage features section and
@@ -36,25 +36,25 @@ export function BentoFeatureCard({
 }: BentoFeatureCardProps) {
   const content = (
     <>
-      {badge && (
+      {/* {badge && (
         <span className="absolute right-4 top-4 z-10 rounded-full bg-brand-100 px-3 py-1 text-xs font-medium text-brand-700">
           {badge}
         </span>
-      )}
-
-      {coverImage && (
-        <div className="pointer-events-none absolute right-20 top-5 h-48 w-48 opacity-[0.5] transition-all duration-300 group-hover:scale-105 group-hover:opacity-30">
-          <Image src={coverImage} alt="" fill className="object-contain" />
-        </div>
-      )}
+      )} */}
 
       <div className="relative">
         <div className="mb-6 inline-flex rounded-2xl bg-brand-100 p-4 text-brand-600 transition-colors group-hover:bg-brand-200">
           <Icon className="h-8 w-8" />
         </div>
         <h3 className="text-display mb-3 text-2xl">{title}</h3>
-        <p className="text-detail max-w-md text-base">{description}</p>
+        <p className="text-detail text-base">{description}</p>
       </div>
+
+      {coverImage && (
+        <div className="relative h-full min-h-[200px] w-full transition-all duration-300 group-hover:scale-105">
+          <Image src={coverImage} alt="" fill className="object-contain" />
+        </div>
+      )}
     </>
   );
 

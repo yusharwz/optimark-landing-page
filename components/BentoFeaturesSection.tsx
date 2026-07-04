@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { FEATURE_ICONS, FEATURE_IDS, FEATURE_META, type FeatureId } from "@/config/features";
+import { FEATURE_ICONS, FEATURE_IDS, FEATURE_META, FEATURE_ROUTES, type FeatureId } from "@/config/features";
 import { Reveal } from "@/components/motion/Reveal";
 import { BentoFeatureCard } from "@/components/BentoFeatureCard";
 
@@ -53,6 +53,7 @@ export function BentoFeaturesSection() {
                 description={t(`items.${id}.description`)}
                 badge={badge}
                 coverImage={meta.coverImage}
+                href={`/features/${FEATURE_ROUTES[id]}`}
                 className={id === FEATURED_ID ? "sm:row-span-2" : undefined}
               />
             );

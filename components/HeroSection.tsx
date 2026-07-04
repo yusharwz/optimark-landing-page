@@ -8,6 +8,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { TextPlugin } from "gsap/TextPlugin";
 import { SplitText } from "gsap/SplitText";
 import { heroBadge, heroTitle, heroDescription, heroImage } from "@/lib/animations";
+import { AiCaptionModal } from "./ai-caption";
 
 export function HeroSection() {
   const t = useTranslations("hero");
@@ -72,15 +73,15 @@ export function HeroSection() {
         ref={contentRef}
         className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pb-24 pt-24 sm:px-6 lg:px-8 lg:pb-32 lg:pt-28"
       >
-        <div className="flex flex-col-reverse gap-12 lg:flex-row lg:items-center lg:gap-20">
-          <div className="flex-3 space-y-6 text-center lg:space-y-8 lg:text-left">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[3fr_2fr] lg:items-center lg:gap-5">
+          <div className="space-y-6 text-center lg:space-y-8 lg:text-left">
             <motion.div
               variants={heroBadge}
               initial="hidden"
               animate="visible"
               className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-brand-50 px-3 py-1.5 text-xs sm:px-4 sm:py-2 sm:text-sm"
             >
-              <span className="font-medium text-[#5925DC]">{t("badge")}</span>
+              <span className="font-medium text-[#D444F1]">{t("badge")}</span>
             </motion.div>
 
             <motion.div
@@ -103,9 +104,11 @@ export function HeroSection() {
             variants={heroImage}
             initial="hidden"
             animate="visible"
-            className="mt-8 flex-2 lg:mt-0"
+            className="mt-8 flex justify-center lg:mt-0 lg:justify-end"
           >
-            <BrowserMockup alt={t("imageAlt")} />
+
+            <AiCaptionModal className="pointer-events-none w-full max-w-md shadow-2xl lg:origin-right lg:scale-95"></AiCaptionModal>
+            {/* <BrowserMockup alt={t("imageAlt")} /> */}
           </motion.div>
         </div>
       </div>

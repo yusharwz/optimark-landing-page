@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    other: {
+      google: "notranslate",
+    },
     icons: {
       icon: [
         { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
@@ -61,7 +64,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale} translate="no" suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased smooth-scroll`}>
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
