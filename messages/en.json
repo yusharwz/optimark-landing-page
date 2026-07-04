@@ -314,5 +314,42 @@
         "description": "Relaxed hours with maximum reach for lifestyle content"
       }
     ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Get started with Optimark in three simple steps and automate your marketing strategy.",
+    "step1Title": "1. Connect Your Accounts",
+    "step1Description": "Safely connect your social media profiles in one click to sync your marketing presence.",
+    "step2Title": "2. AI Generates & Optimizes",
+    "step2Description": "Our AI crafts tailored captions, recommends keywords, and drafts content aligned with your brand voice.",
+    "step3Title": "3. Auto-Schedule & Grow",
+    "step3Description": "Publish automatically at the best times and track your digital engagement and ROI from one dashboard.",
+    "badge": "Simple Flow",
+    "illustrations": {
+      "connected": "Connected",
+      "connecting": "Connecting...",
+      "prompt": "Create an Instagram promo caption for our coffee shop.",
+      "generating": "AI is writing a viral post...",
+      "optimalTime": "Optimal posting time: 18:00",
+      "growth": "Engagement Growth",
+      "scrollExplore": "Scroll down to explore steps",
+      "scrollNext": "Keep scrolling to continue"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Got questions? We've got answers. If you need more help, feel free to contact us.",
+    "items": {
+      "q1": "What is Optimark?",
+      "a1": "Optimark is an all-in-one AI-powered digital marketing platform that helps businesses schedule social media content, optimize search engine visibility (SEO), and auto-create high-quality copy tailored to their brand voice.",
+      "q2": "Do I need a credit card to try Optimark?",
+      "a2": "No, you do not need a credit card to start our Free tier. You get free token credits every month to try out the AI Content Maker and Content Planner.",
+      "q3": "How does the token system work?",
+      "a3": "Each feature (like generating a caption or doing an SEO keyword audit) consumes a specific number of tokens. Your monthly tier gives you a fresh set of tokens. If you run out, you can top-up at any time.",
+      "q4": "Which social media platforms are supported?",
+      "a4": "Currently, you can connect and schedule posts to Instagram, Facebook, and TikTok. We are constantly adding support for more platforms like Threads, X, and LinkedIn.",
+      "q5": "Can I cancel or change my plan anytime?",
+      "a5": "Yes! You can upgrade, downgrade, or cancel your subscription plan directly from your billing settings at any time with no hidden fees."
+    }
   }
 }
