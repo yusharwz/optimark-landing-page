@@ -769,8 +769,8 @@
   --color-avatar-styles-bg-neutral: rgb(224 224 224);
   --color-button-destructive-primary-icon: var(--color-error-300);
   --color-button-destructive-primary-icon_hover: var(--color-error-200);
-  --color-button-primary-icon: var(--color-brand-300);
-  --color-button-primary-icon_hover: var(--color-brand-200);
+  --color-button-primary-icon: #1E280E;
+  --color-button-primary-icon_hover: #1E280E;
   --color-featured-icon-light-fg-brand: var(--color-brand-600);
   --color-featured-icon-light-fg-error: var(--color-error-600);
   --color-featured-icon-light-fg-gray: var(--color-gray-500);
@@ -1190,8 +1190,8 @@
       --color-avatar-styles-bg-neutral: rgb(224 224 224 / 1);
       --color-button-destructive-primary-icon: var(--color-error-300);
       --color-button-destructive-primary-icon_hover: var(--color-error-200);
-      --color-button-primary-icon: var(--color-brand-300);
-      --color-button-primary-icon_hover: var(--color-brand-200);
+  --color-button-primary-icon: #1E280E;
+  --color-button-primary-icon_hover: #1E280E;
       --color-featured-icon-light-fg-brand: var(--color-brand-200);
       --color-featured-icon-light-fg-error: var(--color-error-200);
       --color-featured-icon-light-fg-gray: var(--color-gray-200);
