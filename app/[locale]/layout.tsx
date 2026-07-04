@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Special_Gothic_Condensed_One } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -13,6 +13,13 @@ import "@/styles/globals.css";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const specialGothic = Special_Gothic_Condensed_One({
+  weight: "400",
+  variable: "--font-gothic",
   subsets: ["latin"],
   display: "swap",
 });
@@ -97,7 +104,7 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} translate="no" suppressHydrationWarning>
-      <body className={`${inter.variable} font-sans antialiased smooth-scroll`}>
+      <body className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}>
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
             <ThemeProvider>
