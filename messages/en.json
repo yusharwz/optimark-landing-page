@@ -154,6 +154,7 @@
     "platform": "Platform",
     "company": "Company",
     "comingSoon": "Coming Soon",
+    "availableNow":"Available Now",
     "links": {
       "features": "Features",
       "pricing": "Pricing",

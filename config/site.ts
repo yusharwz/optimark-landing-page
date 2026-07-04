@@ -21,6 +21,5 @@ export const CONNECT_PLATFORMS = [
 export const FOOTER_PRODUCT_KEYS = [
   "contentPlanner",
   "seoAnalyzer",
-  "adsManager",
   "aiContentMaker",
 ] as const;
