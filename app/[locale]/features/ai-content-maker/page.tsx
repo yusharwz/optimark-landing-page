@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
 import { AiCaptionModal } from "@/components/ai-caption";
+import { BestTimeModal } from "@/components/best-time";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
@@ -29,18 +29,7 @@ export default function AiContentMakerPage() {
     },
     {
       key: "best-time",
-      node: (
-        <Image
-          src="/images/ai-content-maker/best-time-modal.svg"
-          alt="Best Time to Post"
-          width={600}
-          height={559}
-          className="pointer-events-none max-h-full w-auto object-contain"
-          draggable={false}
-          priority
-          unoptimized
-        />
-      ),
+      node: <BestTimeModal className="shadow-2xl" />,
     },
   ];
   const [[slide, direction], setSlideState] = useState<[number, number]>([0, 0]);
@@ -135,7 +124,7 @@ export default function AiContentMakerPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="relative"
             >
-              <div className="relative aspect-[3/2] w-full">
+              <div className="relative w-full">
                 <AnimatePresence initial={false} mode="popLayout" custom={direction}>
                   <motion.div
                     key={slide}
@@ -157,7 +146,7 @@ export default function AiContentMakerPage() {
                       if (swipe < -60 || velocity < -400) nextSlide();
                       else if (swipe > 60 || velocity > 400) prevSlide();
                     }}
-                    className="absolute inset-0 flex cursor-grab touch-pan-y select-none items-center justify-center p-1 sm:p-2 active:cursor-grabbing"
+                    className="flex w-full cursor-grab touch-pan-y select-none items-center justify-center p-1 sm:p-2 active:cursor-grabbing"
                   >
                     {mockups[slide].node}
                   </motion.div>
