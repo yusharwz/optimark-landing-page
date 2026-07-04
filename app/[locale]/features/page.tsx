@@ -148,6 +148,7 @@ export default function FeaturesPage() {
                   coverImage={feat.coverImage}
                   illustration={illustration}
                   featured={feat.featured}
+                  highlight={feat.id === "ai"}
                   className={feat.featured ? "sm:row-span-2" : undefined}
                 />
               );

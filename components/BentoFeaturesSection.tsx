@@ -167,6 +167,7 @@ export function BentoFeaturesSection() {
                 coverImage={meta.coverImage}
                 illustration={illustration}
                 featured={id === FEATURED_ID}
+                highlight={id === "ai"}
                 href={`/features/${FEATURE_ROUTES[id]}`}
                 className={cx(
                   id === FEATURED_ID ? "sm:row-span-2" : undefined,
