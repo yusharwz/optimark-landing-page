@@ -147,6 +147,7 @@
         "seo": "SEO Analyzer"
       },
       "ai": {
+        "defaultDraft": "✨ Temukan cara lebih cerdas untuk mengotomatisasi alur kerja Anda. Buat draf tulisan, kalender postingan, dan pantau peringkat SEO otomatis dengan Optimark! 🚀 #DigitalGrowth #Produktivitas",
         "promptLabel": "Deskripsikan produk atau promosi Anda",
         "placeholder": "misal, Promo pagi Starbucks - Beli 1 Gratis 1 matcha latte...",
         "button": "Buat Tulisan",
@@ -186,20 +187,20 @@
     "benefits": {
       "title": "Mengapa Brand Modern Memilih Optimark",
       "subtitle": "Kembangkan bisnis Anda lebih cepat dengan alat yang dirancang untuk kecepatan, performa, dan konversi.",
-      "items": [
-        {
+      "items": {
+        "0": {
           "title": "Eksekusi 10x Lebih Cepat",
           "description": "Hasilkan draf tulisan, tajuk utama, dan kalender penjadwalan berkonversi tinggi dalam hitungan detik."
         },
-        {
+        "1": {
           "title": "Optimasi Berbasis Data",
           "description": "Tidak perlu menerka-nerka. Penganalisis SEO on-page kami memastikan artikel Anda memenuhi standar kualitas terbaik sebelum dirilis."
         },
-        {
+        "2": {
           "title": "Alur Kerja Terpadu",
           "description": "Hubungkan akun media sosial, buat konten, analisis metrik pencarian, dan jadwalkan postingan dari satu tab terpusat."
         }
-      ]
+      }
     }
   },
   "connect": {

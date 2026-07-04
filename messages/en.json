@@ -147,6 +147,7 @@
         "seo": "SEO Analyzer"
       },
       "ai": {
+        "defaultDraft": "✨ Discover a smarter way to automate your workflow. Generate headlines, calendar items, and search rankings automatically with Optimark! 🚀 #DigitalGrowth #Productivity",
         "promptLabel": "Describe your product or promotion",
         "placeholder": "e.g., Morning promo at Starbucks - Buy 1 Get 1 free matcha latte...",
         "button": "Generate Copy",
@@ -186,20 +187,20 @@
     "benefits": {
       "title": "Why Modern Brands Choose Optimark",
       "subtitle": "Grow your business faster with tools built for speed, performance, and conversion.",
-      "items": [
-        {
+      "items": {
+        "0": {
           "title": "10x Faster Execution",
           "description": "Generate high-converting copy, headlines, and scheduling calendars in seconds rather than hours."
         },
-        {
+        "1": {
           "title": "Data-Driven Optimization",
           "description": "Never guess what works. Our on-page SEO analyzer ensures you hit the right benchmarks before you publish."
         },
-        {
+        "2": {
           "title": "All-in-One Workflow",
           "description": "Connect your social accounts, create content, check search metrics, and post, all from a single tab."
         }
-      ]
+      }
     }
   },
   "connect": {
