@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Loader2, SlidersHorizontal, Sparkles } from "lucide-react";
 
 export type PromptStatus = "idle" | "loading" | "done";
@@ -17,11 +18,12 @@ export function PromptPanel({
   typedText = "",
   showCaret = false,
   status = "idle",
-  tip = "Tips: Makin detail promptnya, makin bagus hasilnya. Coba sebutkan jenis konten, manfaat produk, dan siapa target audiensnya.",
+  tip,
 }: PromptPanelProps) {
+  const t = useTranslations("aiCaptionModal");
   return (
     <div className="p-4">
-      <p className="text-xs text-[#535862]">Prompt</p>
+      <p className="text-xs text-[#535862]">{t("promptLabel")}</p>
 
       <div className="mt-2 flex min-h-[120px] flex-col rounded-xl border border-[#E9EAEB] p-3">
         <p
@@ -43,7 +45,7 @@ export function PromptPanel({
           {status === "loading" ? (
             <span className="inline-flex items-center gap-1.5 rounded-lg border border-[#D5D7DA] bg-white px-2.5 py-1.5 text-[11px] font-semibold text-[#717680]">
               <Loader2 className="h-3 w-3 animate-spin" />
-              Membuat…
+              {t("generating")}
             </span>
           ) : (
             <button
@@ -51,13 +53,13 @@ export function PromptPanel({
               className="inline-flex items-center gap-1.5 rounded-lg border border-[#D5D7DA] bg-white px-2.5 py-1.5 text-[11px] font-semibold text-[#414651] transition hover:bg-gray-50"
             >
               <Sparkles className="h-3 w-3 text-[#BA24D5]" />
-              {status === "done" ? "Generate Ulang" : "Generate"}
+              {status === "done" ? t("regenerate") : t("generate")}
             </button>
           )}
         </div>
       </div>
 
-      <p className="mt-2 text-[10px] leading-normal text-[#717680]">{tip}</p>
+      <p className="mt-2 text-[10px] leading-normal text-[#717680]">{tip ?? t("tip")}</p>
     </div>
   );
 }

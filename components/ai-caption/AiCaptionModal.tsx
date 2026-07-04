@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { CaptionHeader } from "./CaptionHeader";
 import { PromptPanel, type PromptStatus } from "./PromptPanel";
 import { ResultPanel } from "./ResultPanel";
@@ -33,41 +34,43 @@ const LOADING_MS = 1300; // fake "generating" duration
 export function AiCaptionModal({
   className,
   title,
-  prompt = "Morning routine with FlimtyFiber",
+  prompt,
   tip,
   lines,
   hashtags,
 }: AiCaptionModalProps) {
+  const t = useTranslations("aiCaptionModal");
+  const resolvedPrompt = prompt ?? t("promptText");
   const [phase, setPhase] = useState<Phase>("typing");
   const [typed, setTyped] = useState("");
 
   // Respect reduced motion: jump straight to the finished state.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTyped(prompt);
+      setTyped(resolvedPrompt);
       setPhase("done");
     }
-  }, [prompt]);
+  }, [resolvedPrompt]);
 
   // Typewriter: append one character at a time, then move to loading.
   useEffect(() => {
     if (phase !== "typing") return;
-    if (typed.length >= prompt.length) {
-      const t = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
-      return () => clearTimeout(t);
+    if (typed.length >= resolvedPrompt.length) {
+      const timer = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
+      return () => clearTimeout(timer);
     }
-    const t = setTimeout(
-      () => setTyped(prompt.slice(0, typed.length + 1)),
+    const timer = setTimeout(
+      () => setTyped(resolvedPrompt.slice(0, typed.length + 1)),
       TYPE_SPEED,
     );
-    return () => clearTimeout(t);
-  }, [phase, typed, prompt]);
+    return () => clearTimeout(timer);
+  }, [phase, typed, resolvedPrompt]);
 
   // Loading → done.
   useEffect(() => {
     if (phase !== "loading") return;
-    const t = setTimeout(() => setPhase("done"), LOADING_MS);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setPhase("done"), LOADING_MS);
+    return () => clearTimeout(timer);
   }, [phase]);
 
   const status: PromptStatus =

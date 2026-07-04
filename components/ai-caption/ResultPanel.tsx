@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { AlignLeft, Check, Hash, Sparkles, ThumbsDown, ThumbsUp } from "lucide-react";
 
 type ResultPanelProps = {
@@ -10,11 +11,7 @@ type ResultPanelProps = {
   revealed?: boolean;
 };
 
-const REFINE_CHIPS = [
-  { icon: AlignLeft, label: "Lebih pendek" },
-  { icon: Sparkles, label: "Lebih persuasif" },
-  { icon: Hash, label: "Tambah hashtag" },
-];
+const REFINE_CHIP_ICONS = [AlignLeft, Sparkles, Hash];
 
 const container: Variants = {
   hidden: {},
@@ -33,17 +30,20 @@ const item: Variants = {
  * generation finishes.
  */
 export function ResultPanel({
-  lines = [
-    "🌱 Pagi lebih ringan, lebih semangat sejak rutin minum FlimtyFiber! ✨",
-    "Pencernaan lancar, nggak gampang lapar, perut nggak begah — semua karena 1 kebiasaan kecil setiap pagi.",
-    "Mau coba juga? Cek link di bio! 👆",
-  ],
-  hashtags = "#FlimtyFiber #FlimtyID #HidupSehat #FiberHarian #PencernaanLancar #MorningRoutine #BodyGoals",
+  lines,
+  hashtags,
   revealed = false,
 }: ResultPanelProps) {
+  const t = useTranslations("aiCaptionModal");
+  const resolvedLines = lines ?? (t.raw("lines") as string[]);
+  const resolvedHashtags = hashtags ?? t("hashtags");
+  const refineChips = (t.raw("refineChips") as string[]).map((label, i) => ({
+    label,
+    icon: REFINE_CHIP_ICONS[i] ?? Sparkles,
+  }));
   return (
     <div className="flex flex-col p-4">
-      <p className="text-xs text-[#535862]">Hasil Generate</p>
+      <p className="text-xs text-[#535862]">{t("resultLabel")}</p>
 
       <motion.div
         className="mt-2 min-h-[140px] space-y-2 rounded-xl bg-[#FDF4FF] p-3"
@@ -51,7 +51,7 @@ export function ResultPanel({
         initial="hidden"
         animate={revealed ? "show" : "hidden"}
       >
-        {lines.map((line, i) => (
+        {resolvedLines.map((line, i) => (
           <motion.p
             key={i}
             variants={item}
@@ -65,7 +65,7 @@ export function ResultPanel({
           variants={item}
           className="ai-caption__hashtags text-xs leading-relaxed text-[#414651]"
         >
-          {hashtags}
+          {resolvedHashtags}
         </motion.p>
 
         <motion.div variants={item} className="flex items-center gap-2.5 pt-0.5">
@@ -74,7 +74,7 @@ export function ResultPanel({
         </motion.div>
 
         <motion.div variants={item} className="flex flex-wrap gap-1">
-          {REFINE_CHIPS.map(({ icon: Icon, label }) => (
+          {refineChips.map(({ icon: Icon, label }) => (
             <span
               key={label}
               className="inline-flex items-center gap-1 rounded-full border border-[#E9EAEB] bg-white px-2 py-1 text-[10px] text-[#414651]"
@@ -97,7 +97,7 @@ export function ResultPanel({
           }`}
         >
           <Check className="h-3.5 w-3.5" />
-          Terapkan
+          {t("apply")}
         </button>
       </div>
     </div>

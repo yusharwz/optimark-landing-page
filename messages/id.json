@@ -154,7 +154,7 @@
     "platform": "Platform",
     "company": "Perusahaan",
     "comingSoon": "Coming Soon",
-    "availableNow":"Available Now",
+    "availableNow": "Available Now",
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
@@ -261,5 +261,58 @@
         }
       ]
     }
+  },
+  "aiCaptionModal": {
+    "title": "AI Caption Assistant",
+    "promptLabel": "Prompt",
+    "promptText": "Morning routine with FlimtyFiber",
+    "generate": "Generate",
+    "regenerate": "Generate Ulang",
+    "generating": "Membuat…",
+    "tip": "Tips: Makin detail promptnya, makin bagus hasilnya. Coba sebutkan jenis konten, manfaat produk, dan siapa target audiensnya.",
+    "resultLabel": "Hasil Generate",
+    "lines": [
+      "🌱 Pagi lebih ringan, lebih semangat sejak rutin minum FlimtyFiber! ✨",
+      "Pencernaan lancar, nggak gampang lapar, perut nggak begah — semua karena 1 kebiasaan kecil setiap pagi.",
+      "Mau coba juga? Cek link di bio! 👆"
+    ],
+    "hashtags": "#FlimtyFiber #FlimtyID #HidupSehat #FiberHarian #PencernaanLancar #MorningRoutine #BodyGoals",
+    "refineChips": [
+      "Lebih pendek",
+      "Lebih persuasif",
+      "Tambah hashtag"
+    ],
+    "apply": "Terapkan"
+  },
+  "bestTimeModal": {
+    "title": "Best Time to Post",
+    "keywordLabel": "Keyword atau topik konten",
+    "keywordText": "Diet sehat ala Deddy Corbuzier",
+    "analyze": "Analisa",
+    "analyzing": "Menganalisa topik konten Anda…",
+    "tip": "Tip: Gunakan keyword yang relevan dengan konten Anda untuk hasil yang lebih akurat.",
+    "heading": "Pilih waktu posting",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "slots": [
+      {
+        "date": "Senin, 8 Juni",
+        "time": "09:00",
+        "tag": "Paling optimal",
+        "description": "Aktivitas tertinggi dari target audience Anda di pagi hari"
+      },
+      {
+        "date": "Selasa, 16 Juni",
+        "time": "12:00",
+        "tag": "Waktu istirahat",
+        "description": "Engagement stabil saat jam istirahat siang"
+      },
+      {
+        "date": "Rabu, 24 Juni",
+        "time": "18:00",
+        "tag": "Prime time",
+        "description": "Waktu santai dengan reach maksimal untuk konten lifestyle"
+      }
+    ]
   }
 }

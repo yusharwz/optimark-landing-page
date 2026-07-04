@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { ArrowRight, Check, Sliders, X } from "lucide-react";
@@ -89,6 +90,9 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
     ads: 0,
   });
   const [showNotification, setShowNotification] = useState(false);
+  // Portal target: only available after mount (client), guards SSR.
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -172,24 +176,29 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
 
   return (
     <section className="relative overflow-hidden px-6 py-16 sm:px-12 lg:px-24 lg:py-24">
-      {showNotification && (
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          className="fixed left-1/2 top-8 z-50 -translate-x-1/2"
-        >
-          <div className="flex items-center gap-3 rounded-full border border-[#94C748]/20 bg-white px-6 py-3 shadow-lg">
-            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#94C748]/10">
-              <span className="text-xl">🚀</span>
+      {mounted &&
+        showNotification &&
+        createPortal(
+          // Portaled to <body> so it escapes the pricing page's `z-10` wrapper
+          // stacking context and layers above the fixed header (z-50).
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="fixed left-1/2 top-8 z-[60] -translate-x-1/2"
+          >
+            <div className="flex items-center gap-3 rounded-full border border-[#94C748]/20 bg-white px-6 py-3 shadow-lg">
+              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#94C748]/10">
+                <span className="text-xl">🚀</span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-[#1E280E]">{t("comingSoonTitle")}</p>
+                <p className="text-xs text-[#535862]">{t("comingSoonDescription")}</p>
+              </div>
             </div>
-            <div>
-              <p className="text-sm font-semibold text-[#1E280E]">{t("comingSoonTitle")}</p>
-              <p className="text-xs text-[#535862]">{t("comingSoonDescription")}</p>
-            </div>
-          </div>
-        </motion.div>
-      )}
+          </motion.div>,
+          document.body,
+        )}
 
       <motion.div
         className="relative z-10 mx-auto max-w-7xl"
