@@ -11,7 +11,6 @@ export function CtaSection() {
   const t = useTranslations("cta");
   const containerRef = useRef<HTMLDivElement>(null);
   const image1Ref = useRef<HTMLDivElement>(null);
-  const image2Ref = useRef<HTMLDivElement>(null);
   const image3Ref = useRef<HTMLDivElement>(null);
   const image4Ref = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -27,7 +26,7 @@ export function CtaSection() {
 
       mm.add("(min-width: 1024px)", () => {
         // Set initial states
-        gsap.set([image1Ref.current, image2Ref.current, image3Ref.current, image4Ref.current], {
+        gsap.set([image1Ref.current, image3Ref.current, image4Ref.current], {
           y: 300,
           opacity: 0,
           scale: 0.8,
@@ -49,7 +48,6 @@ export function CtaSection() {
 
         // Animate images with stagger
         tl.to(image1Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0)
-          .to(image2Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.2)
           .to(image3Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.4)
           .to(image4Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.6)
           .to(contentRef.current, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, 0.8);
@@ -90,21 +88,8 @@ export function CtaSection() {
         </div>
 
         <div
-          ref={image2Ref}
-          className="absolute left-[8%] top-[52px] z-20 w-[984px]"
-        >
-          <Image
-            src="/images/cta/2.svg"
-            alt=""
-            width={984}
-            height={720}
-            className="rounded-3xl shadow-2xl"
-          />
-        </div>
-
-        <div
           ref={image3Ref}
-          className="absolute left-[5%] top-[102px] z-30 w-[1084px]"
+          className="absolute left-[6%] top-[52px] z-30 w-[1084px]"
         >
           <Image
             src="/images/cta/3.svg"
@@ -117,7 +102,7 @@ export function CtaSection() {
 
         <div
           ref={image4Ref}
-          className="absolute left-0 top-[200px] z-40 w-[1184px]"
+          className="absolute left-0 top-[150px] z-40 w-[1184px]"
         >
           <div className="relative rounded-3xl border border-[#94C748] shadow-2xl">
             <div className="absolute inset-0 rounded-3xl bg-[#94C748]/12" />
@@ -155,7 +140,7 @@ export function CtaSection() {
           {t("description")}
         </p>
         <div>
-          <Button href="/pricing" size="xl" className="mt-10 sm:px-10">
+          <Button href="/pricing" size="xl" className="mt-10 sm:px-10 text-white">
             {t("button")}
           </Button>
         </div>

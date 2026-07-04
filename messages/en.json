@@ -154,6 +154,7 @@
     "platform": "Platform",
     "company": "Company",
     "comingSoon": "Coming Soon",
+    "availableNow": "Available Now",
     "links": {
       "features": "Features",
       "pricing": "Pricing",
@@ -260,5 +261,58 @@
         }
       ]
     }
+  },
+  "aiCaptionModal": {
+    "title": "AI Caption Assistant",
+    "promptLabel": "Prompt",
+    "promptText": "Morning routine with FlimtyFiber",
+    "generate": "Generate",
+    "regenerate": "Regenerate",
+    "generating": "Generating…",
+    "tip": "Tips: The more detailed your prompt, the better the result. Try mentioning the content type, product benefits, and who the target audience is.",
+    "resultLabel": "Result",
+    "lines": [
+      "🌱 Lighter, more energized mornings ever since FlimtyFiber became my routine! ✨",
+      "Smooth digestion, no more sudden hunger, no more bloating — all from one small habit every morning.",
+      "Want to try it too? Check the link in bio! 👆"
+    ],
+    "hashtags": "#FlimtyFiber #FlimtyID #HealthyLiving #DailyFiber #SmoothDigestion #MorningRoutine #BodyGoals",
+    "refineChips": [
+      "Shorter",
+      "More persuasive",
+      "Add hashtags"
+    ],
+    "apply": "Apply"
+  },
+  "bestTimeModal": {
+    "title": "Best Time to Post",
+    "keywordLabel": "Keyword or content topic",
+    "keywordText": "Healthy diet à la Deddy Corbuzier",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing your content topic…",
+    "tip": "Tip: Use keywords relevant to your content for more accurate results.",
+    "heading": "Choose a posting time",
+    "cancel": "Cancel",
+    "save": "Save",
+    "slots": [
+      {
+        "date": "Monday, June 8",
+        "time": "09:00",
+        "tag": "Most optimal",
+        "description": "Highest activity from your target audience in the morning"
+      },
+      {
+        "date": "Tuesday, June 16",
+        "time": "12:00",
+        "tag": "Break time",
+        "description": "Stable engagement during the lunch break"
+      },
+      {
+        "date": "Wednesday, June 24",
+        "time": "18:00",
+        "tag": "Prime time",
+        "description": "Relaxed hours with maximum reach for lifestyle content"
+      }
+    ]
   }
 }

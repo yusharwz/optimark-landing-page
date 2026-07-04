@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { BestTimeHeader } from "./BestTimeHeader";
 import { KeywordPanel, type AnalyzeStatus } from "./KeywordPanel";
 import { TimeResultPanel } from "./TimeResultPanel";
@@ -39,11 +40,13 @@ export function BestTimeModal({
   className,
   title,
   label,
-  keyword = "Diet sehat ala Deddy Corbuzier",
+  keyword,
   tip,
   heading,
   slots,
 }: BestTimeModalProps) {
+  const t = useTranslations("bestTimeModal");
+  const resolvedKeyword = keyword ?? t("keywordText");
   const [phase, setPhase] = useState<Phase>("typing");
   const [typed, setTyped] = useState("");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -51,30 +54,30 @@ export function BestTimeModal({
   // Respect reduced motion: jump straight to the finished state.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTyped(keyword);
+      setTyped(resolvedKeyword);
       setPhase("done");
     }
-  }, [keyword]);
+  }, [resolvedKeyword]);
 
   // Typewriter: append one character at a time, then move to loading.
   useEffect(() => {
     if (phase !== "typing") return;
-    if (typed.length >= keyword.length) {
-      const t = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
-      return () => clearTimeout(t);
+    if (typed.length >= resolvedKeyword.length) {
+      const timer = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
+      return () => clearTimeout(timer);
     }
-    const t = setTimeout(
-      () => setTyped(keyword.slice(0, typed.length + 1)),
+    const timer = setTimeout(
+      () => setTyped(resolvedKeyword.slice(0, typed.length + 1)),
       TYPE_SPEED,
     );
-    return () => clearTimeout(t);
-  }, [phase, typed, keyword]);
+    return () => clearTimeout(timer);
+  }, [phase, typed, resolvedKeyword]);
 
   // Loading → done.
   useEffect(() => {
     if (phase !== "loading") return;
-    const t = setTimeout(() => setPhase("done"), LOADING_MS);
-    return () => clearTimeout(t);
+    const timer = setTimeout(() => setPhase("done"), LOADING_MS);
+    return () => clearTimeout(timer);
   }, [phase]);
 
   const status: AnalyzeStatus =
