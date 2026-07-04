@@ -1,57 +1,83 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function CtaSection() {
   const t = useTranslations("cta");
   const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end end"],
-  });
+  const image1Ref = useRef<HTMLDivElement>(null);
+  const image2Ref = useRef<HTMLDivElement>(null);
+  const image3Ref = useRef<HTMLDivElement>(null);
+  const image4Ref = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
-  const y1 = useTransform(scrollYProgress, [0, 0.4], [300, -100]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.4], [0.8, 1]);
+  gsap.registerPlugin(ScrollTrigger);
 
-  const y2 = useTransform(scrollYProgress, [0.15, 0.55], [300, -100]);
-  const opacity2 = useTransform(scrollYProgress, [0.15, 0.4], [0, 1]);
-  const scale2 = useTransform(scrollYProgress, [0.15, 0.55], [0.8, 1]);
+  useGSAP(
+    () => {
+      if (!containerRef.current) return;
 
-  const y3 = useTransform(scrollYProgress, [0.3, 0.7], [300, -100]);
-  const opacity3 = useTransform(scrollYProgress, [0.3, 0.55], [0, 1]);
-  const scale3 = useTransform(scrollYProgress, [0.3, 0.7], [0.8, 1]);
+      // Pin + animasi image cuma di desktop (mobile pakai gambar statis)
+      const mm = gsap.matchMedia();
 
-  const y4 = useTransform(scrollYProgress, [0.45, 0.85], [300, -100]);
-  const opacity4 = useTransform(scrollYProgress, [0.45, 0.7], [0, 1]);
-  const scale4 = useTransform(scrollYProgress, [0.45, 0.85], [0.8, 1]);
+      mm.add("(min-width: 1024px)", () => {
+        // Set initial states
+        gsap.set([image1Ref.current, image2Ref.current, image3Ref.current, image4Ref.current], {
+          y: 300,
+          opacity: 0,
+          scale: 0.8,
+        });
+        gsap.set(contentRef.current, { y: 50, opacity: 0 });
 
-  const contentY = useTransform(scrollYProgress, [0.4, 0.7], [50, 0]);
-  const contentOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+        // Create a timeline for the entire section with ScrollTrigger
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top top", // Mulai nahan pas top section nyampe top viewport (image bisa naik penuh)
+            end: "+=1200", // Jarak scroll selama section ditahan sampai animasi kelar
+            scrub: 1.5,
+            pin: true, // Tahan scroll selama animasi jalan
+            anticipatePin: 1, // Kurangi "loncat" saat mulai pin
+            // markers: true, // Uncomment untuk debug
+          },
+        });
+
+        // Animate images with stagger
+        tl.to(image1Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0)
+          .to(image2Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.2)
+          .to(image3Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.4)
+          .to(image4Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.6)
+          .to(contentRef.current, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, 0.8);
+      });
+    },
+    { scope: containerRef }
+  );
 
   return (
     <section
       id="cta"
       ref={containerRef}
-      className="relative min-h-[700px] overflow-hidden py-16 lg:min-h-[1200px] lg:py-32"
+      className="relative min-h-[700px] overflow-hidden bg-white py-16 lg:min-h-[1200px] lg:py-32"
+      style={{
+        // Dot grid dijadikan background <section> langsung (bukan child absolute
+        // inset-0). Pas di-pin (position: fixed), background elemen selalu nutup
+        // penuh box-nya, jadi pattern-nya konsisten & nggak "berubah jadi putih"
+        // di tengah animasi. Overlay putih 95% = efek opacity-5 pada swatch.
+        backgroundImage:
+          "linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('/images/hero-swatch.png')",
+        backgroundRepeat: "no-repeat, repeat",
+        backgroundSize: "cover, 400px 400px",
+      }}
     >
-      <motion.div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: "url('/images/hero-swatch.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px 400px",
-        }}
-        aria-hidden
-      />
 
       <div className="relative mx-auto hidden h-[900px] max-w-6xl lg:block">
-        <motion.div
-          style={{ y: y1, opacity: opacity1, scale: scale1 }}
+        <div
+          ref={image1Ref}
           className="absolute left-[10%] top-0 z-10 w-[884px]"
         >
           <Image
@@ -61,10 +87,10 @@ export function CtaSection() {
             height={720}
             className="rounded-3xl shadow-2xl"
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          style={{ y: y2, opacity: opacity2, scale: scale2 }}
+        <div
+          ref={image2Ref}
           className="absolute left-[8%] top-[52px] z-20 w-[984px]"
         >
           <Image
@@ -74,10 +100,10 @@ export function CtaSection() {
             height={720}
             className="rounded-3xl shadow-2xl"
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          style={{ y: y3, opacity: opacity3, scale: scale3 }}
+        <div
+          ref={image3Ref}
           className="absolute left-[5%] top-[102px] z-30 w-[1084px]"
         >
           <Image
@@ -87,10 +113,10 @@ export function CtaSection() {
             height={720}
             className="rounded-3xl shadow-2xl"
           />
-        </motion.div>
+        </div>
 
-        <motion.div
-          style={{ y: y4, opacity: opacity4, scale: scale4 }}
+        <div
+          ref={image4Ref}
           className="absolute left-0 top-[200px] z-40 w-[1184px]"
         >
           <div className="relative rounded-3xl border border-[#94C748] shadow-2xl">
@@ -103,7 +129,7 @@ export function CtaSection() {
               className="rounded-3xl"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
 
       <div className="relative mx-auto mt-4 block w-full max-w-xl px-4 lg:hidden">
@@ -118,27 +144,22 @@ export function CtaSection() {
         </div>
       </div>
 
-      <motion.div
-        style={{ y: contentY, opacity: contentOpacity }}
+      <div
+        ref={contentRef}
         className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
       >
-        <h2 className="text-2xl font-semibold text-[#1E280E] sm:text-3xl lg:text-4xl">
+        <h2 className="text-display text-4xl sm:text-5xl lg:text-6xl">
           {t("title")}
         </h2>
-        <p className="mt-3 text-base text-[#535862] sm:mt-4 sm:text-lg">
+        <p className="text-lead mx-auto mt-5 max-w-xl text-lg sm:text-xl">
           {t("description")}
         </p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <Button href="#" size="xl" className="mt-8">
+        <div>
+          <Button href="/pricing" size="xl" className="mt-10 sm:px-10">
             {t("button")}
           </Button>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

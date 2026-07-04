@@ -7,6 +7,10 @@
     "title": "Privacy Policy - OPTIMARK",
     "description": "Optimark Privacy Policy - Learn how we collect, use, and protect your personal information."
   },
+  "termsMetadata": {
+    "title": "Terms of Service - OPTIMARK",
+    "description": "Optimark Terms of Service - The terms and conditions that govern your use of the Optimark platform."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
@@ -14,7 +18,9 @@
       "home": "Home",
       "features": "Features",
       "pricing": "Pricing"
-    }
+    },
+    "signIn": "Sign In",
+    "signUp": "Sign Up"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -112,13 +118,18 @@
       "prioritySupport": "Priority Support"
     }
   },
+  "featuresPage": {
+    "badge": "🤖 AI Automation Suite",
+    "title": "One AI Platform to Automate Your Entire Marketing",
+    "subtitle": "Optimark unifies four artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically."
+  },
   "connect": {
     "title": "Connect to various accounts"
   },
   "cta": {
     "title": "Ready to grow your digital business?",
     "description": "Start for free today. No credit card required.",
-    "button": "Try Now"
+    "button": "Try Free"
   },
   "footer": {
     "tagline": "All-in-one digital marketing platform to help your business grow.",
@@ -132,6 +143,7 @@
       "pricing": "Pricing",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
       "contact": "Contact"
     },
     "products": {
@@ -149,5 +161,88 @@
     "back": "Back",
     "title": "OPTIMARK PRIVACY POLICY",
     "lastUpdated": "Last updated: April 23, 2026"
+  },
+  "terms": {
+    "back": "Back",
+    "title": "OPTIMARK TERMS OF SERVICE",
+    "lastUpdated": "Last updated: July 2, 2026"
+  },
+  "featureDetail": {
+    "back": "Back to All Features",
+    "ai": {
+      "badge": "Featured Module - Available Now",
+      "title": "Write Authentic Content That Matches Your Brand's Character",
+      "description": "Generating relevant content ideas and copy is now just one click away. Optimark trains our AI on your business profile and brand voice guidelines so the results feel natural and personal.",
+      "checks": [
+        "Beat writer's block with dozens of prompt templates",
+        "Highly flexible tone-of-voice customization",
+        "Auto-generate viral hashtags based on current trends"
+      ],
+      "deepTitle": "Core Capabilities of AI Content Maker",
+      "cards": [
+        {
+          "title": "Custom Brand Voice Engine",
+          "description": "Define your brand description, tagline, and personality (Witty, Professional, Casual). Our AI automatically writes content that matches your brand identity."
+        },
+        {
+          "title": "Focused Caption Generator",
+          "description": "Quickly create Instagram & Facebook captions complete with relevant hashtag suggestions, interactive emojis, and calls to action (CTA)."
+        },
+        {
+          "title": "SEO Long-form Writer",
+          "description": "Produce long, well-structured blog article drafts with H2/H3 heading tags already optimized for your target SEO keywords."
+        }
+      ]
+    },
+    "perencana": {
+      "badge": "Featured Module - Available Now",
+      "title": "Smart, Automated Content Planner",
+      "description": "Manage, schedule, and publish your content to multiple Facebook Pages and Instagram Business profiles from one intuitive central dashboard. Save your marketing team hours every week.",
+      "checks": [
+        "Auto-publishing with no manual confirmation needed",
+        "Separate workspace for each of your brands/clients",
+        "Centralized asset library to store visual drafts"
+      ],
+      "deepTitle": "The Smart Technology Behind Your Posts",
+      "cards": [
+        {
+          "title": "Versatile Visual Calendar",
+          "description": "View and schedule all your social media posts in one unified calendar. Reschedule posting times with ease."
+        },
+        {
+          "title": "Instant Multi-Account Connection",
+          "description": "Securely connect your Facebook Pages and Instagram Business profiles via official OAuth integration with no account limits."
+        },
+        {
+          "title": "Optimal Posting Time (Smart Queue)",
+          "description": "Optimark analyzes when your audience is most active and automatically suggests publishing times to maximize impressions."
+        }
+      ]
+    },
+    "seo": {
+      "badge": "Coming Soon - Beta Testing Phase",
+      "title": "SEO Analyzer & Optimal Article Writing",
+      "description": "Write articles that Google loves right away. Get real-time optimization recommendations as you write to ensure your content ranks on the first page of search engines.",
+      "checks": [
+        "Automatic keyword density analysis",
+        "Content quality score counter (0-100)",
+        "Precise internal-linking & image alt suggestions"
+      ],
+      "deepTitle": "Core Capabilities of SEO Analyzer",
+      "cards": [
+        {
+          "title": "Keyword Research & Explorer",
+          "description": "Discover monthly search volume, estimated CPC, and keyword difficulty from our global SEO database."
+        },
+        {
+          "title": "Content Quality Audit (On-Page)",
+          "description": "Our text editor instantly analyzes your article content and provides recommendations for keyword density, heading tag structure, and readability."
+        },
+        {
+          "title": "Rank Tracker & Competitors",
+          "description": "Track your article's position movements on Google search results and periodically monitor your closest competitors' keyword strategies."
+        }
+      ]
+    }
   }
 }

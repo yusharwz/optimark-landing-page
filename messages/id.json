@@ -7,6 +7,10 @@
     "title": "Kebijakan Privasi - OPTIMARK",
     "description": "Kebijakan Privasi Optimark - Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
   },
+  "termsMetadata": {
+    "title": "Ketentuan Layanan - OPTIMARK",
+    "description": "Ketentuan Layanan Optimark - Syarat dan ketentuan yang mengatur penggunaan Anda atas platform Optimark."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Buka menu",
@@ -14,7 +18,9 @@
       "home": "Beranda",
       "features": "Fitur",
       "pricing": "Harga"
-    }
+    },
+    "signIn": "Masuk",
+    "signUp": "Daftar"
   },
   "localeSwitcher": {
     "label": "Bahasa",
@@ -112,13 +118,18 @@
       "prioritySupport": "Priority Support"
     }
   },
+  "featuresPage": {
+    "badge": "🤖 AI Automation Suite",
+    "title": "Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda",
+    "subtitle": "Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis."
+  },
   "connect": {
     "title": "Hubungkan ke berbagai akun"
   },
   "cta": {
     "title": "Siap mengembangkan bisnis digital Anda?",
     "description": "Mulai gratis hari ini. Tidak perlu kartu kredit.",
-    "button": "Coba Sekarang"
+    "button": "Coba Gratis"
   },
   "footer": {
     "tagline": "Platform all-in-one digital marketing untuk bantu bisnis Anda berkembang.",
@@ -132,6 +143,7 @@
       "pricing": "Pilihan Harga",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
+      "terms": "Ketentuan Layanan",
       "contact": "Kontak"
     },
     "products": {
@@ -149,5 +161,88 @@
     "back": "Back",
     "title": "KEBIJAKAN PRIVASI OPTIMARK",
     "lastUpdated": "Terakhir diperbarui: 23 April 2026"
+  },
+  "terms": {
+    "back": "Back",
+    "title": "KETENTUAN LAYANAN OPTIMARK",
+    "lastUpdated": "Terakhir diperbarui: 2 Juli 2026"
+  },
+  "featureDetail": {
+    "back": "Kembali ke Semua Fitur",
+    "ai": {
+      "badge": "Modul Unggulan - Tersedia Sekarang",
+      "title": "Tulis Konten Otentik Sesuai Karakter Brand Anda",
+      "description": "Menghasilkan ide konten dan salinan tertulis yang relevan kini semudah sekali klik. Optimark melatih AI kami berdasarkan profil bisnis dan panduan brand voice Anda agar tulisan yang dihasilkan terasa sangat natural dan personal.",
+      "checks": [
+        "Bebas writer's block dengan puluhan template prompt",
+        "Penyesuaian gaya bahasa (tone of voice) yang sangat fleksibel",
+        "Auto-generate hashtag viral berbasis tren terkini"
+      ],
+      "deepTitle": "Kemampuan Utama AI Content Maker",
+      "cards": [
+        {
+          "title": "Custom Brand Voice Engine",
+          "description": "Tentukan deskripsi brand, tagline, dan kepribadian (Witty, Professional, Casual). AI kami akan otomatis menulis konten sesuai jati diri brand Anda."
+        },
+        {
+          "title": "Caption Generator Terarah",
+          "description": "Buat caption Instagram & Facebook secara cepat lengkap dengan saran hashtag relevan, emoji interaktif, dan ajakan bertindak (CTA)."
+        },
+        {
+          "title": "SEO Long-form Writer",
+          "description": "Hasilkan draf artikel blog panjang berstruktur lengkap dengan heading tag H2/H3 yang sudah dioptimalkan untuk SEO kata kunci Anda."
+        }
+      ]
+    },
+    "perencana": {
+      "badge": "Modul Unggulan - Tersedia Sekarang",
+      "title": "Perencana Konten Otomatis & Cerdas",
+      "description": "Kelola, jadwalkan, dan publikasikan konten Anda ke berbagai halaman Facebook dan profil Instagram Business dari satu dashboard pusat yang intuitif. Hemat jam kerja tim marketing Anda setiap minggu.",
+      "checks": [
+        "Auto-publishing tanpa perlu konfirmasi manual",
+        "Workspace terpisah untuk setiap brand/klien Anda",
+        "Asset library terpusat untuk menyimpan draft visual"
+      ],
+      "deepTitle": "Teknologi Cerdas di Balik Postingan Anda",
+      "cards": [
+        {
+          "title": "Kalender Visual Serbaguna",
+          "description": "Lihat dan jadwalkan semua postingan media sosial Anda dalam satu kalender terpadu. Ubah waktu postingan dengan mudah."
+        },
+        {
+          "title": "Koneksi Multi-Akun Instan",
+          "description": "Hubungkan profil Facebook Pages dan Instagram Business secara aman lewat integrasi OAuth resmi tanpa batas akun."
+        },
+        {
+          "title": "Waktu Posting Optimal (Smart Queue)",
+          "description": "Optimark menganalisis kapan audiens Anda paling aktif dan menyarankan waktu publikasi otomatis demi memaksimalkan impresi."
+        }
+      ]
+    },
+    "seo": {
+      "badge": "Segera Hadir - Tahap Pengujian Beta",
+      "title": "SEO Analyzer & Penulisan Artikel Optimal",
+      "description": "Tulis artikel yang langsung dicintai Google. Dapatkan rekomendasi optimasi secara real-time saat Anda sedang menulis untuk memastikan konten Anda menduduki halaman pertama mesin pencari.",
+      "checks": [
+        "Analisis kepadatan kata kunci secara otomatis",
+        "Penghitung skor kualitas konten 0-100",
+        "Saran internal-linking & alt-image yang presisi"
+      ],
+      "deepTitle": "Kemampuan Utama SEO Analyzer",
+      "cards": [
+        {
+          "title": "Keyword Research & Explorer",
+          "description": "Cari tahu volume pencarian bulanan, estimasi nilai BPK, dan tingkat kesulitan kata kunci (Keyword Difficulty) dari database SEO global kami."
+        },
+        {
+          "title": "Audit Kualitas Konten (On-Page)",
+          "description": "Editor teks kami akan langsung menganalisis konten artikel Anda dan memberikan rekomendasi keyword density, struktur tag heading, dan keterbacaan."
+        },
+        {
+          "title": "Rank Tracker & Kompetitor",
+          "description": "Pantau pergerakan posisi artikel Anda di halaman pencarian Google serta pantau strategi kata kunci kompetitor terdekat Anda secara berkala."
+        }
+      ]
+    }
   }
 }

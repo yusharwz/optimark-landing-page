@@ -1,6 +1,7 @@
 import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
-import { FeaturesSection } from "@/components/FeaturesSection";
+import { HeroFeaturesBackground } from "@/components/HeroFeaturesBackground";
+import { BentoFeaturesSection } from "@/components/BentoFeaturesSection";
 import { PricingSection } from "@/components/PricingSection";
 import { ConnectSection } from "@/components/ConnectSection";
 import { CtaSection } from "@/components/CtaSection";
@@ -22,11 +23,13 @@ export default async function Home({ params }: Props) {
     <div className="min-h-screen bg-white">
       <Header />
       <main>
-        <HeroSection />
-        <div id="features">
-          <FeaturesSection />
+        <div className="relative">
+          <HeroFeaturesBackground />
+          <HeroSection />
+          <div id="features" className="relative z-20">
+            <BentoFeaturesSection />
+          </div>
         </div>
-        <PricingSection showEstimator={false} />
         <ConnectSection />
         <CtaSection />
       </main>
