@@ -16,13 +16,16 @@ async function loadInter(weight: 400 | 700) {
           "User-Agent":
             "Mozilla/5.0 (Windows NT 6.1; Trident/7.0; rv:11.0) like Gecko",
         },
+        cache: "force-cache",
       },
     ).then((res) => res.text());
 
-    const match = css.match(/src: url\(([^)]+)\) format\('(truetype|woff)'\)/);
+    const match = css.match(/src: url\(([^)]+)\) format\('(truetype|woff2?)'\)/);
     if (!match) return undefined;
 
-    return fetch(match[1]).then((res) => res.arrayBuffer());
+    return fetch(match[1], { cache: "force-cache" }).then((res) =>
+      res.arrayBuffer(),
+    );
   } catch {
     return undefined;
   }
@@ -196,6 +199,10 @@ export async function GET(request: Request) {
       {
         ...OG_SIZE,
         fonts,
+        headers: {
+          "Content-Type": "image/png",
+          "Cache-Control": "public, max-age=3600, s-maxage=86400",
+        },
       },
     );
   } catch (error) {
