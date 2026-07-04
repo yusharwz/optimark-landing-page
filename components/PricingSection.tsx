@@ -8,6 +8,7 @@ import { Button } from "@/components/base/buttons/button";
 import { PRICING_TIERS } from "@/config/pricing";
 import { SITE } from "@/config/site";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
+import { cx } from "@/utils/cx";
 
 const SECTION_GRADIENT =
   "linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(242, 248, 231, 1) 100%)";
@@ -88,6 +89,14 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
     ads: 0,
   });
   const [showNotification, setShowNotification] = useState(false);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
 
   const totalTokens = useMemo(() => {
     return SLIDER_CONFIGS.reduce((sum, config) => {
@@ -182,18 +191,6 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
         </motion.div>
       )}
 
-      <div className="absolute inset-0" style={{ background: SECTION_GRADIENT }} />
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: "url('/images/hero-swatch.png')",
-          backgroundRepeat: "repeat",
-          backgroundSize: "400px 400px",
-        }}
-      />
-
       <motion.div
         className="relative z-10 mx-auto max-w-7xl"
         variants={staggerContainer}
@@ -202,10 +199,10 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
         viewport={{ once: true, margin: "-100px" }}
       >
         <motion.div variants={fadeInUp} className="text-center">
-          <h2 className="text-4xl font-bold text-[#1E280E] sm:text-5xl lg:text-[3.5rem]">
+          <h2 className="text-display text-4xl sm:text-5xl lg:text-[3.5rem]">
             {t("title")}
           </h2>
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-[#535862]">
+          <p className="text-lead mx-auto mt-6 max-w-2xl text-lg">
             {t("subtitle")}
           </p>
         </motion.div>
@@ -217,7 +214,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
           {PRICING_TIERS.map((tier) => (
             <motion.div key={tier.id} variants={staggerItem} className="relative flex flex-col">
               {tier.isPopular && (
-                <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
+                <div className="absolute -top-4 left-1/2 z-30 -translate-x-1/2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
                     <span className="relative flex h-2 w-2">
                       <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-75" />
@@ -229,80 +226,103 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
               )}
 
               <div
-                className={`flex h-full flex-col rounded-2xl border bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-xl ${
+                onMouseMove={handleMouseMove}
+                className={cx(
+                  "group relative flex h-full flex-col overflow-hidden rounded-3xl border bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
                   tier.isPopular
                     ? "border-[#94C748] ring-2 ring-[#94C748]/10"
                     : "border-[#E9EAEB]"
-                }`}
+                )}
               >
-                <div className="text-center">
-                  <h3 className="text-xl font-bold text-[#1E280E]">
-                    {t(`tiers.${tier.id}.name`)}
-                  </h3>
-                </div>
+                {/* Background Spotlight Glow */}
+                <div
+                  className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
+                  style={{
+                    background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(212, 68, 241, 0.08), transparent 80%)`,
+                  }}
+                />
+                {/* Border Spotlight Glow */}
+                <div
+                  className="pointer-events-none absolute -inset-px rounded-3xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10"
+                  style={{
+                    background: `radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(212, 68, 241, 0.4), transparent 80%)`,
+                    WebkitMaskImage: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+                    WebkitMaskComposite: `xor`,
+                    maskComposite: `exclude`,
+                    padding: "1px",
+                  }}
+                />
 
-                <div className="mt-6 text-center">
-                  {tier.price === 0 ? (
-                    <div className="flex items-baseline justify-center">
-                      <span className="text-5xl font-bold text-[#1E280E]">
-                        {t("free")}
-                      </span>
-                    </div>
-                  ) : (
-                    <div className="flex items-baseline justify-center gap-1">
-                      <span className="text-2xl font-semibold text-[#535862]">Rp</span>
-                      <span className="text-5xl font-bold text-[#1E280E]">
-                        {(tier.price / 1000).toFixed(0)}K
-                      </span>
-                      <span className="text-lg font-medium text-[#535862]">
-                        {t("perMonth")}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <div className="mt-4 text-center">
-                  <div className="inline-flex items-center gap-1.5 rounded-full bg-[#F4F3FF] px-3 py-1.5">
-                    <span className="text-sm font-medium text-[#5925DC]">
-                      {t("tokensPerMonth", {
-                        count: tier.tokensPerMonth.toLocaleString(),
-                      })}
-                    </span>
+                <div className="relative z-20 flex h-full flex-col">
+                  <div className="text-center">
+                    <h3 className="text-xl font-bold text-[#1E280E]">
+                      {t(`tiers.${tier.id}.name`)}
+                    </h3>
                   </div>
-                </div>
 
-                <ul className="mt-8 flex-1 space-y-4">
-                  {tier.featureKeys.map((feature) => (
-                    <li key={feature.key} className="flex items-start gap-3">
-                      {feature.included ? (
-                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#94C748]/10">
-                          <Check className="h-3.5 w-3.5 text-[#94C748]" strokeWidth={3} />
-                        </div>
-                      ) : (
-                        <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F2F4F7]">
-                          <X className="h-3.5 w-3.5 text-[#98A2B3]" strokeWidth={2} />
-                        </div>
-                      )}
-                      <span
-                        className={`text-sm ${
-                          feature.included ? "text-[#1E280E]" : "text-[#98A2B3]"
-                        }`}
-                      >
-                        {t(`features.${feature.key}`)}
+                  <div className="mt-6 text-center">
+                    {tier.price === 0 ? (
+                      <div className="flex items-baseline justify-center">
+                        <span className="text-5xl font-bold text-[#1E280E]">
+                          {t("free")}
+                        </span>
+                      </div>
+                    ) : (
+                      <div className="flex items-baseline justify-center gap-1">
+                        <span className="text-2xl font-semibold text-[#535862]">Rp</span>
+                        <span className="text-5xl font-bold text-[#1E280E]">
+                          {(tier.price / 1000).toFixed(0)}K
+                        </span>
+                        <span className="text-lg font-medium text-[#535862]">
+                          {t("perMonth")}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="mt-4 text-center">
+                    <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FDF4FF] border border-[#F5D0FE] px-3 py-1.5">
+                      <span className="text-sm font-medium text-[#D444F1]">
+                        {t("tokensPerMonth", {
+                          count: tier.tokensPerMonth.toLocaleString(),
+                        })}
                       </span>
-                    </li>
-                  ))}
-                </ul>
+                    </div>
+                  </div>
 
-                <div className="mt-8">
-                  <Button
-                    onClick={handleComingSoon}
-                    color={tier.isPopular ? "primary" : "secondary"}
-                    size="lg"
-                    className="w-full"
-                  >
-                    {t(`tiers.${tier.id}.cta`)}
-                  </Button>
+                  <ul className="mt-8 flex-1 space-y-4">
+                    {tier.featureKeys.map((feature) => (
+                      <li key={feature.key} className="flex items-start gap-3">
+                        {feature.included ? (
+                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#94C748]/10">
+                            <Check className="h-3.5 w-3.5 text-[#94C748]" strokeWidth={3} />
+                          </div>
+                        ) : (
+                          <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#F2F4F7]">
+                            <X className="h-3.5 w-3.5 text-[#98A2B3]" strokeWidth={2} />
+                          </div>
+                        )}
+                        <span
+                          className={`text-sm ${
+                            feature.included ? "text-[#1E280E]" : "text-[#98A2B3]"
+                          }`}
+                        >
+                          {t(`features.${feature.key}`)}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-8">
+                    <Button
+                      onClick={handleComingSoon}
+                      color={tier.isPopular ? "primary" : "secondary"}
+                      size="lg"
+                      className="w-full"
+                    >
+                      {t(`tiers.${tier.id}.cta`)}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -489,7 +509,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
             {t("customPlan")}{" "}
             <a
               href={`mailto:${SITE.contactEmail}`}
-              className="font-semibold text-[#5925DC] underline decoration-[#5925DC]/30 underline-offset-4 transition-colors hover:decoration-[#5925DC]"
+              className="font-semibold text-[#D444F1] underline decoration-[#D444F1]/30 underline-offset-4 transition-colors hover:decoration-[#D444F1]"
             >
               {t("contactUs")}
             </a>
