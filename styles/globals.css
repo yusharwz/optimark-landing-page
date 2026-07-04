@@ -26,6 +26,10 @@
     transition-timing-function: inherit;
 }
 
+@utility font-gothic {
+    font-family: var(--font-gothic, "Special Gothic Condensed One"), sans-serif;
+}
+
 /*
  * Clarity ladder — the 3-level contrast hierarchy used across the marketing
  * pages. Bundle color + weight + tracking + wrapping so the hierarchy stays
