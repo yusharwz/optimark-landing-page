@@ -42,11 +42,11 @@ export function ResultPanel({
   revealed = false,
 }: ResultPanelProps) {
   return (
-    <div className="flex flex-col p-5">
-      <p className="text-sm text-[#535862]">Hasil Generate</p>
+    <div className="flex flex-col p-4">
+      <p className="text-xs text-[#535862]">Hasil Generate</p>
 
       <motion.div
-        className="mt-3 min-h-[220px] space-y-3 rounded-xl bg-[#FDF4FF] p-4"
+        className="mt-2 min-h-[140px] space-y-2 rounded-xl bg-[#FDF4FF] p-3"
         variants={container}
         initial="hidden"
         animate={revealed ? "show" : "hidden"}
@@ -55,7 +55,7 @@ export function ResultPanel({
           <motion.p
             key={i}
             variants={item}
-            className="ai-caption__line text-sm leading-relaxed text-[#414651]"
+            className="ai-caption__line text-xs leading-relaxed text-[#414651]"
           >
             {line}
           </motion.p>
@@ -63,40 +63,40 @@ export function ResultPanel({
 
         <motion.p
           variants={item}
-          className="ai-caption__hashtags text-sm leading-relaxed text-[#414651]"
+          className="ai-caption__hashtags text-xs leading-relaxed text-[#414651]"
         >
           {hashtags}
         </motion.p>
 
-        <motion.div variants={item} className="flex items-center gap-3 pt-1">
-          <ThumbsUp className="h-4 w-4 text-[#A4A7AE]" />
-          <ThumbsDown className="h-4 w-4 text-[#A4A7AE]" />
+        <motion.div variants={item} className="flex items-center gap-2.5 pt-0.5">
+          <ThumbsUp className="h-3.5 w-3.5 text-[#A4A7AE]" />
+          <ThumbsDown className="h-3.5 w-3.5 text-[#A4A7AE]" />
         </motion.div>
 
-        <motion.div variants={item} className="flex flex-wrap gap-2">
+        <motion.div variants={item} className="flex flex-wrap gap-1">
           {REFINE_CHIPS.map(({ icon: Icon, label }) => (
             <span
               key={label}
-              className="inline-flex items-center gap-1.5 rounded-full border border-[#E9EAEB] bg-white px-3 py-1.5 text-xs text-[#414651]"
+              className="inline-flex items-center gap-1 rounded-full border border-[#E9EAEB] bg-white px-2 py-1 text-[10px] text-[#414651]"
             >
-              <Icon className="h-3.5 w-3.5 text-[#BA24D5]" />
+              <Icon className="h-3 w-3 text-[#BA24D5]" />
               {label}
             </span>
           ))}
         </motion.div>
       </motion.div>
 
-      <div className="mt-4 flex justify-end">
+      <div className="mt-2.5 flex justify-end">
         <button
           type="button"
           disabled={!revealed}
-          className={`inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-semibold transition ${
+          className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold transition ${
             revealed
               ? "bg-[#94C748] text-[#1E280E] hover:brightness-95"
               : "cursor-not-allowed bg-gray-100 text-gray-400"
           }`}
         >
-          <Check className="h-4 w-4" />
+          <Check className="h-3.5 w-3.5" />
           Terapkan
         </button>
       </div>

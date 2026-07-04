@@ -16,9 +16,6 @@ export const CONNECT_PLATFORMS = [
   { name: "Facebook", icon: "/images/connect/facebook.svg" },
   { name: "TikTok", icon: "/images/connect/tiktok.svg" },
   { name: "Threads", icon: "/images/connect/threads.svg" },
-  { name: "Blibli", icon: "/images/connect/blibli.svg" },
-  { name: "Shopee", icon: "/images/connect/shopee.svg" },
-  { name: "TikTok Shop", icon: "/images/connect/tiktokshop.svg" },
 ] as const;
 
 export const FOOTER_PRODUCT_KEYS = [

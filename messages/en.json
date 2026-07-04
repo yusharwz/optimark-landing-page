@@ -20,7 +20,7 @@
       "pricing": "Pricing"
     },
     "signIn": "Sign In",
-    "signUp": "Sign Up"
+    "getStarted": "Get Started"
   },
   "localeSwitcher": {
     "label": "Language",
@@ -55,6 +55,18 @@
       "ai": {
         "title": "AI Content Maker",
         "description": "Create quality content with AI assistance for relevant results."
+      }
+    },
+    "illustrations": {
+      "ai": {
+        "userPrompt": "Write an Instagram promo post...",
+        "aiResponse": "Here's your post draft! 🚀 Ready to boost your sales?",
+        "generate": "Generate"
+      },
+      "seo": {
+        "score": "SEO Score",
+        "keywords": "Keywords",
+        "rank": "Rank"
       }
     }
   },

@@ -11,6 +11,12 @@ export const FEATURE_ICONS: Record<FeatureId, LucideIcon> = {
   ai: Sparkles,
 };
 
+export const FEATURE_ROUTES: Record<FeatureId, string> = {
+  ai: "ai-content-maker",
+  perencana: "perencana-konten",
+  seo: "seo-analyzer",
+};
+
 export const FEATURE_META: Record<
   FeatureId,
   { comingSoon?: boolean; coverImage?: string; hasBadge?: boolean }

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BentoFeatureCard } from "@/components/BentoFeatureCard";
+import { AiContentIllustration, SeoAnalyzerIllustration } from "@/components/BentoCardIllustrations";
 import { Reveal } from "@/components/motion/Reveal";
 import { Calendar, BarChart3, Sparkles, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -110,8 +111,8 @@ export default function FeaturesPage() {
             animate="visible"
             className="text-center max-w-3xl mx-auto mb-20"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#1E280E] border border-[#94C748]/20">
-              <Zap className="h-3 w-3 text-[#94C748]" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#D444F1] border border-[#94C748]/20">
+              <Zap className="h-3 w-3 text-[#D444F1]" />
               {tp("badge")}
             </span>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
@@ -128,18 +129,30 @@ export default function FeaturesPage() {
             y={20}
             className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6"
           >
-            {features.map((feat) => (
-              <BentoFeatureCard
-                key={feat.id}
-                href={`/features/${feat.routeId}`}
-                icon={feat.icon}
-                title={t(`items.${feat.id}.title`)}
-                description={t(`items.${feat.id}.description`)}
-                badge={feat.comingSoon ? t("comingSoon") : t("availableNow")}
-                coverImage={feat.coverImage}
-                className={feat.featured ? "sm:row-span-2" : undefined}
-              />
-            ))}
+            {features.map((feat) => {
+              let illustration: React.ReactNode = undefined;
+              if (feat.id === "ai") {
+                illustration = <AiContentIllustration />;
+              } else if (feat.id === "seo") {
+                illustration = <SeoAnalyzerIllustration />;
+              }
+
+              return (
+                <BentoFeatureCard
+                  key={feat.id}
+                  href={`/features/${feat.routeId}`}
+                  icon={feat.icon}
+                  title={t(`items.${feat.id}.title`)}
+                  description={t(`items.${feat.id}.description`)}
+                  badge={feat.comingSoon ? t("comingSoon") : t("availableNow")}
+                  coverImage={feat.coverImage}
+                  illustration={illustration}
+                  featured={feat.featured}
+                  highlight={feat.id === "ai"}
+                  className={feat.featured ? "sm:row-span-2" : undefined}
+                />
+              );
+            })}
           </Reveal>
         </div>
       </main>
