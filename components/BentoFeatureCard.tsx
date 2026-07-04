@@ -17,6 +17,8 @@ type BentoFeatureCardProps = {
   illustration?: React.ReactNode;
   /** Whether the card is featured (uses a vertical layout instead of grid). */
   featured?: boolean;
+  /** When true, paints a subtle green brand-flourish background to draw the eye. */
+  highlight?: boolean;
   /** When set, the whole card becomes a link to this route. */
   href?: string;
   className?: string;
@@ -34,6 +36,7 @@ export function BentoFeatureCard({
   coverImage,
   illustration,
   featured,
+  highlight,
   href,
   className,
 }: BentoFeatureCardProps) {
@@ -46,7 +49,10 @@ export function BentoFeatureCard({
   };
 
   const cardClass = cx(
-    "group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+    "group relative overflow-hidden rounded-3xl border p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+    highlight
+      ? "border-brand-200 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40"
+      : "border-gray-200 bg-white",
     featured
       ? "flex flex-col justify-between items-stretch gap-8 h-full"
       : "grid grid-cols-[65fr_35fr] items-start gap-6",
@@ -55,6 +61,13 @@ export function BentoFeatureCard({
 
   const content = (
     <>
+      {highlight && (
+        // Subtle green flourish blobs that bleed off the card corners.
+        <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+          <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-brand-200/25 blur-3xl" />
+          <div className="absolute -bottom-20 -left-12 h-52 w-52 rounded-full bg-brand-300/20 blur-3xl" />
+        </div>
+      )}
       {/* Background Spotlight Glow */}
       <div
         className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
@@ -64,9 +77,9 @@ export function BentoFeatureCard({
       />
       {/* Border Spotlight Glow */}
       <div
-        className="pointer-events-none absolute -inset-px rounded-3xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10"
+        className="pointer-events-none absolute -inset-px rounded-3xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-60 z-10"
         style={{
-          background: `radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(212, 68, 241, 0.4), transparent 80%)`,
+          background: `radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(212, 68, 241, 0.4), transparent 40%)`,
           WebkitMaskImage: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
           WebkitMaskComposite: `xor`,
           maskComposite: `exclude`,

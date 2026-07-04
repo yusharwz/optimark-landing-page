@@ -90,8 +90,8 @@ export function Header() {
             <div className="flex items-center gap-3">
               <LanguageSwitcher />
               <div className="hidden md:block">
-                <Button href="https://staging.app.optimark.ai/login" color="primary" size="sm">
-                  {t("signIn")}
+                <Button href="https://staging.app.optimark.ai/login" color="primary" size="sm" className="text-white">
+                  {t("getStarted")}
                 </Button>
               </div>
 
