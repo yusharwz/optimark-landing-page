@@ -11,6 +11,10 @@
     "title": "Terms of Service - OPTIMARK",
     "description": "Optimark Terms of Service - The terms and conditions that govern your use of the Optimark platform."
   },
+  "pricingMetadata": {
+    "title": "Pricing Plans - OPTIMARK",
+    "description": "Choose the right Optimark subscription plan for your business. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",

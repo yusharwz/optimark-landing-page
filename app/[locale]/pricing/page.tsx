@@ -1,15 +1,30 @@
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { resolveLocale } from "@/lib/locale";
 import { Header } from "@/components/Header";
 import { PricingSection } from "@/components/PricingSection";
 import { HeroFeaturesBackground } from "@/components/HeroFeaturesBackground";
 import { Footer } from "@/components/Footer";
 
-export const metadata = {
-  title: "Pilihan Paket Harga - Optimark",
-  description:
-    "Pilih paket langganan Optimark yang sesuai untuk bisnis Anda. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi.",
+type Props = {
+  params: Promise<{ locale: string }>;
 };
 
-export default function PricingPage() {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale: localeParam } = await params;
+  const locale = resolveLocale(localeParam);
+  const t = await getTranslations({ locale, namespace: "pricingMetadata" });
+
+  return {
+    title: t("title"),
+    description: t("description"),
+  };
+}
+
+export default async function PricingPage({ params }: Props) {
+  const { locale: localeParam } = await params;
+  setRequestLocale(resolveLocale(localeParam));
+
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -24,3 +39,4 @@ export default function PricingPage() {
     </div>
   );
 }
+
