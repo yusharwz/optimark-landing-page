@@ -174,7 +174,7 @@ export default function FeaturesPage() {
 
     setTimeout(() => {
       const input = aiPrompt.toLowerCase();
-      let outputText = tp("demo.ai.defaultDraft", "✨ Discover a smarter way to automate your workflow. Generate headlines, calendar items, and search rankings automatically with Optimark! 🚀 #DigitalGrowth #Productivity");
+      let outputText = tp("demo.ai.defaultDraft");
       
       if (input.includes("matcha") || input.includes("coffee") || input.includes("kopi") || input.includes("starbucks")) {
         outputText = "☕ Starting the day with a creamy Matcha Latte! 🍵 Buy 1 Get 1 free at our Nusantara outlet this morning. Tag your coffee buddy below! 👇✨ #CoffeePromo #MatchaLovers #StarbucksVibe";
@@ -306,28 +306,50 @@ export default function FeaturesPage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[0, 1, 2].map((idx) => {
-              const benefitIcons = [Cpu, Activity, Layers];
-              const Icon = benefitIcons[idx];
-              return (
-                <div
-                  key={idx}
-                  className="rounded-3xl border border-gray-200 bg-white/60 backdrop-blur-sm p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-5"
-                >
-                  <div className="h-12 w-12 rounded-2xl bg-[#94C748]/10 text-[#94C748] flex items-center justify-center border border-[#94C748]/20">
-                    <Icon className="h-6 w-6" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-[#1E280E]">
-                      {tp(`benefits.items.${idx}.title`)}
-                    </h3>
-                    <p className="mt-2 text-sm text-[#535862] leading-relaxed">
-                      {tp(`benefits.items.${idx}.description`)}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+            {/* Benefit 1 */}
+            <div className="rounded-3xl border border-gray-200 bg-white/60 backdrop-blur-sm p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-5">
+              <div className="h-12 w-12 rounded-2xl bg-[#94C748]/10 text-[#94C748] flex items-center justify-center border border-[#94C748]/20">
+                <Cpu className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#1E280E]">
+                  {tp("benefits.items.0.title")}
+                </h3>
+                <p className="mt-2 text-sm text-[#535862] leading-relaxed">
+                  {tp("benefits.items.0.description")}
+                </p>
+              </div>
+            </div>
+
+            {/* Benefit 2 */}
+            <div className="rounded-3xl border border-gray-200 bg-white/60 backdrop-blur-sm p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-5">
+              <div className="h-12 w-12 rounded-2xl bg-[#94C748]/10 text-[#94C748] flex items-center justify-center border border-[#94C748]/20">
+                <Activity className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#1E280E]">
+                  {tp("benefits.items.1.title")}
+                </h3>
+                <p className="mt-2 text-sm text-[#535862] leading-relaxed">
+                  {tp("benefits.items.1.description")}
+                </p>
+              </div>
+            </div>
+
+            {/* Benefit 3 */}
+            <div className="rounded-3xl border border-gray-200 bg-white/60 backdrop-blur-sm p-8 shadow-sm hover:shadow-md transition-shadow flex flex-col gap-5">
+              <div className="h-12 w-12 rounded-2xl bg-[#94C748]/10 text-[#94C748] flex items-center justify-center border border-[#94C748]/20">
+                <Layers className="h-6 w-6" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-[#1E280E]">
+                  {tp("benefits.items.2.title")}
+                </h3>
+                <p className="mt-2 text-sm text-[#535862] leading-relaxed">
+                  {tp("benefits.items.2.description")}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
