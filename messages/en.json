@@ -137,7 +137,70 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "One AI Platform to Automate Your Entire Marketing",
-    "subtitle": "Optimark unifies four artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically."
+    "subtitle": "Optimark unifies three artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically.",
+    "demo": {
+      "title": "Interactive Workspace",
+      "subtitle": "Experience our core AI modules in action before you connect your real accounts. Click any tab below to test the simulator.",
+      "tabs": {
+        "ai": "AI Writer",
+        "planner": "Smart Planner",
+        "seo": "SEO Analyzer"
+      },
+      "ai": {
+        "promptLabel": "Describe your product or promotion",
+        "placeholder": "e.g., Morning promo at Starbucks - Buy 1 Get 1 free matcha latte...",
+        "button": "Generate Copy",
+        "generating": "AI is writing your post...",
+        "responseLabel": "AI Generated Draft",
+        "copyButton": "Copy Draft",
+        "copied": "Copied!"
+      },
+      "planner": {
+        "title": "Content Calendar",
+        "subtitle": "Click any time slot below to toggle a post in the queue.",
+        "time": "Time",
+        "post": "Post Title",
+        "status": "Status",
+        "scheduled": "Scheduled",
+        "draft": "Draft",
+        "addPost": "Quick Schedule"
+      },
+      "seo": {
+        "title": "SEO Live Audit",
+        "subtitle": "Type your article and see the quality score change in real-time.",
+        "keywordLabel": "Target Keyword",
+        "keywordPlaceholder": "e.g., healthy diet",
+        "contentLabel": "Article Draft",
+        "contentPlaceholder": "Start typing your article here...",
+        "scoreLabel": "SEO Score",
+        "tips": {
+          "title": "Recommendations",
+          "keywordMissing": "Add your target keyword to the title and body",
+          "keywordDensity": "Use your keyword 2-3 times",
+          "length": "Write at least 30 words for analysis",
+          "headings": "Add subheadings (H2, H3)",
+          "perfect": "Excellent on-page optimization!"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Why Modern Brands Choose Optimark",
+      "subtitle": "Grow your business faster with tools built for speed, performance, and conversion.",
+      "items": [
+        {
+          "title": "10x Faster Execution",
+          "description": "Generate high-converting copy, headlines, and scheduling calendars in seconds rather than hours."
+        },
+        {
+          "title": "Data-Driven Optimization",
+          "description": "Never guess what works. Our on-page SEO analyzer ensures you hit the right benchmarks before you publish."
+        },
+        {
+          "title": "All-in-One Workflow",
+          "description": "Connect your social accounts, create content, check search metrics, and post, all from a single tab."
+        }
+      ]
+    }
   },
   "connect": {
     "title": "Connect to various accounts"

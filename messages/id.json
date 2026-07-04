@@ -137,7 +137,70 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda",
-    "subtitle": "Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis."
+    "subtitle": "Optimark menyatukan tiga modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.",
+    "demo": {
+      "title": "Interactive Workspace",
+      "subtitle": "Rasakan langsung modul AI utama kami sebelum Anda menghubungkan akun asli Anda. Klik salah satu tab di bawah untuk mencoba simulator.",
+      "tabs": {
+        "ai": "AI Writer",
+        "planner": "Smart Planner",
+        "seo": "SEO Analyzer"
+      },
+      "ai": {
+        "promptLabel": "Deskripsikan produk atau promosi Anda",
+        "placeholder": "misal, Promo pagi Starbucks - Beli 1 Gratis 1 matcha latte...",
+        "button": "Buat Tulisan",
+        "generating": "AI sedang menulis postingan Anda...",
+        "responseLabel": "Draf Hasil Generate AI",
+        "copyButton": "Salin Draf",
+        "copied": "Tersalin!"
+      },
+      "planner": {
+        "title": "Kalender Konten",
+        "subtitle": "Klik slot waktu mana saja di bawah untuk mengaktifkan/menonaktifkan postingan dalam antrean.",
+        "time": "Waktu",
+        "post": "Judul Postingan",
+        "status": "Status",
+        "scheduled": "Terjadwal",
+        "draft": "Draf",
+        "addPost": "Jadwalkan Cepat"
+      },
+      "seo": {
+        "title": "SEO Live Audit",
+        "subtitle": "Tulis artikel Anda dan lihat skor kualitas SEO berubah secara real-time.",
+        "keywordLabel": "Kata Kunci Target",
+        "keywordPlaceholder": "misal, diet sehat",
+        "contentLabel": "Draf Artikel",
+        "contentPlaceholder": "Mulai menulis artikel Anda di sini...",
+        "scoreLabel": "Skor SEO",
+        "tips": {
+          "title": "Rekomendasi",
+          "keywordMissing": "Tambahkan kata kunci target Anda di judul dan isi artikel",
+          "keywordDensity": "Gunakan kata kunci target 2-3 kali",
+          "length": "Tulis minimal 30 kata untuk analisis",
+          "headings": "Tambahkan sub-judul (H2, H3)",
+          "perfect": "Optimasi on-page luar biasa!"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Mengapa Brand Modern Memilih Optimark",
+      "subtitle": "Kembangkan bisnis Anda lebih cepat dengan alat yang dirancang untuk kecepatan, performa, dan konversi.",
+      "items": [
+        {
+          "title": "Eksekusi 10x Lebih Cepat",
+          "description": "Hasilkan draf tulisan, tajuk utama, dan kalender penjadwalan berkonversi tinggi dalam hitungan detik."
+        },
+        {
+          "title": "Optimasi Berbasis Data",
+          "description": "Tidak perlu menerka-nerka. Penganalisis SEO on-page kami memastikan artikel Anda memenuhi standar kualitas terbaik sebelum dirilis."
+        },
+        {
+          "title": "Alur Kerja Terpadu",
+          "description": "Hubungkan akun media sosial, buat konten, analisis metrik pencarian, dan jadwalkan postingan dari satu tab terpusat."
+        }
+      ]
+    }
   },
   "connect": {
     "title": "Hubungkan ke berbagai akun"
