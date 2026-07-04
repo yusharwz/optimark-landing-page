@@ -37,6 +37,14 @@ export function BentoFeatureCard({
   href,
   className,
 }: BentoFeatureCardProps) {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+    e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+  };
+
   const cardClass = cx(
     "group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
     featured
@@ -47,7 +55,26 @@ export function BentoFeatureCard({
 
   const content = (
     <>
-      <div className="relative">
+      {/* Background Spotlight Glow */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0"
+        style={{
+          background: `radial-gradient(350px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.07), transparent 80%)`,
+        }}
+      />
+      {/* Border Spotlight Glow */}
+      <div
+        className="pointer-events-none absolute -inset-px rounded-3xl border border-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-10"
+        style={{
+          background: `radial-gradient(250px circle at var(--mouse-x, 0px) var(--mouse-y, 0px), rgba(99, 102, 241, 0.35), transparent 80%)`,
+          WebkitMaskImage: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+          WebkitMaskComposite: `xor`,
+          maskComposite: `exclude`,
+          padding: "1px",
+        }}
+      />
+
+      <div className="relative z-10">
         <div className="mb-6 inline-flex rounded-2xl bg-brand-100 p-4 text-brand-600 transition-colors group-hover:bg-brand-200">
           <Icon className="h-8 w-8" />
         </div>
@@ -58,7 +85,7 @@ export function BentoFeatureCard({
       {illustration && (
         <div
           className={cx(
-            "relative transition-all duration-300 group-hover:scale-105 select-none pointer-events-none",
+            "relative z-10 transition-all duration-300 group-hover:scale-105 select-none pointer-events-none",
             featured ? "w-full flex justify-center mt-auto" : "h-full w-full flex items-center justify-center"
           )}
         >
@@ -67,7 +94,7 @@ export function BentoFeatureCard({
       )}
 
       {!illustration && coverImage && (
-        <div className="relative h-full min-h-[200px] w-full transition-all duration-300 group-hover:scale-105">
+        <div className="relative z-10 h-full min-h-[200px] w-full transition-all duration-300 group-hover:scale-105">
           <Image src={coverImage} alt="" fill className="object-contain" />
         </div>
       )}
@@ -76,11 +103,15 @@ export function BentoFeatureCard({
 
   if (href) {
     return (
-      <Link href={href} className={cx(cardClass, "cursor-pointer")}>
+      <Link href={href} className={cx(cardClass, "cursor-pointer")} onMouseMove={handleMouseMove}>
         {content}
       </Link>
     );
   }
 
-  return <div className={cardClass}>{content}</div>;
+  return (
+    <div className={cardClass} onMouseMove={handleMouseMove}>
+      {content}
+    </div>
+  );
 }
