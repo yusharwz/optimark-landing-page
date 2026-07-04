@@ -8,6 +8,7 @@ import { RouteProvider } from "@/providers/route-provider";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
+import { buildOgImageUrl, getBaseUrl } from "@/lib/og";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -30,11 +31,40 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const locale = resolveLocale(localeParam);
   const t = await getTranslations({ locale, namespace: "metadata" });
 
+  const ogImage = buildOgImageUrl({
+    title: t("title"),
+    description: t("description"),
+    locale,
+  });
+
   return {
+    metadataBase: new URL(getBaseUrl()),
     title: t("title"),
     description: t("description"),
     other: {
       google: "notranslate",
+    },
+    openGraph: {
+      title: t("title"),
+      description: t("description"),
+      url: `/${locale}`,
+      siteName: "OPTIMARK",
+      locale,
+      type: "website",
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: t("title"),
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: t("title"),
+      description: t("description"),
+      images: [ogImage],
     },
     icons: {
       icon: [
