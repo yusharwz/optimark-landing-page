@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { FEATURE_ICONS, FEATURE_IDS, FEATURE_META, FEATURE_ROUTES, type FeatureId } from "@/config/features";
 import { Reveal } from "@/components/motion/Reveal";
 import { BentoFeatureCard } from "@/components/BentoFeatureCard";
+import { AiContentIllustration, SeoAnalyzerIllustration } from "@/components/BentoCardIllustrations";
 
 // The hero/large tile of the bento grid (spans both rows on the left).
 const FEATURED_ID: FeatureId = "ai";
@@ -45,6 +46,13 @@ export function BentoFeaturesSection() {
                 ? t("comingSoon")
                 : undefined;
 
+            let illustration: React.ReactNode = undefined;
+            if (id === "ai") {
+              illustration = <AiContentIllustration />;
+            } else if (id === "seo") {
+              illustration = <SeoAnalyzerIllustration />;
+            }
+
             return (
               <BentoFeatureCard
                 key={id}
@@ -53,6 +61,8 @@ export function BentoFeaturesSection() {
                 description={t(`items.${id}.description`)}
                 badge={badge}
                 coverImage={meta.coverImage}
+                illustration={illustration}
+                featured={id === FEATURED_ID}
                 href={`/features/${FEATURE_ROUTES[id]}`}
                 className={id === FEATURED_ID ? "sm:row-span-2" : undefined}
               />

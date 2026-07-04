@@ -56,6 +56,18 @@
         "title": "AI Content Maker",
         "description": "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan."
       }
+    },
+    "illustrations": {
+      "ai": {
+        "userPrompt": "Buat postingan promo Instagram...",
+        "aiResponse": "Ini draf postinganmu! 🚀 Siap meningkatkan penjualan?",
+        "generate": "Buat Konten"
+      },
+      "seo": {
+        "score": "Skor SEO",
+        "keywords": "Kata Kunci",
+        "rank": "Peringkat"
+      }
     }
   },
   "pricing": {

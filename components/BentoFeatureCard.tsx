@@ -13,13 +13,14 @@ type BentoFeatureCardProps = {
   badge?: string;
   /** Decorative cover image tucked into the top-right corner. */
   coverImage?: string;
+  /** Optional React component illustration to show next to the content. */
+  illustration?: React.ReactNode;
+  /** Whether the card is featured (uses a vertical layout instead of grid). */
+  featured?: boolean;
   /** When set, the whole card becomes a link to this route. */
   href?: string;
   className?: string;
 };
-
-const CARD_CLASS =
-  "group relative grid grid-cols-[65fr_35fr] items-start gap-6 overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl";
 
 /**
  * The bento-style feature card used on both the homepage features section and
@@ -31,17 +32,21 @@ export function BentoFeatureCard({
   description,
   badge,
   coverImage,
+  illustration,
+  featured,
   href,
   className,
 }: BentoFeatureCardProps) {
+  const cardClass = cx(
+    "group relative overflow-hidden rounded-3xl border border-gray-200 bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+    featured
+      ? "flex flex-col justify-between items-stretch gap-8 h-full"
+      : "grid grid-cols-[65fr_35fr] items-start gap-6",
+    className
+  );
+
   const content = (
     <>
-      {/* {badge && (
-        <span className="absolute right-4 top-4 z-10 rounded-full bg-brand-100 px-3 py-1 text-xs font-medium text-brand-700">
-          {badge}
-        </span>
-      )} */}
-
       <div className="relative">
         <div className="mb-6 inline-flex rounded-2xl bg-brand-100 p-4 text-brand-600 transition-colors group-hover:bg-brand-200">
           <Icon className="h-8 w-8" />
@@ -50,7 +55,18 @@ export function BentoFeatureCard({
         <p className="text-detail text-base">{description}</p>
       </div>
 
-      {coverImage && (
+      {illustration && (
+        <div
+          className={cx(
+            "relative transition-all duration-300 group-hover:scale-105 select-none pointer-events-none",
+            featured ? "w-full flex justify-center mt-auto" : "h-full w-full flex items-center justify-center"
+          )}
+        >
+          {illustration}
+        </div>
+      )}
+
+      {!illustration && coverImage && (
         <div className="relative h-full min-h-[200px] w-full transition-all duration-300 group-hover:scale-105">
           <Image src={coverImage} alt="" fill className="object-contain" />
         </div>
@@ -60,11 +76,11 @@ export function BentoFeatureCard({
 
   if (href) {
     return (
-      <Link href={href} className={cx(CARD_CLASS, "cursor-pointer", className)}>
+      <Link href={href} className={cx(cardClass, "cursor-pointer")}>
         {content}
       </Link>
     );
   }
 
-  return <div className={cx(CARD_CLASS, className)}>{content}</div>;
+  return <div className={cardClass}>{content}</div>;
 }

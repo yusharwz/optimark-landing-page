@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { BentoFeatureCard } from "@/components/BentoFeatureCard";
+import { AiContentIllustration, SeoAnalyzerIllustration } from "@/components/BentoCardIllustrations";
 import { Reveal } from "@/components/motion/Reveal";
 import { Calendar, BarChart3, Sparkles, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -128,18 +129,29 @@ export default function FeaturesPage() {
             y={20}
             className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6"
           >
-            {features.map((feat) => (
-              <BentoFeatureCard
-                key={feat.id}
-                href={`/features/${feat.routeId}`}
-                icon={feat.icon}
-                title={t(`items.${feat.id}.title`)}
-                description={t(`items.${feat.id}.description`)}
-                badge={feat.comingSoon ? t("comingSoon") : t("availableNow")}
-                coverImage={feat.coverImage}
-                className={feat.featured ? "sm:row-span-2" : undefined}
-              />
-            ))}
+            {features.map((feat) => {
+              let illustration: React.ReactNode = undefined;
+              if (feat.id === "ai") {
+                illustration = <AiContentIllustration />;
+              } else if (feat.id === "seo") {
+                illustration = <SeoAnalyzerIllustration />;
+              }
+
+              return (
+                <BentoFeatureCard
+                  key={feat.id}
+                  href={`/features/${feat.routeId}`}
+                  icon={feat.icon}
+                  title={t(`items.${feat.id}.title`)}
+                  description={t(`items.${feat.id}.description`)}
+                  badge={feat.comingSoon ? t("comingSoon") : t("availableNow")}
+                  coverImage={feat.coverImage}
+                  illustration={illustration}
+                  featured={feat.featured}
+                  className={feat.featured ? "sm:row-span-2" : undefined}
+                />
+              );
+            })}
           </Reveal>
         </div>
       </main>
