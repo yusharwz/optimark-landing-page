@@ -91,7 +91,7 @@ export function Footer() {
                   >
                     <span>{t(`products.${key}`)}</span>
                     <span className="shrink-0 rounded-full border border-[#E9EAEB] bg-white/60 px-1.5 py-0.5 text-[10px] font-medium text-[#717680]">
-                      {t("comingSoon")}
+                      {t("availableNow")}
                     </span>
                   </li>
                 ))}

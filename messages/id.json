@@ -137,7 +137,70 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda",
-    "subtitle": "Optimark menyatukan empat modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis."
+    "subtitle": "Optimark menyatukan tiga modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.",
+    "demo": {
+      "title": "Interactive Workspace",
+      "subtitle": "Rasakan langsung modul AI utama kami sebelum Anda menghubungkan akun asli Anda. Klik salah satu tab di bawah untuk mencoba simulator.",
+      "tabs": {
+        "ai": "AI Writer",
+        "planner": "Smart Planner",
+        "seo": "SEO Analyzer"
+      },
+      "ai": {
+        "promptLabel": "Deskripsikan produk atau promosi Anda",
+        "placeholder": "misal, Promo pagi Starbucks - Beli 1 Gratis 1 matcha latte...",
+        "button": "Buat Tulisan",
+        "generating": "AI sedang menulis postingan Anda...",
+        "responseLabel": "Draf Hasil Generate AI",
+        "copyButton": "Salin Draf",
+        "copied": "Tersalin!"
+      },
+      "planner": {
+        "title": "Kalender Konten",
+        "subtitle": "Klik slot waktu mana saja di bawah untuk mengaktifkan/menonaktifkan postingan dalam antrean.",
+        "time": "Waktu",
+        "post": "Judul Postingan",
+        "status": "Status",
+        "scheduled": "Terjadwal",
+        "draft": "Draf",
+        "addPost": "Jadwalkan Cepat"
+      },
+      "seo": {
+        "title": "SEO Live Audit",
+        "subtitle": "Tulis artikel Anda dan lihat skor kualitas SEO berubah secara real-time.",
+        "keywordLabel": "Kata Kunci Target",
+        "keywordPlaceholder": "misal, diet sehat",
+        "contentLabel": "Draf Artikel",
+        "contentPlaceholder": "Mulai menulis artikel Anda di sini...",
+        "scoreLabel": "Skor SEO",
+        "tips": {
+          "title": "Rekomendasi",
+          "keywordMissing": "Tambahkan kata kunci target Anda di judul dan isi artikel",
+          "keywordDensity": "Gunakan kata kunci target 2-3 kali",
+          "length": "Tulis minimal 30 kata untuk analisis",
+          "headings": "Tambahkan sub-judul (H2, H3)",
+          "perfect": "Optimasi on-page luar biasa!"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Mengapa Brand Modern Memilih Optimark",
+      "subtitle": "Kembangkan bisnis Anda lebih cepat dengan alat yang dirancang untuk kecepatan, performa, dan konversi.",
+      "items": [
+        {
+          "title": "Eksekusi 10x Lebih Cepat",
+          "description": "Hasilkan draf tulisan, tajuk utama, dan kalender penjadwalan berkonversi tinggi dalam hitungan detik."
+        },
+        {
+          "title": "Optimasi Berbasis Data",
+          "description": "Tidak perlu menerka-nerka. Penganalisis SEO on-page kami memastikan artikel Anda memenuhi standar kualitas terbaik sebelum dirilis."
+        },
+        {
+          "title": "Alur Kerja Terpadu",
+          "description": "Hubungkan akun media sosial, buat konten, analisis metrik pencarian, dan jadwalkan postingan dari satu tab terpusat."
+        }
+      ]
+    }
   },
   "connect": {
     "title": "Hubungkan ke berbagai akun"
@@ -154,6 +217,7 @@
     "platform": "Platform",
     "company": "Perusahaan",
     "comingSoon": "Coming Soon",
+    "availableNow": "Available Now",
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
@@ -259,6 +323,96 @@
           "description": "Pantau pergerakan posisi artikel Anda di halaman pencarian Google serta pantau strategi kata kunci kompetitor terdekat Anda secara berkala."
         }
       ]
+    }
+  },
+  "aiCaptionModal": {
+    "title": "AI Caption Assistant",
+    "promptLabel": "Prompt",
+    "promptText": "Morning routine with FlimtyFiber",
+    "generate": "Generate",
+    "regenerate": "Generate Ulang",
+    "generating": "Membuat…",
+    "tip": "Tips: Makin detail promptnya, makin bagus hasilnya. Coba sebutkan jenis konten, manfaat produk, dan siapa target audiensnya.",
+    "resultLabel": "Hasil Generate",
+    "lines": [
+      "🌱 Pagi lebih ringan, lebih semangat sejak rutin minum FlimtyFiber! ✨",
+      "Pencernaan lancar, nggak gampang lapar, perut nggak begah — semua karena 1 kebiasaan kecil setiap pagi.",
+      "Mau coba juga? Cek link di bio! 👆"
+    ],
+    "hashtags": "#FlimtyFiber #FlimtyID #HidupSehat #FiberHarian #PencernaanLancar #MorningRoutine #BodyGoals",
+    "refineChips": [
+      "Lebih pendek",
+      "Lebih persuasif",
+      "Tambah hashtag"
+    ],
+    "apply": "Terapkan"
+  },
+  "bestTimeModal": {
+    "title": "Best Time to Post",
+    "keywordLabel": "Keyword atau topik konten",
+    "keywordText": "Diet sehat ala Deddy Corbuzier",
+    "analyze": "Analisa",
+    "analyzing": "Menganalisa topik konten Anda…",
+    "tip": "Tip: Gunakan keyword yang relevan dengan konten Anda untuk hasil yang lebih akurat.",
+    "heading": "Pilih waktu posting",
+    "cancel": "Batal",
+    "save": "Simpan",
+    "slots": [
+      {
+        "date": "Senin, 8 Juni",
+        "time": "09:00",
+        "tag": "Paling optimal",
+        "description": "Aktivitas tertinggi dari target audience Anda di pagi hari"
+      },
+      {
+        "date": "Selasa, 16 Juni",
+        "time": "12:00",
+        "tag": "Waktu istirahat",
+        "description": "Engagement stabil saat jam istirahat siang"
+      },
+      {
+        "date": "Rabu, 24 Juni",
+        "time": "18:00",
+        "tag": "Prime time",
+        "description": "Waktu santai dengan reach maksimal untuk konten lifestyle"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "Cara Kerja",
+    "subtitle": "Mulai dengan Optimark dalam tiga langkah mudah dan otomatiskan strategi pemasaran digital Anda.",
+    "step1Title": "1. Hubungkan Akun Anda",
+    "step1Description": "Hubungkan profil media sosial Anda dengan aman dalam satu klik untuk sinkronisasi otomatis.",
+    "step2Title": "2. AI Membuat & Mengoptimasi",
+    "step2Description": "AI kami memformat caption terbaik, merekomendasikan kata kunci, dan menyusun draf sesuai karakter brand Anda.",
+    "step3Title": "3. Jadwalkan & Kembangkan",
+    "step3Description": "Jadwalkan publikasi otomatis di jam terbaik dan pantau interaksi digital serta ROI Anda dari satu dashboard.",
+    "badge": "Langkah Mudah",
+    "illustrations": {
+      "connected": "Terhubung",
+      "connecting": "Menghubungkan...",
+      "prompt": "Buat caption promo Instagram untuk kedai kopi kami.",
+      "generating": "AI sedang menulis postingan viral...",
+      "optimalTime": "Waktu posting optimal: 18:00",
+      "growth": "Pertumbuhan Interaksi",
+      "scrollExplore": "Gulir ke bawah untuk melihat langkah",
+      "scrollNext": "Teruskan menggulir untuk melanjutkan"
+    }
+  },
+  "faq": {
+    "title": "Pertanyaan yang Sering Diajukan",
+    "subtitle": "Punya pertanyaan? Kami punya jawabannya. Hubungi kami jika Anda membutuhkan bantuan lebih lanjut.",
+    "items": {
+      "q1": "Apa itu Optimark?",
+      "a1": "Optimark adalah platform pemasaran digital all-in-one berbasis AI yang membantu bisnis menjadwalkan konten media sosial, meningkatkan visibilitas SEO, dan memproduksi konten tertulis berkualitas tinggi sesuai karakter brand Anda.",
+      "q2": "Apakah butuh kartu kredit untuk mencoba?",
+      "a2": "Tidak, Anda tidak memerlukan kartu kredit untuk memulai paket Gratis kami. Anda akan mendapatkan token gratis setiap bulan untuk mencoba fitur AI Content Maker dan Perencana Konten.",
+      "q3": "Bagaimana cara kerja sistem token?",
+      "a3": "Setiap fitur (seperti membuat caption atau melakukan audit kata kunci SEO) menggunakan sejumlah token tertentu. Kuota token Anda akan diperbarui setiap bulan sesuai paket. Jika token habis, Anda bisa membelinya secara terpisah kapan saja.",
+      "q4": "Media sosial apa saja yang didukung?",
+      "a4": "Saat ini Anda dapat menghubungkan akun Instagram, Facebook, dan TikTok Anda. Kami sedang mengembangkan dukungan untuk platform lain seperti Threads, X, dan LinkedIn.",
+      "q5": "Apakah saya bisa membatalkan paket langganan kapan saja?",
+      "a5": "Ya! Anda bisa meningkatkan, menurunkan, atau membatalkan paket langganan Anda kapan saja melalui halaman pengaturan akun tanpa biaya tersembunyi."
     }
   }
 }

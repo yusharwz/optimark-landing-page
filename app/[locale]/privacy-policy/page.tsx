@@ -28,9 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [
         {
           url: ogImage,
+          secureUrl: ogImage,
           width: 1200,
           height: 630,
           alt: t("title"),
+          type: "image/png",
         },
       ],
     },

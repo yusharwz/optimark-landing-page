@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, type Variants } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { Info } from "lucide-react";
 import { TimeSlotCard, type TimeSlot } from "./TimeSlotCard";
 import { TimeSlotSkeleton } from "./TimeSlotSkeleton";
@@ -25,46 +26,27 @@ const item: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 };
 
-const DEFAULT_SLOTS: TimeSlot[] = [
-  {
-    date: "Senin, 8 Juni",
-    time: "09:00",
-    tag: "Paling optimal",
-    description: "Aktivitas tertinggi dari target audience Anda di pagi hari",
-  },
-  {
-    date: "Selasa, 16 Juni",
-    time: "12:00",
-    tag: "Waktu istirahat",
-    description: "Engagement stabil saat jam istirahat siang",
-  },
-  {
-    date: "Rabu, 24 Juni",
-    time: "18:00",
-    tag: "Prime time",
-    description: "Waktu santai dengan reach maksimal untuk konten lifestyle",
-  },
-];
-
 /**
  * Bottom section: the recommended posting slots in a 3-up row. While `status`
  * is "loading" it shows skeleton placeholders; when "done" the real cards
  * cascade in and the user picks one (purple highlight) to enable "Simpan".
  */
 export function TimeResultPanel({
-  heading = "Pilih waktu posting",
-  slots = DEFAULT_SLOTS,
+  heading,
+  slots,
   status = "done",
   selectedIndex = null,
   onSelect,
 }: TimeResultPanelProps) {
+  const t = useTranslations("bestTimeModal");
+  const resolvedSlots = slots ?? (t.raw("slots") as TimeSlot[]);
   const loading = status === "loading";
   const hasSelection = selectedIndex !== null;
 
   return (
     <div className="border-t border-[#E9EAEB] p-5">
       <div className="flex items-center gap-1.5">
-        <p className="text-sm font-semibold text-[#1E280E]">{heading}</p>
+        <p className="text-sm font-semibold text-[#1E280E]">{heading ?? t("heading")}</p>
         <Info className="h-3.5 w-3.5 text-[#A4A7AE]" />
       </div>
 
@@ -81,7 +63,7 @@ export function TimeResultPanel({
           initial="hidden"
           animate="show"
         >
-          {slots.map((slot, i) => (
+          {resolvedSlots.map((slot, i) => (
             <motion.div key={`${slot.date}-${slot.time}`} variants={item} className="h-full">
               <TimeSlotCard
                 {...slot}
@@ -98,7 +80,7 @@ export function TimeResultPanel({
           type="button"
           className="rounded-lg border border-[#D5D7DA] bg-white px-4 py-2 text-sm font-semibold text-[#414651] transition hover:bg-gray-50"
         >
-          Batal
+          {t("cancel")}
         </button>
         <button
           type="button"
@@ -109,7 +91,7 @@ export function TimeResultPanel({
               : "cursor-not-allowed bg-gray-100 text-gray-400"
           }`}
         >
-          Simpan
+          {t("save")}
         </button>
       </div>
     </div>

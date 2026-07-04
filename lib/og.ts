@@ -25,7 +25,10 @@ export function buildOgImageUrl({
 }): string {
   const url = new URL("/api/og", getBaseUrl());
   url.searchParams.set("title", title);
-  if (description) url.searchParams.set("description", description);
+  // Keep the image URL short; WhatsApp/Facebook crawlers can be sensitive to very long URLs.
+  if (description) {
+    url.searchParams.set("description", description.slice(0, 160));
+  }
   url.searchParams.set("locale", locale);
   return url.toString();
 }

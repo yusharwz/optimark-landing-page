@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { Loader2, Sparkles } from "lucide-react";
 
 export type AnalyzeStatus = "idle" | "loading" | "done";
@@ -18,19 +19,20 @@ type KeywordPanelProps = {
 
 /** Top section: keyword input (typewriter-filled) + "Analisa" button + tip. */
 export function KeywordPanel({
-  label = "Keyword atau topik konten",
+  label,
   typedText = "",
   showCaret = false,
   status = "idle",
-  tip = "Tip: Gunakan keyword yang relevan dengan konten Anda untuk hasil yang lebih akurat.",
-  loadingText = "Menganalisa topik konten Anda…",
+  tip,
+  loadingText,
 }: KeywordPanelProps) {
+  const t = useTranslations("bestTimeModal");
   const hasText = typedText.length > 0;
 
   return (
     <div className="p-5">
       <p className="text-sm text-[#535862]">
-        {label} <span className="text-[#D92D20]">*</span>
+        {label ?? t("keywordLabel")} <span className="text-[#D92D20]">*</span>
       </p>
 
       <div className="mt-2 flex items-stretch gap-2">
@@ -62,7 +64,7 @@ export function KeywordPanel({
             type="button"
             className="inline-flex min-w-[84px] items-center justify-center rounded-lg border border-[#D5D7DA] bg-white px-4 text-sm font-semibold text-[#414651] transition hover:bg-gray-50"
           >
-            Analisa
+            {t("analyze")}
           </button>
         )}
       </div>
@@ -70,10 +72,10 @@ export function KeywordPanel({
       {status === "loading" ? (
         <p className="mt-2 flex items-center gap-1.5 text-xs font-medium text-[#BA24D5]">
           <Sparkles className="h-3.5 w-3.5" />
-          {loadingText}
+          {loadingText ?? t("analyzing")}
         </p>
       ) : (
-        <p className="mt-2 text-xs leading-relaxed text-[#717680]">{tip}</p>
+        <p className="mt-2 text-xs leading-relaxed text-[#717680]">{tip ?? t("tip")}</p>
       )}
     </div>
   );

@@ -4,7 +4,6 @@ import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { Header } from "@/components/Header";
 import { PricingSection } from "@/components/PricingSection";
-import { HeroFeaturesBackground } from "@/components/HeroFeaturesBackground";
 import { Footer } from "@/components/Footer";
 
 type Props = {
@@ -31,9 +30,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: [
         {
           url: ogImage,
+          secureUrl: ogImage,
           width: 1200,
           height: 630,
           alt: t("title"),
+          type: "image/png",
         },
       ],
     },
@@ -54,7 +55,6 @@ export default async function PricingPage({ params }: Props) {
     <div className="min-h-screen bg-white">
       <Header />
       <main className="relative pt-24">
-        <HeroFeaturesBackground />
         <div className="relative z-10">
           {/* We keep showEstimator={false} as requested until business team provides update */}
           <PricingSection showEstimator={false} />

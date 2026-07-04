@@ -137,7 +137,70 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "One AI Platform to Automate Your Entire Marketing",
-    "subtitle": "Optimark unifies four artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically."
+    "subtitle": "Optimark unifies three artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically.",
+    "demo": {
+      "title": "Interactive Workspace",
+      "subtitle": "Experience our core AI modules in action before you connect your real accounts. Click any tab below to test the simulator.",
+      "tabs": {
+        "ai": "AI Writer",
+        "planner": "Smart Planner",
+        "seo": "SEO Analyzer"
+      },
+      "ai": {
+        "promptLabel": "Describe your product or promotion",
+        "placeholder": "e.g., Morning promo at Starbucks - Buy 1 Get 1 free matcha latte...",
+        "button": "Generate Copy",
+        "generating": "AI is writing your post...",
+        "responseLabel": "AI Generated Draft",
+        "copyButton": "Copy Draft",
+        "copied": "Copied!"
+      },
+      "planner": {
+        "title": "Content Calendar",
+        "subtitle": "Click any time slot below to toggle a post in the queue.",
+        "time": "Time",
+        "post": "Post Title",
+        "status": "Status",
+        "scheduled": "Scheduled",
+        "draft": "Draft",
+        "addPost": "Quick Schedule"
+      },
+      "seo": {
+        "title": "SEO Live Audit",
+        "subtitle": "Type your article and see the quality score change in real-time.",
+        "keywordLabel": "Target Keyword",
+        "keywordPlaceholder": "e.g., healthy diet",
+        "contentLabel": "Article Draft",
+        "contentPlaceholder": "Start typing your article here...",
+        "scoreLabel": "SEO Score",
+        "tips": {
+          "title": "Recommendations",
+          "keywordMissing": "Add your target keyword to the title and body",
+          "keywordDensity": "Use your keyword 2-3 times",
+          "length": "Write at least 30 words for analysis",
+          "headings": "Add subheadings (H2, H3)",
+          "perfect": "Excellent on-page optimization!"
+        }
+      }
+    },
+    "benefits": {
+      "title": "Why Modern Brands Choose Optimark",
+      "subtitle": "Grow your business faster with tools built for speed, performance, and conversion.",
+      "items": [
+        {
+          "title": "10x Faster Execution",
+          "description": "Generate high-converting copy, headlines, and scheduling calendars in seconds rather than hours."
+        },
+        {
+          "title": "Data-Driven Optimization",
+          "description": "Never guess what works. Our on-page SEO analyzer ensures you hit the right benchmarks before you publish."
+        },
+        {
+          "title": "All-in-One Workflow",
+          "description": "Connect your social accounts, create content, check search metrics, and post, all from a single tab."
+        }
+      ]
+    }
   },
   "connect": {
     "title": "Connect to various accounts"
@@ -154,6 +217,7 @@
     "platform": "Platform",
     "company": "Company",
     "comingSoon": "Coming Soon",
+    "availableNow": "Available Now",
     "links": {
       "features": "Features",
       "pricing": "Pricing",
@@ -259,6 +323,96 @@
           "description": "Track your article's position movements on Google search results and periodically monitor your closest competitors' keyword strategies."
         }
       ]
+    }
+  },
+  "aiCaptionModal": {
+    "title": "AI Caption Assistant",
+    "promptLabel": "Prompt",
+    "promptText": "Morning routine with FlimtyFiber",
+    "generate": "Generate",
+    "regenerate": "Regenerate",
+    "generating": "Generating…",
+    "tip": "Tips: The more detailed your prompt, the better the result. Try mentioning the content type, product benefits, and who the target audience is.",
+    "resultLabel": "Result",
+    "lines": [
+      "🌱 Lighter, more energized mornings ever since FlimtyFiber became my routine! ✨",
+      "Smooth digestion, no more sudden hunger, no more bloating — all from one small habit every morning.",
+      "Want to try it too? Check the link in bio! 👆"
+    ],
+    "hashtags": "#FlimtyFiber #FlimtyID #HealthyLiving #DailyFiber #SmoothDigestion #MorningRoutine #BodyGoals",
+    "refineChips": [
+      "Shorter",
+      "More persuasive",
+      "Add hashtags"
+    ],
+    "apply": "Apply"
+  },
+  "bestTimeModal": {
+    "title": "Best Time to Post",
+    "keywordLabel": "Keyword or content topic",
+    "keywordText": "Healthy diet à la Deddy Corbuzier",
+    "analyze": "Analyze",
+    "analyzing": "Analyzing your content topic…",
+    "tip": "Tip: Use keywords relevant to your content for more accurate results.",
+    "heading": "Choose a posting time",
+    "cancel": "Cancel",
+    "save": "Save",
+    "slots": [
+      {
+        "date": "Monday, June 8",
+        "time": "09:00",
+        "tag": "Most optimal",
+        "description": "Highest activity from your target audience in the morning"
+      },
+      {
+        "date": "Tuesday, June 16",
+        "time": "12:00",
+        "tag": "Break time",
+        "description": "Stable engagement during the lunch break"
+      },
+      {
+        "date": "Wednesday, June 24",
+        "time": "18:00",
+        "tag": "Prime time",
+        "description": "Relaxed hours with maximum reach for lifestyle content"
+      }
+    ]
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Get started with Optimark in three simple steps and automate your marketing strategy.",
+    "step1Title": "1. Connect Your Accounts",
+    "step1Description": "Safely connect your social media profiles in one click to sync your marketing presence.",
+    "step2Title": "2. AI Generates & Optimizes",
+    "step2Description": "Our AI crafts tailored captions, recommends keywords, and drafts content aligned with your brand voice.",
+    "step3Title": "3. Auto-Schedule & Grow",
+    "step3Description": "Publish automatically at the best times and track your digital engagement and ROI from one dashboard.",
+    "badge": "Simple Flow",
+    "illustrations": {
+      "connected": "Connected",
+      "connecting": "Connecting...",
+      "prompt": "Create an Instagram promo caption for our coffee shop.",
+      "generating": "AI is writing a viral post...",
+      "optimalTime": "Optimal posting time: 18:00",
+      "growth": "Engagement Growth",
+      "scrollExplore": "Scroll down to explore steps",
+      "scrollNext": "Keep scrolling to continue"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "subtitle": "Got questions? We've got answers. If you need more help, feel free to contact us.",
+    "items": {
+      "q1": "What is Optimark?",
+      "a1": "Optimark is an all-in-one AI-powered digital marketing platform that helps businesses schedule social media content, optimize search engine visibility (SEO), and auto-create high-quality copy tailored to their brand voice.",
+      "q2": "Do I need a credit card to try Optimark?",
+      "a2": "No, you do not need a credit card to start our Free tier. You get free token credits every month to try out the AI Content Maker and Content Planner.",
+      "q3": "How does the token system work?",
+      "a3": "Each feature (like generating a caption or doing an SEO keyword audit) consumes a specific number of tokens. Your monthly tier gives you a fresh set of tokens. If you run out, you can top-up at any time.",
+      "q4": "Which social media platforms are supported?",
+      "a4": "Currently, you can connect and schedule posts to Instagram, Facebook, and TikTok. We are constantly adding support for more platforms like Threads, X, and LinkedIn.",
+      "q5": "Can I cancel or change my plan anytime?",
+      "a5": "Yes! You can upgrade, downgrade, or cancel your subscription plan directly from your billing settings at any time with no hidden fees."
     }
   }
 }

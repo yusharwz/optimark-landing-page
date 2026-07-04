@@ -1,59 +1,33 @@
 "use client";
 
-import Image from "next/image";
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export function CtaSection() {
   const t = useTranslations("cta");
   const containerRef = useRef<HTMLDivElement>(null);
-  const image1Ref = useRef<HTMLDivElement>(null);
-  const image2Ref = useRef<HTMLDivElement>(null);
-  const image3Ref = useRef<HTMLDivElement>(null);
-  const image4Ref = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  gsap.registerPlugin(ScrollTrigger);
 
   useGSAP(
     () => {
-      if (!containerRef.current) return;
+      if (!contentRef.current) return;
 
-      // Pin + animasi image cuma di desktop (mobile pakai gambar statis)
-      const mm = gsap.matchMedia();
-
-      mm.add("(min-width: 1024px)", () => {
-        // Set initial states
-        gsap.set([image1Ref.current, image2Ref.current, image3Ref.current, image4Ref.current], {
-          y: 300,
-          opacity: 0,
-          scale: 0.8,
-        });
-        gsap.set(contentRef.current, { y: 50, opacity: 0 });
-
-        // Create a timeline for the entire section with ScrollTrigger
-        const tl = gsap.timeline({
+      gsap.fromTo(
+        contentRef.current,
+        { y: 45, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top top", // Mulai nahan pas top section nyampe top viewport (image bisa naik penuh)
-            end: "+=1200", // Jarak scroll selama section ditahan sampai animasi kelar
-            scrub: 1.5,
-            pin: true, // Tahan scroll selama animasi jalan
-            anticipatePin: 1, // Kurangi "loncat" saat mulai pin
-            // markers: true, // Uncomment untuk debug
+            trigger: contentRef.current,
+            start: "top 85%",
           },
-        });
-
-        // Animate images with stagger
-        tl.to(image1Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0)
-          .to(image2Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.2)
-          .to(image3Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.4)
-          .to(image4Ref.current, { y: 0, opacity: 1, scale: 1, duration: 1, ease: "power2.out" }, 0.6)
-          .to(contentRef.current, { y: 0, opacity: 1, duration: 1, ease: "power2.out" }, 0.8);
-      });
+        }
+      );
     },
     { scope: containerRef }
   );
@@ -62,100 +36,33 @@ export function CtaSection() {
     <section
       id="cta"
       ref={containerRef}
-      className="relative min-h-[700px] overflow-hidden bg-white py-16 lg:min-h-[1200px] lg:py-32"
+      className="relative overflow-hidden bg-white py-24 sm:py-32 border-t border-[#E9EAEB]"
       style={{
-        // Dot grid dijadikan background <section> langsung (bukan child absolute
-        // inset-0). Pas di-pin (position: fixed), background elemen selalu nutup
-        // penuh box-nya, jadi pattern-nya konsisten & nggak "berubah jadi putih"
-        // di tengah animasi. Overlay putih 95% = efek opacity-5 pada swatch.
         backgroundImage:
-          "linear-gradient(rgba(255,255,255,0.95), rgba(255,255,255,0.95)), url('/images/hero-swatch.png')",
+          "linear-gradient(rgba(255,255,255,0.96), rgba(255,255,255,0.96)), url('/images/hero-swatch.png')",
         backgroundRepeat: "no-repeat, repeat",
         backgroundSize: "cover, 400px 400px",
       }}
     >
-
-      <div className="relative mx-auto hidden h-[900px] max-w-6xl lg:block">
-        <div
-          ref={image1Ref}
-          className="absolute left-[10%] top-0 z-10 w-[884px]"
-        >
-          <Image
-            src="/images/cta/1.svg"
-            alt=""
-            width={884}
-            height={720}
-            className="rounded-3xl shadow-2xl"
-          />
-        </div>
-
-        <div
-          ref={image2Ref}
-          className="absolute left-[8%] top-[52px] z-20 w-[984px]"
-        >
-          <Image
-            src="/images/cta/2.svg"
-            alt=""
-            width={984}
-            height={720}
-            className="rounded-3xl shadow-2xl"
-          />
-        </div>
-
-        <div
-          ref={image3Ref}
-          className="absolute left-[5%] top-[102px] z-30 w-[1084px]"
-        >
-          <Image
-            src="/images/cta/3.svg"
-            alt=""
-            width={1084}
-            height={720}
-            className="rounded-3xl shadow-2xl"
-          />
-        </div>
-
-        <div
-          ref={image4Ref}
-          className="absolute left-0 top-[200px] z-40 w-[1184px]"
-        >
-          <div className="relative rounded-3xl border border-[#94C748] shadow-2xl">
-            <div className="absolute inset-0 rounded-3xl bg-[#94C748]/12" />
-            <Image
-              src="/images/cta/4.svg"
-              alt=""
-              width={1184}
-              height={720}
-              className="rounded-3xl"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div className="relative mx-auto mt-4 block w-full max-w-xl px-4 lg:hidden">
-        <div className="relative overflow-hidden rounded-3xl border border-[#94C748] bg-[#F3F9E8]">
-          <Image
-            src="/images/cta-figma/cta-image.png"
-            alt=""
-            width={1184}
-            height={720}
-            className="h-auto w-full"
-          />
-        </div>
-      </div>
+      {/* Decorative green gradient blurs */}
+      <div className="pointer-events-none absolute -top-40 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/5 blur-3xl" />
 
       <div
         ref={contentRef}
-        className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8"
+        className="relative mx-auto max-w-4xl px-6 text-center sm:px-12 lg:px-24"
       >
-        <h2 className="text-display text-4xl sm:text-5xl lg:text-6xl">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
+          Optimark
+        </span>
+        <h2 className="text-display text-4xl sm:text-5xl lg:text-6xl mt-6 leading-tight max-w-3xl mx-auto">
           {t("title")}
         </h2>
-        <p className="text-lead mx-auto mt-5 max-w-xl text-lg sm:text-xl">
+        <p className="text-lead mx-auto mt-6 max-w-xl text-base sm:text-lg lg:text-xl">
           {t("description")}
         </p>
-        <div>
-          <Button href="/pricing" size="xl" className="mt-10 sm:px-10">
+        <div className="mt-10">
+          <Button href="/pricing" size="xl" className="sm:px-10 text-white">
             {t("button")}
           </Button>
         </div>
