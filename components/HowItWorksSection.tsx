@@ -104,7 +104,7 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={containerRef}
-      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 border-b border-[#E9EAEB] lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
+      className="how-it-works-section relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-28 lg:pb-12 xl:pt-32 xl:pb-16 border-b border-[#E9EAEB] lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
       style={{
         // Opaque white base + pinned dot grid so the background doesn't scroll with the page
         backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url('/images/hero-swatch.png')",
@@ -118,14 +118,14 @@ export function HowItWorksSection() {
 
       <div className="mx-auto w-full max-w-7xl relative z-10">
         {/* Header */}
-        <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
+        <Reveal className="how-it-works-header text-center max-w-3xl mx-auto mb-10 lg:mb-6 xl:mb-10">
           <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
             {t("badge")}
           </span>
-          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-tight">
+          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] 2xl:text-[3.5rem] leading-tight">
             {t("title")}
           </h2>
-          <p className="mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
+          <p className="mt-3 lg:mt-2 xl:mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
             {t("subtitle")}
           </p>
         </Reveal>
@@ -134,7 +134,7 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Steps Controls */}
-          <div className="relative flex flex-col gap-5">
+          <div className="how-it-works-steps relative flex flex-col gap-5 lg:gap-3 xl:gap-5">
             {steps.map((step, idx) => {
               const Icon = step.icon;
               const isActive = activeStep === idx;
@@ -143,14 +143,14 @@ export function HowItWorksSection() {
                 <button
                   key={step.id}
                   onClick={() => handleStepSelect(idx)}
-                  className={`group text-left relative flex flex-col sm:flex-row gap-5 p-6 rounded-3xl border transition-all duration-500 ${
+                  className={`how-it-works-step-btn group text-left relative flex flex-col sm:flex-row gap-5 p-6 rounded-3xl border transition-all duration-500 ${
                     isActive
                       ? "border-[#94C748] bg-white shadow-xl shadow-[#94C748]/5 opacity-100 z-10"
                       : "border-transparent bg-transparent opacity-40 z-0 hover:opacity-70"
                   }`}
                 >
                   {/* Step Icon badge wrapper containing the icon + connecting line */}
-                  <div className="relative shrink-0 flex items-center justify-center w-12 h-12">
+                  <div className="how-it-works-step-icon-wrapper relative shrink-0 flex items-center justify-center w-12 h-12">
                     {/* Step Icon badge - pops with green color when active */}
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all duration-500 ${
@@ -159,12 +159,12 @@ export function HowItWorksSection() {
                           : "bg-white text-slate-500 border-slate-100 shadow-xs group-hover:scale-105"
                       }`}
                     >
-                      <Icon className="h-6 w-6" />
+                      <Icon className="how-it-works-step-icon h-6 w-6" />
                     </div>
 
                     {/* Connecting Line - Inside Card Segment (Hidden when card is active/white to avoid overlapping) */}
                     {idx < 2 && !isActive && (
-                      <div className="absolute top-12 left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
+                      <div className="how-it-works-line-inside absolute top-12 left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
                         <motion.div
                           className="w-full bg-[#94C748] origin-top h-full"
                           initial={{ scaleY: 0 }}
@@ -176,7 +176,7 @@ export function HowItWorksSection() {
 
                     {/* Connecting Line - Gap & Next Card Segment (Always rendered to bridge the gap) */}
                     {idx < 2 && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 h-[44px] w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
+                      <div className="how-it-works-line-gap absolute top-full left-1/2 -translate-x-1/2 h-[44px] lg:h-[36px] xl:h-[44px] w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
                         <motion.div
                           className="w-full bg-[#94C748] origin-top h-full"
                           initial={{ scaleY: 0 }}
@@ -191,7 +191,7 @@ export function HowItWorksSection() {
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center justify-between">
                       <h3
-                        className={`text-lg sm:text-xl font-bold tracking-tight transition-colors ${
+                        className={`how-it-works-step-title text-lg sm:text-xl font-bold tracking-tight transition-colors ${
                           isActive ? "text-[#1E280E]" : "text-slate-700"
                         }`}
                       >
@@ -211,7 +211,7 @@ export function HowItWorksSection() {
                       )}
                     </div>
                     <p
-                      className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
+                      className={`how-it-works-step-desc text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
                         isActive ? "text-[#535862]" : "text-slate-400"
                       }`}
                     >
@@ -224,7 +224,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Right Column: Visual Mockup container */}
-          <div className="relative aspect-square lg:aspect-auto lg:h-[480px] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
+          <div className="how-it-works-mockup-container relative aspect-square lg:aspect-auto lg:h-[400px] xl:h-[450px] 2xl:h-[480px] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
             <AnimatePresence mode="wait">
               {activeStep === 0 && <StepOneVisual key="step1" t={t} />}
               {activeStep === 1 && <StepTwoVisual key="step2" t={t} />}
@@ -235,7 +235,7 @@ export function HowItWorksSection() {
       </div>
 
       {/* Floating Scroll Indicator Helper (Desktop Pinned Mode only) */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
+      <div className="how-it-works-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
         <span className="text-[10px] uppercase font-bold tracking-widest text-[#717680]">
           {activeStep < 2 ? t("illustrations.scrollExplore") : t("illustrations.scrollNext")}
         </span>
@@ -274,7 +274,7 @@ function StepOneVisual({ t }: { t: any }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="relative w-full max-w-[360px] h-[320px] flex items-center justify-center"
+      className="how-it-works-mockup-visual relative w-full max-w-[360px] h-[320px] flex items-center justify-center"
     >
       {/* Central Optimark Logo */}
       <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-xl border border-slate-100 flex-col gap-1">
@@ -389,7 +389,7 @@ function StepTwoVisual({ t }: { t: any }) {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
-      className="w-full max-w-[380px] bg-slate-50 border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+      className="how-it-works-mockup-visual w-full max-w-[380px] bg-slate-50 border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col"
     >
       {/* Header bar */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between">
@@ -471,7 +471,7 @@ function StepThreeVisual({ t }: { t: any }) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="w-full max-w-[380px] bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col p-4 gap-4"
+      className="how-it-works-mockup-visual w-full max-w-[380px] bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col p-4 gap-4"
     >
       {/* Top: Calendar schedule slot */}
       <div className="flex flex-col gap-1.5">
