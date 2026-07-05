@@ -239,7 +239,7 @@ export function HowItWorksSection() {
       </div>
 
       {/* Floating Scroll Indicator Helper (Desktop Pinned Mode only) */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
         <span className="text-[10px] uppercase font-bold tracking-widest text-[#717680]">
           {activeStep < 2 ? t("illustrations.scrollExplore") : t("illustrations.scrollNext")}
         </span>
