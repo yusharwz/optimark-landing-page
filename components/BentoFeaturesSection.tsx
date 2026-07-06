@@ -29,7 +29,7 @@ export function BentoFeaturesSection() {
       const mm = gsap.matchMedia();
 
       // Desktop animations
-      mm.add("(min-width: 640px)", () => {
+      mm.add("(min-width: 1024px)", () => {
         // Header Reveal
         gsap.fromTo(
           ".bento-header > *",
@@ -77,8 +77,8 @@ export function BentoFeaturesSection() {
           );
       });
 
-      // Mobile animations
-      mm.add("(max-width: 639px)", () => {
+      // Mobile / tablet animations
+      mm.add("(max-width: 1023px)", () => {
         // Header Reveal
         gsap.fromTo(
           ".bento-header > *",
@@ -137,7 +137,7 @@ export function BentoFeaturesSection() {
         </div>
 
         <div
-          className="bento-grid grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6"
+          className="bento-grid grid grid-cols-1 gap-4 lg:auto-rows-fr lg:grid-cols-2 lg:grid-rows-2 lg:gap-6"
           style={{ perspective: "1200px" }}
         >
           {orderedIds.map((id) => {
@@ -170,7 +170,7 @@ export function BentoFeaturesSection() {
                 highlight={id === "ai"}
                 href={`/features/${FEATURE_ROUTES[id]}`}
                 className={cx(
-                  id === FEATURED_ID ? "sm:row-span-2" : undefined,
+                  id === FEATURED_ID ? "lg:row-span-2" : undefined,
                   `bento-card-${id}`
                 )}
               />
