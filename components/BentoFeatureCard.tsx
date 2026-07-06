@@ -55,7 +55,7 @@ export function BentoFeatureCard({
       : "border-gray-200 bg-white",
     featured
       ? "flex flex-col justify-between items-stretch gap-8 h-full"
-      : "grid grid-cols-[65fr_35fr] items-start gap-6",
+      : "grid grid-cols-1 gap-8 sm:grid-cols-[65fr_35fr] sm:items-start sm:gap-6",
     className
   );
 
@@ -88,10 +88,12 @@ export function BentoFeatureCard({
       />
 
       <div className="relative z-10">
-        <div className="mb-6 inline-flex rounded-2xl bg-brand-100 p-4 text-brand-600 transition-colors group-hover:bg-brand-200">
-          <Icon className="h-8 w-8" />
+        <div className="mb-3 flex items-center gap-4 sm:block">
+          <div className="inline-flex shrink-0 rounded-2xl bg-brand-100 p-4 text-brand-600 transition-colors group-hover:bg-brand-200 sm:mb-6">
+            <Icon className="h-8 w-8" />
+          </div>
+          <h3 className="text-display text-2xl">{title}</h3>
         </div>
-        <h3 className="text-display mb-3 text-2xl">{title}</h3>
         <p className="text-detail text-base">{description}</p>
       </div>
 
