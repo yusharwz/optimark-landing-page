@@ -15,13 +15,18 @@
     "title": "Pilihan Paket Harga - OPTIMARK",
     "description": "Pilih paket langganan Optimark yang sesuai untuk bisnis Anda. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
   },
+  "faqMetadata": {
+    "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
+    "description": "Temukan jawaban atas pertanyaan yang sering diajukan tentang Optimark — fitur, harga, integrasi, dan cara memulai."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Buka menu",
     "nav": {
       "home": "Beranda",
       "features": "Fitur",
-      "pricing": "Harga"
+      "pricing": "Harga",
+      "faq": "FAQ"
     },
     "signIn": "Masuk",
     "getStarted": "Mulai Sekarang"
@@ -222,6 +227,7 @@
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
+      "faq": "FAQ",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",

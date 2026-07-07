@@ -125,9 +125,9 @@ export function BentoFeaturesSection() {
     // Transparent: the shared HeroFeaturesBackground (dot grid + soft gradient)
     // shows through so the hero-to-features transition keeps one continuous
     // canvas. The white cards float above it.
-    <section ref={containerRef} className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+    <section ref={containerRef} className="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:pt-36 lg:pb-16">
       <div className="relative z-10 mx-auto max-w-7xl">
-        <div className="bento-header mb-14 text-center lg:mb-20">
+        <div className="bento-header mb-14 text-center lg:mb-10">
           <h2 className="text-display text-4xl sm:text-5xl lg:text-[3.5rem]">
             {t("title")}
           </h2>

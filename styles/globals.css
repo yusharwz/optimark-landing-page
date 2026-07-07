@@ -70,10 +70,18 @@
  * effective viewport: 13.5px at ≤1280, 14.5px at 1536 (1080p @ 125%), and
  * the full 16px from 1920 up. Media queries use rem against the *initial*
  * font-size, so Tailwind breakpoints are unaffected.
+ *
+ * The min() also factors in viewport *height*: laptops with short screens
+ * (e.g. MacBook Air 1280×800) need the tall pinned sections (hero, how it
+ * works) to shrink further than the width alone suggests — 13px at 800px
+ * tall, full 16px from 1000px tall up.
  */
 @media (min-width: 1024px) {
     html {
-        font-size: clamp(13.5px, 0.390625vw + 8.5px, 16px);
+        font-size: min(
+            clamp(13.5px, 0.390625vw + 8.5px, 16px),
+            clamp(12.5px, 1.5vh + 1px, 16px)
+        );
     }
 }
 

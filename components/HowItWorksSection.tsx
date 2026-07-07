@@ -228,7 +228,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Right Column: Visual Mockup container */}
-          <div className="relative aspect-square lg:aspect-auto lg:h-[480px] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
+          <div className="relative aspect-square lg:aspect-auto lg:h-[30rem] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
             <AnimatePresence mode="wait">
               {activeStep === 0 && <StepOneVisual key="step1" t={t} inView={inView} />}
               {activeStep === 1 && <StepTwoVisual key="step2" t={t} inView={inView} />}
