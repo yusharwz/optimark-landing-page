@@ -262,7 +262,7 @@ export default function FeaturesPage() {
 
         {/* Bento grid section */}
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 mb-32">
-          <div className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 lg:auto-rows-fr lg:grid-cols-2 lg:grid-rows-2 lg:gap-6">
             {features.map((feat) => {
               let illustration: React.ReactNode = undefined;
               if (feat.id === "ai") {
@@ -287,7 +287,7 @@ export default function FeaturesPage() {
                   illustration={illustration}
                   featured={isFeatured}
                   highlight={feat.id === "ai"}
-                  className={isFeatured ? "sm:row-span-2" : undefined}
+                  className={isFeatured ? "lg:row-span-2" : undefined}
                 />
               );
             })}

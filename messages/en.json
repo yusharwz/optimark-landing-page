@@ -15,13 +15,18 @@
     "title": "Pricing Plans - OPTIMARK",
     "description": "Choose the right Optimark subscription plan for your business. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
   },
+  "faqMetadata": {
+    "title": "Frequently Asked Questions - OPTIMARK",
+    "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
     "nav": {
       "home": "Home",
       "features": "Features",
-      "pricing": "Pricing"
+      "pricing": "Pricing",
+      "faq": "FAQ"
     },
     "signIn": "Sign In",
     "getStarted": "Get Started"
@@ -222,6 +227,7 @@
     "links": {
       "features": "Features",
       "pricing": "Pricing",
+      "faq": "FAQ",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",

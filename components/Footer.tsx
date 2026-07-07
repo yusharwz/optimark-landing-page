@@ -124,6 +124,14 @@ export function Footer() {
                     {t("links.pricing")}
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="/faq"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.faq")}
+                  </Link>
+                </li>
               </ul>
             </motion.div>
 

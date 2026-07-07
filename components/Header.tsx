@@ -13,6 +13,7 @@ const NAV_LINK_KEYS = [
   { key: "home", href: "/" },
   { key: "features", href: "/features" },
   { key: "pricing", href: "/pricing" },
+  { key: "faq", href: "/faq" },
 ] as const;
 
 export function Header() {

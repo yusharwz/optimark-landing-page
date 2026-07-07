@@ -57,7 +57,7 @@ export function HeroSection() {
         ref={contentRef}
         className="relative mx-auto flex w-full max-w-7xl flex-col px-4 pt-24 pb-16 sm:px-6 lg:px-8 lg:pt-16 lg:pb-16"
       >
-        <div className="mx-auto grid w-full max-w-5xl grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+        <div className="mx-auto grid w-full grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div className="mx-auto w-full max-w-xl space-y-6 text-center lg:mx-0 lg:max-w-md lg:space-y-8 lg:text-left">
             <motion.div
               variants={heroBadge}
@@ -91,7 +91,7 @@ export function HeroSection() {
             animate="visible"
             className="mt-8 flex w-full justify-center lg:mt-0 lg:justify-end"
           >
-            <AiCaptionModal className="pointer-events-none w-full max-w-[480px] shadow-2xl"></AiCaptionModal>
+            <AiCaptionModal className="pointer-events-none w-full shadow-2xl"></AiCaptionModal>
             {/* <BrowserMockup alt={t("imageAlt")} /> */}
           </motion.div>
         </div>
