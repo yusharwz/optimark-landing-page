@@ -75,16 +75,16 @@ export function FaqSection() {
                 <Mail className="h-5 w-5" />
               </div>
               <div className="space-y-1">
-                <h3 className="font-bold text-slate-800 text-sm">Still have questions?</h3>
+                <h3 className="font-bold text-slate-800 text-sm">{t("support.title")}</h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Can't find the answer you're looking for? Reach out directly to our customer support.
+                  {t("support.description")}
                 </p>
               </div>
               <a
                 href={`mailto:${SITE.contactEmail}`}
                 className="inline-flex items-center justify-center gap-1.5 bg-[#94C748] hover:bg-[#94C748]/90 text-white font-semibold text-xs py-2.5 px-4 rounded-xl shadow-xs transition-colors w-fit group"
               >
-                Contact Support
+                {t("support.cta")}
                 <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
               </a>
             </div>
