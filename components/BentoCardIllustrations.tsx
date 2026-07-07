@@ -231,7 +231,7 @@ export function SeoAnalyzerIllustration() {
         <div className="flex items-center gap-2">
           {/* Circular progress indicator */}
           <div className="relative w-12 h-12 flex items-center justify-center">
-            <svg className="w-full h-full transform -rotate-90">
+            <svg viewBox="0 0 48 48" className="w-full h-full transform -rotate-90">
               {/* Background circle */}
               <circle
                 cx="24"

@@ -420,6 +420,11 @@
       "a4": "Saat ini Anda dapat menghubungkan akun Instagram, Facebook, dan TikTok Anda. Kami sedang mengembangkan dukungan untuk platform lain seperti Threads, X, dan LinkedIn.",
       "q5": "Apakah saya bisa membatalkan paket langganan kapan saja?",
       "a5": "Ya! Anda bisa meningkatkan, menurunkan, atau membatalkan paket langganan Anda kapan saja melalui halaman pengaturan akun tanpa biaya tersembunyi."
+    },
+    "support": {
+      "title": "Masih punya pertanyaan?",
+      "description": "Tidak menemukan jawaban yang Anda cari? Hubungi langsung tim dukungan pelanggan kami.",
+      "cta": "Hubungi Kami"
     }
   }
 }

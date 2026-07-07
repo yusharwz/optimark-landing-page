@@ -420,6 +420,11 @@
       "a4": "Currently, you can connect and schedule posts to Instagram, Facebook, and TikTok. We are constantly adding support for more platforms like Threads, X, and LinkedIn.",
       "q5": "Can I cancel or change my plan anytime?",
       "a5": "Yes! You can upgrade, downgrade, or cancel your subscription plan directly from your billing settings at any time with no hidden fees."
+    },
+    "support": {
+      "title": "Still have questions?",
+      "description": "Can't find the answer you're looking for? Reach out directly to our customer support.",
+      "cta": "Contact Support"
     }
   }
 }
