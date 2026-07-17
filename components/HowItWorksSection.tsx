@@ -108,18 +108,11 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={containerRef}
-      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 border-b border-[#E9EAEB] lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
-      style={{
-        // Opaque white base + pinned dot grid so the background doesn't scroll with the page
-        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url('/images/hero-swatch.png')",
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundSize: "cover, 400px 400px",
-      }}
+      // Transparent: the shared fixed dot canvas (HeroFeaturesBackground) shows
+      // through so this section blends seamlessly with its neighbors. No local
+      // decorative blurs — they would get clipped at the section edges.
+      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
     >
-      {/* Decorative green gradient blurs in background */}
-      <div className="pointer-events-none absolute -top-40 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/5 blur-3xl" />
-
       <div className="mx-auto w-full max-w-7xl relative z-10">
         {/* Header */}
         <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">

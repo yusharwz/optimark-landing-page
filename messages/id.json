@@ -406,6 +406,25 @@
       "scrollNext": "Teruskan menggulir untuk melanjutkan"
     }
   },
+  "videoShowcase": {
+    "title": "Dari Ide Menjadi Konten Siap Tayang",
+    "subtitle": "Lihat langsung bagaimana Optimark membantu Anda membuat, menjadwalkan, dan mengoptimalkan konten — semuanya dari satu platform.",
+    "cta": "Mulai Sekarang",
+    "items": {
+      "card1": {
+        "title": "AI Content Maker",
+        "description": "Buat caption dan konten sesuai karakter brand Anda dalam hitungan detik. Tanpa kehabisan ide."
+      },
+      "card2": {
+        "title": "Perencana Konten",
+        "description": "Jadwalkan publikasi otomatis di jam terbaik untuk setiap platform."
+      },
+      "card3": {
+        "title": "Semua dalam Satu Dashboard",
+        "description": "Pantau performa, kelola akun media sosial, dan kembangkan brand Anda dari satu tempat."
+      }
+    }
+  },
   "faq": {
     "title": "Pertanyaan yang Sering Diajukan",
     "subtitle": "Punya pertanyaan? Kami punya jawabannya. Hubungi kami jika Anda membutuhkan bantuan lebih lanjut.",
