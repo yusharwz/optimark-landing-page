@@ -406,6 +406,25 @@
       "scrollNext": "Keep scrolling to continue"
     }
   },
+  "videoShowcase": {
+    "title": "From Idea to Ready-to-Post Content",
+    "subtitle": "See how Optimark helps you create, schedule, and optimize content — all from one platform.",
+    "cta": "Start Creating",
+    "items": {
+      "card1": {
+        "title": "AI Content Maker",
+        "description": "Generate captions and content that match your brand voice in seconds. Never run out of ideas."
+      },
+      "card2": {
+        "title": "Content Planner",
+        "description": "Auto-schedule posts at the best times for every platform."
+      },
+      "card3": {
+        "title": "Everything in One Dashboard",
+        "description": "Track performance, manage your social accounts, and grow your brand from one place."
+      }
+    }
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Got questions? We've got answers. If you need more help, feel free to contact us.",

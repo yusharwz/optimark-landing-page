@@ -8,26 +8,23 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
 import { BrandIcon, BrandIconDefs } from "@/components/BrandIcon";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+type Translations = ReturnType<typeof useTranslations>;
 
 export function HowItWorksSection() {
   const t = useTranslations("howItWorks");
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoplay, setIsAutoplay] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
   // Only kick off the visual animations once the section actually enters the viewport
   const inView = useInView(containerRef, { once: true, amount: 0.3 });
 
-  // Auto-rotation effect (only for mobile/tablet where scroll pinning is off)
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    if (isDesktop) {
-      setIsAutoplay(false);
-      return;
-    }
-    
-    setIsAutoplay(true);
-  }, []);
+  // Auto-rotation only on mobile/tablet (desktop uses scroll pinning instead),
+  // and only until the user interacts with the steps manually.
+  const isDesktop = useMediaQuery("(min-width: 1024px)", true);
+  const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const isAutoplay = !isDesktop && !autoplayStopped;
 
   useEffect(() => {
     if (!isAutoplay || !inView) return;
@@ -43,7 +40,7 @@ export function HowItWorksSection() {
 
   const handleStepSelect = (index: number) => {
     setActiveStep(index);
-    setIsAutoplay(false); // Stop autoplay once user interacts manually
+    setAutoplayStopped(true); // Stop autoplay once user interacts manually
   };
 
   useGSAP(
@@ -108,18 +105,11 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={containerRef}
-      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 border-b border-[#E9EAEB] lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
-      style={{
-        // Opaque white base + pinned dot grid so the background doesn't scroll with the page
-        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url('/images/hero-swatch.png')",
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundSize: "cover, 400px 400px",
-      }}
+      // Transparent: the shared fixed dot canvas (HeroFeaturesBackground) shows
+      // through so this section blends seamlessly with its neighbors. No local
+      // decorative blurs — they would get clipped at the section edges.
+      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
     >
-      {/* Decorative green gradient blurs in background */}
-      <div className="pointer-events-none absolute -top-40 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/5 blur-3xl" />
-
       <div className="mx-auto w-full max-w-7xl relative z-10">
         {/* Header */}
         <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
@@ -256,7 +246,7 @@ export function HowItWorksSection() {
 }
 
 // ==================== STEP 1 VISUAL ====================
-function StepOneVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -375,7 +365,7 @@ function StepOneVisual({ t, inView }: { t: any; inView: boolean }) {
 }
 
 // ==================== STEP 2 VISUAL ====================
-function StepTwoVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isGenerated, setIsGenerated] = useState(false);
   const promptFull = t("illustrations.prompt");
@@ -469,7 +459,7 @@ function StepTwoVisual({ t, inView }: { t: any; inView: boolean }) {
 }
 
 // ==================== STEP 3 VISUAL ====================
-function StepThreeVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepThreeVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {

@@ -54,6 +54,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
   // Clone the child element and add an `onClick` handler to open the file dialog.
   const mainElement = cloneElement(
     clonableElement as DetailedReactHTMLElement<HTMLAttributes<HTMLElement>, HTMLElement>,
+    // eslint-disable-next-line react-hooks/refs -- the handler only reads the ref on click, never during render
     {
       onClick: () => {
         if (inputRef.current?.value) {
@@ -76,7 +77,7 @@ export const FileTrigger = (props: FileTriggerProps) => {
         onChange={(e) => onSelect?.(e.target.files)}
         capture={defaultCamera}
         multiple={allowsMultiple}
-        // @ts-expect-error
+        // @ts-expect-error -- webkitdirectory is a non-standard attribute missing from React's input typings
         webkitdirectory={acceptDirectory ? "" : undefined}
       />
     </>

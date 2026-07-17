@@ -10,10 +10,10 @@ const BG_GRADIENT =
 
 /**
  * A single persistent background (soft gradient + interactive dot grid) shared
- * by the hero and features sections. It is `sticky` so it stays fixed in the
- * viewport while you scroll through both sections — the hero text fades out and
- * the features fade in over the *same* canvas, instead of a new section
- * sliding into view. Rendered behind content (z-0); content sits above it.
+ * by every section of the landing page. It is `fixed` so it stays pinned in
+ * the viewport while the content scrolls past (parallax) — sections render
+ * transparent above it so the whole page reads as one continuous canvas.
+ * Opaque sections (Connect, Footer) simply paint over it.
  */
 export function HeroFeaturesBackground() {
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
@@ -33,22 +33,17 @@ export function HeroFeaturesBackground() {
   }, []);
 
   return (
-    // Outer is sticky but takes NO layout space (h-0) so it does not push the
-    // hero down. The inner layer is a viewport-tall absolute box that sticks in
-    // view while scrolling through the hero + features region.
+    // Viewport-fixed layer behind all content: takes no layout space and the
+    // dots stay glued to the screen while the page scrolls over them.
     <div
       aria-hidden
-      className="pointer-events-none sticky top-0 z-0 h-0"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      style={{ background: BG_GRADIENT }}
     >
-      <div
-        className="absolute inset-x-0 top-0 h-screen w-full overflow-hidden"
-        style={{ background: BG_GRADIENT }}
-      >
-        <InteractiveDotGrid
-          className="absolute inset-0 h-full w-full"
-          mousePosition={mousePos}
-        />
-      </div>
+      <InteractiveDotGrid
+        className="absolute inset-0 h-full w-full"
+        mousePosition={mousePos}
+      />
     </div>
   );
 }
