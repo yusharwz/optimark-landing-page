@@ -84,7 +84,7 @@ export const formatCardNumber = (number: string) => {
   return cleaned;
 };
 
-interface PaymentInputProps extends Omit<InputBaseProps, "icon"> {}
+type PaymentInputProps = Omit<InputBaseProps, "icon">;
 
 export const PaymentInput = ({
   onChange,

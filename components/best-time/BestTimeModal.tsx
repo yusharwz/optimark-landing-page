@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { BestTimeHeader } from "./BestTimeHeader";
 import { KeywordPanel, type AnalyzeStatus } from "./KeywordPanel";
 import { TimeResultPanel } from "./TimeResultPanel";
@@ -51,17 +52,14 @@ export function BestTimeModal({
   const [typed, setTyped] = useState("");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-  // Respect reduced motion: jump straight to the finished state.
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTyped(resolvedKeyword);
-      setPhase("done");
-    }
-  }, [resolvedKeyword]);
+  // Respect reduced motion: render the finished state instead of animating.
+  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const effectivePhase: Phase = prefersReducedMotion ? "done" : phase;
+  const effectiveTyped = prefersReducedMotion ? resolvedKeyword : typed;
 
   // Typewriter: append one character at a time, then move to loading.
   useEffect(() => {
-    if (phase !== "typing") return;
+    if (prefersReducedMotion || phase !== "typing") return;
     if (typed.length >= resolvedKeyword.length) {
       const timer = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
       return () => clearTimeout(timer);
@@ -71,17 +69,17 @@ export function BestTimeModal({
       TYPE_SPEED,
     );
     return () => clearTimeout(timer);
-  }, [phase, typed, resolvedKeyword]);
+  }, [phase, typed, resolvedKeyword, prefersReducedMotion]);
 
   // Loading → done.
   useEffect(() => {
-    if (phase !== "loading") return;
+    if (prefersReducedMotion || phase !== "loading") return;
     const timer = setTimeout(() => setPhase("done"), LOADING_MS);
     return () => clearTimeout(timer);
-  }, [phase]);
+  }, [phase, prefersReducedMotion]);
 
   const status: AnalyzeStatus =
-    phase === "typing" ? "idle" : phase === "loading" ? "loading" : "done";
+    effectivePhase === "typing" ? "idle" : effectivePhase === "loading" ? "loading" : "done";
 
   return (
     <div
@@ -93,14 +91,14 @@ export function BestTimeModal({
 
       <KeywordPanel
         label={label}
-        typedText={typed}
-        showCaret={phase === "typing"}
+        typedText={effectiveTyped}
+        showCaret={effectivePhase === "typing"}
         status={status}
         tip={tip}
       />
 
       <AnimatePresence initial={false}>
-        {phase !== "typing" && (
+        {effectivePhase !== "typing" && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
@@ -109,7 +107,7 @@ export function BestTimeModal({
             <TimeResultPanel
               heading={heading}
               slots={slots}
-              status={phase === "loading" ? "loading" : "done"}
+              status={effectivePhase === "loading" ? "loading" : "done"}
               selectedIndex={selectedIndex}
               onSelect={setSelectedIndex}
             />

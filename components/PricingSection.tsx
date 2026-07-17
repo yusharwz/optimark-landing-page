@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -79,6 +79,10 @@ interface PricingSectionProps {
   showEstimator?: boolean;
 }
 
+// Store that never changes: lets useSyncExternalStore report "mounted" (true on
+// the client, false during SSR/hydration) without a setState-in-effect.
+const noopSubscribe = () => () => {};
+
 export function PricingSection({ showEstimator = true }: PricingSectionProps = {}) {
   const t = useTranslations("pricing");
   const [sliderValues, setSliderValues] = useState<Record<string, number>>({
@@ -91,8 +95,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
   });
   const [showNotification, setShowNotification] = useState(false);
   // Portal target: only available after mount (client), guards SSR.
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(noopSubscribe, () => true, () => false);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();

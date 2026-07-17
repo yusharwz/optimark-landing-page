@@ -8,26 +8,23 @@ import { motion, AnimatePresence, useInView } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
 import { BrandIcon, BrandIconDefs } from "@/components/BrandIcon";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+type Translations = ReturnType<typeof useTranslations>;
 
 export function HowItWorksSection() {
   const t = useTranslations("howItWorks");
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoplay, setIsAutoplay] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
   // Only kick off the visual animations once the section actually enters the viewport
   const inView = useInView(containerRef, { once: true, amount: 0.3 });
 
-  // Auto-rotation effect (only for mobile/tablet where scroll pinning is off)
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    if (isDesktop) {
-      setIsAutoplay(false);
-      return;
-    }
-    
-    setIsAutoplay(true);
-  }, []);
+  // Auto-rotation only on mobile/tablet (desktop uses scroll pinning instead),
+  // and only until the user interacts with the steps manually.
+  const isDesktop = useMediaQuery("(min-width: 1024px)", true);
+  const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const isAutoplay = !isDesktop && !autoplayStopped;
 
   useEffect(() => {
     if (!isAutoplay || !inView) return;
@@ -43,7 +40,7 @@ export function HowItWorksSection() {
 
   const handleStepSelect = (index: number) => {
     setActiveStep(index);
-    setIsAutoplay(false); // Stop autoplay once user interacts manually
+    setAutoplayStopped(true); // Stop autoplay once user interacts manually
   };
 
   useGSAP(
@@ -249,7 +246,7 @@ export function HowItWorksSection() {
 }
 
 // ==================== STEP 1 VISUAL ====================
-function StepOneVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -368,7 +365,7 @@ function StepOneVisual({ t, inView }: { t: any; inView: boolean }) {
 }
 
 // ==================== STEP 2 VISUAL ====================
-function StepTwoVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isGenerated, setIsGenerated] = useState(false);
   const promptFull = t("illustrations.prompt");
@@ -462,7 +459,7 @@ function StepTwoVisual({ t, inView }: { t: any; inView: boolean }) {
 }
 
 // ==================== STEP 3 VISUAL ====================
-function StepThreeVisual({ t, inView }: { t: any; inView: boolean }) {
+function StepThreeVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
