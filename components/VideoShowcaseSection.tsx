@@ -14,7 +14,6 @@ const CARDS = [
   { id: "card2", src: "/videos/3.mp4", wide: false },
   { id: "card3", src: "/videos/2.mp4", wide: true },
 ] as const;
-
 export function VideoShowcaseSection() {
   const t = useTranslations("videoShowcase");
 

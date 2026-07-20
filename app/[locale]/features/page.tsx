@@ -247,10 +247,6 @@ export default function FeaturesPage() {
             animate="visible"
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#94C748] border border-[#94C748]/20">
-              <Zap className="h-3 w-3 text-[#94C748]" />
-              {tp("badge")}
-            </span>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
               {tp("title")}
             </h1>

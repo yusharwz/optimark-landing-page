@@ -55,11 +55,20 @@ export function HowItWorksSection() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
+            // Pin exactly at the viewport top so the pinned section is exactly
+            // one screen tall — keeps the bottom scroll indicator on-screen.
             start: "top top",
-            end: "+=1800", // Scroll length while pinned
+            // Scroll length while pinned, scaled to viewport height so the
+            // lock feels consistent across screen sizes (~1.8 screens).
+            end: () => "+=" + window.innerHeight * 1.8,
             pin: true,
-            scrub: true,
-            anticipatePin: 1,
+            // 0.6s of catch-up smoothing instead of a hard 1:1 lock, so
+            // entering/leaving the pin no longer snaps abruptly.
+            scrub: 0.3,
+            // anticipatePin was yanking the viewport on fast scroll; a small
+            // value keeps just enough pre-pin to avoid a flash without the tug.
+            anticipatePin: 0,
+            invalidateOnRefresh: true,
             onUpdate: (self) => {
               const progress = self.progress;
               // Quantize progress into 3 buckets: 0-33%, 33-66%, 66-100%
@@ -108,14 +117,11 @@ export function HowItWorksSection() {
       // Transparent: the shared fixed dot canvas (HeroFeaturesBackground) shows
       // through so this section blends seamlessly with its neighbors. No local
       // decorative blurs — they would get clipped at the section edges.
-      className="relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-0 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
+      className="relative overflow-hidden px-6 pt-5 pb-8 sm:px-12 lg:px-24 lg:pt-40 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-start"
     >
       <div className="mx-auto w-full max-w-7xl relative z-10">
         {/* Header */}
         <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
-            {t("badge")}
-          </span>
           <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-tight">
             {t("title")}
           </h2>

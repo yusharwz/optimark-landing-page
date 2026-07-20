@@ -45,9 +45,6 @@ export function CtaSection() {
         ref={contentRef}
         className="relative mx-auto max-w-4xl px-6 text-center sm:px-12 lg:px-24"
       >
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
-          Optimark
-        </span>
         <h2 className="text-display text-4xl sm:text-5xl lg:text-6xl mt-6 leading-tight max-w-3xl mx-auto">
           {t("title")}
         </h2>
