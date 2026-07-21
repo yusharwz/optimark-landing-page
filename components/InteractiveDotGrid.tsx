@@ -16,6 +16,8 @@ interface InteractiveDotGridProps {
   dotGap?: number;
   gridWidth?: number;
   gridHeight?: number;
+  /** Opacity of idle dots; set 0 to only show dots near the cursor */
+  baseOpacity?: number;
   /** Mouse position relative to the grid container (from parent section) */
   mousePosition?: { x: number; y: number } | null;
 }
@@ -26,6 +28,7 @@ export function InteractiveDotGrid({
   dotGap = DOT_SPACING,
   gridWidth,
   gridHeight,
+  baseOpacity = BASE_OPACITY,
   mousePosition = null,
 }: InteractiveDotGridProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -87,7 +90,7 @@ export function InteractiveDotGrid({
 
     for (let cx = 8; cx < w + dotGap; cx += dotGap) {
       for (let cy = 8; cy < h + dotGap; cy += dotGap) {
-        let opacity = BASE_OPACITY;
+        let opacity = baseOpacity;
         let radius = dotSize;
 
         if (mouse) {
@@ -97,10 +100,12 @@ export function InteractiveDotGrid({
           if (dist < INTERACT_RADIUS) {
             const t = 1 - dist / INTERACT_RADIUS;
             const ease = t * t;
-            opacity = BASE_OPACITY + (HOVER_OPACITY - BASE_OPACITY) * ease;
+            opacity = baseOpacity + (HOVER_OPACITY - baseOpacity) * ease;
             radius = dotSize + (HOVER_RADIUS - dotSize) * ease;
           }
         }
+
+        if (opacity <= 0) continue;
 
         ctx.beginPath();
         ctx.arc(cx, cy, radius, 0, Math.PI * 2);
@@ -108,7 +113,7 @@ export function InteractiveDotGrid({
         ctx.fill();
       }
     }
-  }, [dotGap, dotSize]);
+  }, [dotGap, dotSize, baseOpacity]);
 
   useEffect(() => {
     const loop = () => {

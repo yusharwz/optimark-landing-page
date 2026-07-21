@@ -59,9 +59,6 @@ export function FaqSection() {
           
           {/* Left Column: Heading & Support Block */}
           <Reveal className="space-y-6 lg:sticky lg:top-28 self-start">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
-              FAQ
-            </span>
             <h2 className="text-display text-4xl sm:text-5xl lg:text-[3rem] leading-[1.1] text-left">
               {t("title")}
             </h2>
