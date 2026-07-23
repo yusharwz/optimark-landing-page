@@ -37,11 +37,19 @@
     "en": "English"
   },
   "hero": {
-    "badge": "All-in-one digital marketing platform",
+    "badge": "AI-powered digital marketing platform",
     "title": "All digital marketing tools in one platform",
-    "description": "Schedule content, boost SEO visibility, optimize ads, and create content faster with AI assistance.",
-    "cta": "Try for Free",
-    "imageAlt": "Optimark dashboard illustration"
+    "description": "From SEO and content to scheduling and publishing — one platform.",
+    "cta": "Start Free",
+    "ctaSecondary": "Explore features",
+    "imageAlt": "Optimark dashboard illustration",
+    "switcher": {
+      "content": "Create content faster",
+      "seo": "Find SEO opportunities",
+      "visual": "Create visual campaigns",
+      "video": "Turn ideas into video",
+      "schedule": "Schedule and publish"
+    }
   },
   "features": {
     "title": "Everything your business needs is here",

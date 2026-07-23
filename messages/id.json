@@ -37,11 +37,19 @@
     "en": "English"
   },
   "hero": {
-    "badge": "Platform all-in-one digital marketing",
+    "badge": "AI-powered digital marketing platform",
     "title": "Semua tools digital marketing dalam satu platform",
-    "description": "Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI.",
-    "cta": "Coba Gratis",
-    "imageAlt": "Ilustrasi dashboard Optimark"
+    "description": "Dari SEO, konten, scheduling, hingga publishing — dalam satu platform.",
+    "cta": "Mulai Gratis",
+    "ctaSecondary": "Jelajahi fitur",
+    "imageAlt": "Ilustrasi dashboard Optimark",
+    "switcher": {
+      "content": "Buat konten lebih cepat",
+      "seo": "Temukan peluang SEO",
+      "visual": "Ciptakan visual campaign",
+      "video": "Ubah ide menjadi video",
+      "schedule": "Jadwalkan dan publish"
+    }
   },
   "features": {
     "title": "Semua kebutuhan bisnis Anda ada disini",

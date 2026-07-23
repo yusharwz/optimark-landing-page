@@ -76,12 +76,12 @@ export function AiCaptionModal({
 
   return (
     <div
-      className={`ai-caption w-full overflow-hidden rounded-2xl border border-[#E9EAEB] bg-white shadow-xl ${
+      className={`ai-caption flex w-full flex-col overflow-hidden rounded-2xl border border-[#E9EAEB] bg-white shadow-xl ${
         className ?? ""
       }`}
     >
       <CaptionHeader title={title} />
-      <div className="grid divide-y divide-[#E9EAEB] md:grid-cols-2 md:divide-x md:divide-y-0">
+      <div className="grid min-h-0 flex-1 divide-y divide-[#E9EAEB] md:grid-cols-2 md:divide-x md:divide-y-0">
         <PromptPanel
           typedText={effectiveTyped}
           showCaret={effectivePhase === "typing"}
