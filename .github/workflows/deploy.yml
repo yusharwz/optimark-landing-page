@@ -106,7 +106,10 @@ jobs:
             echo "PRODUCTION_DEPLOY_PATH secret is not set."
             exit 1
           fi
-          mkdir -p "$PRODUCTION_DEPLOY_PATH"
+          echo "Runner user: $(whoami)"
+          echo "Deploy path: $PRODUCTION_DEPLOY_PATH"
+          sudo mkdir -p "$PRODUCTION_DEPLOY_PATH"
+          sudo chown "$(whoami):$(whoami)" "$PRODUCTION_DEPLOY_PATH"
           cp docker-compose.yml "$PRODUCTION_DEPLOY_PATH/docker-compose.yml"
           cp .env.local "$PRODUCTION_DEPLOY_PATH/.env.local"
 
