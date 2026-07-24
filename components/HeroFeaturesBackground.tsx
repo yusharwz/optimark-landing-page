@@ -1,27 +1,28 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 
 // Mostly white so the hero stays clean, with a faint green settle toward the
 // bottom for continuity into the features area.
 const BG_GRADIENT =
   "linear-gradient(180deg, #ffffff 0%, #ffffff 55%, #f4f9ea 100%)";
 
+const GLOW_SIZE = 480;
+
 /**
- * A single persistent background (soft gradient + interactive dot grid) shared
- * by the hero and features sections. It is `sticky` so it stays fixed in the
- * viewport while you scroll through both sections — the hero text fades out and
- * the features fade in over the *same* canvas, instead of a new section
- * sliding into view. Rendered behind content (z-0); content sits above it.
+ * A single persistent background (soft gradient + cursor glow) shared by every
+ * section of the landing page. It is `fixed` so it stays pinned in the
+ * viewport while the content scrolls past (parallax) — sections render
+ * transparent above it so the whole page reads as one continuous canvas.
+ * Opaque sections (Connect, Footer) simply paint over it.
  */
 export function HeroFeaturesBackground() {
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
     // The layer is behind content (pointer-events: none), so track the pointer
-    // at the window level. The layer is viewport-aligned (sticky, top-0), so
-    // client coordinates map directly onto the canvas.
+    // at the window level. The layer is viewport-aligned (fixed, inset-0), so
+    // client coordinates map directly onto it.
     const onMove = (e: MouseEvent) => setMousePos({ x: e.clientX, y: e.clientY });
     const onLeave = () => setMousePos(null);
     window.addEventListener("mousemove", onMove);
@@ -33,22 +34,27 @@ export function HeroFeaturesBackground() {
   }, []);
 
   return (
-    // Outer is sticky but takes NO layout space (h-0) so it does not push the
-    // hero down. The inner layer is a viewport-tall absolute box that sticks in
-    // view while scrolling through the hero + features region.
+    // Viewport-fixed layer behind all content: takes no layout space and stays
+    // glued to the screen while the page scrolls over it.
     <div
       aria-hidden
-      className="pointer-events-none sticky top-0 z-0 h-0"
+      className="pointer-events-none fixed inset-0 z-0 overflow-hidden"
+      style={{ background: BG_GRADIENT }}
     >
+      {/* Soft dark spot trailing the cursor */}
       <div
-        className="absolute inset-x-0 top-0 h-screen w-full overflow-hidden"
-        style={{ background: BG_GRADIENT }}
-      >
-        <InteractiveDotGrid
-          className="absolute inset-0 h-full w-full"
-          mousePosition={mousePos}
-        />
-      </div>
+        className="absolute rounded-full transition-[transform,opacity] duration-300 ease-out"
+        style={{
+          width: GLOW_SIZE,
+          height: GLOW_SIZE,
+          opacity: mousePos ? 1 : 0,
+          transform: mousePos
+            ? `translate(${mousePos.x - GLOW_SIZE / 2}px, ${mousePos.y - GLOW_SIZE / 2}px)`
+            : undefined,
+          background:
+            "radial-gradient(circle, rgba(20, 30, 14, 0.06) 0%, rgba(30, 40, 14, 0.03) 45%, transparent 70%)",
+        }}
+      />
     </div>
   );
 }

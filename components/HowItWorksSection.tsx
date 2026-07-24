@@ -6,24 +6,21 @@ import { Link2, Sparkles, CalendarRange, Check, ArrowUpRight, ChevronDown } from
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { useMediaQuery } from "@/hooks/use-media-query";
+
+type Translations = ReturnType<typeof useTranslations>;
 
 export function HowItWorksSection() {
   const t = useTranslations("howItWorks");
   const [activeStep, setActiveStep] = useState(0);
-  const [isAutoplay, setIsAutoplay] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Auto-rotation effect (only for mobile/tablet where scroll pinning is off)
-  useEffect(() => {
-    const isDesktop = window.matchMedia("(min-width: 1024px)").matches;
-    if (isDesktop) {
-      setIsAutoplay(false);
-      return;
-    }
-    
-    setIsAutoplay(true);
-  }, []);
+  // Auto-rotation only on mobile/tablet (desktop uses scroll pinning instead),
+  // and only until the user interacts with the steps manually.
+  const isDesktop = useMediaQuery("(min-width: 1024px)", true);
+  const [autoplayStopped, setAutoplayStopped] = useState(false);
+  const isAutoplay = !isDesktop && !autoplayStopped;
 
   useEffect(() => {
     if (!isAutoplay) return;
@@ -39,7 +36,7 @@ export function HowItWorksSection() {
 
   const handleStepSelect = (index: number) => {
     setActiveStep(index);
-    setIsAutoplay(false); // Stop autoplay once user interacts manually
+    setAutoplayStopped(true); // Stop autoplay once user interacts manually
   };
 
   useGSAP(
@@ -54,11 +51,20 @@ export function HowItWorksSection() {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: containerRef.current,
+            // Pin exactly at the viewport top so the pinned section is exactly
+            // one screen tall — keeps the bottom scroll indicator on-screen.
             start: "top top",
-            end: "+=1800", // Scroll length while pinned
+            // Scroll length while pinned, scaled to viewport height so the
+            // lock feels consistent across screen sizes (~1.8 screens).
+            end: () => "+=" + window.innerHeight * 1.8,
             pin: true,
-            scrub: true,
-            anticipatePin: 1,
+            // 0.6s of catch-up smoothing instead of a hard 1:1 lock, so
+            // entering/leaving the pin no longer snaps abruptly.
+            scrub: 0.3,
+            // anticipatePin was yanking the viewport on fast scroll; a small
+            // value keeps just enough pre-pin to avoid a flash without the tug.
+            anticipatePin: 0,
+            invalidateOnRefresh: true,
             onUpdate: (self) => {
               const progress = self.progress;
               // Quantize progress into 3 buckets: 0-33%, 33-66%, 66-100%
@@ -104,25 +110,15 @@ export function HowItWorksSection() {
     <section
       id="how-it-works"
       ref={containerRef}
-      className="how-it-works-section relative overflow-hidden px-6 pt-20 pb-8 sm:px-12 lg:px-24 lg:pt-28 lg:pb-12 xl:pt-32 xl:pb-16 border-b border-[#E9EAEB] lg:min-h-screen lg:flex lg:flex-col lg:justify-center"
-      style={{
-        // Opaque white base + pinned dot grid so the background doesn't scroll with the page
-        backgroundImage: "linear-gradient(rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.96)), url('/images/hero-swatch.png')",
-        backgroundRepeat: "no-repeat, repeat",
-        backgroundSize: "cover, 400px 400px",
-      }}
+      // Transparent: the shared fixed dot canvas (HeroFeaturesBackground) shows
+      // through so this section blends seamlessly with its neighbors. No local
+      // decorative blurs — they would get clipped at the section edges.
+      className="relative overflow-hidden px-6 pt-5 pb-8 sm:px-12 lg:px-24 lg:pt-40 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-start"
     >
-      {/* Decorative green gradient blurs in background */}
-      <div className="pointer-events-none absolute -top-40 right-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 left-1/4 -z-10 h-96 w-96 rounded-full bg-[#94C748]/5 blur-3xl" />
-
       <div className="mx-auto w-full max-w-7xl relative z-10">
         {/* Header */}
-        <Reveal className="how-it-works-header text-center max-w-3xl mx-auto mb-10 lg:mb-6 xl:mb-10">
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-emerald-700 border border-[#94C748]/20">
-            {t("badge")}
-          </span>
-          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[2.75rem] xl:text-[3.25rem] 2xl:text-[3.5rem] leading-tight">
+        <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
+          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-tight">
             {t("title")}
           </h2>
           <p className="mt-3 lg:mt-2 xl:mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
@@ -224,7 +220,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Right Column: Visual Mockup container */}
-          <div className="how-it-works-mockup-container relative aspect-square lg:aspect-auto lg:h-[400px] xl:h-[450px] 2xl:h-[480px] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
+          <div className="relative aspect-square lg:aspect-auto lg:h-[30rem] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
             <AnimatePresence mode="wait">
               {activeStep === 0 && <StepOneVisual key="step1" t={t} />}
               {activeStep === 1 && <StepTwoVisual key="step2" t={t} />}
@@ -252,7 +248,7 @@ export function HowItWorksSection() {
 }
 
 // ==================== STEP 1 VISUAL ====================
-function StepOneVisual({ t }: { t: any }) {
+function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -363,7 +359,7 @@ function StepOneVisual({ t }: { t: any }) {
 }
 
 // ==================== STEP 2 VISUAL ====================
-function StepTwoVisual({ t }: { t: any }) {
+function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isGenerated, setIsGenerated] = useState(false);
   const promptFull = t("illustrations.prompt");
@@ -456,7 +452,7 @@ function StepTwoVisual({ t }: { t: any }) {
 }
 
 // ==================== STEP 3 VISUAL ====================
-function StepThreeVisual({ t }: { t: any }) {
+function StepThreeVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {

@@ -121,9 +121,9 @@ export function AiContentIllustration() {
           </div>
 
           {/* Preview Image Visual */}
-          <div className="h-[45px] sm:h-[110px] bg-gradient-to-tr from-brand-300 via-emerald-50 to-indigo-100 rounded-md flex items-center justify-center relative overflow-hidden border border-slate-100">
+          <div className="h-[45px] sm:h-[110px] bg-gradient-to-tr from-brand-300 via-[#FDF4FF] to-indigo-100 rounded-md flex items-center justify-center relative overflow-hidden border border-slate-100">
             <div className="absolute inset-0 bg-white/5 backdrop-blur-[1px]" />
-            <Sparkles className="h-5 w-5 text-brand-600 relative z-10 animate-bounce" />
+            <Sparkles className="h-5 w-5 text-[#D444F1] relative z-10 animate-bounce" />
           </div>
 
           {/* Description mock */}
@@ -231,7 +231,7 @@ export function SeoAnalyzerIllustration() {
         <div className="flex items-center gap-2">
           {/* Circular progress indicator */}
           <div className="relative w-12 h-12 flex items-center justify-center">
-            <svg className="w-full h-full transform -rotate-90">
+            <svg viewBox="0 0 48 48" className="w-full h-full transform -rotate-90">
               {/* Background circle */}
               <circle
                 cx="24"

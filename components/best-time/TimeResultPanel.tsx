@@ -51,14 +51,14 @@ export function TimeResultPanel({
       </div>
 
       {loading ? (
-        <div className="mt-3 grid grid-cols-3 gap-3">
+        <div className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <TimeSlotSkeleton key={i} />
           ))}
         </div>
       ) : (
         <motion.div
-          className="mt-3 grid grid-cols-3 gap-3"
+          className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3"
           variants={container}
           initial="hidden"
           animate="show"

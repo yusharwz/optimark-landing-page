@@ -4,6 +4,8 @@ interface LogoProps {
   className?: string;
   showText?: boolean;
   size?: "sm" | "md" | "lg";
+  /** Render the wordmark in white — for use over dark backgrounds. */
+  inverted?: boolean;
 }
 
 const sizeConfig = {
@@ -12,7 +14,7 @@ const sizeConfig = {
   lg: { icon: 40, fontSize: "text-[29px]" },
 };
 
-export function Logo({ className = "", showText = true, size = "md" }: LogoProps) {
+export function Logo({ className = "", showText = true, size = "md", inverted = false }: LogoProps) {
   const config = sizeConfig[size];
 
   return (
@@ -25,7 +27,11 @@ export function Logo({ className = "", showText = true, size = "md" }: LogoProps
         priority
       />
       {showText && (
-        <span className={`font-gothic font-normal uppercase text-gray-900 ${config.fontSize}`}>
+        <span
+          className={`font-gothic font-normal uppercase transition-colors ${
+            inverted ? "text-white" : "text-gray-900"
+          } ${config.fontSize}`}
+        >
           optimark
         </span>
       )}

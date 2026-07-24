@@ -15,13 +15,18 @@
     "title": "Pilihan Paket Harga - OPTIMARK",
     "description": "Pilih paket langganan Optimark yang sesuai untuk bisnis Anda. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
   },
+  "faqMetadata": {
+    "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
+    "description": "Temukan jawaban atas pertanyaan yang sering diajukan tentang Optimark — fitur, harga, integrasi, dan cara memulai."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Buka menu",
     "nav": {
       "home": "Beranda",
       "features": "Fitur",
-      "pricing": "Harga"
+      "pricing": "Harga",
+      "faq": "FAQ"
     },
     "signIn": "Masuk",
     "getStarted": "Mulai Sekarang"
@@ -32,11 +37,19 @@
     "en": "English"
   },
   "hero": {
-    "badge": "Platform all-in-one digital marketing",
+    "badge": "AI-powered digital marketing platform",
     "title": "Semua tools digital marketing dalam satu platform",
-    "description": "Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI.",
-    "cta": "Coba Gratis",
-    "imageAlt": "Ilustrasi dashboard Optimark"
+    "description": "Dari SEO, konten, scheduling, hingga publishing — dalam satu platform.",
+    "cta": "Mulai Gratis",
+    "ctaSecondary": "Jelajahi fitur",
+    "imageAlt": "Ilustrasi dashboard Optimark",
+    "switcher": {
+      "content": "Buat konten lebih cepat",
+      "seo": "Temukan peluang SEO",
+      "visual": "Ciptakan visual campaign",
+      "video": "Ubah ide menjadi video",
+      "schedule": "Jadwalkan dan publish"
+    }
   },
   "features": {
     "title": "Semua kebutuhan bisnis Anda ada disini",
@@ -222,6 +235,7 @@
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
+      "faq": "FAQ",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",
@@ -400,6 +414,25 @@
       "scrollNext": "Teruskan menggulir untuk melanjutkan"
     }
   },
+  "videoShowcase": {
+    "title": "Dari Ide Menjadi Konten Siap Tayang",
+    "subtitle": "Lihat langsung bagaimana Optimark membantu Anda membuat, menjadwalkan, dan mengoptimalkan konten — semuanya dari satu platform.",
+    "cta": "Mulai Sekarang",
+    "items": {
+      "card1": {
+        "title": "AI Content Maker",
+        "description": "Buat caption dan konten sesuai karakter brand Anda dalam hitungan detik. Tanpa kehabisan ide."
+      },
+      "card2": {
+        "title": "Perencana Konten",
+        "description": "Jadwalkan publikasi otomatis di jam terbaik untuk setiap platform."
+      },
+      "card3": {
+        "title": "Semua dalam Satu Dashboard",
+        "description": "Pantau performa, kelola akun media sosial, dan kembangkan brand Anda dari satu tempat."
+      }
+    }
+  },
   "faq": {
     "title": "Pertanyaan yang Sering Diajukan",
     "subtitle": "Punya pertanyaan? Kami punya jawabannya. Hubungi kami jika Anda membutuhkan bantuan lebih lanjut.",
@@ -414,6 +447,11 @@
       "a4": "Saat ini Anda dapat menghubungkan akun Instagram, Facebook, dan TikTok Anda. Kami sedang mengembangkan dukungan untuk platform lain seperti Threads, X, dan LinkedIn.",
       "q5": "Apakah saya bisa membatalkan paket langganan kapan saja?",
       "a5": "Ya! Anda bisa meningkatkan, menurunkan, atau membatalkan paket langganan Anda kapan saja melalui halaman pengaturan akun tanpa biaya tersembunyi."
+    },
+    "support": {
+      "title": "Masih punya pertanyaan?",
+      "description": "Tidak menemukan jawaban yang Anda cari? Hubungi langsung tim dukungan pelanggan kami.",
+      "cta": "Hubungi Kami"
     }
   }
 }

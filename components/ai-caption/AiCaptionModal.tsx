@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useMediaQuery } from "@/hooks/use-media-query";
 import { CaptionHeader } from "./CaptionHeader";
 import { PromptPanel, type PromptStatus } from "./PromptPanel";
 import { ResultPanel } from "./ResultPanel";
@@ -44,17 +45,14 @@ export function AiCaptionModal({
   const [phase, setPhase] = useState<Phase>("typing");
   const [typed, setTyped] = useState("");
 
-  // Respect reduced motion: jump straight to the finished state.
-  useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setTyped(resolvedPrompt);
-      setPhase("done");
-    }
-  }, [resolvedPrompt]);
+  // Respect reduced motion: render the finished state instead of animating.
+  const prefersReducedMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  const effectivePhase: Phase = prefersReducedMotion ? "done" : phase;
+  const effectiveTyped = prefersReducedMotion ? resolvedPrompt : typed;
 
   // Typewriter: append one character at a time, then move to loading.
   useEffect(() => {
-    if (phase !== "typing") return;
+    if (prefersReducedMotion || phase !== "typing") return;
     if (typed.length >= resolvedPrompt.length) {
       const timer = setTimeout(() => setPhase("loading"), PAUSE_AFTER_TYPE);
       return () => clearTimeout(timer);
@@ -64,33 +62,33 @@ export function AiCaptionModal({
       TYPE_SPEED,
     );
     return () => clearTimeout(timer);
-  }, [phase, typed, resolvedPrompt]);
+  }, [phase, typed, resolvedPrompt, prefersReducedMotion]);
 
   // Loading → done.
   useEffect(() => {
-    if (phase !== "loading") return;
+    if (prefersReducedMotion || phase !== "loading") return;
     const timer = setTimeout(() => setPhase("done"), LOADING_MS);
     return () => clearTimeout(timer);
-  }, [phase]);
+  }, [phase, prefersReducedMotion]);
 
   const status: PromptStatus =
-    phase === "typing" ? "idle" : phase === "loading" ? "loading" : "done";
+    effectivePhase === "typing" ? "idle" : effectivePhase === "loading" ? "loading" : "done";
 
   return (
     <div
-      className={`ai-caption w-full overflow-hidden rounded-2xl border border-[#E9EAEB] bg-white shadow-xl ${
+      className={`ai-caption flex w-full flex-col overflow-hidden rounded-2xl border border-[#E9EAEB] bg-white shadow-xl ${
         className ?? ""
       }`}
     >
       <CaptionHeader title={title} />
-      <div className="grid divide-y divide-[#E9EAEB] md:grid-cols-2 md:divide-x md:divide-y-0">
+      <div className="grid min-h-0 flex-1 divide-y divide-[#E9EAEB] md:grid-cols-2 md:divide-x md:divide-y-0">
         <PromptPanel
-          typedText={typed}
-          showCaret={phase === "typing"}
+          typedText={effectiveTyped}
+          showCaret={effectivePhase === "typing"}
           status={status}
           tip={tip}
         />
-        <ResultPanel lines={lines} hashtags={hashtags} revealed={phase === "done"} />
+        <ResultPanel lines={lines} hashtags={hashtags} revealed={effectivePhase === "done"} />
       </div>
     </div>
   );

@@ -247,10 +247,6 @@ export default function FeaturesPage() {
             animate="visible"
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#94C748] border border-[#94C748]/20">
-              <Zap className="h-3 w-3 text-[#94C748]" />
-              {tp("badge")}
-            </span>
             <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
               {tp("title")}
             </h1>
@@ -262,7 +258,7 @@ export default function FeaturesPage() {
 
         {/* Bento grid section */}
         <div className="mx-auto max-w-7xl px-6 sm:px-12 lg:px-24 mb-32">
-          <div className="grid grid-cols-1 gap-4 sm:auto-rows-fr sm:grid-cols-2 sm:grid-rows-2 lg:gap-6">
+          <div className="grid grid-cols-1 gap-4 lg:auto-rows-fr lg:grid-cols-2 lg:grid-rows-2 lg:gap-6">
             {features.map((feat) => {
               let illustration: React.ReactNode = undefined;
               if (feat.id === "ai") {
@@ -287,7 +283,7 @@ export default function FeaturesPage() {
                   illustration={illustration}
                   featured={isFeatured}
                   highlight={feat.id === "ai"}
-                  className={isFeatured ? "sm:row-span-2" : undefined}
+                  className={isFeatured ? "lg:row-span-2" : undefined}
                 />
               );
             })}

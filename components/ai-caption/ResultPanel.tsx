@@ -46,7 +46,7 @@ export function ResultPanel({
       <p className="text-xs text-[#535862]">{t("resultLabel")}</p>
 
       <motion.div
-        className="mt-2 min-h-[140px] space-y-2 rounded-xl bg-[#FDF4FF] p-3"
+        className="mt-2 min-h-[140px] flex-1 space-y-2 rounded-xl bg-[#FDF4FF] p-3"
         variants={container}
         initial="hidden"
         animate={revealed ? "show" : "hidden"}

@@ -13,6 +13,7 @@ const NAV_LINK_KEYS = [
   { key: "home", href: "/" },
   { key: "features", href: "/features" },
   { key: "pricing", href: "/pricing" },
+  { key: "faq", href: "/faq" },
 ] as const;
 
 export function Header() {
@@ -37,6 +38,12 @@ export function Header() {
     return pathname.startsWith(href);
   };
 
+  // Only the homepage has a dark hero behind the (transparent) header. While
+  // sitting over it — i.e. before the user scrolls and the white bar appears —
+  // switch the header to light text. Once scrolled, it reverts to the default
+  // dark-on-white treatment.
+  const overDarkHero = pathname === "/" && !isScrolled;
+
   return (
     <header className="fixed left-4 right-4 top-4 z-50">
       <div className="mx-auto max-w-7xl">
@@ -44,12 +51,18 @@ export function Header() {
           className={`rounded-2xl p-4 transition-all duration-300 ${
             isScrolled
               ? "border border-gray-100/50 bg-white/85 shadow-sm backdrop-blur-md"
-              : "border border-transparent bg-transparent shadow-none backdrop-blur-none hover:border-gray-100/50 hover:bg-white/85 hover:shadow-sm hover:backdrop-blur-md focus-within:border-gray-100/50 focus-within:bg-white/85 focus-within:shadow-sm focus-within:backdrop-blur-md"
+              : overDarkHero
+                ? "border border-transparent bg-transparent shadow-none backdrop-blur-none"
+                : "border border-transparent bg-transparent shadow-none backdrop-blur-none hover:border-gray-100/50 hover:bg-white/85 hover:shadow-sm hover:backdrop-blur-md focus-within:border-gray-100/50 focus-within:bg-white/85 focus-within:shadow-sm focus-within:backdrop-blur-md"
           }`}
         >
           <div className="flex items-center justify-between gap-4">
             <Link href="/" className="group">
-              <Logo size="lg" className="transition-transform duration-300 group-hover:scale-105" />
+              <Logo
+                size="lg"
+                inverted={overDarkHero}
+                className="transition-transform duration-300 group-hover:scale-105"
+              />
             </Link>
 
             <nav className="hidden items-center gap-8 md:flex">
@@ -62,7 +75,9 @@ export function Header() {
                     className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
                       active
                         ? "text-[#94C748]"
-                        : "text-gray-600 hover:bg-gray-50/50 hover:text-gray-900"
+                        : overDarkHero
+                          ? "text-white/75 hover:text-white"
+                          : "text-gray-600 hover:bg-gray-50/50 hover:text-gray-900"
                     }`}
                   >
                     {t(`nav.${link.key}`)}
@@ -93,7 +108,11 @@ export function Header() {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="flex h-9 w-9 items-center justify-center rounded-lg border border-gray-100 bg-gray-50/50 text-gray-600 transition-colors hover:bg-gray-50 hover:text-gray-900 md:hidden"
+                className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-colors md:hidden ${
+                  overDarkHero
+                    ? "border-white/20 bg-white/10 text-white hover:bg-white/20"
+                    : "border-gray-100 bg-gray-50/50 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                }`}
                 aria-label={t("toggleMenu")}
               >
                 {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}

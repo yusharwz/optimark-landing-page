@@ -15,13 +15,18 @@
     "title": "Pricing Plans - OPTIMARK",
     "description": "Choose the right Optimark subscription plan for your business. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
   },
+  "faqMetadata": {
+    "title": "Frequently Asked Questions - OPTIMARK",
+    "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
     "nav": {
       "home": "Home",
       "features": "Features",
-      "pricing": "Pricing"
+      "pricing": "Pricing",
+      "faq": "FAQ"
     },
     "signIn": "Sign In",
     "getStarted": "Get Started"
@@ -32,11 +37,19 @@
     "en": "English"
   },
   "hero": {
-    "badge": "All-in-one digital marketing platform",
+    "badge": "AI-powered digital marketing platform",
     "title": "All digital marketing tools in one platform",
-    "description": "Schedule content, boost SEO visibility, optimize ads, and create content faster with AI assistance.",
-    "cta": "Try for Free",
-    "imageAlt": "Optimark dashboard illustration"
+    "description": "From SEO and content to scheduling and publishing — one platform.",
+    "cta": "Start Free",
+    "ctaSecondary": "Explore features",
+    "imageAlt": "Optimark dashboard illustration",
+    "switcher": {
+      "content": "Create content faster",
+      "seo": "Find SEO opportunities",
+      "visual": "Create visual campaigns",
+      "video": "Turn ideas into video",
+      "schedule": "Schedule and publish"
+    }
   },
   "features": {
     "title": "Everything your business needs is here",
@@ -222,6 +235,7 @@
     "links": {
       "features": "Features",
       "pricing": "Pricing",
+      "faq": "FAQ",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
@@ -400,6 +414,25 @@
       "scrollNext": "Keep scrolling to continue"
     }
   },
+  "videoShowcase": {
+    "title": "From Idea to Ready-to-Post Content",
+    "subtitle": "See how Optimark helps you create, schedule, and optimize content — all from one platform.",
+    "cta": "Start Creating",
+    "items": {
+      "card1": {
+        "title": "AI Content Maker",
+        "description": "Generate captions and content that match your brand voice in seconds. Never run out of ideas."
+      },
+      "card2": {
+        "title": "Content Planner",
+        "description": "Auto-schedule posts at the best times for every platform."
+      },
+      "card3": {
+        "title": "Everything in One Dashboard",
+        "description": "Track performance, manage your social accounts, and grow your brand from one place."
+      }
+    }
+  },
   "faq": {
     "title": "Frequently Asked Questions",
     "subtitle": "Got questions? We've got answers. If you need more help, feel free to contact us.",
@@ -414,6 +447,11 @@
       "a4": "Currently, you can connect and schedule posts to Instagram, Facebook, and TikTok. We are constantly adding support for more platforms like Threads, X, and LinkedIn.",
       "q5": "Can I cancel or change my plan anytime?",
       "a5": "Yes! You can upgrade, downgrade, or cancel your subscription plan directly from your billing settings at any time with no hidden fees."
+    },
+    "support": {
+      "title": "Still have questions?",
+      "description": "Can't find the answer you're looking for? Reach out directly to our customer support.",
+      "cta": "Contact Support"
     }
   }
 }
