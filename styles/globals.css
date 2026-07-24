@@ -124,3 +124,85 @@ input[type="search"]::-webkit-search-cancel-button {
 .recharts-surface path {
     outline: none;
 }
+
+/*
+ * Compact responsiveness for How It Works section on shorter viewports (like MacBook Air or scaled screens)
+ */
+@media (min-width: 1024px) and (max-height: 820px) {
+    .how-it-works-section {
+        padding-top: 6.5rem !important; /* ~104px (safely clears the 96px fixed header) */
+        padding-bottom: 2rem !important;
+        min-height: 100vh !important;
+        height: 100vh !important;
+    }
+
+    .how-it-works-header {
+        margin-bottom: 1.25rem !important;
+    }
+
+    .how-it-works-header h2 {
+        font-size: 2.25rem !important;
+        margin-top: 0.5rem !important;
+    }
+
+    .how-it-works-header p {
+        font-size: 0.875rem !important;
+        margin-top: 0.5rem !important;
+        max-width: 480px !important;
+    }
+
+    .how-it-works-grid {
+        gap: 1.5rem !important;
+    }
+
+    .how-it-works-steps {
+        gap: 0.5rem !important;
+    }
+
+    .how-it-works-step-btn {
+        padding: 1rem 1.25rem !important;
+        border-radius: 1rem !important;
+    }
+
+    .how-it-works-step-icon-wrapper {
+        width: 2.5rem !important;
+        height: 2.5rem !important;
+    }
+
+    .how-it-works-step-icon {
+        width: 1.25rem !important;
+        height: 1.25rem !important;
+    }
+
+    .how-it-works-step-title {
+        font-size: 1rem !important;
+    }
+
+    .how-it-works-step-desc {
+        font-size: 0.8125rem !important;
+        line-height: 1.4 !important;
+    }
+
+    .how-it-works-mockup-container {
+        height: 350px !important;
+        border-radius: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+
+    .how-it-works-mockup-visual {
+        transform: scale(0.8) !important;
+        transform-origin: center center !important;
+    }
+
+    .how-it-works-line-inside {
+        top: 10px !important;
+    }
+
+    .how-it-works-line-gap {
+        height: 24px !important; /* matches: bottom padding 16px + gap 8px */
+    }
+
+    .how-it-works-scroll-indicator {
+        bottom: 1rem !important;
+    }
+}

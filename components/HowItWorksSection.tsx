@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link2, Sparkles, CalendarRange, Check, ArrowUpRight, ChevronDown } from "lucide-react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
-import { BrandIcon, BrandIconDefs } from "@/components/BrandIcon";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -17,8 +15,6 @@ export function HowItWorksSection() {
   const [activeStep, setActiveStep] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const autoplayTimerRef = useRef<NodeJS.Timeout | null>(null);
-  // Only kick off the visual animations once the section actually enters the viewport
-  const inView = useInView(containerRef, { once: true, amount: 0.3 });
 
   // Auto-rotation only on mobile/tablet (desktop uses scroll pinning instead),
   // and only until the user interacts with the steps manually.
@@ -27,7 +23,7 @@ export function HowItWorksSection() {
   const isAutoplay = !isDesktop && !autoplayStopped;
 
   useEffect(() => {
-    if (!isAutoplay || !inView) return;
+    if (!isAutoplay) return;
 
     autoplayTimerRef.current = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % 3);
@@ -36,7 +32,7 @@ export function HowItWorksSection() {
     return () => {
       if (autoplayTimerRef.current) clearInterval(autoplayTimerRef.current);
     };
-  }, [isAutoplay, inView]);
+  }, [isAutoplay]);
 
   const handleStepSelect = (index: number) => {
     setActiveStep(index);
@@ -125,7 +121,7 @@ export function HowItWorksSection() {
           <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-tight">
             {t("title")}
           </h2>
-          <p className="mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
+          <p className="mt-3 lg:mt-2 xl:mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
             {t("subtitle")}
           </p>
         </Reveal>
@@ -134,7 +130,7 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
           
           {/* Left Column: Steps Controls */}
-          <div className="relative flex flex-col gap-5">
+          <div className="how-it-works-steps relative flex flex-col gap-5 lg:gap-3 xl:gap-5">
             {steps.map((step, idx) => {
               const Icon = step.icon;
               const isActive = activeStep === idx;
@@ -143,14 +139,14 @@ export function HowItWorksSection() {
                 <button
                   key={step.id}
                   onClick={() => handleStepSelect(idx)}
-                  className={`group text-left relative flex flex-col sm:flex-row gap-5 p-6 rounded-3xl border transition-all duration-500 ${
+                  className={`how-it-works-step-btn group text-left relative flex flex-col sm:flex-row gap-5 p-6 rounded-3xl border transition-all duration-500 ${
                     isActive
                       ? "border-[#94C748] bg-white shadow-xl shadow-[#94C748]/5 opacity-100 z-10"
                       : "border-transparent bg-transparent opacity-40 z-0 hover:opacity-70"
                   }`}
                 >
                   {/* Step Icon badge wrapper containing the icon + connecting line */}
-                  <div className="relative shrink-0 flex items-center justify-center w-12 h-12">
+                  <div className="how-it-works-step-icon-wrapper relative shrink-0 flex items-center justify-center w-12 h-12">
                     {/* Step Icon badge - pops with green color when active */}
                     <div
                       className={`flex h-12 w-12 items-center justify-center rounded-2xl border transition-all duration-500 ${
@@ -159,12 +155,12 @@ export function HowItWorksSection() {
                           : "bg-white text-slate-500 border-slate-100 shadow-xs group-hover:scale-105"
                       }`}
                     >
-                      <Icon className="h-6 w-6" />
+                      <Icon className="how-it-works-step-icon h-6 w-6" />
                     </div>
 
                     {/* Connecting Line - Inside Card Segment (Hidden when card is active/white to avoid overlapping) */}
                     {idx < 2 && !isActive && (
-                      <div className="absolute top-12 left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
+                      <div className="how-it-works-line-inside absolute top-12 left-1/2 -translate-x-1/2 bottom-0 w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
                         <motion.div
                           className="w-full bg-[#94C748] origin-top h-full"
                           initial={{ scaleY: 0 }}
@@ -176,7 +172,7 @@ export function HowItWorksSection() {
 
                     {/* Connecting Line - Gap & Next Card Segment (Always rendered to bridge the gap) */}
                     {idx < 2 && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 h-[44px] w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
+                      <div className="how-it-works-line-gap absolute top-full left-1/2 -translate-x-1/2 h-[44px] lg:h-[36px] xl:h-[44px] w-0.5 bg-slate-100 hidden sm:block -z-20 pointer-events-none">
                         <motion.div
                           className="w-full bg-[#94C748] origin-top h-full"
                           initial={{ scaleY: 0 }}
@@ -191,7 +187,7 @@ export function HowItWorksSection() {
                   <div className="flex-1 space-y-2">
                     <div className="flex items-center justify-between">
                       <h3
-                        className={`text-lg sm:text-xl font-bold tracking-tight transition-colors ${
+                        className={`how-it-works-step-title text-lg sm:text-xl font-bold tracking-tight transition-colors ${
                           isActive ? "text-[#1E280E]" : "text-slate-700"
                         }`}
                       >
@@ -211,7 +207,7 @@ export function HowItWorksSection() {
                       )}
                     </div>
                     <p
-                      className={`text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
+                      className={`how-it-works-step-desc text-sm sm:text-base leading-relaxed transition-colors duration-500 ${
                         isActive ? "text-[#535862]" : "text-slate-400"
                       }`}
                     >
@@ -226,16 +222,16 @@ export function HowItWorksSection() {
           {/* Right Column: Visual Mockup container */}
           <div className="relative aspect-square lg:aspect-auto lg:h-[30rem] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
             <AnimatePresence mode="wait">
-              {activeStep === 0 && <StepOneVisual key="step1" t={t} inView={inView} />}
-              {activeStep === 1 && <StepTwoVisual key="step2" t={t} inView={inView} />}
-              {activeStep === 2 && <StepThreeVisual key="step3" t={t} inView={inView} />}
+              {activeStep === 0 && <StepOneVisual key="step1" t={t} />}
+              {activeStep === 1 && <StepTwoVisual key="step2" t={t} />}
+              {activeStep === 2 && <StepThreeVisual key="step3" t={t} />}
             </AnimatePresence>
           </div>
         </div>
       </div>
 
       {/* Floating Scroll Indicator Helper (Desktop Pinned Mode only) */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
+      <div className="how-it-works-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
         <span className="text-[10px] uppercase font-bold tracking-widest text-[#717680]">
           {activeStep < 2 ? t("illustrations.scrollExplore") : t("illustrations.scrollNext")}
         </span>
@@ -256,17 +252,16 @@ function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
     const timer = setTimeout(() => {
       setIsConnected(true);
     }, 2500);
     return () => clearTimeout(timer);
-  }, [inView]);
+  }, []);
 
   const platforms = [
-    { name: "Instagram", x: -110, y: -60 },
-    { name: "Facebook", x: 110, y: -60 },
-    { name: "TikTok", x: 0, y: 110 },
+    { name: "Instagram", color: "from-slate-700 to-slate-800", x: -110, y: -60 },
+    { name: "Facebook", color: "from-slate-700 to-slate-800", x: 110, y: -60 },
+    { name: "TikTok", color: "from-slate-800 to-slate-950", x: 0, y: 110 },
   ];
 
   return (
@@ -275,21 +270,14 @@ function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
       transition={{ duration: 0.4 }}
-      className="relative w-full max-w-[360px] h-[320px] flex items-center justify-center"
+      className="how-it-works-mockup-visual relative w-full max-w-[360px] h-[320px] flex items-center justify-center"
     >
-      {/* Shared SVG defs for BrandIcon gradients/clip paths */}
-      <BrandIconDefs />
-
       {/* Central Optimark Logo */}
-      <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-xl border border-slate-100 flex-col gap-1.5">
-        <Image
-          src="/images/optimark-logo.svg"
-          alt="Optimark"
-          width={40}
-          height={40}
-          className="h-10 w-10 animate-pulse"
-        />
-        <span className="font-gothic text-[11px] font-normal uppercase tracking-wide text-gray-900">optimark</span>
+      <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-xl border border-slate-100 flex-col gap-1">
+        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#94C748] to-[#94C748]/70 flex items-center justify-center text-white font-black text-xl shadow-md animate-pulse">
+          O
+        </div>
+        <span className="text-[9px] font-bold text-slate-700 uppercase tracking-widest">Optimark</span>
       </div>
 
       {/* Orbiting Platforms */}
@@ -299,8 +287,8 @@ function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
           className="absolute z-20 flex flex-col items-center gap-1.5"
           style={{ transform: `translate(${plat.x}px, ${plat.y}px)` }}
         >
-          <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-slate-800 shadow-lg border border-slate-100">
-            <BrandIcon name={plat.name} isColor className="h-8 w-8 object-contain" />
+          <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr ${plat.color} text-white shadow-lg border border-white/10`}>
+            <span className="text-[10px] font-bold uppercase">{plat.name.substring(0, 4)}</span>
             {/* Status indicator on top corner */}
             <div className="absolute -top-1.5 -right-1.5">
               <AnimatePresence>
@@ -378,7 +366,6 @@ function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
 
   // Typewriter effect for prompt
   useEffect(() => {
-    if (!inView) return;
     let index = 0;
     const interval = setInterval(() => {
       setTypedPrompt((prev) => prev + promptFull.charAt(index));
@@ -391,14 +378,14 @@ function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
     }, 45); // Speed up typing slightly for snappier demo
 
     return () => clearInterval(interval);
-  }, [promptFull, inView]);
+  }, [promptFull]);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 15 }}
-      className="w-full max-w-[380px] bg-slate-50 border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col"
+      className="how-it-works-mockup-visual w-full max-w-[380px] bg-slate-50 border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col"
     >
       {/* Header bar */}
       <div className="bg-white border-b border-slate-200 px-4 py-2.5 flex items-center justify-between">
@@ -432,9 +419,9 @@ function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="bg-emerald-50/30 border border-dashed border-[#D444F1]/30 rounded-xl p-4 flex items-center justify-center gap-2.5 text-[9px] text-[#D444F1] font-medium italic min-h-[90px]"
+                className="bg-emerald-50/30 border border-dashed border-[#94C748]/30 rounded-xl p-4 flex items-center justify-center gap-2.5 text-[9px] text-emerald-800 font-medium italic min-h-[90px]"
               >
-                <Sparkles className="h-4 w-4 animate-spin text-[#D444F1]" />
+                <Sparkles className="h-4 w-4 animate-spin text-[#94C748]" />
                 {t("illustrations.generating")}
               </motion.div>
             ) : (
@@ -442,18 +429,18 @@ function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
                 key="output"
                 initial={{ opacity: 0, scale: 0.98, y: 5 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                className="bg-[#FDF4FF] border border-[#D444F1]/30 rounded-xl p-3.5 shadow-sm text-[10px] text-slate-800 flex flex-col gap-2 min-h-[90px]"
+                className="bg-white border border-[#94C748]/30 rounded-xl p-3.5 shadow-sm text-[10px] text-slate-800 flex flex-col gap-2 min-h-[90px]"
               >
-                <div className="font-semibold text-[#D444F1] flex items-center gap-1">
-                  <Sparkles className="h-3 w-3 text-[#D444F1] animate-bounce" />
+                <div className="font-semibold text-emerald-800 flex items-center gap-1">
+                  <Sparkles className="h-3 w-3 text-[#94C748] animate-bounce" />
                   Optimark AI:
                 </div>
                 <p className="leading-relaxed font-mono">
                   ☕ Hari Senin butuh dorongan ekstra? Dapatkan promo Buy 1 Get 1 Free untuk semua kopi susu literan hari ini saja! 🚀✨
                 </p>
                 <div className="flex gap-1.5 flex-wrap mt-1">
-                  <span className="bg-white text-[#D444F1] font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#KedaiKopi</span>
-                  <span className="bg-white text-[#D444F1] font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#PromoKopi</span>
+                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#KedaiKopi</span>
+                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#PromoKopi</span>
                 </div>
               </motion.div>
             )}
@@ -469,19 +456,18 @@ function StepThreeVisual({ t, inView }: { t: Translations; inView: boolean }) {
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
-    if (!inView) return;
     const timer = setTimeout(() => {
       setShowChart(true);
     }, 1800);
     return () => clearTimeout(timer);
-  }, [inView]);
+  }, []);
 
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="w-full max-w-[380px] bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col p-4 gap-4"
+      className="how-it-works-mockup-visual w-full max-w-[380px] bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col p-4 gap-4"
     >
       {/* Top: Calendar schedule slot */}
       <div className="flex flex-col gap-1.5">
