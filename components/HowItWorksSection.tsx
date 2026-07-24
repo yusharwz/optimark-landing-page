@@ -248,7 +248,7 @@ export function HowItWorksSection() {
 }
 
 // ==================== STEP 1 VISUAL ====================
-function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
+function StepOneVisual({ t }: { t: Translations }) {
   const [isConnected, setIsConnected] = useState(false);
 
   useEffect(() => {
@@ -359,7 +359,7 @@ function StepOneVisual({ t, inView }: { t: Translations; inView: boolean }) {
 }
 
 // ==================== STEP 2 VISUAL ====================
-function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
+function StepTwoVisual({ t }: { t: Translations }) {
   const [typedPrompt, setTypedPrompt] = useState("");
   const [isGenerated, setIsGenerated] = useState(false);
   const promptFull = t("illustrations.prompt");
@@ -452,7 +452,7 @@ function StepTwoVisual({ t, inView }: { t: Translations; inView: boolean }) {
 }
 
 // ==================== STEP 3 VISUAL ====================
-function StepThreeVisual({ t, inView }: { t: Translations; inView: boolean }) {
+function StepThreeVisual({ t }: { t: Translations }) {
   const [showChart, setShowChart] = useState(false);
 
   useEffect(() => {
