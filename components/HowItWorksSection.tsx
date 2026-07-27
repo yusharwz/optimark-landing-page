@@ -1,10 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link2, Sparkles, CalendarRange, Check, ArrowUpRight, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/components/motion/Reveal";
+import { BrandIcon, BrandIconDefs } from "@/components/BrandIcon";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
@@ -259,9 +261,9 @@ function StepOneVisual({ t }: { t: Translations }) {
   }, []);
 
   const platforms = [
-    { name: "Instagram", color: "from-slate-700 to-slate-800", x: -110, y: -60 },
-    { name: "Facebook", color: "from-slate-700 to-slate-800", x: 110, y: -60 },
-    { name: "TikTok", color: "from-slate-800 to-slate-950", x: 0, y: 110 },
+    { name: "Instagram", x: -110, y: -60 },
+    { name: "Facebook", x: 110, y: -60 },
+    { name: "TikTok", x: 0, y: 110 },
   ];
 
   return (
@@ -272,12 +274,19 @@ function StepOneVisual({ t }: { t: Translations }) {
       transition={{ duration: 0.4 }}
       className="how-it-works-mockup-visual relative w-full max-w-[360px] h-[320px] flex items-center justify-center"
     >
+      {/* Shared gradient/clip defs for colored brand icons */}
+      <BrandIconDefs />
+
       {/* Central Optimark Logo */}
-      <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-xl border border-slate-100 flex-col gap-1">
-        <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-[#94C748] to-[#94C748]/70 flex items-center justify-center text-white font-black text-xl shadow-md animate-pulse">
-          O
-        </div>
-        <span className="text-[9px] font-bold text-slate-700 uppercase tracking-widest">Optimark</span>
+      <div className="relative z-20 flex h-24 w-24 items-center justify-center rounded-full bg-white shadow-xl border border-slate-200 flex-col gap-1.5">
+        <Image
+          src="/images/optimark-logo.svg"
+          alt="Optimark"
+          width={40}
+          height={40}
+          className="h-10 w-10 animate-pulse"
+        />
+        <span className="font-gothic text-[11px] font-normal uppercase tracking-wide text-gray-900">optimark</span>
       </div>
 
       {/* Orbiting Platforms */}
@@ -287,8 +296,8 @@ function StepOneVisual({ t }: { t: Translations }) {
           className="absolute z-20 flex flex-col items-center gap-1.5"
           style={{ transform: `translate(${plat.x}px, ${plat.y}px)` }}
         >
-          <div className={`relative flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr ${plat.color} text-white shadow-lg border border-white/10`}>
-            <span className="text-[10px] font-bold uppercase">{plat.name.substring(0, 4)}</span>
+          <div className="relative flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-lg border border-slate-200">
+            <BrandIcon name={plat.name} isColor className="h-8 w-8 object-contain" />
             {/* Status indicator on top corner */}
             <div className="absolute -top-1.5 -right-1.5">
               <AnimatePresence>
@@ -310,7 +319,7 @@ function StepOneVisual({ t }: { t: Translations }) {
               </AnimatePresence>
             </div>
           </div>
-          <span className="text-[9px] font-semibold text-slate-500 bg-white/80 border border-slate-150 rounded-full px-2 py-0.5 shadow-xs">
+          <span className="text-[9px] font-semibold text-slate-500 bg-white/80 border border-slate-200 rounded-full px-2 py-0.5 shadow-xs">
             {isConnected ? t("illustrations.connected") : t("illustrations.connecting")}
           </span>
         </div>

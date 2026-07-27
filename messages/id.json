@@ -414,9 +414,34 @@
       "scrollNext": "Teruskan menggulir untuk melanjutkan"
     }
   },
+  "imageShowcase": {
+    "eyebrow": "AI Image Generator",
+    "title": "Dari foto produk ke fenomena viral",
+    "subtitle": "Kampanye on-brand global, foto produk, dan visual kelas atas. Semua yang dibutuhkan brand untuk tampil maksimal, dalam setiap format, setiap saat.",
+    "cta": "Mulai Berkarya",
+    "items": {
+      "advertising": {
+        "title": "Iklan",
+        "description": "Dari brief ke aset final. Tanpa rantai vendor, tanpa menunggu. Langsung jadi."
+      },
+      "productShots": {
+        "title": "Foto produk",
+        "description": "Pemotretan bertenaga AI. Tanpa studio. Tanpa kru. Tanpa jadwal."
+      },
+      "brandCampaigns": {
+        "title": "Kampanye brand",
+        "description": "Visual dan citra on-brand dalam skala berapa pun, format apa pun."
+      },
+      "editorial": {
+        "title": "Editorial & sosial",
+        "description": "Konsep, mood board, dan visual kampanye yang siap untuk frame final."
+      }
+    }
+  },
   "videoShowcase": {
-    "title": "Dari Ide Menjadi Konten Siap Tayang",
-    "subtitle": "Lihat langsung bagaimana Optimark membantu Anda membuat, menjadwalkan, dan mengoptimalkan konten — semuanya dari satu platform.",
+    "eyebrow": "AI Video Generator",
+    "title": "Dibuat dengan Optimark",
+    "subtitle": "Video memikat hasil AI — dari satu prompt hingga siap tayang.",
     "cta": "Mulai Sekarang",
     "items": {
       "card1": {
