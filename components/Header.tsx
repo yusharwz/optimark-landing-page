@@ -94,7 +94,7 @@ export function Header() {
             </nav>
 
             <div className="flex items-center gap-3">
-              <LanguageSwitcher />
+              <LanguageSwitcher onDark={overDarkHero} />
               <div className="hidden md:block">
                 <Button
                   href="https://staging.app.optimark.ai/login"
