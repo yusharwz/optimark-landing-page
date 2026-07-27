@@ -5,6 +5,7 @@ import { BentoFeaturesSection } from "@/components/BentoFeaturesSection";
 import { PricingSection } from "@/components/PricingSection";
 import { ConnectSection } from "@/components/ConnectSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
+import { ImageShowcaseSection } from "@/components/ImageShowcaseSection";
 import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
@@ -34,6 +35,7 @@ export default async function Home({ params }: Props) {
         </div>
         <ConnectSection />
         <HowItWorksSection />
+        <ImageShowcaseSection />
         <VideoShowcaseSection />
         <CtaSection />
       </main>
