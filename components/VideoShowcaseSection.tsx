@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -8,12 +8,31 @@ import { Button } from "@/components/base/buttons/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { cx } from "@/utils/cx";
 
-// Order preserved from the original bento layout (2.mp4 is the 4K source).
+// The card takes each clip's own aspect ratio so a 9:16 social cut isn't cropped
+// into a 16:9 frame. `ratio` is only the first-paint guess — the real value is
+// read off the video's metadata at runtime, so swapping a file for a differently
+// shaped one needs no code change here.
 const CARDS = [
-  { id: "card1", src: "/videos/1.mp4" },
-  { id: "card2", src: "/videos/3.mp4" },
-  { id: "card3", src: "/videos/2.mp4" },
+  { id: "productReveal", src: "/videos/01-product-reveal.mp4", ratio: 16 / 9 },
+  { id: "ugcDemo", src: "/videos/02-ugc-beauty-product-demo.mp4", ratio: 9 / 16 },
+  { id: "founderStory", src: "/videos/03-founder-brand-story.mp4", ratio: 9 / 16 },
+  {
+    id: "foodBeverageAd",
+    src: "/videos/04-food-beverage-social-ad.mp4",
+    ratio: 16 / 9,
+  },
+  {
+    id: "promoMotion",
+    src: "/videos/05-promotional-product-motion.mp4",
+    ratio: 9 / 16,
+  },
 ] as const;
+
+// One formula for any ratio: height-driven, but capped so a wide clip can't
+// overflow the viewport (mobile) or the max-w-6xl container (desktop). The
+// ratio arrives as the `--ar` custom property, set per card below.
+const CARD_SIZE =
+  "w-auto h-[min(62vh,calc(88vw/var(--ar)))] lg:h-[min(calc(100vh-360px),760px,calc(1100px/var(--ar)))]";
 
 const SPRING = { type: "spring", stiffness: 300, damping: 30 } as const;
 
@@ -36,7 +55,14 @@ export function VideoShowcaseSection() {
   const goToSlide = (i: number) =>
     setSlideState(([s]) => [i, i > s ? 1 : -1]);
 
+  // Real ratios read off the loaded videos, keyed by card id. Until a clip
+  // reports in, its hardcoded `ratio` stands in.
+  const [ratios, setRatios] = useState<Record<string, number>>({});
+  const reportRatio = (id: string, ratio: number) =>
+    setRatios((prev) => (prev[id] === ratio ? prev : { ...prev, [id]: ratio }));
+
   const card = CARDS[slide];
+  const ratio = ratios[card.id] ?? card.ratio;
 
   return (
     <section
@@ -90,15 +116,20 @@ export function VideoShowcaseSection() {
                   if (swipe < -50 || velocity < -300) next();
                   else if (swipe > 50 || velocity > 300) prev();
                 }}
-                // Big cinematic card. Mobile: width-driven at 16:9. Desktop:
-                // height-driven off the viewport so it fills the screen.
-                className="aspect-video w-[90%] shrink-0 cursor-grab touch-pan-y select-none active:cursor-grabbing sm:w-[78%] lg:aspect-auto lg:h-[clamp(420px,60vh,600px)] lg:w-[calc(clamp(420px,60vh,600px)*16/9)]"
+                style={
+                  { "--ar": ratio, aspectRatio: "var(--ar)" } as CSSProperties
+                }
+                className={cx(
+                  "shrink-0 cursor-grab touch-pan-y select-none active:cursor-grabbing",
+                  CARD_SIZE
+                )}
               >
                 <VideoCard
                   key={card.id}
                   src={card.src}
                   title={t(`items.${card.id}.title`)}
                   description={t(`items.${card.id}.description`)}
+                  onRatio={(r) => reportRatio(card.id, r)}
                 />
               </motion.div>
             </AnimatePresence>
@@ -150,10 +181,30 @@ type VideoCardProps = {
   src: string;
   title: string;
   description: string;
+  onRatio: (ratio: number) => void;
 };
 
-function VideoCard({ src, title, description }: VideoCardProps) {
+function VideoCard({ src, title, description, onRatio }: VideoCardProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // Report the clip's real shape so the card can size itself to the source
+  // instead of a hardcoded guess. Metadata may already be there on a cached
+  // file, in which case `loadedmetadata` never fires — so read it up front too.
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const read = () => {
+      if (video.videoWidth > 0 && video.videoHeight > 0) {
+        onRatio(video.videoWidth / video.videoHeight);
+      }
+    };
+
+    read();
+    video.addEventListener("loadedmetadata", read);
+    return () => video.removeEventListener("loadedmetadata", read);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [src]);
 
   // Play only while on screen; leave the first frame static for
   // prefers-reduced-motion users.
@@ -194,11 +245,12 @@ function VideoCard({ src, title, description }: VideoCardProps) {
       {/* Bottom gradient so the overlay text stays readable on any frame */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-6 lg:p-8">
-        <h3 className="text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
+      {/* Cards can be narrow (9:16), so the copy wraps instead of truncating. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-6">
+        <h3 className="text-base font-bold tracking-tight text-white sm:text-lg lg:text-xl">
           {title}
         </h3>
-        <p className="mt-1.5 max-w-3xl truncate text-sm leading-relaxed text-white/80 sm:text-base">
+        <p className="mt-1 text-xs leading-snug text-white/80 sm:text-sm">
           {description}
         </p>
       </div>

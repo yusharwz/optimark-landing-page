@@ -6,16 +6,38 @@ import { Button } from "@/components/base/buttons/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { cx } from "@/utils/cx";
 
+// All showcase sources are 3:2 landscape, so cards stay landscape-ish to avoid
+// cropping the product out of frame.
 const TOP_CARDS = [
-  { id: "advertising", src: "/images/image-bento/9ee5f6fa037c488e.jpg" },
-  { id: "productShots", src: "/images/image-bento/8b85ce886cb54924.webp" },
-  { id: "brandCampaigns", src: "/images/image-bento/ab6f807561e640fa.jpg" },
+  {
+    id: "productPhotoshoot",
+    src: "/images/image-bento/01-product-photoshoot-skincare.webp",
+  },
+  {
+    id: "productShowcase",
+    src: "/images/image-bento/02-product-showcase-sneaker.webp",
+  },
+  {
+    id: "foodBeverage",
+    src: "/images/image-bento/05-food-beverage-campaign.webp",
+  },
 ] as const;
 
 const WIDE_CARD = {
-  id: "editorial",
-  src: "/images/image-bento/f740fcffd24d4cc3.jpg",
+  id: "marketplace",
+  src: "/images/image-bento/03-marketplace-packshot-fashion.webp",
 } as const;
+
+const BOTTOM_CARDS = [
+  {
+    id: "personalBranding",
+    src: "/images/image-bento/04-personal-branding-creator.webp",
+  },
+  {
+    id: "socialCampaign",
+    src: "/images/image-bento/06-social-media-campaign.webp",
+  },
+] as const;
 
 export function ImageShowcaseSection() {
   const t = useTranslations("imageShowcase");
@@ -57,7 +79,7 @@ export function ImageShowcaseSection() {
               src={card.src}
               title={t(`items.${card.id}.title`)}
               description={t(`items.${card.id}.description`)}
-              className="aspect-[4/5]"
+              className="aspect-[4/3]"
             />
           ))}
         </Reveal>
@@ -70,6 +92,19 @@ export function ImageShowcaseSection() {
             description={t(`items.${WIDE_CARD.id}.description`)}
             className="aspect-[16/9] lg:aspect-[21/9]"
           />
+        </Reveal>
+
+        {/* Bottom row: two cards */}
+        <Reveal className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {BOTTOM_CARDS.map((card) => (
+            <ImageCard
+              key={card.id}
+              src={card.src}
+              title={t(`items.${card.id}.title`)}
+              description={t(`items.${card.id}.description`)}
+              className="aspect-[16/10]"
+            />
+          ))}
         </Reveal>
       </div>
     </section>
