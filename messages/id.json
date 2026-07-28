@@ -420,21 +420,29 @@
     "subtitle": "Kampanye on-brand global, foto produk, dan visual kelas atas. Semua yang dibutuhkan brand untuk tampil maksimal, dalam setiap format, setiap saat.",
     "cta": "Mulai Berkarya",
     "items": {
-      "advertising": {
-        "title": "Iklan",
-        "description": "Dari brief ke aset final. Tanpa rantai vendor, tanpa menunggu. Langsung jadi."
+      "productPhotoshoot": {
+        "title": "Pemotretan produk",
+        "description": "Foto skincare dan beauty kualitas studio. Tanpa studio, tanpa kru, tanpa jadwal."
       },
-      "productShots": {
-        "title": "Foto produk",
-        "description": "Pemotretan bertenaga AI. Tanpa studio. Tanpa kru. Tanpa jadwal."
+      "productShowcase": {
+        "title": "Showcase produk",
+        "description": "Hero shot sinematik yang membuat satu produk terasa seperti kampanye peluncuran."
       },
-      "brandCampaigns": {
-        "title": "Kampanye brand",
-        "description": "Visual dan citra on-brand dalam skala berapa pun, format apa pun."
+      "foodBeverage": {
+        "title": "Makanan & minuman",
+        "description": "Splash, gerak, dan daya gugah selera — tanpa perlu food stylist."
       },
-      "editorial": {
-        "title": "Editorial & sosial",
-        "description": "Konsep, mood board, dan visual kampanye yang siap untuk frame final."
+      "marketplace": {
+        "title": "Packshot marketplace",
+        "description": "Visual katalog yang bersih dan konsisten, siap untuk setiap listing marketplace."
+      },
+      "personalBranding": {
+        "title": "Personal branding",
+        "description": "Foto lifestyle ala kreator yang menghadirkan wajah nyata di samping produk Anda."
+      },
+      "socialCampaign": {
+        "title": "Kampanye sosial",
+        "description": "Visual kampanye on-brand dalam skala berapa pun, di setiap format yang feed Anda butuhkan."
       }
     }
   },
@@ -444,17 +452,25 @@
     "subtitle": "Video memikat hasil AI — dari satu prompt hingga siap tayang.",
     "cta": "Mulai Sekarang",
     "items": {
-      "card1": {
-        "title": "AI Content Maker",
-        "description": "Buat caption dan konten sesuai karakter brand Anda dalam hitungan detik. Tanpa kehabisan ide."
+      "productReveal": {
+        "title": "Product reveal",
+        "description": "Dirancang untuk tiga detik pertama."
       },
-      "card2": {
-        "title": "Perencana Konten",
-        "description": "Jadwalkan publikasi otomatis di jam terbaik untuk setiap platform."
+      "ugcDemo": {
+        "title": "Demo produk ala UGC",
+        "description": "Gaya kreator, tanpa booking talent."
       },
-      "card3": {
-        "title": "Semua dalam Satu Dashboard",
-        "description": "Pantau performa, kelola akun media sosial, dan kembangkan brand Anda dari satu tempat."
+      "founderStory": {
+        "title": "Cerita founder",
+        "description": "Sosok di balik produk."
+      },
+      "foodBeverageAd": {
+        "title": "Iklan makanan & minuman",
+        "description": "Menggugah selera, siap tayang."
+      },
+      "promoMotion": {
+        "title": "Video promosi",
+        "description": "Motion graphic dan penawaran sekaligus."
       }
     }
   },

@@ -8,11 +8,28 @@ import { Button } from "@/components/base/buttons/button";
 import { Reveal } from "@/components/motion/Reveal";
 import { cx } from "@/utils/cx";
 
-// Order preserved from the original bento layout (2.mp4 is the 4K source).
+// The card matches each source's orientation — most clips are 9:16 social cuts,
+// so forcing them all into a 16:9 frame would crop the product out of shot.
+// Both variants are height-driven on desktop so the carousel keeps one baseline.
+const PORTRAIT =
+  "aspect-[9/16] h-[62vh] max-h-[520px] w-auto sm:max-h-[600px] lg:h-[calc(100vh-360px)] lg:max-h-[760px] lg:min-h-[460px]";
+const LANDSCAPE =
+  "aspect-video w-[90%] sm:w-[78%] lg:h-[calc(100vh-360px)] lg:max-h-[600px] lg:min-h-[380px] lg:w-auto";
+
 const CARDS = [
-  { id: "card1", src: "/videos/1.mp4" },
-  { id: "card2", src: "/videos/3.mp4" },
-  { id: "card3", src: "/videos/2.mp4" },
+  { id: "productReveal", src: "/videos/01-product-reveal.mp4", size: PORTRAIT },
+  { id: "ugcDemo", src: "/videos/02-ugc-beauty-product-demo.mp4", size: PORTRAIT },
+  { id: "founderStory", src: "/videos/03-founder-brand-story.mp4", size: PORTRAIT },
+  {
+    id: "foodBeverageAd",
+    src: "/videos/04-food-beverage-social-ad.mp4",
+    size: LANDSCAPE,
+  },
+  {
+    id: "promoMotion",
+    src: "/videos/05-promotional-product-motion.mp4",
+    size: PORTRAIT,
+  },
 ] as const;
 
 const SPRING = { type: "spring", stiffness: 300, damping: 30 } as const;
@@ -90,9 +107,10 @@ export function VideoShowcaseSection() {
                   if (swipe < -50 || velocity < -300) next();
                   else if (swipe > 50 || velocity > 300) prev();
                 }}
-                // Big cinematic card. Mobile: width-driven at 16:9. Desktop:
-                // height-driven off the viewport so it fills the screen.
-                className="aspect-video w-[90%] shrink-0 cursor-grab touch-pan-y select-none active:cursor-grabbing sm:w-[78%] lg:aspect-auto lg:h-[clamp(420px,60vh,600px)] lg:w-[calc(clamp(420px,60vh,600px)*16/9)]"
+                className={cx(
+                  "shrink-0 cursor-grab touch-pan-y select-none active:cursor-grabbing",
+                  card.size
+                )}
               >
                 <VideoCard
                   key={card.id}
@@ -194,11 +212,12 @@ function VideoCard({ src, title, description }: VideoCardProps) {
       {/* Bottom gradient so the overlay text stays readable on any frame */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-6 lg:p-8">
-        <h3 className="text-lg font-bold tracking-tight text-white sm:text-xl lg:text-2xl">
+      {/* Cards can be narrow (9:16), so the copy wraps instead of truncating. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5 sm:p-6">
+        <h3 className="text-base font-bold tracking-tight text-white sm:text-lg lg:text-xl">
           {title}
         </h3>
-        <p className="mt-1.5 max-w-3xl truncate text-sm leading-relaxed text-white/80 sm:text-base">
+        <p className="mt-1 text-xs leading-snug text-white/80 sm:text-sm">
           {description}
         </p>
       </div>
