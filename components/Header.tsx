@@ -48,7 +48,7 @@ export function Header() {
     <header className="fixed left-4 right-4 top-4 z-50">
       <div className="mx-auto max-w-7xl">
         <div
-          className={`rounded-2xl p-4 transition-all duration-300 ${
+          className={`rounded-2xl p-3 transition-all duration-300 sm:p-4 ${
             isScrolled
               ? "border border-gray-100/50 bg-white/85 shadow-sm backdrop-blur-md"
               : overDarkHero
@@ -56,8 +56,8 @@ export function Header() {
                 : "border border-transparent bg-transparent shadow-none backdrop-blur-none hover:border-gray-100/50 hover:bg-white/85 hover:shadow-sm hover:backdrop-blur-md focus-within:border-gray-100/50 focus-within:bg-white/85 focus-within:shadow-sm focus-within:backdrop-blur-md"
           }`}
         >
-          <div className="flex items-center justify-between gap-4">
-            <Link href="/" className="group">
+          <div className="flex items-center justify-between gap-2 sm:gap-4">
+            <Link href="/" className="group min-w-0">
               <Logo
                 size="lg"
                 inverted={overDarkHero}
@@ -72,7 +72,7 @@ export function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className={`relative rounded-lg px-3 py-1.5 text-sm font-medium transition-colors ${
+                    className={`relative rounded-lg px-3 py-1.5 text-m font-medium transition-colors ${
                       active
                         ? "text-[#94C748]"
                         : overDarkHero
@@ -93,7 +93,7 @@ export function Header() {
               })}
             </nav>
 
-            <div className="flex items-center gap-3">
+            <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <LanguageSwitcher onDark={overDarkHero} />
               <div className="hidden md:block">
                 <Button
@@ -108,7 +108,7 @@ export function Header() {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`flex h-9 w-9 items-center justify-center rounded-lg border transition-colors md:hidden ${
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors sm:h-9 sm:w-9 md:hidden ${
                   overDarkHero
                     ? "border-white/20 bg-white/10 text-white hover:bg-white/20"
                     : "border-gray-100 bg-gray-50/50 text-gray-600 hover:bg-gray-50 hover:text-gray-900"

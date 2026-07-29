@@ -22,7 +22,7 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
   return (
     <fieldset
       className={cx(
-        "flex items-center gap-0.5 rounded-lg border p-0.5 transition-colors duration-300",
+        "flex shrink-0 items-center gap-0.5 rounded-lg border p-0.5 transition-colors duration-300",
         onDark ? "border-white/20 bg-white/10 backdrop-blur-md" : "border-gray-200 bg-gray-50",
       )}
     >
@@ -35,7 +35,7 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
           aria-label={t(loc)}
           aria-current={locale === loc ? "true" : undefined}
           className={cx(
-            "rounded-md px-2.5 py-1 text-xs font-semibold uppercase tracking-wide transition-colors",
+            "rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wide transition-colors sm:px-2.5",
             locale === loc
               ? "bg-[#94C748] text-white shadow-sm"
               : onDark
