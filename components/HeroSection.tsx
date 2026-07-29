@@ -101,7 +101,7 @@ export function HeroSection() {
           className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="https://staging.app.optimark.ai/login"
+            href="https://app.optimark.ai/login"
             className="group inline-flex items-center gap-2 rounded-full bg-[#94C748] px-6 py-3 text-sm font-semibold text-[#1E280E] transition hover:brightness-95"
           >
             {t("cta")}

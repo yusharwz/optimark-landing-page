@@ -97,7 +97,7 @@ export function Header() {
               <LanguageSwitcher onDark={overDarkHero} />
               <div className="hidden md:block">
                 <Button
-                  href="https://staging.app.optimark.ai/login"
+                  href="https://app.optimark.ai/login"
                   color="primary"
                   size="sm"
                   className="text-white"
@@ -149,7 +149,7 @@ export function Header() {
               })}
               <div className="mt-1 border-t border-gray-100 pt-3">
                 <Button
-                  href="https://staging.app.optimark.ai"
+                  href="https://app.optimark.ai"
                   color="primary"
                   size="lg"
                   className="w-full justify-center"
