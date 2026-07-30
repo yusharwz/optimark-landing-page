@@ -29,10 +29,19 @@ const CARDS = [
 ] as const;
 
 // One formula for any ratio: height-driven, but capped so a wide clip can't
-// overflow the viewport (mobile) or the max-w-6xl container (desktop). The
-// ratio arrives as the `--ar` custom property, set per card below.
+// overflow the viewport (mobile) or the container (desktop). The ratio arrives
+// as the `--ar` custom property, set per card below.
+//
+// Note the `_-_` in the desktop calc: CSS requires whitespace around `-` inside
+// calc(), and Tailwind turns `_` into a space. Written as `calc(100vh-240px)`
+// the expression is invalid, which silently kills the whole `min()` and leaves
+// the card sized by its aspect-ratio alone — that's why it rendered tiny.
+//
+// Desktop reads as: at least 420px tall, ideally the viewport minus the header
+// and dots, never past 900px or whatever height would make it wider than the
+// 1200px container.
 const CARD_SIZE =
-  "w-auto h-[min(62vh,calc(88vw/var(--ar)))] lg:h-[min(calc(100vh-360px),760px,calc(1100px/var(--ar)))]";
+  "w-auto h-[min(62vh,calc(88vw/var(--ar)))] lg:h-[clamp(420px,calc(100vh_-_240px),min(900px,calc(1200px/var(--ar))))]";
 
 const SPRING = { type: "spring", stiffness: 300, damping: 30 } as const;
 
@@ -71,7 +80,7 @@ export function VideoShowcaseSection() {
       // reads as one screen. Transparent so the shared fixed canvas shows through.
       className="relative flex min-h-screen flex-col justify-center overflow-hidden px-6 py-12 sm:px-12 lg:px-24"
     >
-      <div className="relative z-10 mx-auto w-full max-w-6xl">
+      <div className="relative z-10 mx-auto w-full max-w-6xl xl:max-w-7xl">
         {/* Header: title + subtitle left, CTA right (per reference design) */}
         <Reveal className="mb-8 flex flex-col gap-5 lg:mb-10 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0 lg:flex-1">
