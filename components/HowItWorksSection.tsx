@@ -115,12 +115,21 @@ export function HowItWorksSection() {
       // Transparent: the shared fixed dot canvas (HeroFeaturesBackground) shows
       // through so this section blends seamlessly with its neighbors. No local
       // decorative blurs — they would get clipped at the section edges.
-      className="relative overflow-hidden px-6 pt-5 pb-8 sm:px-12 lg:px-24 lg:pt-40 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-start"
+      // The desktop vertical rhythm steps down between `lg` and `xl`: on a
+      // MacBook Air-class viewport (~800px tall) the xl spacing left nothing for
+      // the scroll indicator at the bottom, which is why it used to collide with
+      // the mockup card.
+      className="relative overflow-hidden px-6 pt-5 pb-8 sm:px-12 lg:px-24 lg:pt-24 lg:pb-0 lg:min-h-screen lg:flex lg:flex-col lg:justify-start xl:pt-32"
     >
-      <div className="mx-auto w-full max-w-7xl relative z-10">
+      {/* `lg:flex-1 + justify-center` centres the header/grid block in whatever
+          height is left after the padding and the scroll indicator. The section's
+          `pt` is therefore a *floor*, not the actual gap: on a tall screen the
+          block drifts down from it, and it can never creep closer to the fixed
+          header than that padding. */}
+      <div className="mx-auto w-full max-w-7xl relative z-10 lg:flex lg:flex-1 lg:flex-col lg:justify-center">
         {/* Header */}
-        <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-12">
-          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[3.5rem] leading-tight">
+        <Reveal className="text-center max-w-3xl mx-auto mb-10 lg:mb-8 xl:mb-10">
+          <h2 className="mt-3 text-display text-4xl sm:text-5xl lg:text-[2.75rem] xl:text-[3.5rem] leading-tight">
             {t("title")}
           </h2>
           <p className="mt-3 lg:mt-2 xl:mt-4 text-lead text-base sm:text-lg max-w-xl mx-auto">
@@ -129,7 +138,7 @@ export function HowItWorksSection() {
         </Reveal>
 
         {/* Split screen layout: Left steps controls, Right interactive mockups */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-10 xl:gap-16 items-center">
           
           {/* Left Column: Steps Controls */}
           <div className="how-it-works-steps relative flex flex-col gap-5 lg:gap-3 xl:gap-5">
@@ -141,7 +150,7 @@ export function HowItWorksSection() {
                 <button
                   key={step.id}
                   onClick={() => handleStepSelect(idx)}
-                  className={`how-it-works-step-btn group text-left relative flex flex-col sm:flex-row gap-5 p-6 rounded-3xl border transition-all duration-500 ${
+                  className={`how-it-works-step-btn group text-left relative flex flex-col sm:flex-row gap-5 p-6 lg:p-5 xl:p-6 rounded-3xl border transition-all duration-500 ${
                     isActive
                       ? "border-[#94C748] bg-white shadow-xl shadow-[#94C748]/5 opacity-100 z-10"
                       : "border-transparent bg-transparent opacity-40 z-0 hover:opacity-70"
@@ -222,7 +231,7 @@ export function HowItWorksSection() {
           </div>
 
           {/* Right Column: Visual Mockup container */}
-          <div className="relative aspect-square lg:aspect-auto lg:h-[30rem] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 sm:p-10 select-none">
+          <div className="relative aspect-square lg:aspect-auto lg:h-[24rem] xl:h-[30rem] w-full rounded-3xl border border-slate-200/80 bg-white/70 backdrop-blur-md shadow-2xl overflow-hidden flex items-center justify-center p-6 lg:p-6 xl:p-10 select-none">
             <AnimatePresence mode="wait">
               {activeStep === 0 && <StepOneVisual key="step1" t={t} />}
               {activeStep === 1 && <StepTwoVisual key="step2" t={t} />}
@@ -232,8 +241,13 @@ export function HowItWorksSection() {
         </div>
       </div>
 
-      {/* Floating Scroll Indicator Helper (Desktop Pinned Mode only) */}
-      <div className="how-it-works-scroll-indicator absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:flex flex-col items-center gap-2.5 z-30 pointer-events-none">
+      {/* Scroll Indicator Helper (Desktop Pinned Mode only).
+          This sits in the section's flow — not absolutely positioned over it —
+          so it can never land on top of the mockup card. `mt-auto` parks it at
+          the bottom of the pinned viewport when there's room to spare, and when
+          there isn't it simply stacks under the grid with its own breathing
+          room instead of clipping. */}
+      <div className="how-it-works-scroll-indicator relative z-10 mt-auto hidden lg:flex flex-col items-center gap-2.5 pt-6 pb-6 xl:pb-8 pointer-events-none">
         <span className="text-[10px] uppercase font-bold tracking-widest text-[#717680]">
           {activeStep < 2 ? t("illustrations.scrollExplore") : t("illustrations.scrollNext")}
         </span>
