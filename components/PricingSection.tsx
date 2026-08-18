@@ -282,17 +282,20 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                   <div className="mt-6 text-center">
                     {tier.price === 0 ? (
                       <div className="flex items-baseline justify-center">
-                        <span className="text-5xl font-bold text-[#1E280E]">
+                        <span className="text-4xl font-bold text-[#1E280E]">
                           {t("free")}
                         </span>
                       </div>
                     ) : (
-                      <div className="flex flex-wrap items-baseline justify-center gap-x-1">
-                        <span className="text-xl font-semibold text-[#535862]">Rp</span>
-                        <span className="text-4xl font-bold text-[#1E280E]">
+                      // Never wraps: at the 4-column desktop width a card only
+                      // has ~214px of content box, and "Rp 599.000 /bulan" has
+                      // to survive there as one line.
+                      <div className="flex items-baseline justify-center gap-x-1 whitespace-nowrap">
+                        <span className="text-lg font-semibold text-[#535862]">Rp</span>
+                        <span className="text-3xl font-bold text-[#1E280E]">
                           {format.number(tier.price)}
                         </span>
-                        <span className="text-base font-medium text-[#535862]">
+                        <span className="text-sm font-medium text-[#535862]">
                           {t("perMonth")}
                         </span>
                       </div>
