@@ -12,16 +12,19 @@ import {
   Sparkles,
   CheckCircle2,
   ArrowLeft,
+  CalendarCheck,
+  Clock,
   PenTool,
   Bookmark,
   MessageSquare,
+  Wand2,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { useTranslations } from "next-intl";
 
 export default function AiContentMakerPage() {
   const t = useTranslations("featureDetail");
-  const cardIcons = [Bookmark, MessageSquare, PenTool];
+  const cardIcons = [Bookmark, MessageSquare, Wand2, Clock, CalendarCheck, PenTool];
   const mockups = [
     {
       key: "caption",

@@ -17,7 +17,12 @@ export type PricingFeatureKey =
 export interface PricingTier {
   id: PricingTierId;
   price: number;
-  tokensPerMonth: number;
+  /** Token allowance. Monthly unless `tokensOneTime` is set. */
+  tokens: number;
+  /** Free tokens are granted once at signup and never refresh. */
+  tokensOneTime?: boolean;
+  /** Purchasable today. Tiers without it render a greyed-out CTA. */
+  isAvailable?: boolean;
   isPopular?: boolean;
   featureKeys: Array<{ key: PricingFeatureKey; included: boolean }>;
 }
@@ -27,7 +32,9 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: "free",
     price: 0,
-    tokensPerMonth: 1000,
+    tokens: 1000,
+    tokensOneTime: true,
+    isAvailable: true,
     featureKeys: [
       { key: "contentPlanner", included: true },
       { key: "socialAccounts1", included: true },
@@ -42,7 +49,7 @@ export const PRICING_TIERS: PricingTier[] = [
   {
     id: "starter",
     price: 99000,
-    tokensPerMonth: 10000,
+    tokens: 1000,
     isPopular: true,
     featureKeys: [
       { key: "contentPlanner", included: true },
@@ -57,8 +64,8 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     id: "pro",
-    price: 249000,
-    tokensPerMonth: 50000,
+    price: 199000,
+    tokens: 2250,
     featureKeys: [
       { key: "contentPlanner", included: true },
       { key: "socialAccounts15", included: true },
@@ -72,8 +79,8 @@ export const PRICING_TIERS: PricingTier[] = [
   },
   {
     id: "enterprise",
-    price: 499000,
-    tokensPerMonth: 150000,
+    price: 599000,
+    tokens: 8500,
     featureKeys: [
       { key: "contentPlanner", included: true },
       { key: "socialAccountsUnlimited", included: true },

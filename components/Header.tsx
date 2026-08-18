@@ -8,6 +8,7 @@ import { Button } from "@/components/base/buttons/button";
 import { Logo } from "@/components/Logo";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { Link, usePathname } from "@/i18n/navigation";
+import { GET_STARTED_URL } from "@/config/site";
 
 const NAV_LINK_KEYS = [
   { key: "home", href: "/" },
@@ -97,7 +98,7 @@ export function Header() {
               <LanguageSwitcher onDark={overDarkHero} />
               <div className="hidden md:block">
                 <Button
-                  href="https://app.optimark.ai/login"
+                  href={GET_STARTED_URL}
                   color="primary"
                   size="sm"
                   className="text-white"
@@ -149,12 +150,12 @@ export function Header() {
               })}
               <div className="mt-1 border-t border-gray-100 pt-3">
                 <Button
-                  href="https://app.optimark.ai"
+                  href={GET_STARTED_URL}
                   color="primary"
                   size="lg"
                   className="w-full justify-center"
                 >
-                  Try Free
+                  {t("getStarted")}
                 </Button>
               </div>
             </motion.div>

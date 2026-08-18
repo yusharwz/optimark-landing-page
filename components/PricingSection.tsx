@@ -3,11 +3,11 @@
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { createPortal } from "react-dom";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { ArrowRight, Check, Sliders, X } from "lucide-react";
 import { Button } from "@/components/base/buttons/button";
 import { PRICING_TIERS } from "@/config/pricing";
-import { SITE } from "@/config/site";
+import { GET_STARTED_URL, SITE } from "@/config/site";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { cx } from "@/utils/cx";
 
@@ -85,6 +85,7 @@ const noopSubscribe = () => () => {};
 
 export function PricingSection({ showEstimator = true }: PricingSectionProps = {}) {
   const t = useTranslations("pricing");
+  const format = useFormatter();
   const [sliderValues, setSliderValues] = useState<Record<string, number>>({
     captions: 0,
     articles: 0,
@@ -123,14 +124,14 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
 
     let planByTokens = PRICING_TIERS[0];
     for (let i = PRICING_TIERS.length - 1; i >= 0; i--) {
-      if (totalTokens <= PRICING_TIERS[i].tokensPerMonth) {
+      if (totalTokens <= PRICING_TIERS[i].tokens) {
         planByTokens = PRICING_TIERS[i];
       }
     }
 
     if (needsProFeatures) {
       const proIndex = PRICING_TIERS.findIndex((tier) => tier.id === "pro");
-      if (totalTokens > PRICING_TIERS[proIndex].tokensPerMonth) {
+      if (totalTokens > PRICING_TIERS[proIndex].tokens) {
         return PRICING_TIERS.find((tier) => tier.id === "enterprise") || PRICING_TIERS[proIndex];
       }
       return PRICING_TIERS[proIndex];
@@ -138,7 +139,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
 
     if (needsStarterFeatures) {
       const starterIndex = PRICING_TIERS.findIndex((tier) => tier.id === "starter");
-      if (totalTokens > PRICING_TIERS[starterIndex].tokensPerMonth) {
+      if (totalTokens > PRICING_TIERS[starterIndex].tokens) {
         const proIndex = PRICING_TIERS.findIndex((tier) => tier.id === "pro");
         return PRICING_TIERS[proIndex];
       }
@@ -149,7 +150,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
   }, [totalTokens, sliderValues]);
 
   const additionalTokensNeeded = useMemo(() => {
-    return Math.max(0, totalTokens - recommendedPlan.tokensPerMonth);
+    return Math.max(0, totalTokens - recommendedPlan.tokens);
   }, [totalTokens, recommendedPlan]);
 
   const recommendedTopup = useMemo(() => {
@@ -223,9 +224,15 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
           variants={staggerContainer}
           className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
         >
-          {PRICING_TIERS.map((tier) => (
+          {PRICING_TIERS.map((tier) => {
+            // Only a live tier gets emphasised: a "Most Popular" badge on a
+            // greyed-out card would contradict itself, so the badge and ring
+            // follow availability rather than `isPopular` alone.
+            const isEmphasised = Boolean(tier.isAvailable);
+
+            return (
             <motion.div key={tier.id} variants={staggerItem} className="relative flex flex-col">
-              {tier.isPopular && (
+              {tier.isPopular && tier.isAvailable && (
                 <div className="absolute -top-4 left-1/2 z-30 -translate-x-1/2">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748] px-4 py-1.5 text-xs font-semibold text-white shadow-lg">
                     <span className="relative flex h-2 w-2">
@@ -241,7 +248,7 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                 onMouseMove={handleMouseMove}
                 className={cx(
                   "group relative flex h-full flex-col overflow-hidden rounded-3xl border bg-white p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
-                  tier.isPopular
+                  isEmphasised
                     ? "border-[#94C748] ring-2 ring-[#94C748]/10"
                     : "border-[#E9EAEB]"
                 )}
@@ -280,12 +287,12 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                         </span>
                       </div>
                     ) : (
-                      <div className="flex items-baseline justify-center gap-1">
-                        <span className="text-2xl font-semibold text-[#535862]">Rp</span>
-                        <span className="text-5xl font-bold text-[#1E280E]">
-                          {(tier.price / 1000).toFixed(0)}K
+                      <div className="flex flex-wrap items-baseline justify-center gap-x-1">
+                        <span className="text-xl font-semibold text-[#535862]">Rp</span>
+                        <span className="text-4xl font-bold text-[#1E280E]">
+                          {format.number(tier.price)}
                         </span>
-                        <span className="text-lg font-medium text-[#535862]">
+                        <span className="text-base font-medium text-[#535862]">
                           {t("perMonth")}
                         </span>
                       </div>
@@ -295,8 +302,8 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                   <div className="mt-4 text-center">
                     <div className="inline-flex items-center gap-1.5 rounded-full bg-[#FDF4FF] border border-[#F5D0FE] px-3 py-1.5">
                       <span className="text-sm font-medium text-[#D444F1]">
-                        {t("tokensPerMonth", {
-                          count: tier.tokensPerMonth.toLocaleString(),
+                        {t(tier.tokensOneTime ? "tokensOneTime" : "tokensPerMonth", {
+                          count: format.number(tier.tokens),
                         })}
                       </span>
                     </div>
@@ -326,19 +333,24 @@ export function PricingSection({ showEstimator = true }: PricingSectionProps = {
                   </ul>
 
                   <div className="mt-8">
-                    <Button
-                      onClick={handleComingSoon}
-                      color={tier.isPopular ? "primary" : "secondary"}
-                      size="lg"
-                      className="w-full"
-                    >
-                      {t(`tiers.${tier.id}.cta`)}
-                    </Button>
+                    {/* Only the Free tier is live: it funnels into the same
+                        register/login flow as the header "Get Started". Paid
+                        tiers stay greyed out until checkout ships. */}
+                    {tier.isAvailable ? (
+                      <Button href={GET_STARTED_URL} color="primary" size="lg" className="w-full">
+                        {t(`tiers.${tier.id}.cta`)}
+                      </Button>
+                    ) : (
+                      <Button isDisabled color="secondary" size="lg" className="w-full">
+                        {t(`tiers.${tier.id}.cta`)}
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>
             </motion.div>
-          ))}
+            );
+          })}
         </motion.div>
 
         {showEstimator && (

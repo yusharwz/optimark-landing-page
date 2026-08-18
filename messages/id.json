@@ -63,7 +63,7 @@
       },
       "seo": {
         "title": "SEO Analyzer",
-        "description": "Analisis kata kunci dan optimasi konten dengan teknologi analisis kata kunci terbaru."
+        "description": "Satu ruang kerja SEO: riset ide konten dan kata kunci, audit draf sebelum publish (skor 0-100, kepadatan kata kunci, struktur heading, keterbacaan), lalu pantau pergerakan peringkat, profil backlink, dan pesaing Anda dari satu dashboard."
       },
       "ads": {
         "title": "Ads Manager",
@@ -71,7 +71,15 @@
       },
       "ai": {
         "title": "AI Content Maker",
-        "description": "Buat konten berkualitas dengan bantuan AI untuk hasil yang relevan."
+        "description": "Buat konten berkualitas dengan bantuan AI — caption siap posting lengkap dengan hook dan hashtag, artikel long-form, sampai rekomendasi jam tayang terbaik."
+      },
+      "aiImage": {
+        "title": "AI Image",
+        "description": "Hasilkan visual produk, thumbnail, dan aset feed sesuai brief Anda tanpa perlu sesi foto. Cukup jelaskan konsepnya, AI menyiapkan gambar siap posting dalam berbagai rasio."
+      },
+      "aiVideo": {
+        "title": "AI Video",
+        "description": "Ubah ide atau gambar menjadi video pendek untuk Reels, TikTok, dan Shorts. Cocok untuk promo cepat tanpa biaya produksi dan tim editor."
       }
     },
     "illustrations": {
@@ -94,6 +102,7 @@
     "free": "Gratis",
     "perMonth": "/bulan",
     "tokensPerMonth": "{count} tokens/bulan",
+    "tokensOneTime": "{count} token sekali klaim",
     "customPlan": "Butuh paket custom?",
     "contactUs": "Hubungi kami",
     "comingSoonTitle": "Coming Soon!",
@@ -117,7 +126,7 @@
     "tiers": {
       "free": {
         "name": "Free",
-        "cta": "Mulai Gratis"
+        "cta": "Get Started"
       },
       "starter": {
         "name": "Starter",
@@ -150,7 +159,7 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "Satu Platform AI untuk Mengotomatisasi Seluruh Pemasaran Anda",
-    "subtitle": "Optimark menyatukan tiga modul kecerdasan buatan (AI) untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.",
+    "subtitle": "Optimark menyatukan modul-modul kecerdasan buatan (AI) — tulisan, gambar, video, penjadwalan, dan SEO — untuk membantu Anda merancang, mengoptimalkan, dan menjadwalkan seluruh aktivitas pemasaran digital secara otomatis.",
     "demo": {
       "title": "Interactive Workspace",
       "subtitle": "Rasakan langsung modul AI utama kami sebelum Anda menghubungkan akun asli Anda. Klik salah satu tab di bawah untuk mencoba simulator.",
@@ -267,11 +276,11 @@
     "ai": {
       "badge": "Modul Unggulan - Tersedia Sekarang",
       "title": "Tulis Konten Otentik Sesuai Karakter Brand Anda",
-      "description": "Menghasilkan ide konten dan salinan tertulis yang relevan kini semudah sekali klik. Optimark melatih AI kami berdasarkan profil bisnis dan panduan brand voice Anda agar tulisan yang dihasilkan terasa sangat natural dan personal.",
+      "description": "Menghasilkan ide konten dan salinan tertulis yang relevan kini semudah sekali klik. Optimark melatih AI kami berdasarkan profil bisnis dan panduan brand voice Anda agar tulisan yang dihasilkan terasa natural dan personal — lalu menyarankan jam tayang terbaik supaya konten itu benar-benar dilihat.",
       "checks": [
-        "Bebas writer's block dengan puluhan template prompt",
+        "Caption siap posting: hook, isi, call to action, dan hashtag sekaligus",
         "Penyesuaian gaya bahasa (tone of voice) yang sangat fleksibel",
-        "Auto-generate hashtag viral berbasis tren terkini"
+        "Rekomendasi waktu posting terbaik, langsung masuk antrean jadwal"
       ],
       "deepTitle": "Kemampuan Utama AI Content Maker",
       "cards": [
@@ -280,8 +289,20 @@
           "description": "Tentukan deskripsi brand, tagline, dan kepribadian (Witty, Professional, Casual). AI kami akan otomatis menulis konten sesuai jati diri brand Anda."
         },
         {
-          "title": "Caption Generator Terarah",
-          "description": "Buat caption Instagram & Facebook secara cepat lengkap dengan saran hashtag relevan, emoji interaktif, dan ajakan bertindak (CTA)."
+          "title": "AI Caption Assist",
+          "description": "Tulis prompt singkat tentang produk atau momen yang mau diangkat, lalu terima caption utuh — kalimat pembuka yang menahan scroll, isi yang jelas, ajakan bertindak, dan hashtag yang relevan."
+        },
+        {
+          "title": "Penyempurnaan Sekali Klik",
+          "description": "Belum pas? Pilih “Lebih pendek”, “Lebih persuasif”, atau “Tambah hashtag” dan caption ditulis ulang tanpa harus mulai dari nol."
+        },
+        {
+          "title": "Best Time to Post",
+          "description": "Masukkan keyword atau topik konten Anda, lalu terima beberapa pilihan slot tanggal dan jam — dari jam sibuk pagi, jam istirahat siang, sampai prime time malam — lengkap dengan alasan tiap slot."
+        },
+        {
+          "title": "Langsung Terhubung ke Jadwal",
+          "description": "Simpan slot pilihan dan postingan langsung masuk ke antrean Perencana Konten. Tidak perlu memindahkan tanggal secara manual."
         },
         {
           "title": "SEO Long-form Writer",
@@ -315,27 +336,77 @@
       ]
     },
     "seo": {
-      "badge": "Segera Hadir - Tahap Pengujian Beta",
-      "title": "SEO Analyzer & Penulisan Artikel Optimal",
-      "description": "Tulis artikel yang langsung dicintai Google. Dapatkan rekomendasi optimasi secara real-time saat Anda sedang menulis untuk memastikan konten Anda menduduki halaman pertama mesin pencari.",
+      "badge": "Modul Unggulan - Tersedia Sekarang",
+      "title": "Satu Ruang Kerja SEO: Riset, Optimasi, dan Pantau Peringkat",
+      "description": "Optimark menyatukan riset topik, audit on-page, pelacakan peringkat, profil backlink, dan analisis pesaing dalam satu workspace. Anda tahu apa yang harus ditulis, seberapa layak draf Anda sebelum publish, dan bagaimana pergerakannya setelah tayang — tanpa berpindah-pindah tool.",
       "checks": [
-        "Analisis kepadatan kata kunci secara otomatis",
-        "Penghitung skor kualitas konten 0-100",
-        "Saran internal-linking & alt-image yang presisi"
+        "Skor SEO 0-100 beserta rekomendasi perbaikan sebelum publish",
+        "Pelacakan peringkat per kata kunci, kota, dan perangkat",
+        "Pantau visibilitas brand Anda di mesin jawaban AI"
       ],
       "deepTitle": "Kemampuan Utama SEO Analyzer",
       "cards": [
         {
-          "title": "Keyword Research & Explorer",
-          "description": "Cari tahu volume pencarian bulanan, estimasi nilai BPK, dan tingkat kesulitan kata kunci (Keyword Difficulty) dari database SEO global kami."
+          "title": "Optimasi Konten Sebelum Publish",
+          "description": "Tempel draf dan kata kunci target Anda, lalu terima rapor lengkap: kepadatan kata kunci, struktur heading H1/H2/H3, skor keterbacaan, deteksi konten duplikat, saran internal link, dan rekomendasi panjang konten."
         },
         {
-          "title": "Audit Kualitas Konten (On-Page)",
-          "description": "Editor teks kami akan langsung menganalisis konten artikel Anda dan memberikan rekomendasi keyword density, struktur tag heading, dan keterbacaan."
+          "title": "Ide Konten & Eksplorasi Kata Kunci",
+          "description": "Masukkan satu topik, dapatkan daftar ide konten lengkap dengan search intent, format, tahap funnel, dan brief singkat. Telusuri kata kunci turunan beserta estimasi volume, tingkat kesulitan, dan pratinjau SERP."
         },
         {
-          "title": "Rank Tracker & Kompetitor",
-          "description": "Pantau pergerakan posisi artikel Anda di halaman pencarian Google serta pantau strategi kata kunci kompetitor terdekat Anda secara berkala."
+          "title": "Pantau Peringkat, Backlink & AI SEO",
+          "description": "Lacak posisi kata kunci per kota dan perangkat berikut riwayat pergerakannya, pantau profil backlink (baru, hilang, tautan rusak), dan lihat seberapa sering brand Anda dikutip mesin jawaban seperti ChatGPT, Perplexity, Gemini, dan Google AI Overview."
+        }
+      ]
+    },
+    "aiImage": {
+      "badge": "Modul Kreatif - Tersedia Sekarang",
+      "title": "Foto Produk Kualitas Studio Tanpa Sesi Pemotretan",
+      "description": "Jelaskan konsepnya, Optimark yang menyiapkan visualnya. Dari packshot marketplace yang bersih sampai kampanye lifestyle bergaya editorial — semuanya on-brand, dalam rasio yang Anda butuhkan, tanpa studio, kru, atau jadwal pemotretan.",
+      "checks": [
+        "Foto produk, packshot marketplace, dan visual kampanye dari satu prompt",
+        "Rasio siap pakai untuk feed, story, dan listing marketplace",
+        "Gaya visual konsisten mengikuti identitas brand Anda"
+      ],
+      "deepTitle": "Kemampuan Utama AI Image",
+      "cards": [
+        {
+          "title": "Dari Prompt ke Visual Siap Posting",
+          "description": "Tulis brief singkat — produk, suasana, dan target audiens — lalu terima beberapa alternatif visual untuk dipilih. Tidak perlu tahu istilah fotografi."
+        },
+        {
+          "title": "Konsisten dengan Identitas Brand",
+          "description": "Palet warna, gaya pencahayaan, dan mood dijaga tetap sama antar konten, jadi feed Anda terlihat sebagai satu kesatuan, bukan tempelan."
+        },
+        {
+          "title": "Satu Konsep, Banyak Format",
+          "description": "Hasilkan versi potret, lanskap, dan persegi dari konsep yang sama untuk feed, story, thumbnail, sampai listing marketplace."
+        }
+      ]
+    },
+    "aiVideo": {
+      "badge": "Modul Kreatif - Tersedia Sekarang",
+      "title": "Video Pendek Siap Tayang dari Satu Prompt",
+      "description": "Ubah ide, produk, atau satu gambar diam menjadi video pendek untuk Reels, TikTok, dan Shorts. Cocok untuk promo cepat, demo produk, dan konten bergaya UGC — tanpa biaya produksi, talent, atau tim editor.",
+      "checks": [
+        "Product reveal, demo ala UGC, cerita founder, dan iklan kuliner",
+        "Format vertikal dan horizontal untuk tiap platform",
+        "Dari brief ke draf video tanpa menyentuh software editing"
+      ],
+      "deepTitle": "Kemampuan Utama AI Video",
+      "cards": [
+        {
+          "title": "Prompt Jadi Storyboard",
+          "description": "Deskripsikan produk dan pesan utamanya. Optimark menyusun alur adegan, lalu merendernya menjadi klip pendek yang siap Anda tinjau."
+        },
+        {
+          "title": "Gaya Konten yang Terbukti",
+          "description": "Pilih pendekatan yang sudah terbukti jalan di media sosial — product reveal, demo ala kreator, cerita founder, atau iklan makanan dan minuman."
+        },
+        {
+          "title": "Siap untuk Reels, TikTok & Shorts",
+          "description": "Keluaran mengikuti rasio tiap platform, jadi video Anda tidak terpotong atau melar saat diunggah."
         }
       ]
     }
