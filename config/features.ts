@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { BarChart3, Calendar, Sparkles } from "lucide-react";
+import { BarChart3, Calendar, Image as ImageIcon, Sparkles, Video } from "lucide-react";
 
 export const FEATURE_IDS = ["perencana", "seo", "ai"] as const;
 
@@ -25,6 +25,26 @@ export const FEATURE_META: Record<
     coverImage: "/images/features-perencanaan-konten.svg",
     hasBadge: true,
   },
-  seo: { comingSoon: true },
-  ai: { comingSoon: true },
+  seo: { hasBadge: true },
+  ai: { hasBadge: true },
+};
+
+/**
+ * Secondary features shown on the /features page below the bento grid. They are
+ * kept out of `FEATURE_IDS` because that list drives the homepage bento layout
+ * (one featured tile + two side tiles) and has no room for more cards.
+ * Each one has its own detail page under `/features/<route>`.
+ */
+export const EXTRA_FEATURE_IDS = ["aiImage", "aiVideo"] as const;
+
+export type ExtraFeatureId = (typeof EXTRA_FEATURE_IDS)[number];
+
+export const EXTRA_FEATURE_ROUTES: Record<ExtraFeatureId, string> = {
+  aiImage: "ai-image",
+  aiVideo: "ai-video",
+};
+
+export const EXTRA_FEATURE_ICONS: Record<ExtraFeatureId, LucideIcon> = {
+  aiImage: ImageIcon,
+  aiVideo: Video,
 };

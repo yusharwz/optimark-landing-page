@@ -63,7 +63,7 @@
       },
       "seo": {
         "title": "SEO Analyzer",
-        "description": "Keyword analysis and content optimization with the latest keyword analysis technology."
+        "description": "One SEO workspace: research content ideas and keywords, audit a draft before you publish (0-100 score, keyword density, heading structure, readability), then track ranking movement, backlink profile, and competitors from a single dashboard."
       },
       "ads": {
         "title": "Ads Manager",
@@ -71,7 +71,15 @@
       },
       "ai": {
         "title": "AI Content Maker",
-        "description": "Create quality content with AI assistance for relevant results."
+        "description": "Create quality content with AI — post-ready captions with hook and hashtags, long-form articles, and the best hour to publish them."
+      },
+      "aiImage": {
+        "title": "AI Image",
+        "description": "Generate product visuals, thumbnails, and feed assets from a brief — no photo shoot needed. Describe the concept and get post-ready images in every aspect ratio."
+      },
+      "aiVideo": {
+        "title": "AI Video",
+        "description": "Turn an idea or a still image into short-form video for Reels, TikTok, and Shorts. Built for fast promos without production costs or an editing team."
       }
     },
     "illustrations": {
@@ -94,6 +102,7 @@
     "free": "Free",
     "perMonth": "/month",
     "tokensPerMonth": "{count} tokens/month",
+    "tokensOneTime": "{count} tokens, one-time",
     "customPlan": "Need a custom plan?",
     "contactUs": "Contact us",
     "comingSoonTitle": "Coming Soon!",
@@ -117,7 +126,7 @@
     "tiers": {
       "free": {
         "name": "Free",
-        "cta": "Start Free"
+        "cta": "Get Started"
       },
       "starter": {
         "name": "Starter",
@@ -150,7 +159,7 @@
   "featuresPage": {
     "badge": "🤖 AI Automation Suite",
     "title": "One AI Platform to Automate Your Entire Marketing",
-    "subtitle": "Optimark unifies three artificial intelligence (AI) modules to help you design, optimize, and schedule all your digital marketing activities automatically.",
+    "subtitle": "Optimark unifies our artificial intelligence (AI) modules — copy, image, video, scheduling, and SEO — to help you design, optimize, and schedule all your digital marketing activities automatically.",
     "demo": {
       "title": "Interactive Workspace",
       "subtitle": "Experience our core AI modules in action before you connect your real accounts. Click any tab below to test the simulator.",
@@ -266,26 +275,38 @@
     "back": "Back to All Features",
     "ai": {
       "badge": "Featured Module - Available Now",
-      "title": "Write Authentic Content That Matches Your Brand's Character",
-      "description": "Generating relevant content ideas and copy is now just one click away. Optimark trains our AI on your business profile and brand voice guidelines so the results feel natural and personal.",
+      "title": "Write Authentic Content That Sounds Like Your Brand",
+      "description": "Producing relevant content ideas and copy is now one click away. Optimark trains our AI on your business profile and brand voice guidelines so the writing feels natural and personal — then suggests the best hour to publish so the piece actually gets seen.",
       "checks": [
-        "Beat writer's block with dozens of prompt templates",
-        "Highly flexible tone-of-voice customization",
-        "Auto-generate viral hashtags based on current trends"
+        "Post-ready captions: hook, body, call to action, and hashtags at once",
+        "Highly flexible tone-of-voice control",
+        "Best-time-to-post recommendations that drop straight into your queue"
       ],
       "deepTitle": "Core Capabilities of AI Content Maker",
       "cards": [
         {
           "title": "Custom Brand Voice Engine",
-          "description": "Define your brand description, tagline, and personality (Witty, Professional, Casual). Our AI automatically writes content that matches your brand identity."
+          "description": "Define your brand description, tagline, and personality (Witty, Professional, Casual). Our AI then writes every piece in your brand's own voice."
         },
         {
-          "title": "Focused Caption Generator",
-          "description": "Quickly create Instagram & Facebook captions complete with relevant hashtag suggestions, interactive emojis, and calls to action (CTA)."
+          "title": "AI Caption Assist",
+          "description": "Write a short prompt about the product or the moment, and get a full caption back — an opening line that stops the scroll, a clear body, a call to action, and relevant hashtags."
+        },
+        {
+          "title": "One-Click Refinement",
+          "description": "Not quite right? Pick “Shorter”, “More persuasive”, or “More hashtags” and the caption is rewritten without starting over."
+        },
+        {
+          "title": "Best Time to Post",
+          "description": "Enter your keyword or content topic and get several date and time slots — the morning rush, the lunch break, the evening prime time — each with the reasoning behind it."
+        },
+        {
+          "title": "Wired Into Your Schedule",
+          "description": "Save the slot you want and the post lands in the Content Planner queue. No dragging dates around by hand."
         },
         {
           "title": "SEO Long-form Writer",
-          "description": "Produce long, well-structured blog article drafts with H2/H3 heading tags already optimized for your target SEO keywords."
+          "description": "Generate long-form blog drafts with a full H2/H3 heading structure already optimized for your target keywords."
         }
       ]
     },
@@ -315,27 +336,77 @@
       ]
     },
     "seo": {
-      "badge": "Coming Soon - Beta Testing Phase",
-      "title": "SEO Analyzer & Optimal Article Writing",
-      "description": "Write articles that Google loves right away. Get real-time optimization recommendations as you write to ensure your content ranks on the first page of search engines.",
+      "badge": "Featured Module - Available Now",
+      "title": "One SEO Workspace: Research, Optimize, Track Rankings",
+      "description": "Optimark brings topic research, on-page auditing, rank tracking, backlink profiling, and competitor analysis into one workspace. You know what to write, how strong the draft is before you publish, and how it moves once it is live — without hopping between tools.",
       "checks": [
-        "Automatic keyword density analysis",
-        "Content quality score counter (0-100)",
-        "Precise internal-linking & image alt suggestions"
+        "A 0-100 SEO score with concrete fixes before you publish",
+        "Rank tracking per keyword, city, and device",
+        "Monitor how visible your brand is inside AI answer engines"
       ],
       "deepTitle": "Core Capabilities of SEO Analyzer",
       "cards": [
         {
-          "title": "Keyword Research & Explorer",
-          "description": "Discover monthly search volume, estimated CPC, and keyword difficulty from our global SEO database."
+          "title": "Optimize Content Before Publishing",
+          "description": "Paste your draft and target keywords, then get a full report: keyword density, H1/H2/H3 heading structure, readability score, duplicate content detection, internal linking suggestions, and content length recommendations."
         },
         {
-          "title": "Content Quality Audit (On-Page)",
-          "description": "Our text editor instantly analyzes your article content and provides recommendations for keyword density, heading tag structure, and readability."
+          "title": "Content Ideas & Keyword Explorer",
+          "description": "Enter one topic and get a list of content ideas complete with search intent, format, funnel stage, and a short brief. Explore related keywords with estimated volume, difficulty, and a SERP preview."
         },
         {
-          "title": "Rank Tracker & Competitors",
-          "description": "Track your article's position movements on Google search results and periodically monitor your closest competitors' keyword strategies."
+          "title": "Track Rankings, Backlinks & AI SEO",
+          "description": "Follow keyword positions per city and device with full movement history, monitor your backlink profile (new, lost, broken links), and see how often your brand gets cited by answer engines such as ChatGPT, Perplexity, Gemini, and Google AI Overview."
+        }
+      ]
+    },
+    "aiImage": {
+      "badge": "Creative Module - Available Now",
+      "title": "Studio-Grade Product Shots Without the Photo Shoot",
+      "description": "Describe the concept and Optimark produces the visual. From clean marketplace packshots to editorial lifestyle campaigns — all on-brand, in whatever aspect ratio you need, with no studio, crew, or shoot day.",
+      "checks": [
+        "Product shots, marketplace packshots, and campaign visuals from one prompt",
+        "Ready-made ratios for feed, story, and marketplace listings",
+        "A consistent visual style that follows your brand identity"
+      ],
+      "deepTitle": "Core Capabilities of AI Image",
+      "cards": [
+        {
+          "title": "From Prompt to Post-Ready Visual",
+          "description": "Write a short brief — the product, the mood, the audience — and get several visual options to pick from. No photography jargon required."
+        },
+        {
+          "title": "Consistent With Your Brand",
+          "description": "Color palette, lighting, and mood stay the same across pieces, so your feed reads as one body of work rather than a patchwork."
+        },
+        {
+          "title": "One Concept, Many Formats",
+          "description": "Generate portrait, landscape, and square versions of the same concept for feed, story, thumbnails, and marketplace listings."
+        }
+      ]
+    },
+    "aiVideo": {
+      "badge": "Creative Module - Available Now",
+      "title": "Short-Form Video, Ready to Publish, From One Prompt",
+      "description": "Turn an idea, a product, or a single still into short-form video for Reels, TikTok, and Shorts. Built for fast promos, product demos, and UGC-style content — without production costs, talent, or an editing team.",
+      "checks": [
+        "Product reveals, UGC-style demos, founder stories, and food ads",
+        "Vertical and horizontal formats for every platform",
+        "From brief to draft video without touching editing software"
+      ],
+      "deepTitle": "Core Capabilities of AI Video",
+      "cards": [
+        {
+          "title": "Prompt Becomes Storyboard",
+          "description": "Describe the product and its core message. Optimark lays out the scene flow, then renders it into a short clip for you to review."
+        },
+        {
+          "title": "Formats That Already Work",
+          "description": "Pick an approach proven on social — product reveal, creator-style demo, founder story, or a food and beverage ad."
+        },
+        {
+          "title": "Ready for Reels, TikTok & Shorts",
+          "description": "Output follows each platform's aspect ratio, so your video is neither cropped nor stretched on upload."
         }
       ]
     }

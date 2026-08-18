@@ -40,6 +40,11 @@ import { CtaSection } from "@/components/CtaSection";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { SCROLL_UP_THRESHOLD } from "@/config/site";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
+import {
+  EXTRA_FEATURE_ICONS,
+  EXTRA_FEATURE_IDS,
+  EXTRA_FEATURE_ROUTES,
+} from "@/config/features";
 
 type FeatureItem = {
   id: "ai" | "perencana" | "seo";
@@ -54,7 +59,6 @@ const features: FeatureItem[] = [
     id: "ai",
     routeId: "ai-content-maker",
     icon: Sparkles,
-    comingSoon: true,
     featured: true,
   },
   {
@@ -66,7 +70,6 @@ const features: FeatureItem[] = [
     id: "seo",
     routeId: "seo-analyzer",
     icon: BarChart3,
-    comingSoon: true,
   },
 ];
 
@@ -287,6 +290,20 @@ export default function FeaturesPage() {
                 />
               );
             })}
+          </div>
+
+          {/* Secondary modules, each with its own detail page. */}
+          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-6 lg:gap-6">
+            {EXTRA_FEATURE_IDS.map((id) => (
+              <BentoFeatureCard
+                key={id}
+                href={`/features/${EXTRA_FEATURE_ROUTES[id]}`}
+                icon={EXTRA_FEATURE_ICONS[id]}
+                title={t(`items.${id}.title`)}
+                description={t(`items.${id}.description`)}
+                badge={t("availableNow")}
+              />
+            ))}
           </div>
         </div>
 

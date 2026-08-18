@@ -7,6 +7,7 @@ import { ArrowRight, Sparkles, Clock } from "lucide-react";
 import { AiCaptionModal } from "./ai-caption";
 import { BestTimeModal } from "./best-time";
 import { heroBadge, heroTitle, heroDescription, heroImage } from "@/lib/animations";
+import { GET_STARTED_URL } from "@/config/site";
 
 /**
  * Hero background — a self-contained dark canvas scoped to this section only
@@ -171,7 +172,7 @@ export function HeroSection() {
           className="mt-8 flex flex-wrap items-center justify-center gap-4"
         >
           <a
-            href="https://app.optimark.ai/login"
+            href={GET_STARTED_URL}
             className="group inline-flex items-center gap-2 rounded-full bg-[#94C748] px-6 py-3 text-sm font-semibold text-[#1E280E] transition hover:brightness-95"
           >
             {t("cta")}
