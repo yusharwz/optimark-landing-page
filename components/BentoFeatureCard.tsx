@@ -15,6 +15,11 @@ type BentoFeatureCardProps = {
   coverImage?: string;
   /** Optional React component illustration to show next to the content. */
   illustration?: React.ReactNode;
+  /**
+   * Media that fills the entire card — the copy is overlaid on top of it behind
+   * a scrim. Takes precedence over `illustration` / `coverImage`.
+   */
+  showcase?: React.ReactNode;
   /** Whether the card is featured (uses a vertical layout instead of grid). */
   featured?: boolean;
   /** When true, paints a subtle green brand-flourish background to draw the eye. */
@@ -35,6 +40,7 @@ export function BentoFeatureCard({
   badge,
   coverImage,
   illustration,
+  showcase,
   featured,
   highlight,
   href,
@@ -49,14 +55,42 @@ export function BentoFeatureCard({
   };
 
   const cardClass = cx(
-    "group relative overflow-hidden rounded-3xl border p-8 shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
-    highlight
-      ? "border-brand-200 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40"
-      : "border-gray-200 bg-white",
-    featured
-      ? "flex flex-col justify-between items-stretch gap-8 h-full"
-      : "grid grid-cols-1 gap-8 lg:grid-cols-[65fr_35fr] lg:items-start lg:gap-6",
-    className
+    "group relative overflow-hidden rounded-3xl border shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl",
+    showcase
+      ? "flex min-h-[22rem] flex-col justify-end border-gray-900/10 bg-gray-900 p-0"
+      : cx(
+          "p-8",
+          highlight
+            ? "border-brand-200 bg-gradient-to-br from-brand-50/60 via-white to-brand-50/40"
+            : "border-gray-200 bg-white",
+          featured
+            ? "flex flex-col justify-between items-stretch gap-8 h-full"
+            : "grid grid-cols-1 gap-8 lg:grid-cols-[65fr_35fr] lg:items-start lg:gap-6",
+        ),
+    className,
+  );
+
+  const showcaseContent = (
+    <>
+      <div className="absolute inset-0 z-0 transition-transform duration-500 group-hover:scale-105">
+        {showcase}
+      </div>
+      {/* Scrim: the copy sits on real photography, so it needs its own ground. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-t from-gray-950/90 via-gray-950/55 to-gray-950/10"
+      />
+
+      <div className="relative z-20 p-8">
+        <div className="mb-3 flex items-center gap-4 lg:block">
+          <div className="inline-flex shrink-0 rounded-2xl bg-white/15 p-4 text-white backdrop-blur-sm transition-colors group-hover:bg-white/25 lg:mb-6">
+            <Icon className="h-8 w-8" />
+          </div>
+          <h3 className="text-2xl font-semibold tracking-tight text-white">{title}</h3>
+        </div>
+        <p className="text-base leading-relaxed text-white/80">{description}</p>
+      </div>
+    </>
   );
 
   const content = (
@@ -101,7 +135,9 @@ export function BentoFeatureCard({
         <div
           className={cx(
             "relative z-10 transition-all duration-300 group-hover:scale-105 select-none pointer-events-none",
-            featured ? "w-full flex justify-center mt-auto" : "h-full w-full flex items-center justify-center"
+            featured
+              ? "w-full flex justify-center mt-auto"
+              : "h-full w-full flex items-center justify-center",
           )}
         >
           {illustration}
@@ -116,17 +152,19 @@ export function BentoFeatureCard({
     </>
   );
 
+  const body = showcase ? showcaseContent : content;
+
   if (href) {
     return (
       <Link href={href} className={cx(cardClass, "cursor-pointer")} onMouseMove={handleMouseMove}>
-        {content}
+        {body}
       </Link>
     );
   }
 
   return (
     <div className={cardClass} onMouseMove={handleMouseMove}>
-      {content}
+      {body}
     </div>
   );
 }

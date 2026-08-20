@@ -5,12 +5,13 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { FOOTER_PRODUCT_KEYS, SITE, SOCIAL_LINKS } from "@/config/site";
 import { Link } from "@/i18n/navigation";
+import { ALL_FEATURE_IDS, featureHref } from "@/config/features";
 
-const FOOTER_GRADIENT =
-  "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(242,248,231,1) 100%)";
+const FOOTER_GRADIENT = "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(242,248,231,1) 100%)";
 
 export function Footer() {
   const t = useTranslations("footer");
+  const tf = useTranslations("features");
 
   return (
     <footer
@@ -39,15 +40,11 @@ export function Footer() {
               </span>
             </Link>
 
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#535862]">
-              {t("tagline")}
-            </p>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#535862]">{t("tagline")}</p>
 
             <div className="mt-6 flex flex-wrap items-center gap-3">
               <div className="flex items-center gap-3">
-                <span className="text-xs font-medium text-[#717680]">
-                  {t("followUs")}
-                </span>
+                <span className="text-xs font-medium text-[#717680]">{t("followUs")}</span>
                 <div className="flex items-center gap-2">
                   {SOCIAL_LINKS.map((social) => (
                     <motion.a
@@ -80,9 +77,7 @@ export function Footer() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: 0.05 }}
             >
-              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                {t("product")}
-              </h3>
+              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">{t("product")}</h3>
               <ul className="mt-4 space-y-3">
                 {FOOTER_PRODUCT_KEYS.map((key) => (
                   <li
@@ -108,14 +103,17 @@ export function Footer() {
                 {t("platform")}
               </h3>
               <ul className="mt-4 space-y-3">
-                <li>
-                  <Link
-                    href="/features"
-                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
-                  >
-                    {t("links.features")}
-                  </Link>
-                </li>
+                {/* No features hub page — link each feature page directly. */}
+                {ALL_FEATURE_IDS.map((id) => (
+                  <li key={id}>
+                    <Link
+                      href={featureHref(id)}
+                      className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                    >
+                      {tf(`items.${id}.title`)}
+                    </Link>
+                  </li>
+                ))}
                 <li>
                   <Link
                     href="/pricing"
@@ -141,9 +139,7 @@ export function Footer() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: 0.15 }}
             >
-              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                {t("company")}
-              </h3>
+              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">{t("company")}</h3>
               <ul className="mt-4 space-y-3">
                 <li>
                   <Link
@@ -177,9 +173,7 @@ export function Footer() {
         <div className="mt-12 h-px w-full bg-linear-to-r from-transparent via-[#E9EAEB] to-transparent lg:mt-16" />
 
         <div className="mt-6 flex flex-col items-center justify-between gap-3 text-sm sm:flex-row">
-          <p className="text-[#717680]">
-            {t("copyright", { year: new Date().getFullYear() })}
-          </p>
+          <p className="text-[#717680]">{t("copyright", { year: new Date().getFullYear() })}</p>
         </div>
       </div>
     </footer>

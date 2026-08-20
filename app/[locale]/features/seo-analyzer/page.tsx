@@ -54,7 +54,7 @@ export default function SeoAnalyzerPage() {
           {/* Back button */}
           <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="mb-8">
             <Link
-              href="/features"
+              href="/"
               className="inline-flex items-center gap-2 text-sm font-semibold text-[#535862] hover:text-[#94C748] transition-colors"
             >
               <ArrowLeft className="h-4 w-4" />

@@ -30,10 +30,10 @@ export const FEATURE_META: Record<
 };
 
 /**
- * Secondary features shown on the /features page below the bento grid. They are
- * kept out of `FEATURE_IDS` because that list drives the homepage bento layout
- * (one featured tile + two side tiles) and has no room for more cards.
- * Each one has its own detail page under `/features/<route>`.
+ * Secondary features. They are kept out of `FEATURE_IDS` because that list
+ * drives the tall-featured-tile bento layout (one featured tile + two side
+ * tiles); these two render as a plain two-up row underneath it. Each one has
+ * its own detail page under `/features/<route>`.
  */
 export const EXTRA_FEATURE_IDS = ["aiImage", "aiVideo"] as const;
 
@@ -48,3 +48,23 @@ export const EXTRA_FEATURE_ICONS: Record<ExtraFeatureId, LucideIcon> = {
   aiImage: ImageIcon,
   aiVideo: Video,
 };
+
+/** Every feature that has a detail page, in menu order. */
+export const ALL_FEATURE_IDS = ["ai", "perencana", "seo", ...EXTRA_FEATURE_IDS] as const;
+
+export type AnyFeatureId = (typeof ALL_FEATURE_IDS)[number];
+
+export const ALL_FEATURE_ROUTES: Record<AnyFeatureId, string> = {
+  ...FEATURE_ROUTES,
+  ...EXTRA_FEATURE_ROUTES,
+};
+
+export const ALL_FEATURE_ICONS: Record<AnyFeatureId, LucideIcon> = {
+  ...FEATURE_ICONS,
+  ...EXTRA_FEATURE_ICONS,
+};
+
+/** Locale-aware href for a feature's detail page. */
+export function featureHref(id: AnyFeatureId): string {
+  return `/features/${ALL_FEATURE_ROUTES[id]}`;
+}
