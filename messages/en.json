@@ -15,6 +15,34 @@
     "title": "Token Pricing - OPTIMARK",
     "description": "Buy Optimark tokens as you need without monthly subscriptions. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
   },
+  "pricingTrialMetadata": {
+    "title": "Pricing - OPTIMARK",
+    "description": "Start with a free trial and get full access to every OPTIMARK AI feature - content planning, SEO, ads, image and video generation."
+  },
+  "pricingTrial": {
+    "badge": "Free Trial",
+    "title": "Start free. Get everything.",
+    "subtitle": "Every OPTIMARK AI feature is unlocked on the free trial - no credit card required.",
+    "tokenAmount": "1,000",
+    "tokenLabel": "free tokens",
+    "tokenGrant": "Credited to your account on sign up",
+    "priceNote": "Full access, no card required",
+    "featuresHeader": "Everything included:",
+    "features": [
+      "Content Planner and auto-scheduling",
+      "AI Content Maker - captions, long-form and best time to post",
+      "SEO Analyzer - research, content audit and rank tracking",
+      "Ads Manager",
+      "AI Image generation",
+      "AI Video generation",
+      "Connect Instagram, Facebook and TikTok",
+      "Customer support"
+    ],
+    "cta": "Get Started Free",
+    "footnote": "No credit card required. Cancel anytime.",
+    "contactLine": "Need something custom for your team?",
+    "contactCta": "Contact us"
+  },
   "faqMetadata": {
     "title": "Frequently Asked Questions - OPTIMARK",
     "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
