@@ -12,8 +12,8 @@
     "description": "Optimark Terms of Service - The terms and conditions that govern your use of the Optimark platform."
   },
   "pricingMetadata": {
-    "title": "Pricing Plans - OPTIMARK",
-    "description": "Choose the right Optimark subscription plan for your business. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
+    "title": "Token Pricing - OPTIMARK",
+    "description": "Buy Optimark tokens as you need without monthly subscriptions. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
   },
   "faqMetadata": {
     "title": "Frequently Asked Questions - OPTIMARK",
@@ -96,32 +96,55 @@
     }
   },
   "pricing": {
-    "title": "Choose the Right Plan for Your Business",
-    "subtitle": "Start for free and upgrade to a paid plan whenever you're ready. All plans include free updates.",
+    "title": "OPTIMARK Token Pricing",
+    "subtitle": "Buy token packages according to your needs with no monthly subscription required. Use tokens across all OPTIMARK AI features.",
+    "badge": "Pay-As-You-Go",
     "mostPopular": "Most Popular",
-    "free": "Free",
-    "perMonth": "/month",
-    "tokensPerMonth": "{count} tokens/month",
-    "tokensOneTime": "{count} tokens, one-time",
-    "customPlan": "Need a custom plan?",
+    "bestValue": "Best Value",
+    "perToken": "/ token",
+    "buyTokens": "Buy Token Pack",
+    "savings": "Save {percent}",
+    "tokensCount": "{count} Tokens",
+    "featuresHeader": "All token packages include:",
+    "noSubscription": "No monthly subscription fee",
+    "neverExpires": "Tokens never expire",
+    "accessAllFeatures": "Access to all AI features",
+    "prioritySupport": "Customer support",
+    "customPlan": "Need a custom enterprise token package?",
     "contactUs": "Contact us",
     "comingSoonTitle": "Coming Soon!",
-    "comingSoonDescription": "This feature is coming soon",
+    "comingSoonDescription": "Token purchasing feature coming soon",
     "estimator": {
-      "badge": "Usage Estimator",
-      "title": "Not Sure Which Plan to Pick?",
-      "subtitle": "Estimate your monthly AI usage and we'll recommend the most cost-efficient plan for you.",
+      "badge": "Token Calculator",
+      "title": "Not Sure How Many Tokens You Need?",
+      "subtitle": "Estimate your monthly AI usage and we'll recommend the right token package for you.",
       "slidersTitle": "How active is your marketing?",
-      "slidersSubtitle": "Adjust the sliders to match your typical monthly activity. Rough estimates are fine.",
-      "breakdown": "Token Breakdown",
+      "slidersSubtitle": "Adjust the sliders to match your estimated monthly activity.",
+      "breakdown": "Token Usage Breakdown",
       "estimatedTokens": "Estimated Tokens / Month",
-      "recommendedPlan": "Recommended Plan",
+      "recommendedPlan": "Recommended Token Pack",
       "additionalTokens": "Additional Tokens Needed",
       "suggestedTopup": "Suggested: {tokens} Token pack (~Rp {price}k)",
-      "planCost": "Plan cost",
+      "planCost": "Token package cost",
       "topupCost": "Est. top-up",
       "notNeeded": "Not needed",
-      "totalPerMonth": "Total / month"
+      "totalPerMonth": "Total Estimated Cost"
+    },
+    "usageGuide": {
+      "title": "Token Usage Reference",
+      "subtitle": "Token cost per AI action in OPTIMARK",
+      "captions": "Social media captions & copy",
+      "captionsRate": "2 Tokens / post",
+      "articles": "Blog articles & long-form content",
+      "articlesRate": "5 Tokens / article",
+      "images": "AI-generated images & visuals",
+      "imagesRate": "10 Tokens / image",
+      "seo": "Keyword research & SEO audits",
+      "seoRate": "5 Tokens / audit",
+      "marketplace": "Marketplace intelligence queries",
+      "marketplaceRate": "3 Tokens / query",
+      "ads": "Ad campaigns optimized",
+      "adsRate": "15 Tokens / campaign"
     },
     "tiers": {
       "free": {

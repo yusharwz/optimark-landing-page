@@ -12,8 +12,8 @@
     "description": "Ketentuan Layanan Optimark - Syarat dan ketentuan yang mengatur penggunaan Anda atas platform Optimark."
   },
   "pricingMetadata": {
-    "title": "Pilihan Paket Harga - OPTIMARK",
-    "description": "Pilih paket langganan Optimark yang sesuai untuk bisnis Anda. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
+    "title": "Harga Token - OPTIMARK",
+    "description": "Beli paket token Optimark sesuai kebutuhan bisnis Anda tanpa berlangganan bulanan. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
   },
   "faqMetadata": {
     "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
@@ -96,32 +96,55 @@
     }
   },
   "pricing": {
-    "title": "Pilih Paket yang Tepat untuk Bisnis Anda",
-    "subtitle": "Mulai gratis dan tingkatkan ke paket berbayar kapan pun Anda siap. Semua paket termasuk update gratis.",
-    "mostPopular": "Most Popular",
-    "free": "Gratis",
-    "perMonth": "/bulan",
-    "tokensPerMonth": "{count} token/bulan",
-    "tokensOneTime": "{count} token sekali klaim",
-    "customPlan": "Butuh paket custom?",
+    "title": "Harga Token OPTIMARK",
+    "subtitle": "Beli paket token sesuai kebutuhan tanpa biaya langganan bulanan. Gunakan token untuk seluruh fitur AI OPTIMARK.",
+    "badge": "Pay-As-You-Go",
+    "mostPopular": "Paling Populer",
+    "bestValue": "Paling Hemat",
+    "perToken": "/ token",
+    "buyTokens": "Beli Token",
+    "savings": "Hemat {percent}",
+    "tokensCount": "{count} Token",
+    "featuresHeader": "Semua paket token termasuk:",
+    "noSubscription": "Tanpa langganan bulanan",
+    "neverExpires": "Token aktif selamanya (tanpa kadaluarsa)",
+    "accessAllFeatures": "Akses ke semua fitur AI",
+    "prioritySupport": "Dukungan pelanggan",
+    "customPlan": "Butuh paket token khusus untuk enterprise?",
     "contactUs": "Hubungi kami",
     "comingSoonTitle": "Coming Soon!",
-    "comingSoonDescription": "Fitur ini akan segera hadir",
+    "comingSoonDescription": "Fitur pembelian token akan segera hadir",
     "estimator": {
-      "badge": "Usage Estimator",
-      "title": "Belum Yakin Paket Mana yang Tepat?",
-      "subtitle": "Estimasi penggunaan AI bulanan Anda dan kami akan merekomendasikan paket paling hemat untuk Anda.",
+      "badge": "Kalkulator Token",
+      "title": "Belum Yakin Berapa Token yang Anda Butuhkan?",
+      "subtitle": "Estimasi penggunaan AI bulanan Anda dan kami akan merekomendasikan paket token yang tepat.",
       "slidersTitle": "Seberapa aktif pemasaran Anda?",
-      "slidersSubtitle": "Sesuaikan slider dengan aktivitas bulanan Anda. Perkiraan kasar sudah cukup.",
-      "breakdown": "Rincian Token",
+      "slidersSubtitle": "Sesuaikan slider dengan estimasi aktivitas bulanan Anda.",
+      "breakdown": "Rincian Penggunaan Token",
       "estimatedTokens": "Estimasi Token / Bulan",
-      "recommendedPlan": "Paket Direkomendasikan",
+      "recommendedPlan": "Paket Token Rekomendasi",
       "additionalTokens": "Token Tambahan Diperlukan",
       "suggestedTopup": "Saran: paket {tokens} Token (~Rp {price}k)",
-      "planCost": "Biaya paket",
+      "planCost": "Biaya paket token",
       "topupCost": "Est. top-up",
       "notNeeded": "Tidak diperlukan",
-      "totalPerMonth": "Total / bulan"
+      "totalPerMonth": "Total Estimasi Biaya"
+    },
+    "usageGuide": {
+      "title": "Panduan Konsumsi Token",
+      "subtitle": "Penggunaan token per aksi AI di OPTIMARK",
+      "captions": "Caption & copy media sosial",
+      "captionsRate": "2 Token / post",
+      "articles": "Artikel blog & konten panjang",
+      "articlesRate": "5 Token / artikel",
+      "images": "Gambar & visual AI",
+      "imagesRate": "10 Token / gambar",
+      "seo": "Riset kata kunci & audit SEO",
+      "seoRate": "5 Token / audit",
+      "marketplace": "Kueri intelijen marketplace",
+      "marketplaceRate": "3 Token / kueri",
+      "ads": "Optimasi kampanye iklan",
+      "adsRate": "15 Token / kampanye"
     },
     "tiers": {
       "free": {

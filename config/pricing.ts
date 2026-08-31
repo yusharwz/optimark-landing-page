@@ -27,7 +27,56 @@ export interface PricingTier {
   featureKeys: Array<{ key: PricingFeatureKey; included: boolean }>;
 }
 
-/** Hardcoded pricing tiers (TBD: fetch from Back Office API) */
+export interface TokenPackage {
+  id: string;
+  tokens: number;
+  price: number;
+  pricePerToken: number;
+  savings?: string;
+  isPopular?: boolean;
+  isBestValue?: boolean;
+}
+
+export const TOKEN_PACKAGES: TokenPackage[] = [
+  {
+    id: "pack_100",
+    tokens: 100,
+    price: 100000,
+    pricePerToken: 1000,
+  },
+  {
+    id: "pack_300",
+    tokens: 300,
+    price: 270000,
+    pricePerToken: 900,
+    savings: "10%",
+  },
+  {
+    id: "pack_500",
+    tokens: 500,
+    price: 425000,
+    pricePerToken: 850,
+    savings: "15%",
+    isPopular: true,
+  },
+  {
+    id: "pack_1000",
+    tokens: 1000,
+    price: 800000,
+    pricePerToken: 800,
+    savings: "20%",
+  },
+  {
+    id: "pack_2500",
+    tokens: 2500,
+    price: 1875000,
+    pricePerToken: 750,
+    savings: "25%",
+    isBestValue: true,
+  },
+];
+
+/** Hardcoded pricing tiers (TBD: fetch from Back Office API) - Inactive for now */
 export const PRICING_TIERS: PricingTier[] = [
   {
     id: "free",
@@ -93,3 +142,4 @@ export const PRICING_TIERS: PricingTier[] = [
     ],
   },
 ];
+

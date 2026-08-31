@@ -56,8 +56,7 @@ export default async function PricingPage({ params }: Props) {
       <Header />
       <main className="relative pt-24">
         <div className="relative z-10">
-          {/* We keep showEstimator={false} as requested until business team provides update */}
-          <PricingSection showEstimator={false} />
+          <PricingSection showEstimator={true} />
         </div>
       </main>
       <Footer />
