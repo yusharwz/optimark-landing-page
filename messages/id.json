@@ -15,6 +15,34 @@
     "title": "Harga Token - OPTIMARK",
     "description": "Beli paket token Optimark sesuai kebutuhan bisnis Anda tanpa berlangganan bulanan. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
   },
+  "pricingTrialMetadata": {
+    "title": "Harga - OPTIMARK",
+    "description": "Mulai dengan free trial dan dapatkan akses penuh ke semua fitur AI OPTIMARK - perencanaan konten, SEO, iklan, serta pembuatan gambar dan video."
+  },
+  "pricingTrial": {
+    "badge": "Uji Coba Gratis",
+    "title": "Mulai gratis. Dapatkan semuanya.",
+    "subtitle": "Semua fitur AI OPTIMARK bisa dicoba gratis - tanpa kartu kredit.",
+    "tokenAmount": "1.000",
+    "tokenLabel": "token gratis",
+    "tokenGrant": "Langsung masuk ke akunmu saat daftar",
+    "priceNote": "Akses penuh, tanpa kartu kredit",
+    "featuresHeader": "Semua sudah termasuk:",
+    "features": [
+      "Perencana Konten dan penjadwalan otomatis",
+      "AI Content Maker - caption, artikel panjang, dan waktu posting terbaik",
+      "SEO Analyzer - riset, audit konten, dan pelacakan peringkat",
+      "Ads Manager",
+      "Pembuatan AI Image",
+      "Pembuatan AI Video",
+      "Koneksi Instagram, Facebook, dan TikTok",
+      "Dukungan pelanggan"
+    ],
+    "cta": "Mulai Gratis",
+    "footnote": "Tanpa kartu kredit. Bisa berhenti kapan saja.",
+    "contactLine": "Butuh paket khusus untuk tim Anda?",
+    "contactCta": "Hubungi kami"
+  },
   "faqMetadata": {
     "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
     "description": "Temukan jawaban atas pertanyaan yang sering diajukan tentang Optimark — fitur, harga, integrasi, dan cara memulai."

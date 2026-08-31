@@ -3,7 +3,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { Header } from "@/components/Header";
-import { PricingSection } from "@/components/PricingSection";
+// import { PricingSection } from "@/components/PricingSection"; // TEMP — restore setelah launch
+import { PricingFreeTrial } from "@/components/PricingFreeTrial";
 import { Footer } from "@/components/Footer";
 
 type Props = {
@@ -13,7 +14,8 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam } = await params;
   const locale = resolveLocale(localeParam);
-  const t = await getTranslations({ locale, namespace: "pricingMetadata" });
+  // const t = await getTranslations({ locale, namespace: "pricingMetadata" }); // TEMP — restore setelah launch
+  const t = await getTranslations({ locale, namespace: "pricingTrialMetadata" });
 
   const ogImage = buildOgImageUrl({
     title: t("title"),
@@ -56,11 +58,11 @@ export default async function PricingPage({ params }: Props) {
       <Header />
       <main className="relative pt-24">
         <div className="relative z-10">
-          <PricingSection showEstimator={true} />
+          {/* TEMP — restore setelah launch: <PricingSection showEstimator={true} /> */}
+          <PricingFreeTrial />
         </div>
       </main>
       <Footer />
     </div>
   );
 }
-

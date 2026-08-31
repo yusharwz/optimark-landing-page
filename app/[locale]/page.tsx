@@ -2,7 +2,7 @@ import { Header } from "@/components/Header";
 import { HeroSection } from "@/components/HeroSection";
 import { HeroFeaturesBackground } from "@/components/HeroFeaturesBackground";
 import { BentoFeaturesSection } from "@/components/BentoFeaturesSection";
-import { PricingSection } from "@/components/PricingSection";
+// import { PricingSection } from "@/components/PricingSection"; // TEMP — restore setelah launch
 import { ConnectSection } from "@/components/ConnectSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { ImageShowcaseSection } from "@/components/ImageShowcaseSection";
