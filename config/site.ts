@@ -51,5 +51,5 @@ export const WHATSAPP_URL = "https://wa.me/6288888888888";
  * An empty string disables the corresponding tag entirely — see
  * app/[locale]/layout.tsx — so nothing renders a broken `undefined`.
  */
-export const GTM_ID = "";
+export const GTM_ID = "GTM-WQSGHBQ2";
 export const GSC_VERIFICATION = "3h7lh6UwIhSr3y5NEqiclzIsqbbsuNWR7ysPwr3ab_Y";
