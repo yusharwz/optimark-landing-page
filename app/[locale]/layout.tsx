@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter, Special_Gothic_Condensed_One } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -36,6 +35,27 @@ type Props = {
  * on why they are not environment-driven. An empty string means "not set yet"
  * and skips the corresponding tag rather than rendering an undefined id.
  */
+
+/**
+ * Google Tag Manager, verbatim from the container's own install instructions.
+ *
+ * This is deliberately the raw snippet inlined into <head> rather than
+ * `@next/third-parties`. That component loads the tag through next/script with
+ * the `afterInteractive` strategy, which leaves nothing but a `<link rel=
+ * "preload">` in the served HTML and boots the tag from a client chunk after
+ * hydration. It works, but the SEO team verifies the install from view-source
+ * and asked for the snippet "as high in the <head> as possible", and an install
+ * they cannot see is an install they will not sign off on.
+ *
+ * There is no rendering cost to this: the snippet sets `j.async=true`, so
+ * gtm.js is still fetched asynchronously. Only the ~500-byte bootstrap below is
+ * synchronous.
+ */
+const GTM_SNIPPET = `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_ID}');`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -114,10 +134,12 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} translate="no" suppressHydrationWarning>
-      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
+      <head>
+        {/* Google Tag Manager — must stay as high in <head> as possible. */}
+        {GTM_ID && <script dangerouslySetInnerHTML={{ __html: GTM_SNIPPET }} />}
+      </head>
       <body className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}>
-        {/* `<GoogleTagManager>` only emits the JS tags, so the no-JS fallback
-            iframe is added by hand. It must stay the first thing in <body>. */}
+        {/* Google Tag Manager (noscript) — must stay first inside <body>. */}
         {GTM_ID && (
           <noscript>
             <iframe
