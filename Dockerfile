@@ -33,6 +33,13 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
+# No build args here on purpose. Every page is statically prerendered, so any
+# `NEXT_PUBLIC_*` value would have to be correct at build time — and .env is
+# excluded from the image by .dockerignore, so a variable nobody remembers to
+# set in CI yields a silently wrong site rather than a failure. The site URL,
+# GTM container id, and Search Console token are static in config/site.ts
+# instead. Add an ARG here only alongside code that actually reads it.
+
 # Disable analytics and telemetry
 RUN npx next telemetry disable
 

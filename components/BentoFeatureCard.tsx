@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import type { LucideIcon } from "lucide-react";
+import { ArrowRight, type LucideIcon } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { cx } from "@/utils/cx";
 
@@ -26,6 +26,12 @@ type BentoFeatureCardProps = {
   highlight?: boolean;
   /** When set, the whole card becomes a link to this route. */
   href?: string;
+  /**
+   * Label for the in-card CTA. The whole card is already the link, so this
+   * renders as a styled `<span>`, never a nested `<a>` — it exists purely to
+   * make the card read as clickable. Ignored when there is no `href`.
+   */
+  ctaLabel?: string;
   className?: string;
 };
 
@@ -44,6 +50,7 @@ export function BentoFeatureCard({
   featured,
   highlight,
   href,
+  ctaLabel,
   className,
 }: BentoFeatureCardProps) {
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement | HTMLAnchorElement>) => {
@@ -70,6 +77,27 @@ export function BentoFeatureCard({
     className,
   );
 
+  /**
+   * The card as a whole is the link, so the CTA is a styled `<span>`, never an
+   * `<a>` — nesting anchors is invalid markup and would split the click target.
+   * It exists because a card that only *looks* like a card gives no hint that
+   * it navigates anywhere.
+   */
+  const renderCta = (onDark: boolean) =>
+    href && ctaLabel ? (
+      <span
+        className={cx(
+          "mt-6 inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors",
+          onDark
+            ? "bg-white/15 text-white backdrop-blur-sm group-hover:bg-white/25"
+            : "bg-brand-500 text-[#1E280E] group-hover:bg-brand-600",
+        )}
+      >
+        {ctaLabel}
+        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+      </span>
+    ) : null;
+
   const showcaseContent = (
     <>
       <div className="absolute inset-0 z-0 transition-transform duration-500 group-hover:scale-105">
@@ -89,6 +117,7 @@ export function BentoFeatureCard({
           <h3 className="text-2xl font-semibold tracking-tight text-white">{title}</h3>
         </div>
         <p className="text-base leading-relaxed text-white/80">{description}</p>
+        {renderCta(true)}
       </div>
     </>
   );
@@ -129,6 +158,7 @@ export function BentoFeatureCard({
           <h3 className="text-display text-2xl">{title}</h3>
         </div>
         <p className="text-detail text-base">{description}</p>
+        {renderCta(false)}
       </div>
 
       {illustration && (
