@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
+    "@next/third-parties": "^16.3.4",
     "@react-aria/utils": "^3.33.1",
     "@react-stately/utils": "^3.11.0",
     "@react-types/shared": "^3.33.1",

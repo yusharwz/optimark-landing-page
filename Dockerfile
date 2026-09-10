@@ -33,6 +33,24 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
+# Public config must exist at BUILD time, not just at runtime: every page here is
+# statically prerendered, so `NEXT_PUBLIC_*` values are baked into the HTML and
+# client bundles by `next build`. .env / .env.local are excluded by .dockerignore
+# and .gitignore, so without these args the build silently falls back to
+# localhost (see getBaseUrl in lib/og.ts) and ships that to production.
+#
+# These are all public values — the site URL and the GTM container id are visible
+# in any visitor's view-source. Never pass a real secret as a build arg; it is
+# recorded in the image history.
+ARG NEXT_PUBLIC_SITE_URL
+ARG NEXT_PUBLIC_CLIENT_AREA_URL
+ARG NEXT_PUBLIC_GTM_ID
+ARG NEXT_PUBLIC_GSC_VERIFICATION
+ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
+ENV NEXT_PUBLIC_CLIENT_AREA_URL=$NEXT_PUBLIC_CLIENT_AREA_URL
+ENV NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID
+ENV NEXT_PUBLIC_GSC_VERIFICATION=$NEXT_PUBLIC_GSC_VERIFICATION
+
 # Disable analytics and telemetry
 RUN npx next telemetry disable
 

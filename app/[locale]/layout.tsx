@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter, Special_Gothic_Condensed_One } from "next/font/google";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
@@ -29,6 +30,18 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
+/**
+ * Google Tag Manager container id, and the Search Console ownership token.
+ *
+ * Both are read at module scope because every page here is statically
+ * prerendered — these resolve at build time, which is why the Dockerfile takes
+ * them as build args. Both are optional: with the env unset (a local `pnpm dev`
+ * or a plain `pnpm build`) the tag and the meta tag simply do not render, rather
+ * than shipping a broken `undefined` container id.
+ */
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
+const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -51,6 +64,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     other: {
       google: "notranslate",
     },
+    // Emits <meta name="google-site-verification"> for Search Console ownership.
+    ...(GSC_VERIFICATION ? { verification: { google: GSC_VERIFICATION } } : {}),
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -104,7 +119,20 @@ export default async function LocaleLayout({ children, params }: Props) {
 
   return (
     <html lang={locale} translate="no" suppressHydrationWarning>
+      {GTM_ID && <GoogleTagManager gtmId={GTM_ID} />}
       <body className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}>
+        {/* `<GoogleTagManager>` only emits the JS tags, so the no-JS fallback
+            iframe is added by hand. It must stay the first thing in <body>. */}
+        {GTM_ID && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
             <ThemeProvider>
