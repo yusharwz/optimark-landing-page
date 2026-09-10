@@ -55,6 +55,18 @@ export const GTM_ID = "GTM-WQSGHBQ2";
 export const GSC_VERIFICATION = "3h7lh6UwIhSr3y5NEqiclzIsqbbsuNWR7ysPwr3ab_Y";
 
 /**
+ * GA4 measurement id for the "Optimark AI" web stream.
+ *
+ * Loaded directly via gtag.js rather than as a tag inside the GTM container.
+ *
+ * IMPORTANT: these two must not both send GA4. If a Google Tag for
+ * G-YNXD0DYDQ0 is ever added to container GTM-WQSGHBQ2, every pageview will be
+ * counted twice — once from here and once from GTM. Whoever adds it there must
+ * blank this constant in the same change.
+ */
+export const GA_MEASUREMENT_ID = "G-YNXD0DYDQ0";
+
+/**
  * Canonical origin, used for metadataBase, OG image URLs, the sitemap, and
  * robots.txt. No trailing slash.
  *
