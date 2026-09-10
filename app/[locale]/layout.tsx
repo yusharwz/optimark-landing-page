@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { RouteProvider } from "@/providers/route-provider";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { routing } from "@/i18n/routing";
-import { GSC_VERIFICATION, GTM_ID } from "@/config/site";
+import { GA_MEASUREMENT_ID, GSC_VERIFICATION, GTM_ID } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl, getBaseUrl } from "@/lib/og";
 import "@/styles/globals.css";
@@ -56,6 +56,20 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','${GTM_ID}');`;
+
+/**
+ * GA4 bootstrap, the standard gtag.js snippet. gtag.js itself is loaded with
+ * `async`, so only this stub is synchronous.
+ *
+ * Note it writes into the same `dataLayer` array GTM uses — that is by design
+ * and how Google's own instructions read; the two coexist. What they must not
+ * do is both configure G-YNXD0DYDQ0, or pageviews double-count. See the note in
+ * config/site.ts.
+ */
+const GA_SNIPPET = `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${GA_MEASUREMENT_ID}');`;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -137,6 +151,17 @@ export default async function LocaleLayout({ children, params }: Props) {
       <head>
         {/* Google Tag Manager — must stay as high in <head> as possible. */}
         {GTM_ID && <script dangerouslySetInnerHTML={{ __html: GTM_SNIPPET }} />}
+
+        {/* Google Analytics 4 (gtag.js) */}
+        {GA_MEASUREMENT_ID && (
+          <>
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+            />
+            <script dangerouslySetInnerHTML={{ __html: GA_SNIPPET }} />
+          </>
+        )}
       </head>
       <body className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}>
         {/* Google Tag Manager (noscript) — must stay first inside <body>. */}
