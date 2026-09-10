@@ -53,3 +53,13 @@ export const WHATSAPP_URL = "https://wa.me/6288888888888";
  */
 export const GTM_ID = "GTM-WQSGHBQ2";
 export const GSC_VERIFICATION = "3h7lh6UwIhSr3y5NEqiclzIsqbbsuNWR7ysPwr3ab_Y";
+
+/**
+ * Canonical origin, used for metadataBase, OG image URLs, the sitemap, and
+ * robots.txt. No trailing slash.
+ *
+ * Static for the same reason as the ids above: every page is prerendered, so
+ * this has to be correct at build time, and a build arg that nobody remembers
+ * to set produces a silently wrong site rather than a failure.
+ */
+export const SITE_URL = "https://optimark.ai";

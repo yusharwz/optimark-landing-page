@@ -33,23 +33,12 @@ COPY . .
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 
-# Public config must exist at BUILD time, not just at runtime: every page here is
-# statically prerendered, so `NEXT_PUBLIC_*` values are baked into the HTML and
-# client bundles by `next build`. .env / .env.local are excluded by .dockerignore
-# and .gitignore, so without these args the build silently falls back to
-# localhost (see getBaseUrl in lib/og.ts) and ships that to production.
-#
-# These are all public values — the site URL and the GTM container id are visible
-# in any visitor's view-source. Never pass a real secret as a build arg; it is
-# recorded in the image history.
-# The GTM container id and the Search Console token used to live here too. They
-# are static values in config/site.ts now, so passing them as build args would
-# do nothing — a variable set in CI that silently has no effect is worse than no
-# variable at all.
-ARG NEXT_PUBLIC_SITE_URL
-ARG NEXT_PUBLIC_CLIENT_AREA_URL
-ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
-ENV NEXT_PUBLIC_CLIENT_AREA_URL=$NEXT_PUBLIC_CLIENT_AREA_URL
+# No build args here on purpose. Every page is statically prerendered, so any
+# `NEXT_PUBLIC_*` value would have to be correct at build time — and .env is
+# excluded from the image by .dockerignore, so a variable nobody remembers to
+# set in CI yields a silently wrong site rather than a failure. The site URL,
+# GTM container id, and Search Console token are static in config/site.ts
+# instead. Add an ARG here only alongside code that actually reads it.
 
 # Disable analytics and telemetry
 RUN npx next telemetry disable

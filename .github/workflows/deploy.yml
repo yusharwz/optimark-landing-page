@@ -57,12 +57,6 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          # Public config, needed at build time because the site is statically
-          # prerendered. Repository/environment *variables*, not secrets — these
-          # end up in the image history and in the shipped HTML either way.
-          build-args: |
-            NEXT_PUBLIC_SITE_URL=${{ vars.NEXT_PUBLIC_SITE_URL }}
-            NEXT_PUBLIC_CLIENT_AREA_URL=${{ vars.NEXT_PUBLIC_CLIENT_AREA_URL }}
           tags: |
             ${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}
             ${{ steps.image.outputs.name }}:production
