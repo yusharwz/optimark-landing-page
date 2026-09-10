@@ -70,6 +70,9 @@
     "description": "Dari SEO, konten, scheduling, hingga publishing — dalam satu platform.",
     "cta": "Mulai Gratis",
     "ctaSecondary": "Jelajahi fitur",
+    "ctaAccount": "Buat Akun Gratis",
+    "ctaToken": "Klaim Free Token",
+    "ctaWhatsapp": "Tanya via WhatsApp",
     "imageAlt": "Ilustrasi dashboard Optimark",
     "switcher": {
       "content": "Buat konten lebih cepat",
@@ -84,6 +87,7 @@
     "subtitle": "Kami menyediakan berbagai fitur unggulan untuk membantu strategi pemasaran digital menjadi lebih efektif dan efisien.",
     "availableNow": "Available Now",
     "comingSoon": "Coming soon",
+    "learnMore": "Pelajari selengkapnya",
     "items": {
       "perencana": {
         "title": "Perencana Konten",
@@ -92,10 +96,6 @@
       "seo": {
         "title": "SEO Analyzer",
         "description": "Satu ruang kerja SEO: riset ide konten dan kata kunci, audit draf sebelum publish (skor 0-100, kepadatan kata kunci, struktur heading, keterbacaan), lalu pantau pergerakan peringkat, profil backlink, dan pesaing Anda dari satu dashboard."
-      },
-      "ads": {
-        "title": "Ads Manager",
-        "description": "Kelola dan optimalkan kampanye iklan untuk meningkatkan traffic dan konversi secara signifikan."
       },
       "ai": {
         "title": "AI Content Maker",
@@ -277,7 +277,8 @@
     }
   },
   "connect": {
-    "title": "Hubungkan ke berbagai akun"
+    "title": "Hubungkan Akun Social Media Anda",
+    "description": "Hubungkan akun social media Anda ke Optimark untuk memudahkan penjadwalan dan publikasi konten di berbagai platform."
   },
   "cta": {
     "title": "Siap mengembangkan bisnis digital Anda?",

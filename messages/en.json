@@ -70,6 +70,9 @@
     "description": "From SEO and content to scheduling and publishing — one platform.",
     "cta": "Start Free",
     "ctaSecondary": "Explore features",
+    "ctaAccount": "Create Free Account",
+    "ctaToken": "Claim Free Tokens",
+    "ctaWhatsapp": "Ask on WhatsApp",
     "imageAlt": "Optimark dashboard illustration",
     "switcher": {
       "content": "Create content faster",
@@ -84,6 +87,7 @@
     "subtitle": "We provide premium features to help your digital marketing strategy become more effective and efficient.",
     "availableNow": "Available Now",
     "comingSoon": "Coming soon",
+    "learnMore": "Learn more",
     "items": {
       "perencana": {
         "title": "Content Planner",
@@ -92,10 +96,6 @@
       "seo": {
         "title": "SEO Analyzer",
         "description": "One SEO workspace: research content ideas and keywords, audit a draft before you publish (0-100 score, keyword density, heading structure, readability), then track ranking movement, backlink profile, and competitors from a single dashboard."
-      },
-      "ads": {
-        "title": "Ads Manager",
-        "description": "Manage and optimize ad campaigns to significantly increase traffic and conversions."
       },
       "ai": {
         "title": "AI Content Maker",
@@ -277,7 +277,8 @@
     }
   },
   "connect": {
-    "title": "Connect to various accounts"
+    "title": "Connect Your Social Media Accounts",
+    "description": "Connect your social media accounts to Optimark to streamline content scheduling and publishing across multiple platforms."
   },
   "cta": {
     "title": "Ready to grow your digital business?",
