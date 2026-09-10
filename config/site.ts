@@ -35,3 +35,21 @@ export const GET_STARTED_URL = `${CLIENT_AREA_URL}/login`;
  * the number itself as pending.
  */
 export const WHATSAPP_URL = "https://wa.me/6288888888888";
+
+/**
+ * Analytics / search-console identifiers.
+ *
+ * Hardcoded on purpose rather than read from the environment: both are public
+ * values that ship in the HTML of every page anyway, and keeping them here
+ * means a deploy does not depend on anyone setting a CI variable first.
+ *
+ * The trade-off is that they are baked in for every environment. UAT-81 asks
+ * for a UAT container id separate from production; with a static id, UAT and
+ * production report into the *same* GTM container. Move these back to build
+ * args if that separation becomes a requirement.
+ *
+ * An empty string disables the corresponding tag entirely — see
+ * app/[locale]/layout.tsx — so nothing renders a broken `undefined`.
+ */
+export const GTM_ID = "";
+export const GSC_VERIFICATION = "3h7lh6UwIhSr3y5NEqiclzIsqbbsuNWR7ysPwr3ab_Y";

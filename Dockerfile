@@ -42,14 +42,14 @@ ENV NODE_ENV=production
 # These are all public values — the site URL and the GTM container id are visible
 # in any visitor's view-source. Never pass a real secret as a build arg; it is
 # recorded in the image history.
+# The GTM container id and the Search Console token used to live here too. They
+# are static values in config/site.ts now, so passing them as build args would
+# do nothing — a variable set in CI that silently has no effect is worse than no
+# variable at all.
 ARG NEXT_PUBLIC_SITE_URL
 ARG NEXT_PUBLIC_CLIENT_AREA_URL
-ARG NEXT_PUBLIC_GTM_ID
-ARG NEXT_PUBLIC_GSC_VERIFICATION
 ENV NEXT_PUBLIC_SITE_URL=$NEXT_PUBLIC_SITE_URL
 ENV NEXT_PUBLIC_CLIENT_AREA_URL=$NEXT_PUBLIC_CLIENT_AREA_URL
-ENV NEXT_PUBLIC_GTM_ID=$NEXT_PUBLIC_GTM_ID
-ENV NEXT_PUBLIC_GSC_VERIFICATION=$NEXT_PUBLIC_GSC_VERIFICATION
 
 # Disable analytics and telemetry
 RUN npx next telemetry disable

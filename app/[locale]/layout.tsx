@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { RouteProvider } from "@/providers/route-provider";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
 import { routing } from "@/i18n/routing";
+import { GSC_VERIFICATION, GTM_ID } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl, getBaseUrl } from "@/lib/og";
 import "@/styles/globals.css";
@@ -31,16 +32,10 @@ type Props = {
 };
 
 /**
- * Google Tag Manager container id, and the Search Console ownership token.
- *
- * Both are read at module scope because every page here is statically
- * prerendered — these resolve at build time, which is why the Dockerfile takes
- * them as build args. Both are optional: with the env unset (a local `pnpm dev`
- * or a plain `pnpm build`) the tag and the meta tag simply do not render, rather
- * than shipping a broken `undefined` container id.
+ * Both ids are static, public values from config/site.ts — see the note there
+ * on why they are not environment-driven. An empty string means "not set yet"
+ * and skips the corresponding tag rather than rendering an undefined id.
  */
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION;
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
