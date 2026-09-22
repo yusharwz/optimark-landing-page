@@ -151,14 +151,6 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <Link
-                    href="/about"
-                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
-                  >
-                    {t("links.about")}
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/privacy-policy"
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >

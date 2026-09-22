@@ -55,14 +55,6 @@
     "title": "Product Overview - OPTIMARK",
     "description": "Lihat apa saja yang bisa dikerjakan di Optimark: perencanaan konten, audit SEO, pembuatan visual AI, sampai penjadwalan publikasi — dari satu akun dan satu saldo token."
   },
-  "aboutMetadata": {
-    "title": "Tentang Kami - OPTIMARK",
-    "description": "Optimark dibangun oleh PT Usaha Kreatif Indonesia untuk tim pemasaran dan pemilik usaha di Indonesia. Token dibeli sesuai kebutuhan, aktif selamanya, tanpa langganan bulanan."
-  },
-  "aboutV2Metadata": {
-    "title": "Tentang Optimark - OPTIMARK",
-    "description": "Optimark adalah platform digital marketing berbasis AI dari PT Usaha Kreatif Indonesia. Kenali visi, misi, alasan memilih Optimark, dan cara kami menjaga data Anda."
-  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Buka menu",
@@ -71,8 +63,7 @@
       "features": "Fitur",
       "pricing": "Harga",
       "faq": "FAQ",
-      "blog": "Blog",
-      "about": "Tentang Kami"
+      "blog": "Blog"
     },
     "signIn": "Masuk",
     "getStarted": "Mulai Sekarang"
@@ -316,7 +307,6 @@
       "pricing": "Pilihan Harga",
       "faq": "FAQ",
       "blog": "Blog",
-      "about": "Tentang Kami",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",
@@ -739,237 +729,6 @@
         "Tarif per pekerjaan tertulis sebelum Anda bayar"
       ],
       "linkLabel": "Lihat tarif token lengkap"
-    }
-  },
-  "about": {
-    "badge": "Tentang Kami",
-    "title": "Kami bangun alat yang kami sendiri butuhkan",
-    "description": "Optimark lahir dari pekerjaan pemasaran sehari-hari: terlalu banyak tab, terlalu banyak langganan, dan tagihan yang baru ketahuan di akhir bulan. Kami rapikan semuanya jadi satu tempat dengan harga yang bisa Anda hitung sendiri sebelum mendaftar.",
-    "ctaPrimary": "Mulai Gratis",
-    "ctaSecondary": "Tanya via WhatsApp",
-    "ctaNote": "Tanpa kartu kredit",
-    "story": {
-      "badge": "Cerita singkat",
-      "title": "Dari tujuh langganan jadi satu platform",
-      "paragraphs": [
-        "Tim pemasaran kecil di Indonesia hampir selalu bekerja dengan tumpukan alat: satu untuk menjadwalkan posting, satu untuk riset kata kunci, satu lagi untuk bikin gambar, dan satu spreadsheet untuk menjahit semuanya. Masing-masing menagih bulanan dalam dolar, dan hampir semuanya dipakai jauh di bawah kapasitas.",
-        "Yang paling merepotkan bukan harganya, tapi tidak bisa ditebaknya. Bulan sepi tetap ditagih penuh. Bulan sibuk tiba-tiba kena limit. Tidak ada satu pun dari alat itu yang bisa menjawab pertanyaan sederhana: bulan ini saya sebenarnya habis berapa, untuk apa saja.",
-        "Optimark menjawab dua hal itu sekaligus. Semua pekerjaan konten ada di satu tempat, dan biayanya dihitung per pekerjaan dengan tarif yang tertulis terbuka. Tidak ada langganan yang jalan diam-diam saat Anda sedang tidak memakainya."
-      ],
-      "steps": {
-        "problem": {
-          "label": "Masalahnya",
-          "text": "Alat tersebar di banyak langganan, biaya tidak bisa diprediksi, dan tidak ada yang tahu persis anggarannya lari ke mana."
-        },
-        "action": {
-          "label": "Yang kami kerjakan",
-          "text": "Satukan perencanaan konten, audit SEO, pembuatan visual, dan optimasi iklan dalam satu platform dengan tarif per pekerjaan."
-        },
-        "result": {
-          "label": "Hasilnya",
-          "text": "Satu tempat kerja, satu saldo token yang bisa dihitung sendiri, dan tidak ada tagihan bulanan yang berjalan tanpa dipakai."
-        }
-      }
-    },
-    "principles": {
-      "badge": "Cara kami bekerja",
-      "title": "Tiga hal yang kami pegang",
-      "description": "Bukan nilai-nilai yang ditempel di dinding kantor. Ketiganya menentukan keputusan produk yang kami ambil, termasuk yang tidak populer.",
-      "items": {
-        "transparent": {
-          "title": "Transparan sampai ke angkanya",
-          "description": "Tarif token per pekerjaan tertulis di halaman harga, bukan di dokumen terpisah setelah Anda mendaftar. Kalau sebuah biaya tidak bisa Anda hitung sendiri sebelum bayar, itu bukan harga yang transparan."
-        },
-        "efficient": {
-          "title": "Cepat, tapi tetap Anda yang memutuskan",
-          "description": "AI memangkas waktu dari halaman kosong ke draf pertama. Hasilnya tetap draf — Anda yang paling tahu cara pelanggan Anda bicara, dan kami tidak berpura-pura sebaliknya."
-        },
-        "local": {
-          "title": "Dibuat untuk pasar Indonesia",
-          "description": "Bahasa, gaya penulisan, platform yang dipakai, dan kebiasaan audiensnya. Bukan alat asing yang diterjemahkan setengah jalan lalu ditinggal."
-        }
-      }
-    },
-    "commitments": {
-      "title": "Janji yang bisa Anda tagih",
-      "description": "Empat hal ini bukan promo peluncuran. Ini cara model harga kami bekerja.",
-      "linkLabel": "Lihat rincian harga",
-      "items": {
-        "neverExpires": {
-          "title": "Token aktif selamanya",
-          "description": "Tidak ada masa kadaluarsa. Token yang tidak terpakai tetap ada saat kampanye berikutnya jalan."
-        },
-        "noSubscription": {
-          "title": "Tanpa langganan bulanan",
-          "description": "Beli token sesuai kebutuhan. Bulan yang sepi tidak menghasilkan tagihan apa pun."
-        },
-        "countable": {
-          "title": "Biaya bisa dihitung di muka",
-          "description": "Tarif per caption, audit, gambar, dan kampanye tertulis terbuka sebelum Anda mendaftar."
-        },
-        "honest": {
-          "title": "Jelas soal batasnya",
-          "description": "Kami sebutkan apa yang belum bisa dikerjakan AI, bukan cuma yang bisa. Ekspektasi yang meleset lebih mahal daripada fitur yang belum ada."
-        }
-      }
-    },
-    "pillars": {
-      "badge": "Yang kami bangun",
-      "title": "Satu platform, lima modul kerja",
-      "description": "Setiap modul berdiri sendiri, tapi dipakai dari satu akun dan satu saldo token yang sama.",
-      "linkLabel": "Pelajari"
-    },
-    "company": {
-      "badge": "Perusahaan",
-      "title": "Siapa di balik Optimark",
-      "description": "Optimark adalah produk dari PT Usaha Kreatif Indonesia. Kalau ada yang ingin ditanyakan sebelum mencoba, hubungi kami langsung — pertanyaan pra-penjualan dijawab orang, bukan bot.",
-      "legalEntityLabel": "Badan hukum",
-      "legalEntityValue": "PT Usaha Kreatif Indonesia",
-      "productLabel": "Produk",
-      "productValue": "Optimark — platform digital marketing berbasis AI",
-      "emailLabel": "Email",
-      "whatsappLabel": "WhatsApp",
-      "whatsappValue": "Tanya sebelum mencoba"
-    }
-  },
-  "aboutV2": {
-    "hero": {
-      "badge": "Tentang Optimark",
-      "title": "Kerjakan Pemasaran Digital Anda Lebih Ringkas Bersama Optimark",
-      "description": "Satu platform untuk merencanakan konten, menulis, mengaudit SEO, membuat visual, dan menjadwalkan publikasi. Dibeli per pemakaian, bukan per bulan.",
-      "ctaPrimary": "Buka Akun Gratis",
-      "ctaSecondary": "Masuk",
-      "ctaNote": "Tanpa kartu kredit"
-    },
-    "who": {
-      "badge": "Siapa Kami",
-      "title": "Siapa Kami",
-      "paragraphs": [
-        "Optimark adalah platform digital marketing berbasis AI yang dikembangkan dan dioperasikan oleh PT Usaha Kreatif Indonesia. Kami membangunnya untuk tim pemasaran, pemilik usaha, dan kreator konten di Indonesia yang harus menghasilkan materi secara rutin tanpa tim besar.",
-        "Produk ini menggabungkan lima modul kerja — perencana konten, SEO Analyzer, AI Content Maker, AI Image, dan AI Video — dalam satu akun dan satu saldo token. Tidak ada langganan bulanan: Anda membeli token sesuai kebutuhan dan token itu tidak punya masa kadaluarsa.",
-        "Seluruh layanan dijalankan dengan syarat penggunaan dan kebijakan privasi yang dipublikasikan terbuka di situs ini, termasuk rincian data apa yang kami kumpulkan dan untuk apa dipakai."
-      ],
-      "highlights": {
-        "entity": {
-          "label": "Badan hukum",
-          "value": "PT Usaha Kreatif Indonesia"
-        },
-        "product": {
-          "label": "Produk",
-          "value": "Optimark"
-        },
-        "market": {
-          "label": "Fokus pasar",
-          "value": "Indonesia"
-        },
-        "model": {
-          "label": "Model harga",
-          "value": "Token, tanpa langganan"
-        }
-      }
-    },
-    "visionMission": {
-      "badge": "Visi & Misi",
-      "visionLabel": "Visi",
-      "vision": "Menjadi platform pemasaran digital yang paling mudah dipertanggungjawabkan di Indonesia — jelas hasilnya, jelas biayanya.",
-      "missionLabel": "Misi",
-      "missions": [
-        "Menyatukan pekerjaan konten yang selama ini tersebar di banyak alat ke dalam satu tempat kerja.",
-        "Menjaga harga tetap bisa dihitung sendiri oleh pengguna sebelum mereka membayar.",
-        "Menyediakan AI yang mempercepat pekerjaan tanpa mengambil alih keputusan dari penggunanya.",
-        "Menyesuaikan produk dengan bahasa, platform, dan kebiasaan audiens di Indonesia."
-      ]
-    },
-    "highlight": {
-      "badge": "Sorotan produk",
-      "title": "Audit sebelum tayang, bukan setelah peringkat mandek",
-      "description": "SEO Analyzer memeriksa draf artikel sebelum dipublikasikan dan memberi skor 0–100 beserta daftar hal yang belum terpenuhi — kepadatan kata kunci, struktur heading, dan keterbacaan. Perbaikan yang dikerjakan di tahap draf langsung menjadi versi pertama yang dilihat mesin pencari, tanpa menunggu perayapan ulang berminggu-minggu.",
-      "linkLabel": "Lihat SEO Analyzer",
-      "stats": {
-        "score": {
-          "value": "0–100",
-          "label": "Skor audit per draf"
-        },
-        "modules": {
-          "value": "5",
-          "label": "Modul dalam satu akun"
-        },
-        "platforms": {
-          "value": "4",
-          "label": "Platform tujuan publikasi"
-        }
-      }
-    },
-    "reasons": {
-      "badge": "Kenapa Optimark",
-      "title": "Kenapa Memilih Optimark",
-      "description": "Enam hal yang membedakan cara kerja kami, dan semuanya bisa Anda periksa sendiri sebelum mendaftar.",
-      "items": {
-        "allInOne": {
-          "title": "Satu platform, bukan tujuh langganan",
-          "description": "Perencanaan, penulisan, audit SEO, visual, dan penjadwalan ada di satu akun. Tidak perlu memindahkan file antar-alat setiap hari."
-        },
-        "payPerUse": {
-          "title": "Bayar sesuai pemakaian",
-          "description": "Token dibeli sesuai kebutuhan dan aktif selamanya. Bulan yang sepi tidak menghasilkan tagihan apa pun."
-        },
-        "noGimmick": {
-          "title": "Tanpa gimmick harga",
-          "description": "Tarif token per pekerjaan tertulis di halaman harga sebelum Anda mendaftar, bukan di dokumen yang baru muncul setelah pembayaran."
-        },
-        "localFirst": {
-          "title": "Dirancang untuk pasar Indonesia",
-          "description": "Bahasa, gaya penulisan, dan platform yang benar-benar dipakai di sini — bukan alat asing yang diterjemahkan setengah jalan."
-        },
-        "support": {
-          "title": "Pertanyaan dijawab orang",
-          "description": "Pertanyaan pra-penjualan bisa langsung lewat WhatsApp atau email, dijawab oleh tim kami, bukan bot balasan otomatis."
-        },
-        "ownership": {
-          "title": "Hasilnya tetap milik Anda",
-          "description": "Konten yang Anda buat adalah milik Anda. Ketentuan penggunaan dan kebijakan privasi kami terbuka untuk dibaca kapan saja."
-        }
-      }
-    },
-    "legal": {
-      "badge": "Legalitas",
-      "title": "Identitas Resmi",
-      "description": "Optimark dioperasikan oleh badan hukum Indonesia berikut. Dokumen ketentuan layanan dan kebijakan privasi berlaku untuk seluruh penggunaan platform.",
-      "entityLabel": "Badan hukum",
-      "entityValue": "PT Usaha Kreatif Indonesia",
-      "brandLabel": "Nama layanan",
-      "brandValue": "Optimark",
-      "emailLabel": "Email resmi",
-      "termsLabel": "Ketentuan Layanan",
-      "termsValue": "Baca dokumen lengkap",
-      "privacyLabel": "Kebijakan Privasi",
-      "privacyValue": "Baca dokumen lengkap",
-      "note": "Alamat kantor akan dicantumkan di sini setelah dikonfirmasi."
-    },
-    "security": {
-      "badge": "Keamanan",
-      "title": "Data Anda Dijaga",
-      "description": "Kami menerapkan langkah keamanan teknis dan organisasi untuk melindungi data Anda. Rinciannya tertulis di Kebijakan Privasi, bagian Penyimpanan dan Keamanan Data.",
-      "items": {
-        "encryption": {
-          "title": "Enkripsi saat transit dan penyimpanan",
-          "description": "Data dienkripsi menggunakan SSL/TLS ketika dikirim dan ketika disimpan."
-        },
-        "access": {
-          "title": "Kontrol akses terbatas",
-          "description": "Akses ke data pribadi dibatasi hanya untuk pihak yang memang membutuhkannya."
-        },
-        "monitoring": {
-          "title": "Pemantauan berkala",
-          "description": "Aktivitas keamanan platform dipantau secara berkala untuk mendeteksi penyalahgunaan."
-        },
-        "training": {
-          "title": "Pelatihan staf",
-          "description": "Staf yang menangani data pribadi mendapat pelatihan keamanan."
-        }
-      },
-      "disclaimer": "Tidak ada metode transmisi atau penyimpanan elektronik yang sepenuhnya aman, sehingga kami tidak menjanjikan keamanan mutlak. Kami menuliskannya apa adanya, sama seperti di Kebijakan Privasi.",
-      "linkLabel": "Baca Kebijakan Privasi"
     }
   }
 }

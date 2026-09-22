@@ -14,7 +14,6 @@ const ROUTES = [
   "/pricing",
   "/faq",
   "/blog",
-  "/about",
   "/privacy-policy",
   "/terms-of-service",
   "/features/ai-content-maker",
