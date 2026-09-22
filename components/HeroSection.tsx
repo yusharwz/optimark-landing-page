@@ -3,11 +3,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Sparkles, Clock } from "lucide-react";
+import { ArrowRight, Gift, MessageCircle, Sparkles, Clock } from "lucide-react";
 import { AiCaptionModal } from "./ai-caption";
 import { BestTimeModal } from "./best-time";
-import { heroBadge, heroTitle, heroDescription, heroImage } from "@/lib/animations";
-import { GET_STARTED_URL } from "@/config/site";
+import { heroBadge, heroTitle, heroDescription, heroButton, heroImage } from "@/lib/animations";
+import { GET_STARTED_URL, WHATSAPP_URL } from "@/config/site";
 
 /**
  * Hero background — a self-contained dark canvas scoped to this section only
@@ -134,16 +134,18 @@ export function HeroSection() {
       {/* Top padding must clear the fixed header, which ends ~88px down
           (top-4 + p-4 + row height). pt-24 left only ~8px of air under it. */}
       <div className="relative mx-auto flex w-full max-w-5xl flex-1 flex-col items-center px-4 pt-28 pb-8 text-center min-h-0 sm:px-6 lg:max-w-6xl lg:px-8 lg:pt-32 lg:pb-16">
-        {/* Badge */}
-        <motion.div
+        {/* Eyebrow — a plain tagline, deliberately not a pill/button. It is not
+            clickable, so it must not read as clickable: the only actionable
+            things in this hero are the three CTAs below. */}
+        <motion.p
           variants={heroBadge}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs backdrop-blur-sm sm:text-sm"
+          className="inline-flex items-center gap-2.5 text-[0.6875rem] font-semibold tracking-[0.22em] text-white/45 uppercase sm:text-xs"
         >
-          <span className="font-medium text-white/70">{t("badge")}</span>
-          <ArrowRight className="h-3.5 w-3.5 text-[#94C748]" />
-        </motion.div>
+          <span aria-hidden className="h-1 w-1 rounded-full bg-[#94C748]" />
+          {t("badge")}
+        </motion.p>
 
         {/* Tagline (unchanged copy) */}
         <motion.h1
@@ -164,30 +166,40 @@ export function HeroSection() {
           {t("description")}
         </motion.p>
 
-        {/* CTAs */}
-        {/* <motion.div
+        {/* CTAs. Three intents, in descending commitment: create an account,
+            claim the signup tokens, or ask a question first. The first two both
+            land on the register/login flow — free tokens are granted at signup
+            (see config/pricing.ts), so they are one action framed two ways. */}
+        <motion.div
           variants={heroButton}
           initial="hidden"
           animate="visible"
-          className="mt-8 flex flex-wrap items-center justify-center gap-4"
+          className="mt-7 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
         >
           <a
             href={GET_STARTED_URL}
-            className="group inline-flex items-center gap-2 rounded-full bg-[#94C748] px-6 py-3 text-sm font-semibold text-[#1E280E] transition hover:brightness-95"
+            className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#94C748] px-6 py-3 text-sm font-semibold text-[#1E280E] transition hover:brightness-95"
           >
-            {t("cta")}
+            {t("ctaAccount")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
-          <button
-            type="button"
-            className="group inline-flex items-center gap-3 text-sm font-semibold text-white/80 transition hover:text-white"
+          <a
+            href={GET_STARTED_URL}
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/10"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/5 transition group-hover:border-white/40">
-              <Play className="h-3.5 w-3.5 fill-current" />
-            </span>
-            {t("ctaSecondary")}
-          </button>
-        </motion.div> */}
+            <Gift className="h-4 w-4 text-[#94C748]" />
+            {t("ctaToken")}
+          </a>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white/70 transition hover:text-white"
+          >
+            <MessageCircle className="h-4 w-4" />
+            {t("ctaWhatsapp")}
+          </a>
+        </motion.div>
 
         {/* Options: centered segmented toggle (2 choices) */}
         <motion.div

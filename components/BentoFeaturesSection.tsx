@@ -214,6 +214,7 @@ export function BentoFeaturesSection() {
                 featured={id === FEATURED_ID}
                 highlight={id === "ai"}
                 href={featureHref(id)}
+                ctaLabel={t("learnMore")}
                 className={cx(id === FEATURED_ID ? "lg:row-span-2" : undefined, `bento-card-${id}`)}
               />
             );
@@ -232,6 +233,7 @@ export function BentoFeaturesSection() {
               badge={t("availableNow")}
               showcase={id === "aiImage" ? <AiImageShowcase /> : <AiVideoShowcase />}
               href={featureHref(id)}
+              ctaLabel={t("learnMore")}
             />
           ))}
         </div>

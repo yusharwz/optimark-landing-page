@@ -47,15 +47,18 @@ export function ConnectSection() {
       <BrandIconDefs />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row lg:items-center">
-          <div className="flex shrink-0 items-center justify-center border-[#E9EAEB] py-6 lg:w-64 lg:border-x lg:py-8">
-            <h2 className="text-center text-base font-bold text-[#1E280E] sm:text-lg lg:mx-8 lg:text-xl">
-              {t("title")}
-            </h2>
+        <div className="flex flex-col">
+          {/* The headline now carries a full sentence of supporting copy, which
+              the old 16rem side column could not hold without wrapping to ~8
+              lines — so the copy sits above the logo strip instead of beside
+              it, and the strip runs the full width. */}
+          <div className="mx-auto max-w-2xl pt-12 text-center lg:pt-16">
+            <h2 className="text-display text-2xl sm:text-3xl lg:text-4xl">{t("title")}</h2>
+            <p className="text-lead mt-4 text-base sm:text-lg">{t("description")}</p>
           </div>
 
-          <div className="flex w-full flex-1 shrink-0 items-center lg:flex-nowrap">
-            <div className="grid w-full grid-cols-4 gap-3 py-6 sm:gap-4 sm:py-8 lg:flex lg:flex-1 lg:grid-cols-none lg:gap-0 lg:py-0">
+          <div className="mt-8 flex w-full shrink-0 items-center lg:mt-12 lg:flex-nowrap">
+            <div className="grid w-full grid-cols-4 gap-3 pb-8 sm:gap-4 lg:flex lg:flex-1 lg:grid-cols-none lg:gap-0 lg:border-t lg:border-[#E9EAEB] lg:pb-0">
               {CONNECT_PLATFORMS.map((platform, index) => (
                 <motion.div
                   key={platform.name}
@@ -63,7 +66,7 @@ export function ConnectSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.04 }}
-                  className="flex min-w-0 items-center justify-center rounded-lg border border-[#E9EAEB] bg-zinc-50/80 p-3 sm:p-4 lg:min-w-0 lg:flex-1 lg:rounded-none lg:border-0 lg:border-r lg:border-[#E9EAEB] lg:bg-transparent lg:py-8"
+                  className="flex min-w-0 items-center justify-center rounded-lg border border-[#E9EAEB] bg-zinc-50/80 p-3 sm:p-4 lg:min-w-0 lg:flex-1 lg:rounded-none lg:border-0 lg:border-r lg:border-[#E9EAEB] lg:bg-transparent lg:py-8 lg:last:border-r-0"
                 >
                   <div className="relative h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 flex items-center justify-center">
                     <div className="connect-icon-gray absolute inset-0 opacity-100 flex items-center justify-center pointer-events-none">
