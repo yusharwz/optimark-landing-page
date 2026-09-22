@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getBaseUrl } from "@/lib/og";
+import { BLOG_POSTS, blogHref } from "@/config/blog";
 
 /**
  * Every indexable route, without a locale prefix.
@@ -12,6 +13,8 @@ const ROUTES = [
   "",
   "/pricing",
   "/faq",
+  "/blog",
+  "/about",
   "/privacy-policy",
   "/terms-of-service",
   "/features/ai-content-maker",
@@ -19,6 +22,9 @@ const ROUTES = [
   "/features/seo-analyzer",
   "/features/ai-image",
   "/features/ai-video",
+  // Post URLs come from config/blog.ts, so a new post lands in the sitemap
+  // without a second edit here.
+  ...BLOG_POSTS.map((post) => blogHref(post.slug)),
 ] as const;
 
 /**

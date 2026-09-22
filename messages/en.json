@@ -47,6 +47,22 @@
     "title": "Frequently Asked Questions - OPTIMARK",
     "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
   },
+  "blogMetadata": {
+    "title": "Blog - OPTIMARK",
+    "description": "Practical guides on SEO, social content, and what producing content actually costs. Written for marketing teams and business owners."
+  },
+  "productOverviewMetadata": {
+    "title": "Product Overview - OPTIMARK",
+    "description": "See what you can get done in Optimark: content planning, SEO auditing, AI visual production, and publish scheduling — from one account and one token balance."
+  },
+  "aboutMetadata": {
+    "title": "About Us - OPTIMARK",
+    "description": "Optimark is built by PT Usaha Kreatif Indonesia for marketing teams and business owners in Indonesia. Buy tokens as you need them, they never expire, and there is no monthly subscription."
+  },
+  "aboutV2Metadata": {
+    "title": "About Optimark - OPTIMARK",
+    "description": "Optimark is an AI-powered digital marketing platform by PT Usaha Kreatif Indonesia. Read our vision, mission, why teams choose Optimark, and how we protect your data."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
@@ -54,7 +70,9 @@
       "home": "Home",
       "features": "Features",
       "pricing": "Pricing",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "blog": "Blog",
+      "about": "About Us"
     },
     "signIn": "Sign In",
     "getStarted": "Get Started"
@@ -297,6 +315,8 @@
       "features": "Features",
       "pricing": "Pricing",
       "faq": "FAQ",
+      "blog": "Blog",
+      "about": "About Us",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
@@ -616,6 +636,340 @@
       "title": "Still have questions?",
       "description": "Can't find the answer you're looking for? Reach out directly to our customer support.",
       "cta": "Contact Support"
+    }
+  },
+  "blog": {
+    "badge": "Optimark Blog",
+    "title": "Working notes on content, SEO, and what it costs to produce",
+    "description": "Guides you can act on today. No long theory, no instant-results promises — just the order of steps and numbers you can check yourself.",
+    "sampleNotice": "The posts below are samples used to review the layout. Real content is on the way.",
+    "featuredLabel": "Featured",
+    "latestLabel": "Latest posts",
+    "allCategories": "All topics",
+    "readMore": "Read more",
+    "readTime": "{minutes} min read",
+    "empty": "No posts under this topic yet.",
+    "filterLabel": "Filter by topic",
+    "categories": {
+      "seo": "SEO",
+      "konten": "Content",
+      "bisnis": "Business & Cost"
+    },
+    "authors": {
+      "tim": "The Optimark Team"
+    },
+    "post": {
+      "back": "Back to blog",
+      "publishedOn": "Published {date}",
+      "shareLabel": "Share this post",
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "sampleNotice": "This is a sample article. Its contents are here to review the layout, not as final writing.",
+      "relatedTitle": "More reading",
+      "ctaTitle": "Try it on your own account",
+      "ctaDescription": "Write captions, audit article drafts, and schedule posts from one place. Buy tokens as you need them, with no monthly subscription.",
+      "ctaButton": "Start Free",
+      "ctaNote": "No credit card required"
+    }
+  },
+  "productOverview": {
+    "badge": "Product Overview",
+    "title": "All your content work, in one place",
+    "description": "Optimark brings planning, writing, SEO auditing, visual production, and scheduling into one platform. One account, one token balance, no monthly subscription.",
+    "ctaPrimary": "Start Free",
+    "ctaSecondary": "See pricing",
+    "ctaNote": "No credit card required",
+    "modules": {
+      "badge": "Modules",
+      "title": "Five modules running from the same account",
+      "description": "Each module works on its own, but they pay off most when used in sequence as a single workflow.",
+      "linkLabel": "Explore this module"
+    },
+    "workflow": {
+      "badge": "Workflow",
+      "title": "What one working cycle looks like",
+      "description": "These four steps are the most common day-to-day use. You can enter at any of them.",
+      "steps": {
+        "plan": {
+          "title": "Plan",
+          "description": "Build a content calendar across all your social accounts. See the windows with the highest engagement from your own account history, not from an industry average."
+        },
+        "create": {
+          "title": "Create",
+          "description": "Write captions, long-form articles, or generate product images from a short brief. Adjust the output with refinement chips until the tone fits."
+        },
+        "audit": {
+          "title": "Audit before publishing",
+          "description": "Check article drafts against a 0–100 score: keyword density, heading structure, and readability. Fix it before publishing, not after the ranking stalls."
+        },
+        "publish": {
+          "title": "Schedule & publish",
+          "description": "Send to Instagram, Facebook, TikTok, and Threads from one place. Scheduling costs no tokens — tokens are only spent when AI helps make the material."
+        }
+      }
+    },
+    "audience": {
+      "badge": "Who it is for",
+      "title": "Used by one person and by whole agencies",
+      "description": "The model is the same; only the volume changes. With no subscription, the cost rises and falls with what you actually use.",
+      "items": {
+        "owner": {
+          "title": "Owners doing it themselves",
+          "description": "No content team, and no need for one. Produce captions, product images, and a posting schedule without hiring anyone.",
+          "detail": "Typical: a dozen captions and a few images a month."
+        },
+        "team": {
+          "title": "Small content teams",
+          "description": "Two or three people covering several channels at once. A shared calendar, drafts that can be audited, and schedules that do not collide.",
+          "detail": "Typical: dozens of captions, regular articles, weekly visuals."
+        },
+        "agency": {
+          "title": "Agencies with several clients",
+          "description": "High volume and many revisions. Per-job rates make the cost per client something you calculate rather than guess from a subscription tier.",
+          "detail": "Typical: hundreds of assets a month across accounts."
+        }
+      }
+    },
+    "transparency": {
+      "title": "You can work the cost out before signing up",
+      "description": "Every AI job has a published token rate — captions, SEO audits, articles, images, and ad campaigns. Tokens are bought as you need them and never expire.",
+      "points": [
+        "No monthly subscription — a quiet month produces no bill",
+        "Tokens carry no expiry date",
+        "The rate per job is published before you pay"
+      ],
+      "linkLabel": "See the full token rates"
+    }
+  },
+  "about": {
+    "badge": "About Us",
+    "title": "We built the tool we needed ourselves",
+    "description": "Optimark came out of everyday marketing work: too many tabs, too many subscriptions, and a bill you only understood at the end of the month. We put it all in one place, at a price you can work out for yourself before signing up.",
+    "ctaPrimary": "Start Free",
+    "ctaSecondary": "Ask on WhatsApp",
+    "ctaNote": "No credit card required",
+    "story": {
+      "badge": "The short version",
+      "title": "From seven subscriptions to one platform",
+      "paragraphs": [
+        "Small marketing teams in Indonesia almost always work from a pile of tools: one to schedule posts, one for keyword research, another to make images, and a spreadsheet to stitch it all together. Each one bills monthly in dollars, and nearly all of them run far below capacity.",
+        "The hard part was never the price — it was the unpredictability. A quiet month still billed in full. A busy month hit a limit out of nowhere. And not one of those tools could answer a simple question: what did I actually spend this month, and on what?",
+        "Optimark answers both at once. Every content job lives in one place, and the cost is counted per job at rates written out in the open. No subscription runs quietly while you are not using it."
+      ],
+      "steps": {
+        "problem": {
+          "label": "The problem",
+          "text": "Tools scattered across subscriptions, costs nobody could predict, and no clear view of where the budget went."
+        },
+        "action": {
+          "label": "What we did",
+          "text": "Put content planning, SEO auditing, visual production, and ad optimisation in one platform priced per job."
+        },
+        "result": {
+          "label": "The result",
+          "text": "One place to work, one token balance you can calculate yourself, and no monthly bill running on an unused account."
+        }
+      }
+    },
+    "principles": {
+      "badge": "How we work",
+      "title": "Three things we hold to",
+      "description": "Not values pinned to an office wall. These three decide the product calls we make, including the unpopular ones.",
+      "items": {
+        "transparent": {
+          "title": "Transparent down to the numbers",
+          "description": "Token rates per job are printed on the pricing page, not in a separate document you find after signing up. If you cannot work a cost out for yourself before paying, it is not a transparent price."
+        },
+        "efficient": {
+          "title": "Fast, but you still decide",
+          "description": "AI cuts the time between a blank page and a first draft. What it gives you is still a draft — you know how your customers talk, and we do not pretend otherwise."
+        },
+        "local": {
+          "title": "Built for the Indonesian market",
+          "description": "The language, the writing style, the platforms in use, and how the audience actually behaves. Not a foreign tool half-translated and then left alone."
+        }
+      }
+    },
+    "commitments": {
+      "title": "Promises you can hold us to",
+      "description": "These four are not a launch promotion. They are how our pricing model works.",
+      "linkLabel": "See the pricing detail",
+      "items": {
+        "neverExpires": {
+          "title": "Tokens never expire",
+          "description": "No expiry date. Unused tokens are still there when the next campaign starts."
+        },
+        "noSubscription": {
+          "title": "No monthly subscription",
+          "description": "Buy tokens as you need them. A quiet month produces no bill at all."
+        },
+        "countable": {
+          "title": "Costs you can work out up front",
+          "description": "The rate per caption, audit, image, and campaign is published before you sign up."
+        },
+        "honest": {
+          "title": "Clear about the limits",
+          "description": "We say what the AI cannot do yet, not only what it can. A missed expectation costs more than a missing feature."
+        }
+      }
+    },
+    "pillars": {
+      "badge": "What we build",
+      "title": "One platform, five working modules",
+      "description": "Each module stands on its own, but they run from one account and share the same token balance.",
+      "linkLabel": "Learn more"
+    },
+    "company": {
+      "badge": "Company",
+      "title": "Who is behind Optimark",
+      "description": "Optimark is a product of PT Usaha Kreatif Indonesia. If something needs answering before you try it, reach us directly — pre-sales questions are answered by a person, not a bot.",
+      "legalEntityLabel": "Legal entity",
+      "legalEntityValue": "PT Usaha Kreatif Indonesia",
+      "productLabel": "Product",
+      "productValue": "Optimark — an AI-powered digital marketing platform",
+      "emailLabel": "Email",
+      "whatsappLabel": "WhatsApp",
+      "whatsappValue": "Ask before you try"
+    }
+  },
+  "aboutV2": {
+    "hero": {
+      "badge": "About Optimark",
+      "title": "Run Your Digital Marketing With Less Overhead, With Optimark",
+      "description": "One platform to plan content, write it, audit SEO, produce visuals, and schedule publishing. Paid per job, not per month.",
+      "ctaPrimary": "Open a Free Account",
+      "ctaSecondary": "Sign in",
+      "ctaNote": "No credit card required"
+    },
+    "who": {
+      "badge": "Who We Are",
+      "title": "Who We Are",
+      "paragraphs": [
+        "Optimark is an AI-powered digital marketing platform developed and operated by PT Usaha Kreatif Indonesia. We built it for marketing teams, business owners, and content creators in Indonesia who have to ship material regularly without a large team.",
+        "The product brings five working modules together — Content Planner, SEO Analyzer, AI Content Maker, AI Image, and AI Video — under one account and one token balance. There is no monthly subscription: you buy tokens as you need them, and those tokens never expire.",
+        "The service runs under terms and a privacy policy published openly on this site, including exactly what data we collect and what it is used for."
+      ],
+      "highlights": {
+        "entity": {
+          "label": "Legal entity",
+          "value": "PT Usaha Kreatif Indonesia"
+        },
+        "product": {
+          "label": "Product",
+          "value": "Optimark"
+        },
+        "market": {
+          "label": "Market focus",
+          "value": "Indonesia"
+        },
+        "model": {
+          "label": "Pricing model",
+          "value": "Tokens, no subscription"
+        }
+      }
+    },
+    "visionMission": {
+      "badge": "Vision & Mission",
+      "visionLabel": "Vision",
+      "vision": "To be the most accountable digital marketing platform in Indonesia — clear about results, and clear about cost.",
+      "missionLabel": "Mission",
+      "missions": [
+        "Bring the content work that is scattered across many tools into one workspace.",
+        "Keep pricing something users can work out for themselves before they pay.",
+        "Provide AI that speeds the work up without taking the decisions away from the person doing it.",
+        "Fit the product to the language, platforms, and audience habits of Indonesia."
+      ]
+    },
+    "highlight": {
+      "badge": "Product highlight",
+      "title": "Audit before publishing, not after the ranking stalls",
+      "description": "SEO Analyzer checks an article draft before it goes live and returns a 0–100 score with the list of items still unmet — keyword density, heading structure, and readability. A fix made at the draft stage becomes the first version search engines ever see, with no weeks of waiting on a recrawl.",
+      "linkLabel": "See SEO Analyzer",
+      "stats": {
+        "score": {
+          "value": "0–100",
+          "label": "Audit score per draft"
+        },
+        "modules": {
+          "value": "5",
+          "label": "Modules in one account"
+        },
+        "platforms": {
+          "value": "4",
+          "label": "Publishing destinations"
+        }
+      }
+    },
+    "reasons": {
+      "badge": "Why Optimark",
+      "title": "Why Teams Choose Optimark",
+      "description": "Six things that set how we work apart — and every one of them is something you can check before signing up.",
+      "items": {
+        "allInOne": {
+          "title": "One platform, not seven subscriptions",
+          "description": "Planning, writing, SEO auditing, visuals, and scheduling in a single account. No moving files between tools every day."
+        },
+        "payPerUse": {
+          "title": "Pay for what you use",
+          "description": "Tokens are bought as needed and never expire. A quiet month produces no bill at all."
+        },
+        "noGimmick": {
+          "title": "No pricing gimmicks",
+          "description": "Token rates per job are printed on the pricing page before you sign up, not in a document that appears after payment."
+        },
+        "localFirst": {
+          "title": "Designed for the Indonesian market",
+          "description": "The language, the writing style, and the platforms actually used here — not a foreign tool half-translated."
+        },
+        "support": {
+          "title": "Questions answered by people",
+          "description": "Pre-sales questions go straight to WhatsApp or email and are answered by our team, not an auto-reply bot."
+        },
+        "ownership": {
+          "title": "The output stays yours",
+          "description": "The content you create belongs to you. Our terms of service and privacy policy are open to read at any time."
+        }
+      }
+    },
+    "legal": {
+      "badge": "Legal",
+      "title": "Official Identity",
+      "description": "Optimark is operated by the Indonesian legal entity below. The terms of service and privacy policy apply to all use of the platform.",
+      "entityLabel": "Legal entity",
+      "entityValue": "PT Usaha Kreatif Indonesia",
+      "brandLabel": "Service name",
+      "brandValue": "Optimark",
+      "emailLabel": "Official email",
+      "termsLabel": "Terms of Service",
+      "termsValue": "Read the full document",
+      "privacyLabel": "Privacy Policy",
+      "privacyValue": "Read the full document",
+      "note": "The office address will be listed here once it is confirmed."
+    },
+    "security": {
+      "badge": "Security",
+      "title": "Your Data Is Protected",
+      "description": "We apply technical and organisational security measures to protect your data. The detail is written out in the Privacy Policy, under Data Storage and Security.",
+      "items": {
+        "encryption": {
+          "title": "Encrypted in transit and at rest",
+          "description": "Data is encrypted with SSL/TLS both when sent and when stored."
+        },
+        "access": {
+          "title": "Restricted access control",
+          "description": "Access to personal data is limited to those who genuinely need it."
+        },
+        "monitoring": {
+          "title": "Regular monitoring",
+          "description": "Platform security activity is monitored regularly to detect misuse."
+        },
+        "training": {
+          "title": "Staff training",
+          "description": "Staff who handle personal data receive security training."
+        }
+      },
+      "disclaimer": "No method of electronic transmission or storage is completely secure, so we do not promise absolute security. We state it plainly here, exactly as the Privacy Policy does.",
+      "linkLabel": "Read the Privacy Policy"
     }
   }
 }
