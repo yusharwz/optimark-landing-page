@@ -14,6 +14,7 @@ const ROUTES = [
   "/pricing",
   "/faq",
   "/blog",
+  "/contact",
   "/privacy-policy",
   "/terms-of-service",
   "/features/ai-content-maker",
@@ -27,26 +28,29 @@ const ROUTES = [
 ] as const;
 
 /**
- * Routing uses `localePrefix: "as-needed"` with `defaultLocale: "en"`, so the
- * English pages live at the bare path and only Indonesian carries a `/id`
- * prefix. The canonical `url` is therefore the English one, with both locales
- * declared as `alternates` so Google pairs them instead of treating them as
- * duplicates.
+ * Routing uses `localePrefix: "as-needed"` with `defaultLocale: "id"`, so the
+ * Indonesian pages live at the bare path and only English carries an `/en`
+ * prefix. The canonical `url` is therefore the Indonesian one, with both
+ * locales declared as `alternates` so Google pairs them instead of treating
+ * them as duplicates.
+ *
+ * `/id/…` URLs are never listed: they only 308 to the bare path (see
+ * next.config.ts).
  */
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = getBaseUrl();
   const lastModified = new Date();
 
   return ROUTES.map((route) => {
-    const en = `${base}${route || "/"}`;
+    const id = `${base}${route || "/"}`;
 
     return {
-      url: en,
+      url: id,
       lastModified,
       alternates: {
         languages: {
-          en,
-          id: `${base}/id${route}`,
+          id,
+          en: `${base}/en${route}`,
         },
       },
     };

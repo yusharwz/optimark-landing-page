@@ -51,6 +51,10 @@
     "title": "Blog - OPTIMARK",
     "description": "Panduan praktis soal SEO, konten media sosial, dan biaya produksi konten. Ditulis untuk tim pemasaran dan pemilik usaha."
   },
+  "contactMetadata": {
+    "title": "Hubungi Kami - OPTIMARK",
+    "description": "Kirim pertanyaan soal fitur, harga token, atau kebutuhan tim Anda ke tim support Optimark. Atau hubungi kami langsung lewat WhatsApp, email, dan media sosial."
+  },
   "productOverviewMetadata": {
     "title": "Product Overview - OPTIMARK",
     "description": "Lihat apa saja yang bisa dikerjakan di Optimark: perencanaan konten, audit SEO, pembuatan visual AI, sampai penjadwalan publikasi — dari satu akun dan satu saldo token."
@@ -79,9 +83,7 @@
     "description": "Dari SEO, konten, scheduling, hingga publishing — dalam satu platform.",
     "cta": "Mulai Gratis",
     "ctaSecondary": "Jelajahi fitur",
-    "ctaAccount": "Buat Akun Gratis",
-    "ctaToken": "Klaim Free Token",
-    "ctaWhatsapp": "Tanya via WhatsApp",
+    "ctaSignup": "Buat Akun & Dapatkan Token Gratis",
     "imageAlt": "Ilustrasi dashboard Optimark",
     "switcher": {
       "content": "Buat konten lebih cepat",
@@ -297,11 +299,9 @@
   "footer": {
     "tagline": "Platform all-in-one digital marketing untuk bantu bisnis Anda berkembang.",
     "followUs": "Ikuti kami",
-    "product": "Produk",
-    "platform": "Platform",
+    "features": "Fitur",
+    "resources": "Sumber Daya",
     "company": "Perusahaan",
-    "comingSoon": "Coming Soon",
-    "availableNow": "Available Now",
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
@@ -310,13 +310,7 @@
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",
-      "contact": "Kontak"
-    },
-    "products": {
-      "contentPlanner": "Perencana Konten",
-      "seoAnalyzer": "SEO Analyzer",
-      "adsManager": "Ads Manager",
-      "aiContentMaker": "AI Content Maker"
+      "contact": "Hubungi Kami"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
   },
@@ -471,6 +465,20 @@
           "description": "Keluaran mengikuti rasio tiap platform, jadi video Anda tidak terpotong atau melar saat diunggah."
         }
       ]
+    }
+  },
+  "featureNav": {
+    "badge": "Fitur lainnya",
+    "title": "Jelajahi fitur Optimark lainnya",
+    "description": "Semua fitur dipakai dari satu akun dan satu saldo token yang sama.",
+    "prev": "Fitur sebelumnya",
+    "next": "Fitur berikutnya",
+    "categories": {
+      "ai": "Pembuatan konten",
+      "perencana": "Perencanaan & jadwal",
+      "seo": "SEO & riset",
+      "aiImage": "Visual AI",
+      "aiVideo": "Video AI"
     }
   },
   "aiCaptionModal": {
@@ -661,6 +669,71 @@
       "ctaButton": "Mulai Gratis",
       "ctaNote": "Tanpa kartu kredit"
     }
+  },
+  "contact": {
+    "badge": "Hubungi Kami",
+    "title": "Diskusikan kebutuhan pemasaran Anda dengan kami",
+    "description": "Ceritakan sedikit tentang usaha Anda dan tulis pertanyaannya. Tim support kami membaca setiap pesan dan membalas langsung ke email Anda.",
+    "form": {
+      "nameLabel": "Nama Lengkap",
+      "namePlaceholder": "Nama lengkap Anda",
+      "companyLabel": "Nama Perusahaan / Usaha",
+      "companyPlaceholder": "Opsional",
+      "roleLabel": "Peran Anda",
+      "roles": {
+        "owner": "Pemilik usaha",
+        "marketing": "Tim marketing",
+        "agency": "Agensi",
+        "creator": "Kreator konten",
+        "other": "Lainnya"
+      },
+      "teamSizeLabel": "Ukuran Tim Pemasaran",
+      "teamSizes": {
+        "solo": "Sendiri",
+        "small": "2–5 orang",
+        "medium": "6–20 orang",
+        "large": "21–50 orang",
+        "xlarge": "Lebih dari 50 orang"
+      },
+      "phoneLabel": "Nomor Ponsel",
+      "phonePlaceholder": "08xxxxxxxxxx",
+      "emailLabel": "Alamat Email",
+      "emailPlaceholder": "nama@perusahaan.com",
+      "interestLabel": "Fitur yang Anda minati",
+      "interestHint": "Boleh pilih lebih dari satu.",
+      "questionLabel": "Pertanyaan Anda",
+      "questionPlaceholder": "Contoh: Berapa token yang dibutuhkan untuk 40 caption dan 8 artikel per bulan?",
+      "submit": "Kirim ke Support",
+      "consent": "Dengan mengirim formulir ini, Anda menyetujui <terms>Ketentuan Layanan</terms> dan <privacy>Kebijakan Privasi</privacy> Optimark.",
+      "required": "Lengkapi nama, nomor ponsel, email, dan pertanyaan Anda terlebih dahulu.",
+      "invalidEmail": "Format email belum benar.",
+      "sentTitle": "Pesan Anda siap dikirim",
+      "sentDescription": "Aplikasi email Anda sudah terbuka dengan pesan yang tersusun. Tekan kirim di sana, dan tim support akan membalas ke {email}.",
+      "sentAgain": "Kirim pertanyaan lain",
+      "composedSubject": "[Support] Pertanyaan dari {name}",
+      "composedIntro": "Pertanyaan baru dari formulir Hubungi Kami:",
+      "composedName": "Nama",
+      "composedCompany": "Perusahaan",
+      "composedRole": "Peran",
+      "composedTeamSize": "Ukuran tim",
+      "composedPhone": "Ponsel",
+      "composedEmail": "Email",
+      "composedInterest": "Fitur diminati",
+      "composedQuestion": "Pertanyaan",
+      "composedEmpty": "-"
+    },
+    "support": {
+      "title": "Beritahu kami, apa yang bisa kami bantu?",
+      "description": "Lebih suka langsung ngobrol? Pilih kanal yang paling nyaman untuk Anda.",
+      "whatsappTitle": "WhatsApp",
+      "whatsappDescription": "Tanya langsung soal fitur dan pilihan paket token.",
+      "whatsappAction": "Chat sekarang",
+      "emailTitle": "Email",
+      "emailDescription": "Untuk pertanyaan yang butuh penjelasan panjang atau lampiran.",
+      "socialTitle": "Media sosial",
+      "socialDescription": "Ikuti kabar terbaru, tips konten, dan pengumuman fitur."
+    },
+    "company": "Optimark dioperasikan oleh PT Usaha Kreatif Indonesia."
   },
   "productOverview": {
     "badge": "Product Overview",

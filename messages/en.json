@@ -51,6 +51,10 @@
     "title": "Blog - OPTIMARK",
     "description": "Practical guides on SEO, social content, and what producing content actually costs. Written for marketing teams and business owners."
   },
+  "contactMetadata": {
+    "title": "Contact Us - OPTIMARK",
+    "description": "Send questions about features, token pricing, or your team's needs to the Optimark support team. Or reach us directly on WhatsApp, email, and social media."
+  },
   "productOverviewMetadata": {
     "title": "Product Overview - OPTIMARK",
     "description": "See what you can get done in Optimark: content planning, SEO auditing, AI visual production, and publish scheduling — from one account and one token balance."
@@ -79,9 +83,7 @@
     "description": "From SEO and content to scheduling and publishing — one platform.",
     "cta": "Start Free",
     "ctaSecondary": "Explore features",
-    "ctaAccount": "Create Free Account",
-    "ctaToken": "Claim Free Tokens",
-    "ctaWhatsapp": "Ask on WhatsApp",
+    "ctaSignup": "Create an Account & Get Free Tokens",
     "imageAlt": "Optimark dashboard illustration",
     "switcher": {
       "content": "Create content faster",
@@ -297,11 +299,9 @@
   "footer": {
     "tagline": "All-in-one digital marketing platform to help your business grow.",
     "followUs": "Follow us",
-    "product": "Product",
-    "platform": "Platform",
+    "features": "Features",
+    "resources": "Resources",
     "company": "Company",
-    "comingSoon": "Coming Soon",
-    "availableNow": "Available Now",
     "links": {
       "features": "Features",
       "pricing": "Pricing",
@@ -310,13 +310,7 @@
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "contact": "Contact"
-    },
-    "products": {
-      "contentPlanner": "Content Planner",
-      "seoAnalyzer": "SEO Analyzer",
-      "adsManager": "Ads Manager",
-      "aiContentMaker": "AI Content Maker"
+      "contact": "Contact Us"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
   },
@@ -471,6 +465,20 @@
           "description": "Output follows each platform's aspect ratio, so your video is neither cropped nor stretched on upload."
         }
       ]
+    }
+  },
+  "featureNav": {
+    "badge": "More features",
+    "title": "Explore more of Optimark",
+    "description": "Every feature runs from one account and one shared token balance.",
+    "prev": "Previous feature",
+    "next": "Next feature",
+    "categories": {
+      "ai": "Content creation",
+      "perencana": "Planning & scheduling",
+      "seo": "SEO & research",
+      "aiImage": "AI visuals",
+      "aiVideo": "AI video"
     }
   },
   "aiCaptionModal": {
@@ -661,6 +669,71 @@
       "ctaButton": "Start Free",
       "ctaNote": "No credit card required"
     }
+  },
+  "contact": {
+    "badge": "Contact Us",
+    "title": "Talk through your marketing needs with us",
+    "description": "Tell us a little about your business and write your question. Our support team reads every message and replies straight to your email.",
+    "form": {
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Your full name",
+      "companyLabel": "Company / Business Name",
+      "companyPlaceholder": "Optional",
+      "roleLabel": "Your Role",
+      "roles": {
+        "owner": "Business owner",
+        "marketing": "Marketing team",
+        "agency": "Agency",
+        "creator": "Content creator",
+        "other": "Other"
+      },
+      "teamSizeLabel": "Marketing Team Size",
+      "teamSizes": {
+        "solo": "Just me",
+        "small": "2–5 people",
+        "medium": "6–20 people",
+        "large": "21–50 people",
+        "xlarge": "More than 50 people"
+      },
+      "phoneLabel": "Mobile Number",
+      "phonePlaceholder": "08xxxxxxxxxx",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "name@company.com",
+      "interestLabel": "Features you are interested in",
+      "interestHint": "Pick as many as apply.",
+      "questionLabel": "Your Question",
+      "questionPlaceholder": "Example: How many tokens would 40 captions and 8 articles a month need?",
+      "submit": "Send to Support",
+      "consent": "By submitting this form, you agree to Optimark's <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
+      "required": "Please fill in your name, mobile number, email, and question first.",
+      "invalidEmail": "That email address does not look right.",
+      "sentTitle": "Your message is ready to send",
+      "sentDescription": "Your email app has opened with the message composed. Hit send there, and the support team will reply to {email}.",
+      "sentAgain": "Send another question",
+      "composedSubject": "[Support] Question from {name}",
+      "composedIntro": "New question from the Contact Us form:",
+      "composedName": "Name",
+      "composedCompany": "Company",
+      "composedRole": "Role",
+      "composedTeamSize": "Team size",
+      "composedPhone": "Mobile",
+      "composedEmail": "Email",
+      "composedInterest": "Interested in",
+      "composedQuestion": "Question",
+      "composedEmpty": "-"
+    },
+    "support": {
+      "title": "Tell us, how can we help?",
+      "description": "Rather talk directly? Pick whichever channel suits you.",
+      "whatsappTitle": "WhatsApp",
+      "whatsappDescription": "Ask straight away about features and token packages.",
+      "whatsappAction": "Chat now",
+      "emailTitle": "Email",
+      "emailDescription": "For questions that need a longer answer or an attachment.",
+      "socialTitle": "Social media",
+      "socialDescription": "Follow updates, content tips, and feature announcements."
+    },
+    "company": "Optimark is operated by PT Usaha Kreatif Indonesia."
   },
   "productOverview": {
     "badge": "Product Overview",

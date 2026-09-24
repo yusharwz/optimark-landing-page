@@ -3,11 +3,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, Gift, MessageCircle, Sparkles, Clock } from "lucide-react";
+import { ArrowRight, Gift, Sparkles, Clock } from "lucide-react";
 import { AiCaptionModal } from "./ai-caption";
 import { BestTimeModal } from "./best-time";
 import { heroBadge, heroTitle, heroDescription, heroButton, heroImage } from "@/lib/animations";
-import { GET_STARTED_URL, WHATSAPP_URL } from "@/config/site";
+import { GET_STARTED_URL } from "@/config/site";
 
 /**
  * Hero background — a self-contained dark canvas scoped to this section only
@@ -166,38 +166,22 @@ export function HeroSection() {
           {t("description")}
         </motion.p>
 
-        {/* CTAs. Three intents, in descending commitment: create an account,
-            claim the signup tokens, or ask a question first. The first two both
-            land on the register/login flow — free tokens are granted at signup
-            (see config/pricing.ts), so they are one action framed two ways. */}
+        {/* Single CTA. Free tokens are granted at signup (see config/pricing.ts),
+            so "create an account" and "claim free tokens" were one action shown
+            as two buttons — they are merged here into one. */}
         <motion.div
           variants={heroButton}
           initial="hidden"
           animate="visible"
-          className="mt-7 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4"
+          className="mt-7 flex w-full flex-col items-stretch sm:w-auto sm:flex-row sm:justify-center"
         >
           <a
             href={GET_STARTED_URL}
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-[#94C748] px-6 py-3 text-sm font-semibold text-[#1E280E] transition hover:brightness-95"
           >
-            {t("ctaAccount")}
+            <Gift className="h-4 w-4" />
+            {t("ctaSignup")}
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </a>
-          <a
-            href={GET_STARTED_URL}
-            className="inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/10"
-          >
-            <Gift className="h-4 w-4 text-[#94C748]" />
-            {t("ctaToken")}
-          </a>
-          <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 rounded-full px-4 py-3 text-sm font-semibold text-white/70 transition hover:text-white"
-          >
-            <MessageCircle className="h-4 w-4" />
-            {t("ctaWhatsapp")}
           </a>
         </motion.div>
 
