@@ -98,7 +98,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     openGraph: {
       title: t("title"),
       description: t("description"),
-      url: `/${locale}`,
+      // The default locale has no prefix; `/id` would only redirect to `/`.
+      url: locale === routing.defaultLocale ? "/" : `/${locale}`,
       siteName: "OPTIMARK",
       locale,
       type: "website",

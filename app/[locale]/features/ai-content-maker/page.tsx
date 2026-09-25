@@ -7,6 +7,7 @@ import { AiCaptionModal } from "@/components/ai-caption";
 import { BestTimeModal } from "@/components/best-time";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FeatureNavSection } from "@/components/FeatureNavSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import {
   Sparkles,
@@ -207,6 +208,7 @@ export default function AiContentMakerPage() {
         </div>
       </main>
 
+      <FeatureNavSection current="ai" />
       <Footer />
     </div>
   );

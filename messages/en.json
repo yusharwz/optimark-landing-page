@@ -47,6 +47,18 @@
     "title": "Frequently Asked Questions - OPTIMARK",
     "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
   },
+  "blogMetadata": {
+    "title": "Blog - OPTIMARK",
+    "description": "Practical guides on SEO, social content, and what producing content actually costs. Written for marketing teams and business owners."
+  },
+  "contactMetadata": {
+    "title": "Contact Us - OPTIMARK",
+    "description": "Send questions about features, token pricing, or your team's needs to the Optimark support team. Or reach us directly on WhatsApp, email, and social media."
+  },
+  "productOverviewMetadata": {
+    "title": "Product Overview - OPTIMARK",
+    "description": "See what you can get done in Optimark: content planning, SEO auditing, AI visual production, and publish scheduling — from one account and one token balance."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Toggle menu",
@@ -54,7 +66,8 @@
       "home": "Home",
       "features": "Features",
       "pricing": "Pricing",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "blog": "Blog"
     },
     "signIn": "Sign In",
     "getStarted": "Get Started"
@@ -70,9 +83,7 @@
     "description": "From SEO and content to scheduling and publishing — one platform.",
     "cta": "Start Free",
     "ctaSecondary": "Explore features",
-    "ctaAccount": "Create Free Account",
-    "ctaToken": "Claim Free Tokens",
-    "ctaWhatsapp": "Ask on WhatsApp",
+    "ctaSignup": "Create an Account & Get Free Tokens",
     "imageAlt": "Optimark dashboard illustration",
     "switcher": {
       "content": "Create content faster",
@@ -288,25 +299,18 @@
   "footer": {
     "tagline": "All-in-one digital marketing platform to help your business grow.",
     "followUs": "Follow us",
-    "product": "Product",
-    "platform": "Platform",
+    "features": "Features",
+    "resources": "Resources",
     "company": "Company",
-    "comingSoon": "Coming Soon",
-    "availableNow": "Available Now",
     "links": {
       "features": "Features",
       "pricing": "Pricing",
       "faq": "FAQ",
+      "blog": "Blog",
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
-      "contact": "Contact"
-    },
-    "products": {
-      "contentPlanner": "Content Planner",
-      "seoAnalyzer": "SEO Analyzer",
-      "adsManager": "Ads Manager",
-      "aiContentMaker": "AI Content Maker"
+      "contact": "Contact Us"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
   },
@@ -463,6 +467,20 @@
       ]
     }
   },
+  "featureNav": {
+    "badge": "More features",
+    "title": "Explore more of Optimark",
+    "description": "Every feature runs from one account and one shared token balance.",
+    "prev": "Previous feature",
+    "next": "Next feature",
+    "categories": {
+      "ai": "Content creation",
+      "perencana": "Planning & scheduling",
+      "seo": "SEO & research",
+      "aiImage": "AI visuals",
+      "aiVideo": "AI video"
+    }
+  },
   "aiCaptionModal": {
     "title": "AI Caption Assistant",
     "promptLabel": "Prompt",
@@ -616,6 +634,174 @@
       "title": "Still have questions?",
       "description": "Can't find the answer you're looking for? Reach out directly to our customer support.",
       "cta": "Contact Support"
+    }
+  },
+  "blog": {
+    "badge": "Optimark Blog",
+    "title": "Working notes on content, SEO, and what it costs to produce",
+    "description": "Guides you can act on today. No long theory, no instant-results promises — just the order of steps and numbers you can check yourself.",
+    "sampleNotice": "The posts below are samples used to review the layout. Real content is on the way.",
+    "featuredLabel": "Featured",
+    "latestLabel": "Latest posts",
+    "allCategories": "All topics",
+    "readMore": "Read more",
+    "readTime": "{minutes} min read",
+    "empty": "No posts under this topic yet.",
+    "filterLabel": "Filter by topic",
+    "categories": {
+      "seo": "SEO",
+      "konten": "Content",
+      "bisnis": "Business & Cost"
+    },
+    "authors": {
+      "tim": "The Optimark Team"
+    },
+    "post": {
+      "back": "Back to blog",
+      "publishedOn": "Published {date}",
+      "shareLabel": "Share this post",
+      "copyLink": "Copy link",
+      "copied": "Link copied",
+      "sampleNotice": "This is a sample article. Its contents are here to review the layout, not as final writing.",
+      "relatedTitle": "More reading",
+      "ctaTitle": "Try it on your own account",
+      "ctaDescription": "Write captions, audit article drafts, and schedule posts from one place. Buy tokens as you need them, with no monthly subscription.",
+      "ctaButton": "Start Free",
+      "ctaNote": "No credit card required"
+    }
+  },
+  "contact": {
+    "badge": "Contact Us",
+    "title": "Talk through your marketing needs with us",
+    "description": "Tell us a little about your business and write your question. Our support team reads every message and replies straight to your email.",
+    "form": {
+      "nameLabel": "Full Name",
+      "namePlaceholder": "Your full name",
+      "companyLabel": "Company / Business Name",
+      "companyPlaceholder": "Optional",
+      "roleLabel": "Your Role",
+      "roles": {
+        "owner": "Business owner",
+        "marketing": "Marketing team",
+        "agency": "Agency",
+        "creator": "Content creator",
+        "other": "Other"
+      },
+      "teamSizeLabel": "Marketing Team Size",
+      "teamSizes": {
+        "solo": "Just me",
+        "small": "2–5 people",
+        "medium": "6–20 people",
+        "large": "21–50 people",
+        "xlarge": "More than 50 people"
+      },
+      "phoneLabel": "Mobile Number",
+      "phonePlaceholder": "08xxxxxxxxxx",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "name@company.com",
+      "interestLabel": "Features you are interested in",
+      "interestHint": "Pick as many as apply.",
+      "questionLabel": "Your Question",
+      "questionPlaceholder": "Example: How many tokens would 40 captions and 8 articles a month need?",
+      "submit": "Send to Support",
+      "consent": "By submitting this form, you agree to Optimark's <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>.",
+      "required": "Please fill in your name, mobile number, email, and question first.",
+      "invalidEmail": "That email address does not look right.",
+      "sentTitle": "Your message is ready to send",
+      "sentDescription": "Your email app has opened with the message composed. Hit send there, and the support team will reply to {email}.",
+      "sentAgain": "Send another question",
+      "composedSubject": "[Support] Question from {name}",
+      "composedIntro": "New question from the Contact Us form:",
+      "composedName": "Name",
+      "composedCompany": "Company",
+      "composedRole": "Role",
+      "composedTeamSize": "Team size",
+      "composedPhone": "Mobile",
+      "composedEmail": "Email",
+      "composedInterest": "Interested in",
+      "composedQuestion": "Question",
+      "composedEmpty": "-"
+    },
+    "support": {
+      "title": "Tell us, how can we help?",
+      "description": "Rather talk directly? Pick whichever channel suits you.",
+      "whatsappTitle": "WhatsApp",
+      "whatsappDescription": "Ask straight away about features and token packages.",
+      "whatsappAction": "Chat now",
+      "emailTitle": "Email",
+      "emailDescription": "For questions that need a longer answer or an attachment.",
+      "socialTitle": "Social media",
+      "socialDescription": "Follow updates, content tips, and feature announcements."
+    },
+    "company": "Optimark is operated by PT Usaha Kreatif Indonesia."
+  },
+  "productOverview": {
+    "badge": "Product Overview",
+    "title": "All your content work, in one place",
+    "description": "Optimark brings planning, writing, SEO auditing, visual production, and scheduling into one platform. One account, one token balance, no monthly subscription.",
+    "ctaPrimary": "Start Free",
+    "ctaSecondary": "See pricing",
+    "ctaNote": "No credit card required",
+    "modules": {
+      "badge": "Modules",
+      "title": "Five modules running from the same account",
+      "description": "Each module works on its own, but they pay off most when used in sequence as a single workflow.",
+      "linkLabel": "Explore this module"
+    },
+    "workflow": {
+      "badge": "Workflow",
+      "title": "What one working cycle looks like",
+      "description": "These four steps are the most common day-to-day use. You can enter at any of them.",
+      "steps": {
+        "plan": {
+          "title": "Plan",
+          "description": "Build a content calendar across all your social accounts. See the windows with the highest engagement from your own account history, not from an industry average."
+        },
+        "create": {
+          "title": "Create",
+          "description": "Write captions, long-form articles, or generate product images from a short brief. Adjust the output with refinement chips until the tone fits."
+        },
+        "audit": {
+          "title": "Audit before publishing",
+          "description": "Check article drafts against a 0–100 score: keyword density, heading structure, and readability. Fix it before publishing, not after the ranking stalls."
+        },
+        "publish": {
+          "title": "Schedule & publish",
+          "description": "Send to Instagram, Facebook, TikTok, and Threads from one place. Scheduling costs no tokens — tokens are only spent when AI helps make the material."
+        }
+      }
+    },
+    "audience": {
+      "badge": "Who it is for",
+      "title": "Used by one person and by whole agencies",
+      "description": "The model is the same; only the volume changes. With no subscription, the cost rises and falls with what you actually use.",
+      "items": {
+        "owner": {
+          "title": "Owners doing it themselves",
+          "description": "No content team, and no need for one. Produce captions, product images, and a posting schedule without hiring anyone.",
+          "detail": "Typical: a dozen captions and a few images a month."
+        },
+        "team": {
+          "title": "Small content teams",
+          "description": "Two or three people covering several channels at once. A shared calendar, drafts that can be audited, and schedules that do not collide.",
+          "detail": "Typical: dozens of captions, regular articles, weekly visuals."
+        },
+        "agency": {
+          "title": "Agencies with several clients",
+          "description": "High volume and many revisions. Per-job rates make the cost per client something you calculate rather than guess from a subscription tier.",
+          "detail": "Typical: hundreds of assets a month across accounts."
+        }
+      }
+    },
+    "transparency": {
+      "title": "You can work the cost out before signing up",
+      "description": "Every AI job has a published token rate — captions, SEO audits, articles, images, and ad campaigns. Tokens are bought as you need them and never expire.",
+      "points": [
+        "No monthly subscription — a quiet month produces no bill",
+        "Tokens carry no expiry date",
+        "The rate per job is published before you pay"
+      ],
+      "linkLabel": "See the full token rates"
     }
   }
 }

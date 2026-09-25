@@ -7,6 +7,7 @@ import type { LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FeatureNavSection } from "@/components/FeatureNavSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { Link } from "@/i18n/navigation";
@@ -191,6 +192,7 @@ export function FeatureDetailLayout({
         </div>
       </main>
 
+      <FeatureNavSection current={id} />
       <Footer />
     </div>
   );

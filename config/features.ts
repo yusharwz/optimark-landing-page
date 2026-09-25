@@ -68,3 +68,32 @@ export const ALL_FEATURE_ICONS: Record<AnyFeatureId, LucideIcon> = {
 export function featureHref(id: AnyFeatureId): string {
   return `/features/${ALL_FEATURE_ROUTES[id]}`;
 }
+
+/**
+ * Preview shown on each feature's card in the "explore other features" strip
+ * at the bottom of every feature page (components/FeatureNavSection.tsx).
+ *
+ * SEO Analyzer has no product artwork yet, so it renders a small CSS mockup of
+ * its audit score instead of an image.
+ */
+export type FeaturePreview =
+  | { type: "image"; src: string }
+  | { type: "video"; src: string }
+  | { type: "seoMockup" };
+
+export const FEATURE_PREVIEWS: Record<AnyFeatureId, FeaturePreview> = {
+  ai: { type: "image", src: "/images/ai-content-maker/ai-caption-modal.svg" },
+  perencana: { type: "image", src: "/images/features-perencanaan-konten.svg" },
+  seo: { type: "seoMockup" },
+  aiImage: { type: "image", src: "/images/image-bento/01-product-photoshoot-skincare.webp" },
+  aiVideo: { type: "video", src: "/videos/01-product-reveal.mp4" },
+};
+
+/** Soft background wash behind each preview, one tint per feature. */
+export const FEATURE_PREVIEW_TINTS: Record<AnyFeatureId, string> = {
+  ai: "linear-gradient(135deg, #F1FBE4 0%, #E3F5C9 100%)",
+  perencana: "linear-gradient(135deg, #FEF6E7 0%, #FCE9C3 100%)",
+  seo: "linear-gradient(135deg, #EFF6FF 0%, #DBE9FE 100%)",
+  aiImage: "linear-gradient(135deg, #FDF2F8 0%, #FBE1EF 100%)",
+  aiVideo: "linear-gradient(135deg, #EEF2FF 0%, #DFE4FD 100%)",
+};

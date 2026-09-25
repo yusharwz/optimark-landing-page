@@ -1,0 +1,105 @@
+{
+  "memulai-kalender-konten": {
+    "title": "Memulai kalender konten yang benar-benar dipakai",
+    "excerpt": "Contoh artikel. Kalender konten gagal bukan karena template-nya jelek, tapi karena diisi terlalu ambisius di minggu pertama.",
+    "metaTitle": "Memulai Kalender Konten yang Benar-benar Dipakai - Blog OPTIMARK",
+    "metaDescription": "Contoh artikel blog Optimark: cara menyusun kalender konten yang realistis dan tetap jalan setelah minggu kedua.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Hampir semua tim pernah membuat kalender konten. Yang jarang terjadi adalah kalender itu masih dipakai di bulan ketiga. Masalahnya biasanya bukan di alatnya, tapi di jumlah yang direncanakan pada minggu pertama saat semangat masih penuh."
+      },
+      { "type": "h2", "text": "Mulai dari jumlah yang membosankan" },
+      {
+        "type": "p",
+        "text": "Tentukan jumlah post yang Anda yakin bisa dipenuhi di minggu tersibuk, bukan di minggu terluang. Kalau angkanya dua post per minggu, tulis dua. Kalender yang selalu terpenuhi jauh lebih berguna daripada kalender ambisius yang ditinggalkan."
+      },
+      { "type": "h2", "text": "Isi dulu temanya, bukan naskahnya" },
+      {
+        "type": "p",
+        "text": "Satu bulan ke depan cukup diisi tema per slot: tips, produk, testimoni, di balik layar. Naskah lengkapnya menyusul. Memisahkan keputusan tema dari pekerjaan menulis bikin dua-duanya lebih cepat selesai."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Tetapkan jumlah post berdasarkan minggu tersibuk Anda",
+          "Isi tema dulu untuk sebulan, naskah menyusul per minggu",
+          "Sisakan satu slot kosong tiap minggu untuk hal yang mendadak",
+          "Tinjau ulang setiap akhir bulan, bukan setiap hari"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      },
+      {
+        "type": "quote",
+        "text": "Kalender yang selalu terpenuhi mengalahkan kalender ambisius yang ditinggalkan di minggu kedua."
+      }
+    ]
+  },
+  "audit-seo-dasar": {
+    "title": "Empat hal yang diperiksa sebelum artikel tayang",
+    "excerpt": "Contoh artikel. Pemeriksaan singkat di tahap draf jauh lebih murah daripada memperbaiki artikel yang sudah tayang.",
+    "metaTitle": "Empat Hal yang Diperiksa Sebelum Artikel Tayang - Blog OPTIMARK",
+    "metaDescription": "Contoh artikel blog Optimark: empat pemeriksaan SEO dasar yang bisa diselesaikan sebelum tombol publish ditekan.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Memperbaiki artikel yang sudah tayang selalu lebih mahal. Mesin pencari butuh waktu merayapi ulang halaman yang diubah, jadi setiap perbaikan baru terasa hasilnya beberapa minggu kemudian."
+      },
+      { "type": "h2", "text": "Empat pemeriksaan cepat" },
+      {
+        "type": "ol",
+        "items": [
+          "Kata kunci utama muncul di judul, dalam 60 karakter pertama.",
+          "Ada satu H1 dan beberapa H2 yang bertingkat rapi, bukan satu blok teks panjang.",
+          "Meta deskripsi 150–160 karakter yang menyebut manfaat konkret.",
+          "Dua sampai tiga internal link ke artikel lama yang berkaitan."
+        ]
+      },
+      { "type": "h2", "text": "Kenapa internal link sering terlewat" },
+      {
+        "type": "p",
+        "text": "Tiga yang pertama terasa seperti pekerjaan menulis, jadi biasanya dikerjakan. Internal link terasa seperti pekerjaan administratif, jadi sering dilewat — padahal ini cara paling murah menaikkan halaman lama tanpa menulis apa pun yang baru."
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "menghitung-biaya-konten": {
+    "title": "Menghitung biaya produksi konten sebulan",
+    "excerpt": "Contoh artikel. Biaya konten jadi bisa diprediksi begitu Anda menghitungnya per pekerjaan, bukan per langganan.",
+    "metaTitle": "Menghitung Biaya Produksi Konten Sebulan - Blog OPTIMARK",
+    "metaDescription": "Contoh artikel blog Optimark: cara memperkirakan biaya produksi konten bulanan berdasarkan jumlah materi yang benar-benar diproduksi.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Pertanyaan yang paling sering muncul saat menyusun anggaran pemasaran bukan soal alat mana yang dipakai, tapi berapa yang akan habis bulan depan. Selama biayanya berbentuk langganan, jawabannya selalu kira-kira."
+      },
+      { "type": "h2", "text": "Hitung dari materi, bukan dari paket" },
+      {
+        "type": "p",
+        "text": "Mulai dari jumlah materi yang benar-benar Anda produksi bulan lalu: berapa caption, berapa artikel, berapa gambar. Angka itu jauh lebih akurat daripada menebak dari paket yang ditawarkan."
+      },
+      { "type": "h2", "text": "Jangan lupa revisi" },
+      {
+        "type": "p",
+        "text": "Revisi hampir selalu luput dari hitungan. Menulis ulang satu caption dengan nada berbeda tetap sebuah pekerjaan, begitu juga varian rasio gambar. Tambahkan sekitar 20 persen di atas hitungan awal Anda."
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      },
+      {
+        "type": "quote",
+        "text": "Kalau sebuah biaya tidak bisa Anda hitung sendiri, itu bukan anggaran — itu harapan."
+      }
+    ]
+  }
+}

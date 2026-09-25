@@ -1,0 +1,105 @@
+{
+  "memulai-kalender-konten": {
+    "title": "Starting a content calendar you actually keep",
+    "excerpt": "Sample article. Content calendars fail not because the template is bad, but because week one gets filled far too ambitiously.",
+    "metaTitle": "Starting a Content Calendar You Actually Keep - OPTIMARK Blog",
+    "metaDescription": "Sample Optimark blog article: how to build a content calendar realistic enough to still be running in week three.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Almost every team has made a content calendar. What rarely happens is that calendar still being used in month three. The problem is usually not the tool but the number planned in week one, while enthusiasm is still full."
+      },
+      { "type": "h2", "text": "Start at a boring number" },
+      {
+        "type": "p",
+        "text": "Set the post count you are confident of hitting in your busiest week, not your emptiest one. If that number is two posts a week, write two. A calendar you always meet is far more useful than an ambitious one you abandon."
+      },
+      { "type": "h2", "text": "Fill in themes first, not drafts" },
+      {
+        "type": "p",
+        "text": "A month ahead only needs a theme per slot: tips, product, testimonial, behind the scenes. The full draft comes later. Separating the theme decision from the writing makes both finish faster."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Set the post count from your busiest week",
+          "Fill a month of themes first; draft weekly",
+          "Leave one empty slot each week for whatever comes up",
+          "Review at the end of each month, not every day"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      },
+      {
+        "type": "quote",
+        "text": "A calendar you always meet beats an ambitious one abandoned in week two."
+      }
+    ]
+  },
+  "audit-seo-dasar": {
+    "title": "Four things to check before an article goes live",
+    "excerpt": "Sample article. A short check at the draft stage is far cheaper than fixing an article that has already published.",
+    "metaTitle": "Four Things to Check Before an Article Goes Live - OPTIMARK Blog",
+    "metaDescription": "Sample Optimark blog article: four basic SEO checks you can finish before hitting the publish button.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Fixing a published article always costs more. Search engines need time to recrawl a page you changed, so every fix only shows its effect weeks later."
+      },
+      { "type": "h2", "text": "Four quick checks" },
+      {
+        "type": "ol",
+        "items": [
+          "The main keyword appears in the title, within the first 60 characters.",
+          "There is one H1 and several tidy H2s, not one long block of text.",
+          "A meta description of 150–160 characters naming a concrete benefit.",
+          "Two or three internal links to related older articles."
+        ]
+      },
+      { "type": "h2", "text": "Why internal links get skipped" },
+      {
+        "type": "p",
+        "text": "The first three feel like writing work, so they get done. Internal linking feels like admin, so it gets skipped — even though it is the cheapest way to lift older pages without writing anything new."
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "menghitung-biaya-konten": {
+    "title": "Working out a month of content production costs",
+    "excerpt": "Sample article. Content costs become predictable the moment you count them per job rather than per subscription.",
+    "metaTitle": "Working Out a Month of Content Production Costs - OPTIMARK Blog",
+    "metaDescription": "Sample Optimark blog article: how to estimate monthly content production costs from what you actually produce.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "The question that comes up most while setting a marketing budget is not which tool to use but how much next month will cost. As long as the cost is a subscription, the answer is always an approximation."
+      },
+      { "type": "h2", "text": "Count from output, not from tiers" },
+      {
+        "type": "p",
+        "text": "Start from what you genuinely produced last month: how many captions, how many articles, how many images. That number is far more accurate than guessing from the packages on offer."
+      },
+      { "type": "h2", "text": "Do not forget revisions" },
+      {
+        "type": "p",
+        "text": "Revisions almost always fall out of the estimate. Rewriting one caption in a different tone is still a job, and so is an alternate image ratio. Add roughly 20 percent on top of your first number."
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      },
+      {
+        "type": "quote",
+        "text": "If you cannot work a cost out yourself, it is not a budget — it is a hope."
+      }
+    ]
+  }
+}

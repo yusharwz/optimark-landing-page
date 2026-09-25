@@ -21,6 +21,7 @@ const NAV_ITEMS = [
   { key: "features", href: null },
   { key: "pricing", href: "/pricing" },
   { key: "faq", href: "/faq" },
+  { key: "blog", href: "/blog" },
 ] as const;
 
 const FEATURES_PREFIX = "/features";

@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { FeatureNavSection } from "@/components/FeatureNavSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import {
   BarChart3,
@@ -185,6 +186,7 @@ export default function SeoAnalyzerPage() {
         </div>
       </main>
 
+      <FeatureNavSection current="seo" />
       <Footer />
     </div>
   );

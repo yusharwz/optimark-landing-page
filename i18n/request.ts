@@ -8,10 +8,11 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
-  const [messages, privacyPolicy, termsOfService] = await Promise.all([
+  const [messages, privacyPolicy, termsOfService, blogPosts] = await Promise.all([
     import(`../messages/${locale}.json`),
     import(`../messages/${locale}/privacy-policy.json`),
     import(`../messages/${locale}/terms-of-service.json`),
+    import(`../messages/${locale}/blog-posts.json`),
   ]);
 
   return {
@@ -20,6 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       ...messages.default,
       privacyPolicy: privacyPolicy.default,
       termsOfService: termsOfService.default,
+      blogPosts: blogPosts.default,
     },
   };
 });

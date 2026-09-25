@@ -18,8 +18,6 @@ export const CONNECT_PLATFORMS = [
   { name: "Threads", icon: "/images/connect/threads.svg" },
 ] as const;
 
-export const FOOTER_PRODUCT_KEYS = ["contentPlanner", "seoAnalyzer", "aiContentMaker"] as const;
-
 /**
  * Client area (app) entry point. Every "Get Started" CTA — header, hero, and the
  * Free plan on pricing — funnels through the same register/login flow.

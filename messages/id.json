@@ -47,6 +47,18 @@
     "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
     "description": "Temukan jawaban atas pertanyaan yang sering diajukan tentang Optimark — fitur, harga, integrasi, dan cara memulai."
   },
+  "blogMetadata": {
+    "title": "Blog - OPTIMARK",
+    "description": "Panduan praktis soal SEO, konten media sosial, dan biaya produksi konten. Ditulis untuk tim pemasaran dan pemilik usaha."
+  },
+  "contactMetadata": {
+    "title": "Hubungi Kami - OPTIMARK",
+    "description": "Kirim pertanyaan soal fitur, harga token, atau kebutuhan tim Anda ke tim support Optimark. Atau hubungi kami langsung lewat WhatsApp, email, dan media sosial."
+  },
+  "productOverviewMetadata": {
+    "title": "Product Overview - OPTIMARK",
+    "description": "Lihat apa saja yang bisa dikerjakan di Optimark: perencanaan konten, audit SEO, pembuatan visual AI, sampai penjadwalan publikasi — dari satu akun dan satu saldo token."
+  },
   "header": {
     "comingSoon": "Coming soon",
     "toggleMenu": "Buka menu",
@@ -54,7 +66,8 @@
       "home": "Beranda",
       "features": "Fitur",
       "pricing": "Harga",
-      "faq": "FAQ"
+      "faq": "FAQ",
+      "blog": "Blog"
     },
     "signIn": "Masuk",
     "getStarted": "Mulai Sekarang"
@@ -70,9 +83,7 @@
     "description": "Dari SEO, konten, scheduling, hingga publishing — dalam satu platform.",
     "cta": "Mulai Gratis",
     "ctaSecondary": "Jelajahi fitur",
-    "ctaAccount": "Buat Akun Gratis",
-    "ctaToken": "Klaim Free Token",
-    "ctaWhatsapp": "Tanya via WhatsApp",
+    "ctaSignup": "Buat Akun & Dapatkan Token Gratis",
     "imageAlt": "Ilustrasi dashboard Optimark",
     "switcher": {
       "content": "Buat konten lebih cepat",
@@ -288,25 +299,18 @@
   "footer": {
     "tagline": "Platform all-in-one digital marketing untuk bantu bisnis Anda berkembang.",
     "followUs": "Ikuti kami",
-    "product": "Produk",
-    "platform": "Platform",
+    "features": "Fitur",
+    "resources": "Sumber Daya",
     "company": "Perusahaan",
-    "comingSoon": "Coming Soon",
-    "availableNow": "Available Now",
     "links": {
       "features": "Fitur Unggulan",
       "pricing": "Pilihan Harga",
       "faq": "FAQ",
+      "blog": "Blog",
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",
-      "contact": "Kontak"
-    },
-    "products": {
-      "contentPlanner": "Perencana Konten",
-      "seoAnalyzer": "SEO Analyzer",
-      "adsManager": "Ads Manager",
-      "aiContentMaker": "AI Content Maker"
+      "contact": "Hubungi Kami"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
   },
@@ -463,6 +467,20 @@
       ]
     }
   },
+  "featureNav": {
+    "badge": "Fitur lainnya",
+    "title": "Jelajahi fitur Optimark lainnya",
+    "description": "Semua fitur dipakai dari satu akun dan satu saldo token yang sama.",
+    "prev": "Fitur sebelumnya",
+    "next": "Fitur berikutnya",
+    "categories": {
+      "ai": "Pembuatan konten",
+      "perencana": "Perencanaan & jadwal",
+      "seo": "SEO & riset",
+      "aiImage": "Visual AI",
+      "aiVideo": "Video AI"
+    }
+  },
   "aiCaptionModal": {
     "title": "AI Caption Assistant",
     "promptLabel": "Prompt",
@@ -616,6 +634,174 @@
       "title": "Masih punya pertanyaan?",
       "description": "Tidak menemukan jawaban yang Anda cari? Hubungi langsung tim dukungan pelanggan kami.",
       "cta": "Hubungi Kami"
+    }
+  },
+  "blog": {
+    "badge": "Blog Optimark",
+    "title": "Catatan kerja soal konten, SEO, dan biaya produksinya",
+    "description": "Panduan yang bisa langsung dikerjakan hari ini. Tanpa teori panjang, tanpa janji instan — hanya urutan langkah dan angka yang bisa Anda periksa sendiri.",
+    "sampleNotice": "Tulisan di bawah ini masih contoh untuk meninjau tampilan halaman. Konten asli menyusul.",
+    "featuredLabel": "Tulisan pilihan",
+    "latestLabel": "Tulisan terbaru",
+    "allCategories": "Semua topik",
+    "readMore": "Baca selengkapnya",
+    "readTime": "{minutes} menit baca",
+    "empty": "Belum ada tulisan untuk topik ini.",
+    "filterLabel": "Saring berdasarkan topik",
+    "categories": {
+      "seo": "SEO",
+      "konten": "Konten",
+      "bisnis": "Bisnis & Biaya"
+    },
+    "authors": {
+      "tim": "Tim Optimark"
+    },
+    "post": {
+      "back": "Kembali ke blog",
+      "publishedOn": "Terbit {date}",
+      "shareLabel": "Bagikan tulisan ini",
+      "copyLink": "Salin tautan",
+      "copied": "Tautan tersalin",
+      "sampleNotice": "Ini artikel contoh. Isinya dipakai untuk meninjau tampilan, bukan tulisan final.",
+      "relatedTitle": "Bacaan lain",
+      "ctaTitle": "Coba langsung di akun Anda",
+      "ctaDescription": "Buat caption, audit draf artikel, dan jadwalkan posting dari satu tempat. Beli token sesuai kebutuhan, tanpa langganan bulanan.",
+      "ctaButton": "Mulai Gratis",
+      "ctaNote": "Tanpa kartu kredit"
+    }
+  },
+  "contact": {
+    "badge": "Hubungi Kami",
+    "title": "Diskusikan kebutuhan pemasaran Anda dengan kami",
+    "description": "Ceritakan sedikit tentang usaha Anda dan tulis pertanyaannya. Tim support kami membaca setiap pesan dan membalas langsung ke email Anda.",
+    "form": {
+      "nameLabel": "Nama Lengkap",
+      "namePlaceholder": "Nama lengkap Anda",
+      "companyLabel": "Nama Perusahaan / Usaha",
+      "companyPlaceholder": "Opsional",
+      "roleLabel": "Peran Anda",
+      "roles": {
+        "owner": "Pemilik usaha",
+        "marketing": "Tim marketing",
+        "agency": "Agensi",
+        "creator": "Kreator konten",
+        "other": "Lainnya"
+      },
+      "teamSizeLabel": "Ukuran Tim Pemasaran",
+      "teamSizes": {
+        "solo": "Sendiri",
+        "small": "2–5 orang",
+        "medium": "6–20 orang",
+        "large": "21–50 orang",
+        "xlarge": "Lebih dari 50 orang"
+      },
+      "phoneLabel": "Nomor Ponsel",
+      "phonePlaceholder": "08xxxxxxxxxx",
+      "emailLabel": "Alamat Email",
+      "emailPlaceholder": "nama@perusahaan.com",
+      "interestLabel": "Fitur yang Anda minati",
+      "interestHint": "Boleh pilih lebih dari satu.",
+      "questionLabel": "Pertanyaan Anda",
+      "questionPlaceholder": "Contoh: Berapa token yang dibutuhkan untuk 40 caption dan 8 artikel per bulan?",
+      "submit": "Kirim ke Support",
+      "consent": "Dengan mengirim formulir ini, Anda menyetujui <terms>Ketentuan Layanan</terms> dan <privacy>Kebijakan Privasi</privacy> Optimark.",
+      "required": "Lengkapi nama, nomor ponsel, email, dan pertanyaan Anda terlebih dahulu.",
+      "invalidEmail": "Format email belum benar.",
+      "sentTitle": "Pesan Anda siap dikirim",
+      "sentDescription": "Aplikasi email Anda sudah terbuka dengan pesan yang tersusun. Tekan kirim di sana, dan tim support akan membalas ke {email}.",
+      "sentAgain": "Kirim pertanyaan lain",
+      "composedSubject": "[Support] Pertanyaan dari {name}",
+      "composedIntro": "Pertanyaan baru dari formulir Hubungi Kami:",
+      "composedName": "Nama",
+      "composedCompany": "Perusahaan",
+      "composedRole": "Peran",
+      "composedTeamSize": "Ukuran tim",
+      "composedPhone": "Ponsel",
+      "composedEmail": "Email",
+      "composedInterest": "Fitur diminati",
+      "composedQuestion": "Pertanyaan",
+      "composedEmpty": "-"
+    },
+    "support": {
+      "title": "Beritahu kami, apa yang bisa kami bantu?",
+      "description": "Lebih suka langsung ngobrol? Pilih kanal yang paling nyaman untuk Anda.",
+      "whatsappTitle": "WhatsApp",
+      "whatsappDescription": "Tanya langsung soal fitur dan pilihan paket token.",
+      "whatsappAction": "Chat sekarang",
+      "emailTitle": "Email",
+      "emailDescription": "Untuk pertanyaan yang butuh penjelasan panjang atau lampiran.",
+      "socialTitle": "Media sosial",
+      "socialDescription": "Ikuti kabar terbaru, tips konten, dan pengumuman fitur."
+    },
+    "company": "Optimark dioperasikan oleh PT Usaha Kreatif Indonesia."
+  },
+  "productOverview": {
+    "badge": "Product Overview",
+    "title": "Semua pekerjaan konten Anda, dari satu tempat",
+    "description": "Optimark menggabungkan perencanaan, penulisan, audit SEO, pembuatan visual, dan penjadwalan dalam satu platform. Satu akun, satu saldo token, tanpa langganan bulanan.",
+    "ctaPrimary": "Mulai Gratis",
+    "ctaSecondary": "Lihat harga",
+    "ctaNote": "Tanpa kartu kredit",
+    "modules": {
+      "badge": "Modul",
+      "title": "Lima modul yang bekerja dari akun yang sama",
+      "description": "Setiap modul bisa dipakai sendiri-sendiri, tapi paling terasa saat dipakai berurutan dalam satu alur kerja.",
+      "linkLabel": "Pelajari modul ini"
+    },
+    "workflow": {
+      "badge": "Alur kerja",
+      "title": "Seperti apa satu siklus kerjanya",
+      "description": "Empat langkah ini adalah pemakaian sehari-hari yang paling umum. Anda bisa masuk dari langkah mana pun.",
+      "steps": {
+        "plan": {
+          "title": "Rencanakan",
+          "description": "Susun kalender konten untuk semua akun media sosial Anda. Lihat rentang jam dengan interaksi tertinggi dari riwayat akun, bukan dari rata-rata industri."
+        },
+        "create": {
+          "title": "Buat",
+          "description": "Tulis caption, artikel panjang, atau hasilkan gambar produk dari brief singkat. Sesuaikan hasilnya lewat tombol penyempurnaan sampai nadanya pas."
+        },
+        "audit": {
+          "title": "Audit sebelum tayang",
+          "description": "Periksa draf artikel dengan skor 0–100: kepadatan kata kunci, struktur heading, dan keterbacaan. Perbaiki sebelum publish, bukan setelah peringkatnya mandek."
+        },
+        "publish": {
+          "title": "Jadwalkan & publish",
+          "description": "Kirim ke Instagram, Facebook, TikTok, dan Threads dari satu tempat. Penjadwalan tidak memakai token — token hanya terpakai saat AI ikut membuat materinya."
+        }
+      }
+    },
+    "audience": {
+      "badge": "Untuk siapa",
+      "title": "Dipakai dari satu orang sampai satu agensi",
+      "description": "Modelnya sama, yang beda cuma volume kerjanya. Karena tidak ada langganan, biayanya ikut naik-turun sesuai pemakaian.",
+      "items": {
+        "owner": {
+          "title": "Pemilik usaha yang mengerjakan sendiri",
+          "description": "Tidak punya tim konten dan tidak perlu punya. Buat caption, foto produk, dan jadwal posting tanpa menyewa siapa pun.",
+          "detail": "Tipikal: belasan caption dan beberapa gambar per bulan."
+        },
+        "team": {
+          "title": "Tim konten kecil",
+          "description": "Dua sampai tiga orang yang memegang beberapa kanal sekaligus. Kalender bersama, draf yang bisa diaudit, dan jadwal yang tidak bertabrakan.",
+          "detail": "Tipikal: puluhan caption, artikel rutin, dan visual mingguan."
+        },
+        "agency": {
+          "title": "Agensi dengan beberapa klien",
+          "description": "Volume tinggi dan banyak revisi. Tarif per pekerjaan bikin biaya per klien bisa dihitung, bukan ditebak dari paket langganan.",
+          "detail": "Tipikal: ratusan materi per bulan lintas akun."
+        }
+      }
+    },
+    "transparency": {
+      "title": "Biayanya bisa Anda hitung sebelum mendaftar",
+      "description": "Setiap pekerjaan AI punya tarif token yang tertulis terbuka — caption, audit SEO, artikel, gambar, dan kampanye iklan. Token dibeli sesuai kebutuhan dan aktif selamanya tanpa kadaluarsa.",
+      "points": [
+        "Tanpa langganan bulanan — bulan yang sepi tidak menghasilkan tagihan",
+        "Token tidak punya masa kadaluarsa",
+        "Tarif per pekerjaan tertulis sebelum Anda bayar"
+      ],
+      "linkLabel": "Lihat tarif token lengkap"
     }
   }
 }

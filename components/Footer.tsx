@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { FOOTER_PRODUCT_KEYS, SITE, SOCIAL_LINKS } from "@/config/site";
+import { SITE, SOCIAL_LINKS } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { ALL_FEATURE_IDS, featureHref } from "@/config/features";
 
@@ -77,17 +77,23 @@ export function Footer() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: 0.05 }}
             >
-              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">{t("product")}</h3>
+              <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
+                {t("features")}
+              </h3>
               <ul className="mt-4 space-y-3">
-                {FOOTER_PRODUCT_KEYS.map((key) => (
-                  <li
-                    key={key}
-                    className="flex items-center justify-between gap-3 text-sm text-[#535862]"
-                  >
-                    <span>{t(`products.${key}`)}</span>
-                    <span className="shrink-0 rounded-full border border-[#E9EAEB] bg-white/60 px-1.5 py-0.5 text-[10px] font-medium text-[#717680]">
-                      {t("availableNow")}
-                    </span>
+                {/*
+                  One column for every feature page. It replaces the old
+                  Produk + Platform pair, which listed the same three
+                  features twice under two different names.
+                */}
+                {ALL_FEATURE_IDS.map((id) => (
+                  <li key={id}>
+                    <Link
+                      href={featureHref(id)}
+                      className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                    >
+                      {tf(`items.${id}.title`)}
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -100,20 +106,9 @@ export function Footer() {
               transition={{ duration: 0.5, delay: 0.1 }}
             >
               <h3 className="text-sm font-semibold tracking-wide text-[#1E280E]">
-                {t("platform")}
+                {t("resources")}
               </h3>
               <ul className="mt-4 space-y-3">
-                {/* No features hub page — link each feature page directly. */}
-                {ALL_FEATURE_IDS.map((id) => (
-                  <li key={id}>
-                    <Link
-                      href={featureHref(id)}
-                      className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
-                    >
-                      {tf(`items.${id}.title`)}
-                    </Link>
-                  </li>
-                ))}
                 <li>
                   <Link
                     href="/pricing"
@@ -128,6 +123,14 @@ export function Footer() {
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
                     {t("links.faq")}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/blog"
+                    className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
+                  >
+                    {t("links.blog")}
                   </Link>
                 </li>
               </ul>
@@ -158,12 +161,12 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href={`mailto:${SITE.contactEmail}`}
+                  <Link
+                    href="/contact"
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
                     {t("links.contact")}
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </motion.div>
