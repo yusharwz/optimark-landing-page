@@ -1,0 +1,194 @@
+// Landing page database — PostgreSQL via Prisma.
+//
+// Architecture (see the backend diagram in the notes vault):
+//   PBO ──webhook──▶ Landing Page + Backend ──▶ this database
+//
+// Data flows one way: PBO (the back office) owns the content and pushes it
+// here. Every synced row therefore carries an `externalId` — PBO's own id —
+// so a webhook can upsert idempotently without knowing our primary keys.
+//
+// The datasource URL lives in prisma.config.ts (Prisma 7), not here.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Shared ─────────────────────────────────────────────────────────────────
+
+/// Mirrors `routing.locales` in i18n/routing.ts. Values are the literal
+/// locale codes so they can be compared with next-intl's locale directly.
+enum Locale {
+  id
+  en
+}
+
+// ─── Blog ───────────────────────────────────────────────────────────────────
+
+enum BlogPostStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+/// Topic a post is filed under (SEO, Konten, Bisnis & Biaya, …).
+model BlogCategory {
+  id         String   @id @default(cuid())
+  externalId String?  @unique @map("external_id")
+  slug       String   @unique
+  /// Display order in the index filter chips.
+  sortOrder  Int      @default(0) @map("sort_order")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  translations BlogCategoryTranslation[]
+  posts        BlogPost[]
+
+  @@map("blog_categories")
+}
+
+model BlogCategoryTranslation {
+  id         String @id @default(cuid())
+  categoryId String @map("category_id")
+  locale     Locale
+  name       String
+
+  category BlogCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@unique([categoryId, locale])
+  @@map("blog_category_translations")
+}
+
+/// A person who writes or reviews posts. One table for both roles: the same
+/// person can author one article and review another, so the role belongs to
+/// the relation on BlogPost, not to the person.
+model BlogPerson {
+  id          String   @id @default(cuid())
+  externalId  String?  @unique @map("external_id")
+  /// URL slug of the profile page (/blog/author/<slug>, /blog/reviewer/<slug>).
+  slug        String   @unique
+  /// Full display name, including academic titles ("Andi Wijaya, S.E., M.M.").
+  /// Not translated — a name reads the same in every locale.
+  name        String
+  avatarUrl   String?  @map("avatar_url")
+  linkedinUrl String?  @map("linkedin_url")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  translations  BlogPersonTranslation[]
+  authoredPosts BlogPost[]              @relation("PostAuthor")
+  reviewedPosts BlogPost[]              @relation("PostReviewer")
+
+  @@map("blog_people")
+}
+
+model BlogPersonTranslation {
+  id       String @id @default(cuid())
+  personId String @map("person_id")
+  locale   Locale
+  /// Job title shown under the name ("Content Strategist").
+  role     String
+  bio      String
+
+  person BlogPerson @relation(fields: [personId], references: [id], onDelete: Cascade)
+
+  @@unique([personId, locale])
+  @@map("blog_person_translations")
+}
+
+model BlogPost {
+  id            String         @id @default(cuid())
+  externalId    String?        @unique @map("external_id")
+  slug          String         @unique
+  status        BlogPostStatus @default(DRAFT)
+  categoryId    String         @map("category_id")
+  authorId      String         @map("author_id")
+  /// Subject-matter expert who checked the post. Optional: a post can be
+  /// published before a review is assigned.
+  reviewerId    String?        @map("reviewer_id")
+  coverImageUrl String?        @map("cover_image_url")
+  readMinutes   Int            @map("read_minutes")
+  /// At most one post should be featured; enforced by the sync, not the DB.
+  featured      Boolean        @default(false)
+
+  /// Shown as "Tayang / Published". Null while the post is a draft.
+  publishedAt      DateTime? @map("published_at")
+  /// Shown as "Diperbarui / Updated" — the last *editorial* change. Kept
+  /// separate from `updatedAt`, which moves on every write (including a
+  /// no-op webhook re-sync) and must not be shown to readers.
+  contentUpdatedAt DateTime? @map("content_updated_at")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  category     BlogCategory          @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  author       BlogPerson            @relation("PostAuthor", fields: [authorId], references: [id], onDelete: Restrict)
+  reviewer     BlogPerson?           @relation("PostReviewer", fields: [reviewerId], references: [id], onDelete: SetNull)
+  translations BlogPostTranslation[]
+
+  @@index([status, publishedAt(sort: Desc)])
+  @@index([categoryId])
+  @@index([authorId])
+  @@index([reviewerId])
+  @@map("blog_posts")
+}
+
+model BlogPostTranslation {
+  id              String @id @default(cuid())
+  postId          String @map("post_id")
+  locale          Locale
+  title           String
+  excerpt         String
+  metaTitle       String @map("meta_title")
+  metaDescription String @map("meta_description")
+  /// Structured body blocks — the same shape as `BlogBlock[]` in
+  /// types/blog.ts (h2, p, ul, ol, quote, callout). Stored as JSON so the
+  /// renderer, not the author, keeps control of markup and styling.
+  body            Json
+
+  post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, locale])
+  @@map("blog_post_translations")
+}
+
+// ─── Webhooks ───────────────────────────────────────────────────────────────
+
+enum WebhookEventStatus {
+  RECEIVED
+  PROCESSED
+  FAILED
+  /// Valid event we deliberately do nothing with (unknown type, stale update).
+  IGNORED
+}
+
+/// Every inbound webhook call, stored raw before it is processed.
+///
+/// Persisting first means a failed or buggy handler never loses data: the
+/// event can be replayed from `payload`. `externalEventId` makes delivery
+/// idempotent — PBO retries of the same event hit the unique constraint
+/// instead of being applied twice.
+model WebhookEvent {
+  id              String             @id @default(cuid())
+  /// Sender system. Only "pbo" today.
+  source          String
+  /// Event name from the sender, e.g. "blog.post.published".
+  eventType       String             @map("event_type")
+  /// Sender's own id for this delivery; the idempotency key.
+  externalEventId String             @map("external_event_id")
+  payload         Json
+  signatureValid  Boolean            @map("signature_valid")
+  status          WebhookEventStatus @default(RECEIVED)
+  attempts        Int                @default(0)
+  lastError       String?            @map("last_error")
+  receivedAt      DateTime           @default(now()) @map("received_at")
+  processedAt     DateTime?          @map("processed_at")
+
+  @@unique([source, externalEventId])
+  @@index([status, receivedAt])
+  @@map("webhook_events")
+}
