@@ -61,18 +61,38 @@ export const BLOG_SLUGS = [
 
 export type BlogSlug = (typeof BLOG_SLUGS)[number];
 
-/** Resolved against `blog.authors.*` in the messages. */
-export const BLOG_AUTHOR_IDS = ["tim"] as const;
+/**
+ * People behind the posts. Each id is both the URL slug of their profile page
+ * (`/blog/author/<id>`, `/blog/reviewer/<id>`) and the key of their copy under
+ * `blogPeople.authors.*` / `blogPeople.reviewers.*` in the messages.
+ *
+ * SAMPLE DATA, like the posts: these are placeholder profiles so the author
+ * and reviewer pages can be reviewed. Replace them with the real editorial
+ * team — names, bios, credentials — before the blog goes live. Avatars are
+ * initials on purpose; no stand-in photos of people who do not exist.
+ */
+export const BLOG_AUTHOR_IDS = ["rina-pratiwi", "dimas-saputra"] as const;
 
 export type BlogAuthorId = (typeof BLOG_AUTHOR_IDS)[number];
+
+export const BLOG_REVIEWER_IDS = ["andi-wijaya"] as const;
+
+export type BlogReviewerId = (typeof BLOG_REVIEWER_IDS)[number];
 
 export type BlogPost = {
   slug: BlogSlug;
   category: BlogCategoryId;
   /** ISO date, formatted per locale at render time. */
   publishedAt: string;
+  /**
+   * ISO date of the last substantive edit. Omit it for a post that has not
+   * changed since publishing — the "Updated" line only renders when it is set.
+   */
+  updatedAt?: string;
   readMinutes: number;
   author: BlogAuthorId;
+  /** Subject-matter expert who checked the post before publishing. */
+  reviewer: BlogReviewerId;
   /** Exactly one post should carry this — it drives the wide hero card. */
   featured?: boolean;
 };
@@ -83,28 +103,68 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "memulai-kalender-konten",
     category: "konten",
     publishedAt: "2026-09-15",
+    updatedAt: "2026-09-22",
     readMinutes: 5,
-    author: "tim",
+    author: "rina-pratiwi",
+    reviewer: "andi-wijaya",
     featured: true,
   },
   {
     slug: "audit-seo-dasar",
     category: "seo",
     publishedAt: "2026-09-01",
+    updatedAt: "2026-09-10",
     readMinutes: 4,
-    author: "tim",
+    author: "dimas-saputra",
+    reviewer: "andi-wijaya",
   },
   {
     slug: "menghitung-biaya-konten",
     category: "bisnis",
     publishedAt: "2026-08-18",
     readMinutes: 4,
-    author: "tim",
+    author: "rina-pratiwi",
+    reviewer: "andi-wijaya",
   },
 ];
 
 export function blogHref(slug: BlogSlug): string {
   return `/blog/${slug}`;
+}
+
+export function authorHref(id: BlogAuthorId): string {
+  return `/blog/author/${id}`;
+}
+
+export function reviewerHref(id: BlogReviewerId): string {
+  return `/blog/reviewer/${id}`;
+}
+
+export function isBlogAuthorId(value: string): value is BlogAuthorId {
+  return (BLOG_AUTHOR_IDS as readonly string[]).includes(value);
+}
+
+export function isBlogReviewerId(value: string): value is BlogReviewerId {
+  return (BLOG_REVIEWER_IDS as readonly string[]).includes(value);
+}
+
+export function getPostsByAuthor(id: BlogAuthorId): BlogPost[] {
+  return BLOG_POSTS.filter((post) => post.author === id);
+}
+
+export function getPostsByReviewer(id: BlogReviewerId): BlogPost[] {
+  return BLOG_POSTS.filter((post) => post.reviewer === id);
+}
+
+/** Two-letter initials for the avatar, from the display name. */
+export function initialsOf(name: string): string {
+  const words = name
+    .replace(/,.*$/, "") // drop trailing academic titles ("…, S.E., M.M.")
+    .trim()
+    .split(/\s+/);
+  const first = words[0]?.[0] ?? "";
+  const last = words.length > 1 ? words[words.length - 1][0] : "";
+  return (first + last).toUpperCase();
 }
 
 /** Accepts a raw route param, so the caller does the narrowing. */

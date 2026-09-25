@@ -12,7 +12,9 @@ import type { AppLocale } from "@/lib/locale";
 export function formatBlogDate(isoDate: string, locale: AppLocale): string {
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", {
     day: "numeric",
-    month: "long",
+    // Short month ("15 Sep 2026"), matching Mekari's article header — two
+    // dates side by side stay on one line on phones.
+    month: "short",
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T00:00:00Z`));

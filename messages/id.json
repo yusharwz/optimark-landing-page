@@ -51,6 +51,10 @@
     "title": "Blog - OPTIMARK",
     "description": "Panduan praktis soal SEO, konten media sosial, dan biaya produksi konten. Ditulis untuk tim pemasaran dan pemilik usaha."
   },
+  "aboutMetadata": {
+    "title": "Tentang Kami - OPTIMARK",
+    "description": "OPTIMARK adalah platform digital marketing all-in-one berbasis AI yang dikembangkan oleh UKI — dibuat untuk membantu bisnis menyederhanakan dan meningkatkan pemasaran digitalnya."
+  },
   "contactMetadata": {
     "title": "Hubungi Kami - OPTIMARK",
     "description": "Kirim pertanyaan soal fitur, harga token, atau kebutuhan tim Anda ke tim support Optimark. Atau hubungi kami langsung lewat WhatsApp, email, dan media sosial."
@@ -67,7 +71,8 @@
       "features": "Fitur",
       "pricing": "Harga",
       "faq": "FAQ",
-      "blog": "Blog"
+      "blog": "Blog",
+      "about": "Tentang Kami"
     },
     "signIn": "Masuk",
     "getStarted": "Mulai Sekarang"
@@ -310,6 +315,7 @@
       "getStarted": "Mulai Sekarang",
       "privacy": "Kebijakan Privasi",
       "terms": "Ketentuan Layanan",
+      "about": "Tentang Kami",
       "contact": "Hubungi Kami"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
@@ -653,12 +659,8 @@
       "konten": "Konten",
       "bisnis": "Bisnis & Biaya"
     },
-    "authors": {
-      "tim": "Tim Optimark"
-    },
     "post": {
       "back": "Kembali ke blog",
-      "publishedOn": "Terbit {date}",
       "shareLabel": "Bagikan tulisan ini",
       "copyLink": "Salin tautan",
       "copied": "Tautan tersalin",
@@ -667,7 +669,164 @@
       "ctaTitle": "Coba langsung di akun Anda",
       "ctaDescription": "Buat caption, audit draf artikel, dan jadwalkan posting dari satu tempat. Beli token sesuai kebutuhan, tanpa langganan bulanan.",
       "ctaButton": "Mulai Gratis",
-      "ctaNote": "Tanpa kartu kredit"
+      "ctaNote": "Tanpa kartu kredit",
+      "writtenBy": "Ditulis oleh",
+      "reviewedBy": "Direview oleh",
+      "aboutAuthor": "Tentang penulis",
+      "viewProfile": "Lihat profil",
+      "published": "Tayang",
+      "updated": "Diperbarui"
+    },
+    "profile": {
+      "sampleNotice": "Profil ini masih contoh untuk meninjau tampilan halaman. Data penulis dan reviewer asli menyusul.",
+      "breadcrumbHome": "Beranda",
+      "breadcrumbBlog": "Blog",
+      "articleCount": "{count} artikel",
+      "reviewedCount": "{count} artikel direview",
+      "articlesBy": "Artikel oleh {name}",
+      "reviewerBadge": "Reviewer Optimark",
+      "reviewedArticles": "Daftar artikel yang direview",
+      "empty": "Belum ada artikel.",
+      "authorMetaTitle": "{name} - Penulis Blog OPTIMARK",
+      "reviewerMetaTitle": "{name} - Reviewer Blog OPTIMARK"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "OPTIMARK",
+      "title": "Pemasaran yang Lebih Cerdas Dimulai di Sini",
+      "description": "OPTIMARK adalah platform digital marketing all-in-one berbasis AI yang dikembangkan oleh UKI — dibuat untuk membantu bisnis menyederhanakan, merapikan, dan meningkatkan aktivitas pemasaran digital dalam satu ruang kerja yang terhubung.",
+      "ctaPrimary": "Mulai Sekarang",
+      "ctaSecondary": "Jelajahi OPTIMARK"
+    },
+    "who": {
+      "title": "Siapa Kami",
+      "paragraphs": [
+        "Pemasaran digital saat ini melibatkan banyak bagian — pembuatan konten, media sosial, SEO, penjadwalan, dan pemantauan performa — yang sering tersebar di berbagai alat dan tim.",
+        "OPTIMARK menyatukan semua aktivitas itu dalam satu platform cerdas. Dirancang untuk bisnis dan tim pemasaran dari berbagai skala, OPTIMARK memadukan kecerdasan buatan, otomatisasi, dan pengelolaan pemasaran terpusat agar pekerjaan pemasaran sehari-hari lebih cepat, lebih sederhana, dan lebih konsisten.",
+        "Mulai dari mencari ide konten sampai memublikasikan dan menganalisis hasilnya, OPTIMARK dibangun untuk mendukung seluruh alur kerja pemasaran digital — semuanya di satu tempat."
+      ]
+    },
+    "vision": {
+      "title": "Visi Kami",
+      "text": "Memberdayakan bisnis untuk tumbuh dan bersaing dengan percaya diri di era digital, dengan membuat teknologi pemasaran cerdas bisa diakses siapa saja — bukan hanya perusahaan besar dengan tim besar dan anggaran besar."
+    },
+    "mission": {
+      "title": "Misi Kami",
+      "intro": "Misi kami adalah membuat pemasaran digital lebih sederhana dan lebih efektif dengan:",
+      "items": [
+        "Mengurangi tugas pemasaran yang berulang dan menyita waktu",
+        "Mendukung pembuatan konten yang lebih cepat dan lebih konsisten",
+        "Menyatukan alat dan data pemasaran dalam satu platform yang terhubung",
+        "Memberikan insight yang jelas dan bisa ditindaklanjuti untuk keputusan yang lebih baik"
+      ],
+      "closing": "Kami percaya bisnis seharusnya lebih sedikit menghabiskan waktu untuk mengurus alat, dan lebih banyak waktu untuk menumbuhkan brand-nya."
+    },
+    "whatWeDo": {
+      "title": "Apa yang Kami Kerjakan",
+      "intro": "OPTIMARK memadukan berbagai kemampuan berbasis AI untuk mendukung pemasaran digital dari awal sampai akhir, di antaranya:",
+      "items": {
+        "contentGeneration": {
+          "title": "Pembuatan Konten AI",
+          "description": "Buat copy pemasaran, caption, dan ide konten dengan cepat berkat bantuan AI."
+        },
+        "imageVideo": {
+          "title": "Pembuatan Gambar & Video AI",
+          "description": "Hasilkan konten visual untuk mendukung kampanye tanpa butuh banyak sumber daya desain."
+        },
+        "planning": {
+          "title": "Perencanaan & Penjadwalan Konten",
+          "description": "Rencanakan konten pemasaran lebih awal dan jaga publikasi tetap teratur dan konsisten."
+        },
+        "social": {
+          "title": "Pengelolaan Media Sosial",
+          "description": "Kelola dan publikasikan konten ke berbagai platform sosial dari satu dashboard."
+        },
+        "seo": {
+          "title": "Optimasi SEO",
+          "description": "Dapatkan dukungan dan panduan agar konten tampil lebih baik di hasil pencarian."
+        },
+        "analytics": {
+          "title": "Analitik Pemasaran Terpusat",
+          "description": "Lihat performa dan insight pemasaran di satu tempat untuk mendukung keputusan yang lebih tepat."
+        }
+      }
+    },
+    "howItHelps": {
+      "title": "Bagaimana OPTIMARK Membantu Bisnis",
+      "intro": "OPTIMARK dirancang mengikuti alur kerja pemasaran secara alami, dari awal sampai akhir:",
+      "steps": {
+        "ideation": {
+          "title": "Pencarian Ide",
+          "description": "Dapatkan saran konten dan kampanye dengan bantuan AI."
+        },
+        "creation": {
+          "title": "Pembuatan Konten",
+          "description": "Ubah ide menjadi teks, gambar, dan video secara efisien."
+        },
+        "planning": {
+          "title": "Perencanaan & Penjadwalan",
+          "description": "Susun kalender konten dan jadwal publikasi."
+        },
+        "publishing": {
+          "title": "Publikasi",
+          "description": "Sebarkan konten ke berbagai kanal sosial dan digital."
+        },
+        "monitoring": {
+          "title": "Pemantauan",
+          "description": "Pantau performa konten dan kampanye Anda."
+        },
+        "optimization": {
+          "title": "Optimasi",
+          "description": "Gunakan insight untuk menyempurnakan pemasaran berikutnya."
+        }
+      },
+      "closing": "Dengan menghubungkan setiap langkah ini, OPTIMARK membantu mengurangi pekerjaan manual dan menjaga tim pemasaran tetap fokus pada strategi, bukan pada eksekusi yang berulang."
+    },
+    "uki": {
+      "eyebrow": "UKI",
+      "title": "Dikembangkan oleh UKI",
+      "paragraphs": [
+        "OPTIMARK adalah platform digital marketing yang dikembangkan oleh UKI, tim teknologi dan pengembangan produk di balik platform ini.",
+        "UKI bertanggung jawab merancang, membangun, dan terus menyempurnakan OPTIMARK — memadukan teknologi AI dengan kebutuhan pemasaran yang nyata untuk menghadirkan platform yang fungsional, andal, dan mudah digunakan."
+      ]
+    },
+    "commitment": {
+      "title": "Komitmen Kami",
+      "intro": "Kami berkomitmen untuk terus berbenah — menyempurnakan OPTIMARK berdasarkan kebutuhan nyata pengguna dan tantangan pemasaran di lapangan. Fokus kami meliputi:",
+      "items": [
+        "Membangun pengalaman yang ramah pengguna dan mudah dipelajari",
+        "Menerapkan otomatisasi dengan cara yang bermakna dan praktis",
+        "Mendukung keputusan pemasaran yang lebih baik dan berbasis data",
+        "Mengembangkan platform secara bertahap dan berkelanjutan"
+      ],
+      "closing": "OPTIMARK dibangun dengan pemahaman bahwa teknologi pemasaran yang baik seharusnya membuat pekerjaan lebih mudah, bukan lebih rumit."
+    },
+    "closing": {
+      "title": "Sederhanakan Pemasaran. Perkuat Pertumbuhan.",
+      "cta": "Mulai Sekarang",
+      "note": "Tanpa kartu kredit"
+    }
+  },
+  "blogPeople": {
+    "authors": {
+      "rina-pratiwi": {
+        "name": "Rina Pratiwi",
+        "role": "Content Strategist",
+        "bio": "Rina menyusun strategi konten untuk usaha kecil dan brand lokal. Tulisannya membahas perencanaan konten, copywriting media sosial, dan cara menjaga anggaran produksi tetap masuk akal."
+      },
+      "dimas-saputra": {
+        "name": "Dimas Saputra",
+        "role": "SEO Specialist",
+        "bio": "Dimas mengerjakan SEO on-page dan riset kata kunci untuk situs e-commerce dan blog perusahaan. Ia menulis panduan praktis soal audit konten sebelum artikel dipublikasikan."
+      }
+    },
+    "reviewers": {
+      "andi-wijaya": {
+        "name": "Andi Wijaya, S.E., M.M.",
+        "role": "Konsultan Digital Marketing",
+        "bio": "Andi membantu UMKM dan brand ritel menyusun strategi pemasaran digital, dari perencanaan konten sampai pengelolaan anggaran iklan. Ia memeriksa setiap artikel blog Optimark sebelum tayang untuk memastikan isinya akurat dan bisa langsung dipraktikkan."
+      }
     }
   },
   "contact": {

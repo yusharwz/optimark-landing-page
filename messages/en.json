@@ -51,6 +51,10 @@
     "title": "Blog - OPTIMARK",
     "description": "Practical guides on SEO, social content, and what producing content actually costs. Written for marketing teams and business owners."
   },
+  "aboutMetadata": {
+    "title": "About Us - OPTIMARK",
+    "description": "OPTIMARK is an AI-powered, all-in-one digital marketing platform developed by UKI — built to help businesses simplify, streamline, and elevate their digital marketing."
+  },
   "contactMetadata": {
     "title": "Contact Us - OPTIMARK",
     "description": "Send questions about features, token pricing, or your team's needs to the Optimark support team. Or reach us directly on WhatsApp, email, and social media."
@@ -67,7 +71,8 @@
       "features": "Features",
       "pricing": "Pricing",
       "faq": "FAQ",
-      "blog": "Blog"
+      "blog": "Blog",
+      "about": "About Us"
     },
     "signIn": "Sign In",
     "getStarted": "Get Started"
@@ -310,6 +315,7 @@
       "getStarted": "Get Started",
       "privacy": "Privacy Policy",
       "terms": "Terms of Service",
+      "about": "About Us",
       "contact": "Contact Us"
     },
     "copyright": "© {year} OPTIMARK, PT Usaha Kreatif Indonesia. All rights reserved."
@@ -653,12 +659,8 @@
       "konten": "Content",
       "bisnis": "Business & Cost"
     },
-    "authors": {
-      "tim": "The Optimark Team"
-    },
     "post": {
       "back": "Back to blog",
-      "publishedOn": "Published {date}",
       "shareLabel": "Share this post",
       "copyLink": "Copy link",
       "copied": "Link copied",
@@ -667,7 +669,164 @@
       "ctaTitle": "Try it on your own account",
       "ctaDescription": "Write captions, audit article drafts, and schedule posts from one place. Buy tokens as you need them, with no monthly subscription.",
       "ctaButton": "Start Free",
-      "ctaNote": "No credit card required"
+      "ctaNote": "No credit card required",
+      "writtenBy": "Written by",
+      "reviewedBy": "Reviewed by",
+      "aboutAuthor": "About the author",
+      "viewProfile": "View profile",
+      "published": "Published",
+      "updated": "Updated"
+    },
+    "profile": {
+      "sampleNotice": "This profile is a sample used to review the page layout. Real author and reviewer details are on the way.",
+      "breadcrumbHome": "Home",
+      "breadcrumbBlog": "Blog",
+      "articleCount": "{count} articles",
+      "reviewedCount": "{count} articles reviewed",
+      "articlesBy": "Articles by {name}",
+      "reviewerBadge": "Optimark Reviewer",
+      "reviewedArticles": "Reviewed articles",
+      "empty": "No articles yet.",
+      "authorMetaTitle": "{name} - OPTIMARK Blog Author",
+      "reviewerMetaTitle": "{name} - OPTIMARK Blog Reviewer"
+    }
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "OPTIMARK",
+      "title": "Smarter Marketing Starts Here",
+      "description": "OPTIMARK is an AI-powered, all-in-one digital marketing platform developed by UKI — built to help businesses simplify, streamline, and elevate their digital marketing activities in one connected workspace.",
+      "ctaPrimary": "Get Started",
+      "ctaSecondary": "Explore OPTIMARK"
+    },
+    "who": {
+      "title": "Who We Are",
+      "paragraphs": [
+        "Digital marketing today involves many moving parts — content creation, social media, SEO, scheduling, and performance tracking — often spread across different tools and teams.",
+        "OPTIMARK brings these activities together in a single, intelligent platform. Designed for businesses and marketing teams of all sizes, OPTIMARK combines artificial intelligence, automation, and centralized marketing management to make everyday marketing work faster, simpler, and more consistent.",
+        "From generating content ideas to publishing and analyzing results, OPTIMARK is built to support the full digital marketing workflow — all in one place."
+      ]
+    },
+    "vision": {
+      "title": "Our Vision",
+      "text": "To empower businesses to grow and compete confidently in the digital era by making intelligent marketing technology accessible to everyone — not just large enterprises with big teams and big budgets."
+    },
+    "mission": {
+      "title": "Our Mission",
+      "intro": "Our mission is to make digital marketing simpler and more effective by:",
+      "items": [
+        "Reducing repetitive, time-consuming marketing tasks",
+        "Supporting faster and more consistent content creation",
+        "Bringing marketing tools and data into one connected platform",
+        "Providing clear, actionable insights that support better decisions"
+      ],
+      "closing": "We believe businesses should spend less time managing tools and more time growing their brand."
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "intro": "OPTIMARK combines a range of AI-driven capabilities to support end-to-end digital marketing, including:",
+      "items": {
+        "contentGeneration": {
+          "title": "AI Content Generation",
+          "description": "Generate marketing copy, captions, and content ideas quickly with AI assistance."
+        },
+        "imageVideo": {
+          "title": "AI Image & Video Creation",
+          "description": "Produce visual content to support campaigns without needing extensive design resources."
+        },
+        "planning": {
+          "title": "Content Planning & Scheduling",
+          "description": "Plan marketing content ahead of time and keep publishing organized and consistent."
+        },
+        "social": {
+          "title": "Social Media Management",
+          "description": "Manage and publish content across social platforms from a single dashboard."
+        },
+        "seo": {
+          "title": "SEO Optimization",
+          "description": "Get support and guidance to help content perform better in search results."
+        },
+        "analytics": {
+          "title": "Centralized Marketing Analytics",
+          "description": "View marketing performance and insights in one place to support informed decisions."
+        }
+      }
+    },
+    "howItHelps": {
+      "title": "How OPTIMARK Helps Businesses",
+      "intro": "OPTIMARK is designed to support the natural flow of a marketing workflow, from start to finish:",
+      "steps": {
+        "ideation": {
+          "title": "Idea Generation",
+          "description": "Get AI-assisted suggestions for content and campaigns."
+        },
+        "creation": {
+          "title": "Content Creation",
+          "description": "Turn ideas into text, images, and videos efficiently."
+        },
+        "planning": {
+          "title": "Planning & Scheduling",
+          "description": "Organize content calendars and publishing timelines."
+        },
+        "publishing": {
+          "title": "Publishing",
+          "description": "Distribute content across social and digital channels."
+        },
+        "monitoring": {
+          "title": "Monitoring",
+          "description": "Track how content and campaigns are performing."
+        },
+        "optimization": {
+          "title": "Optimization",
+          "description": "Use insights to refine and improve future marketing efforts."
+        }
+      },
+      "closing": "By connecting each of these steps, OPTIMARK helps reduce manual work and keeps marketing teams focused on strategy rather than repetitive execution."
+    },
+    "uki": {
+      "eyebrow": "UKI",
+      "title": "Developed by UKI",
+      "paragraphs": [
+        "OPTIMARK is a digital marketing platform developed by UKI, the technology and product development team behind the platform.",
+        "UKI is responsible for designing, building, and continuously improving OPTIMARK — combining AI technology with practical marketing needs to create a platform that is functional, reliable, and easy to use."
+      ]
+    },
+    "commitment": {
+      "title": "Our Commitment",
+      "intro": "We are committed to continuous improvement — refining OPTIMARK based on real user needs and practical marketing challenges. Our focus areas include:",
+      "items": [
+        "Building user-friendly experiences that are easy to adopt",
+        "Applying automation in meaningful, practical ways",
+        "Supporting better, data-informed marketing decisions",
+        "Evolving the platform steadily through ongoing development"
+      ],
+      "closing": "OPTIMARK is built with the understanding that good marketing technology should make work easier, not more complicated."
+    },
+    "closing": {
+      "title": "Simplify Your Marketing. Amplify Your Growth.",
+      "cta": "Get Started",
+      "note": "No credit card required"
+    }
+  },
+  "blogPeople": {
+    "authors": {
+      "rina-pratiwi": {
+        "name": "Rina Pratiwi",
+        "role": "Content Strategist",
+        "bio": "Rina builds content strategy for small businesses and local brands. She writes about content planning, social media copywriting, and keeping production budgets sensible."
+      },
+      "dimas-saputra": {
+        "name": "Dimas Saputra",
+        "role": "SEO Specialist",
+        "bio": "Dimas works on on-page SEO and keyword research for e-commerce sites and company blogs. He writes practical guides on auditing content before an article is published."
+      }
+    },
+    "reviewers": {
+      "andi-wijaya": {
+        "name": "Andi Wijaya, S.E., M.M.",
+        "role": "Digital Marketing Consultant",
+        "bio": "Andi helps small businesses and retail brands shape their digital marketing, from content planning to managing ad budgets. He checks every Optimark blog article before it goes live to make sure it is accurate and ready to put into practice."
+      }
     }
   },
   "contact": {
