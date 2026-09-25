@@ -25,6 +25,7 @@ export function BlogCard({ post, locale, variant = "default" }: BlogCardProps) {
   // Each post is its own namespace, so the slug selects the namespace rather
   // than being looked up as a key inside `blogPosts`.
   const tPost = useTranslations(`blogPosts.${post.slug}`);
+  const tPeople = useTranslations("blogPeople");
 
   const style = BLOG_CATEGORY_STYLES[post.category];
   const Icon = BLOG_CATEGORY_ICONS[post.category];
@@ -95,7 +96,11 @@ export function BlogCard({ post, locale, variant = "default" }: BlogCardProps) {
         </p>
 
         <div className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200/80 pt-4">
-          <span className="text-detail text-xs">
+          <span className="text-detail min-w-0 truncate text-xs">
+            <span className="font-medium text-[#1E280E]">
+              {tPeople(`authors.${post.author}.name`)}
+            </span>
+            {" · "}
             <time dateTime={post.publishedAt}>{formatBlogDate(post.publishedAt, locale)}</time>
           </span>
           <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">

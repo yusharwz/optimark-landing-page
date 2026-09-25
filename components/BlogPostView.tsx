@@ -3,17 +3,20 @@
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { ArrowLeft, Check, Clock, Info, Link2 } from "lucide-react";
+import { ArrowLeft, ArrowRight, BadgeCheck, Check, Clock, Info, Link2 } from "lucide-react";
 import { Button } from "@/components/base/buttons/button";
 import { BlogArticle } from "@/components/BlogArticle";
 import { BlogCard } from "@/components/BlogCard";
+import { BlogPersonAvatar } from "@/components/BlogPersonAvatar";
 import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
 import {
   BLOG_CATEGORY_ICONS,
   BLOG_CATEGORY_STYLES,
+  authorHref,
   getBlogPost,
   getRelatedPosts,
+  reviewerHref,
   type BlogSlug,
 } from "@/config/blog";
 import { GET_STARTED_URL } from "@/config/site";
@@ -27,6 +30,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
   const t = useTranslations("blog");
   const tPost = useTranslations("blog.post");
   const tCopy = useTranslations(`blogPosts.${slug}`);
+  const tPeople = useTranslations("blogPeople");
   const locale = resolveLocale(useLocale());
   const [copied, setCopied] = useState(false);
 
@@ -55,6 +59,8 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
 
   const style = BLOG_CATEGORY_STYLES[post.category];
   const Icon = BLOG_CATEGORY_ICONS[post.category];
+  const authorName = tPeople(`authors.${post.author}.name`);
+  const reviewerName = tPeople(`reviewers.${post.reviewer}.name`);
 
   return (
     <>
@@ -116,14 +122,69 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
             <p className="text-sm text-amber-900">{tPost("sampleNotice")}</p>
           </div>
 
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-gray-200/80 pt-5">
-            <div className="text-detail text-sm">
-              <span className="font-medium text-[#1E280E]">{t(`authors.${post.author}`)}</span>
-              {" · "}
-              <time dateTime={post.publishedAt}>
-                {tPost("publishedOn", { date: formatBlogDate(post.publishedAt, locale) })}
-              </time>
+          {/* Byline: who wrote it and who checked it, each linking to their
+              profile. The reviewer line is what gives the article its
+              expert-checked standing, so it sits beside the author, not in
+              the footer. */}
+          <div className="mt-8 border-t border-gray-200/80 pt-5">
+            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
+              <Link
+                href={authorHref(post.author)}
+                className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+              >
+                <BlogPersonAvatar name={authorName} size="sm" />
+                <span className="leading-tight">
+                  <span className="text-detail block text-xs">{tPost("writtenBy")}</span>
+                  <span className="block text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
+                    {authorName}
+                  </span>
+                </span>
+              </Link>
+
+              <Link
+                href={reviewerHref(post.reviewer)}
+                className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+              >
+                <BlogPersonAvatar name={reviewerName} size="sm" kind="reviewer" />
+                <span className="leading-tight">
+                  <span className="text-detail inline-flex items-center gap-1 text-xs">
+                    {tPost("reviewedBy")}
+                    <BadgeCheck className="h-3.5 w-3.5 text-[#94C748]" aria-hidden />
+                  </span>
+                  <span className="block text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
+                    {reviewerName}
+                  </span>
+                </span>
+              </Link>
             </div>
+          </div>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
+            {/* Published · Updated, as on Mekari's article header. "Updated"
+                only shows once a post has actually been edited. */}
+            <dl className="text-detail flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <div className="flex gap-1.5">
+                <dt>{tPost("published")}</dt>
+                <dd className="font-medium text-[#1E280E]">
+                  <time dateTime={post.publishedAt}>
+                    {formatBlogDate(post.publishedAt, locale)}
+                  </time>
+                </dd>
+              </div>
+              {post.updatedAt && (
+                <>
+                  <span aria-hidden>·</span>
+                  <div className="flex gap-1.5">
+                    <dt>{tPost("updated")}</dt>
+                    <dd className="font-medium text-[#1E280E]">
+                      <time dateTime={post.updatedAt}>
+                        {formatBlogDate(post.updatedAt, locale)}
+                      </time>
+                    </dd>
+                  </div>
+                </>
+              )}
+            </dl>
 
             <button
               type="button"
@@ -145,6 +206,28 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
       {/* Body */}
       <article className="relative mx-auto max-w-3xl px-4 pb-20 sm:px-6">
         <BlogArticle slug={slug} />
+
+        {/* About the author */}
+        <aside className="mt-14 flex flex-col gap-5 rounded-3xl border border-gray-200/80 bg-white p-6 sm:flex-row sm:items-start sm:p-8">
+          <BlogPersonAvatar name={authorName} size="lg" />
+          <div className="min-w-0">
+            <p className="text-detail text-xs font-semibold uppercase tracking-[0.12em]">
+              {tPost("aboutAuthor")}
+            </p>
+            <p className="text-display mt-1.5 text-lg">{authorName}</p>
+            <p className="text-detail text-sm">{tPeople(`authors.${post.author}.role`)}</p>
+            <p className="text-lead mt-3 text-sm lg:text-base">
+              {tPeople(`authors.${post.author}.bio`)}
+            </p>
+            <Link
+              href={authorHref(post.author)}
+              className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[#1E280E] transition-colors hover:text-[#94C748] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+            >
+              {tPost("viewProfile")}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </Link>
+          </div>
+        </aside>
       </article>
 
       {/* In-article CTA */}
