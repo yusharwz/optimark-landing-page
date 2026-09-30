@@ -643,21 +643,25 @@
     }
   },
   "blog": {
-    "badge": "Blog Optimark",
-    "title": "Catatan kerja soal konten, SEO, dan biaya produksinya",
-    "description": "Panduan yang bisa langsung dikerjakan hari ini. Tanpa teori panjang, tanpa janji instan — hanya urutan langkah dan angka yang bisa Anda periksa sendiri.",
+    "title": "Optimark Blog",
+    "description": "Tips dan strategi digital marketing untuk bisnis Anda",
     "sampleNotice": "Tulisan di bawah ini masih contoh untuk meninjau tampilan halaman. Konten asli menyusul.",
-    "featuredLabel": "Tulisan pilihan",
-    "latestLabel": "Tulisan terbaru",
-    "allCategories": "Semua topik",
-    "readMore": "Baca selengkapnya",
+    "latestLabel": "Artikel Terbaru",
+    "allCategories": "Semua",
     "readTime": "{minutes} menit baca",
-    "empty": "Belum ada tulisan untuk topik ini.",
-    "filterLabel": "Saring berdasarkan topik",
+    "empty": "Belum ada artikel untuk topik ini.",
+    "filterLabel": "Kategori",
+    "searchLabel": "Cari artikel",
+    "searchPlaceholder": "Cari artikel di sini...",
+    "searchButton": "Cari",
+    "searchResults": "Hasil pencarian “{query}”",
+    "searchEmpty": "Tidak ada artikel yang cocok dengan “{query}”.",
+    "viewAll": "Lihat semua",
     "categories": {
       "seo": "SEO",
-      "konten": "Konten",
-      "bisnis": "Bisnis & Biaya"
+      "content-marketing": "Content Marketing",
+      "social-media": "Social Media",
+      "visual-content": "Visual Content"
     },
     "post": {
       "back": "Kembali ke blog",
@@ -810,15 +814,15 @@
   },
   "blogPeople": {
     "authors": {
-      "rina-pratiwi": {
-        "name": "Rina Pratiwi",
+      "thia-rahmani": {
+        "name": "Thia Rahmani",
         "role": "Content Strategist",
-        "bio": "Rina menyusun strategi konten untuk usaha kecil dan brand lokal. Tulisannya membahas perencanaan konten, copywriting media sosial, dan cara menjaga anggaran produksi tetap masuk akal."
+        "bio": "Thia menyusun strategi konten dan SEO untuk UMKM dan brand lokal. Tulisannya membahas riset kata kunci, perencanaan konten, dan cara membuat konten visual yang konsisten tanpa tim besar."
       },
-      "dimas-saputra": {
-        "name": "Dimas Saputra",
-        "role": "SEO Specialist",
-        "bio": "Dimas mengerjakan SEO on-page dan riset kata kunci untuk situs e-commerce dan blog perusahaan. Ia menulis panduan praktis soal audit konten sebelum artikel dipublikasikan."
+      "rafi-rizky": {
+        "name": "Rafi Rizky",
+        "role": "Social Media Specialist",
+        "bio": "Rafi mengelola media sosial untuk bisnis kuliner dan ritel. Ia menulis panduan praktis soal jadwal posting, foto produk, dan cara mengubah satu ide menjadi banyak konten."
       }
     },
     "reviewers": {

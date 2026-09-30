@@ -643,21 +643,25 @@
     }
   },
   "blog": {
-    "badge": "Optimark Blog",
-    "title": "Working notes on content, SEO, and what it costs to produce",
-    "description": "Guides you can act on today. No long theory, no instant-results promises — just the order of steps and numbers you can check yourself.",
+    "title": "Optimark Blog",
+    "description": "Digital marketing tips and strategies for your business",
     "sampleNotice": "The posts below are samples used to review the layout. Real content is on the way.",
-    "featuredLabel": "Featured",
-    "latestLabel": "Latest posts",
-    "allCategories": "All topics",
-    "readMore": "Read more",
+    "latestLabel": "Latest Articles",
+    "allCategories": "All",
     "readTime": "{minutes} min read",
-    "empty": "No posts under this topic yet.",
-    "filterLabel": "Filter by topic",
+    "empty": "No articles under this topic yet.",
+    "filterLabel": "Categories",
+    "searchLabel": "Search articles",
+    "searchPlaceholder": "Search articles...",
+    "searchButton": "Search",
+    "searchResults": "Search results for “{query}”",
+    "searchEmpty": "No articles match “{query}”.",
+    "viewAll": "View all",
     "categories": {
       "seo": "SEO",
-      "konten": "Content",
-      "bisnis": "Business & Cost"
+      "content-marketing": "Content Marketing",
+      "social-media": "Social Media",
+      "visual-content": "Visual Content"
     },
     "post": {
       "back": "Back to blog",
@@ -810,15 +814,15 @@
   },
   "blogPeople": {
     "authors": {
-      "rina-pratiwi": {
-        "name": "Rina Pratiwi",
+      "thia-rahmani": {
+        "name": "Thia Rahmani",
         "role": "Content Strategist",
-        "bio": "Rina builds content strategy for small businesses and local brands. She writes about content planning, social media copywriting, and keeping production budgets sensible."
+        "bio": "Thia builds content and SEO strategies for small businesses and local brands. She writes about keyword research, content planning, and producing consistent visual content without a big team."
       },
-      "dimas-saputra": {
-        "name": "Dimas Saputra",
-        "role": "SEO Specialist",
-        "bio": "Dimas works on on-page SEO and keyword research for e-commerce sites and company blogs. He writes practical guides on auditing content before an article is published."
+      "rafi-rizky": {
+        "name": "Rafi Rizky",
+        "role": "Social Media Specialist",
+        "bio": "Rafi runs social media for food and retail businesses. He writes practical guides on posting schedules, product photography, and turning one idea into many pieces of content."
       }
     },
     "reviewers": {
