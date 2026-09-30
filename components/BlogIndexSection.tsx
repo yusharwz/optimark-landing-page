@@ -116,10 +116,10 @@ export function BlogIndexSection() {
             reviewed; remove this block together with `blog.sampleNotice` and
             `blog.post.sampleNotice` once real articles land.
           */}
-          <div className="mt-6 inline-flex max-w-2xl items-start gap-2.5 rounded-2xl border border-amber-300/50 bg-amber-50/70 px-4 py-3">
+          {/* <div className="mt-6 inline-flex max-w-2xl items-start gap-2.5 rounded-2xl border border-amber-300/50 bg-amber-50/70 px-4 py-3">
             <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden />
             <p className="text-sm text-amber-900">{t("sampleNotice")}</p>
-          </div>
+          </div> */}
         </div>
 
         <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:gap-16">
