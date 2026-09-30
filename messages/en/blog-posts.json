@@ -1,68 +1,64 @@
 {
-  "memulai-kalender-konten": {
-    "title": "Starting a content calendar you actually keep",
-    "excerpt": "Sample article. Content calendars fail not because the template is bad, but because week one gets filled far too ambitiously.",
-    "metaTitle": "Starting a Content Calendar You Actually Keep - OPTIMARK Blog",
-    "metaDescription": "Sample Optimark blog article: how to build a content calendar realistic enough to still be running in week three.",
+  "riset-keyword-bisnis-lokal": {
+    "title": "How to Research Keywords for a Local Business Without Paid Tools",
+    "excerpt": "The phrases nearby customers search for can be found in Google itself, no SEO tool subscription needed.",
+    "metaTitle": "How to Research Keywords for a Local Business Without Paid Tools - OPTIMARK Blog",
+    "metaDescription": "The phrases nearby customers search for can be found in Google itself, no SEO tool subscription needed.",
     "blocks": [
       {
         "type": "p",
-        "text": "Almost every team has made a content calendar. What rarely happens is that calendar still being used in month three. The problem is usually not the tool but the number planned in week one, while enthusiasm is still full."
+        "text": "A local business rarely needs thousands of keywords. It needs a handful of phrases real customers in your city type, and most of them can be found for free."
       },
-      { "type": "h2", "text": "Start at a boring number" },
+      {
+        "type": "h2",
+        "text": "Start from the Google search box"
+      },
       {
         "type": "p",
-        "text": "Set the post count you are confident of hitting in your busiest week, not your emptiest one. If that number is two posts a week, write two. A calendar you always meet is far more useful than an ambitious one you abandon."
-      },
-      { "type": "h2", "text": "Fill in themes first, not drafts" },
-      {
-        "type": "p",
-        "text": "A month ahead only needs a theme per slot: tips, product, testimonial, behind the scenes. The full draft comes later. Separating the theme decision from the writing makes both finish faster."
+        "text": "Type your service plus your city name, then note the autocomplete suggestions and the “Related searches” at the bottom of the page. Both come from real searches."
       },
       {
         "type": "ul",
         "items": [
-          "Set the post count from your busiest week",
-          "Fill a month of themes first; draft weekly",
-          "Leave one empty slot each week for whatever comes up",
-          "Review at the end of each month, not every day"
+          "Note autocomplete suggestions for service + city",
+          "Read the questions in the “People also ask” box",
+          "Check the wording competitors use in their Google Business Profile",
+          "Group phrases by intent: learn, compare, or buy"
         ]
       },
       {
         "type": "callout",
         "title": "Note",
         "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
-      },
-      {
-        "type": "quote",
-        "text": "A calendar you always meet beats an ambitious one abandoned in week two."
       }
     ]
   },
-  "audit-seo-dasar": {
-    "title": "Four things to check before an article goes live",
-    "excerpt": "Sample article. A short check at the draft stage is far cheaper than fixing an article that has already published.",
-    "metaTitle": "Four Things to Check Before an Article Goes Live - OPTIMARK Blog",
-    "metaDescription": "Sample Optimark blog article: four basic SEO checks you can finish before hitting the publish button.",
+  "jadwal-posting-instagram-umkm-kuliner": {
+    "title": "The Best Instagram Posting Schedule for Food Businesses in 2026",
+    "excerpt": "There is no universal best time to post. For food businesses, your customers’ hungry hours are the benchmark.",
+    "metaTitle": "The Best Instagram Posting Schedule for Food Businesses in 2026 - OPTIMARK Blog",
+    "metaDescription": "There is no universal best time to post. For food businesses, your customers’ hungry hours are the benchmark.",
     "blocks": [
       {
         "type": "p",
-        "text": "Fixing a published article always costs more. Search engines need time to recrawl a page you changed, so every fix only shows its effect weeks later."
+        "text": "“Best time to post on Instagram” articles usually give one number for every business. For food, a more honest benchmark is when your customers start thinking about their next meal."
       },
-      { "type": "h2", "text": "Four quick checks" },
       {
-        "type": "ol",
+        "type": "h2",
+        "text": "Follow meal times, not office hours"
+      },
+      {
+        "type": "p",
+        "text": "Posting 30–60 minutes before lunch and dinner gives people time to see the post, then order. Check your account Insights to confirm the pattern."
+      },
+      {
+        "type": "ul",
         "items": [
-          "The main keyword appears in the title, within the first 60 characters.",
-          "There is one H1 and several tidy H2s, not one long block of text.",
-          "A meta description of 150–160 characters naming a concrete benefit.",
-          "Two or three internal links to related older articles."
+          "Test the 10:30–11:30 and 16:30–17:30 slots for two weeks",
+          "Compare reach per slot in Instagram Insights",
+          "Save new-menu Reels for the weekend",
+          "Post promotions the day before payday"
         ]
-      },
-      { "type": "h2", "text": "Why internal links get skipped" },
-      {
-        "type": "p",
-        "text": "The first three feel like writing work, so they get done. Internal linking feels like admin, so it gets skipped — even though it is the cheapest way to lift older pages without writing anything new."
       },
       {
         "type": "callout",
@@ -71,34 +67,309 @@
       }
     ]
   },
-  "menghitung-biaya-konten": {
-    "title": "Working out a month of content production costs",
-    "excerpt": "Sample article. Content costs become predictable the moment you count them per job rather than per subscription.",
-    "metaTitle": "Working Out a Month of Content Production Costs - OPTIMARK Blog",
-    "metaDescription": "Sample Optimark blog article: how to estimate monthly content production costs from what you actually produce.",
+  "foto-produk-ai-smartphone": {
+    "title": "A Guide to Attractive Product Photos Using AI and a Smartphone",
+    "excerpt": "Smartphone photos plus a little AI help are enough for a clean catalogue, as long as the source shot is right.",
+    "metaTitle": "A Guide to Attractive Product Photos Using AI and a Smartphone - OPTIMARK Blog",
+    "metaDescription": "Smartphone photos plus a little AI help are enough for a clean catalogue, as long as the source shot is right.",
     "blocks": [
       {
         "type": "p",
-        "text": "The question that comes up most while setting a marketing budget is not which tool to use but how much next month will cost. As long as the cost is a subscription, the answer is always an approximation."
+        "text": "AI can clean up backgrounds, fix lighting, and create mood variations. But the result is only as good as the source photo you take on your phone."
       },
-      { "type": "h2", "text": "Count from output, not from tiers" },
+      {
+        "type": "h2",
+        "text": "Take a clean source photo"
+      },
       {
         "type": "p",
-        "text": "Start from what you genuinely produced last month: how many captions, how many articles, how many images. That number is far more accurate than guessing from the packages on offer."
+        "text": "Use side light from a window, a plain background, and a camera level with the product. A sharp, bright photo gives the AI enough to work with."
       },
-      { "type": "h2", "text": "Do not forget revisions" },
       {
-        "type": "p",
-        "text": "Revisions almost always fall out of the estimate. Rewriting one caption in a different tone is still a job, and so is an alternate image ratio. Add roughly 20 percent on top of your first number."
+        "type": "ul",
+        "items": [
+          "Shoot near a window and avoid warm indoor bulbs",
+          "Wipe the lens before shooting",
+          "Take several angles of each product",
+          "Use AI for backgrounds and variations, not to change the product itself"
+        ]
       },
       {
         "type": "callout",
         "title": "Note",
         "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "strategi-content-pillar": {
+    "title": "A Content Pillar Strategy That Keeps Small Brands Posting Consistently",
+    "excerpt": "Three or four content pillars mean you no longer wonder what to post every morning.",
+    "metaTitle": "A Content Pillar Strategy That Keeps Small Brands Posting Consistently - OPTIMARK Blog",
+    "metaDescription": "Three or four content pillars mean you no longer wonder what to post every morning.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Small brands rarely run out of ideas out of laziness. Usually every day starts from zero. Content pillars give you a frame so ideas don’t have to be found again."
       },
       {
-        "type": "quote",
-        "text": "If you cannot work a cost out yourself, it is not a budget — it is a hope."
+        "type": "h2",
+        "text": "Pick pillars from customer questions"
+      },
+      {
+        "type": "p",
+        "text": "Write down the questions customers ask most, then group them. Each group can become a pillar, for example education, product, behind the scenes, and testimonials."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Keep it to three or four pillars",
+          "Set a weekly share for each pillar",
+          "Keep five backup ideas per pillar",
+          "Review which pillar gets saved and shared most each month"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "website-belum-muncul-di-google": {
+    "title": "Why Your Website Isn’t on Google’s First Page Yet",
+    "excerpt": "Before blaming the algorithm, check whether Google can actually find and understand your pages.",
+    "metaTitle": "Why Your Website Isn’t on Google’s First Page Yet - OPTIMARK Blog",
+    "metaDescription": "Before blaming the algorithm, check whether Google can actually find and understand your pages.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "A site missing from the first page doesn’t necessarily have bad content. Often Google hasn’t indexed the page, or can’t tell which search it answers."
+      },
+      {
+        "type": "h2",
+        "text": "Check indexing before content"
+      },
+      {
+        "type": "p",
+        "text": "Search site:yourdomain.com on Google. If important pages don’t show up, the problem is indexing, not writing. Google Search Console can show you why."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Register the site and sitemap in Google Search Console",
+          "Give every page a clear title and H1",
+          "Fix pages that load slowly on mobile",
+          "Link new pages from older pages that already get traffic"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "warna-feed-instagram": {
+    "title": "Tips for Choosing Instagram Feed Colours That Match Your Brand",
+    "excerpt": "A consistent feed palette makes an account recognisable before anyone reads your brand name.",
+    "metaTitle": "Tips for Choosing Instagram Feed Colours That Match Your Brand - OPTIMARK Blog",
+    "metaDescription": "A consistent feed palette makes an account recognisable before anyone reads your brand name.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "A tidy feed doesn’t mean every photo looks the same. What matters is two or three colours that keep appearing, so the account feels like one character."
+      },
+      {
+        "type": "h2",
+        "text": "Derive colours from your logo and product"
+      },
+      {
+        "type": "p",
+        "text": "Take one main colour from the logo, one neutral, and one accent from the product. Use all three in photo backgrounds, text, and props."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Keep the palette to three colours",
+          "Save the colour codes so designers and photographers agree",
+          "Use the same editing preset on every photo",
+          "Check the last nine posts in the grid before uploading"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "caption-tiktok": {
+    "title": "How to Write TikTok Captions That Get Viewers Interacting",
+    "excerpt": "A good TikTok caption doesn’t repeat the video. It gives viewers a reason to comment.",
+    "metaTitle": "How to Write TikTok Captions That Get Viewers Interacting - OPTIMARK Blog",
+    "metaDescription": "A good TikTok caption doesn’t repeat the video. It gives viewers a reason to comment.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "TikTok viewers have already watched the video. A caption that repeats it adds nothing. A good caption starts a conversation."
+      },
+      {
+        "type": "h2",
+        "text": "End with an easy question"
+      },
+      {
+        "type": "p",
+        "text": "Either-or questions like “Team spicy or team sweet?” are easier to answer than open ones. The lighter the answer, the more people comment."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Put the most important line first",
+          "Ask one either-or question at the end",
+          "Use three to five relevant hashtags",
+          "Reply to early comments within the first hour"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "artikel-jadi-konten-media-sosial": {
+    "title": "How to Turn One Blog Post Into Ten Social Media Posts",
+    "excerpt": "One well-researched article can feed two weeks of content without writing from scratch again.",
+    "metaTitle": "How to Turn One Blog Post Into Ten Social Media Posts - OPTIMARK Blog",
+    "metaDescription": "One well-researched article can feed two weeks of content without writing from scratch again.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "A good blog post holds research, examples, and a conclusion. All of it can be broken into shorter social posts."
+      },
+      {
+        "type": "h2",
+        "text": "Split by point, not by paragraph"
+      },
+      {
+        "type": "p",
+        "text": "Each main point can become a carousel, each strong quote a text post, and each practical step a short video."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "One carousel summarising the article",
+          "Three quote posts from the strongest lines",
+          "Three short videos, one per practical step",
+          "One poll and two stories to invite discussion"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "video-promosi-singkat": {
+    "title": "Making Short, Engaging Promo Videos Without Hiring an Editor",
+    "excerpt": "A 15-second promo can be shot and edited on a smartphone, as long as the first three seconds are strong.",
+    "metaTitle": "Making Short, Engaging Promo Videos Without Hiring an Editor - OPTIMARK Blog",
+    "metaDescription": "A 15-second promo can be shot and edited on a smartphone, as long as the first three seconds are strong.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Viewers decide whether to keep watching or swipe within the first few seconds. Even a professional editor can’t save a video with a weak opening."
+      },
+      {
+        "type": "h2",
+        "text": "Open with the result, not the logo"
+      },
+      {
+        "type": "p",
+        "text": "Show the product in use or the end result in the first second. The logo and brand name can come at the end."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Plan three scenes: result, process, call to action",
+          "Shoot vertically in 9:16",
+          "Add on-screen text for people watching muted",
+          "Keep it to 15–30 seconds"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "target-audiens": {
+    "title": "Defining Your Target Audience Before Creating Content for an Online Business",
+    "excerpt": "Content for everyone usually appeals to no one. Decide who you are talking to first.",
+    "metaTitle": "Defining Your Target Audience Before Creating Content for an Online Business - OPTIMARK Blog",
+    "metaDescription": "Content for everyone usually appeals to no one. Decide who you are talking to first.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Many online businesses start making content before they know who it is for. The result is polite content that doesn’t feel meant for anyone."
+      },
+      {
+        "type": "h2",
+        "text": "Start with customers who already bought"
+      },
+      {
+        "type": "p",
+        "text": "Look at your last ten customers: age, job, city, and why they bought. The pattern that shows up is where your target audience starts."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Interview three customers about why they bought",
+          "Write a one-paragraph ideal customer profile",
+          "Note the words they use when asking questions",
+          "Test content on one segment before widening"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+      }
+    ]
+  },
+  "insight-instagram": {
+    "title": "Reading Instagram Insights to Find Your Most Effective Content",
+    "excerpt": "Likes aren’t the only measure. Saves and shares often show more honestly which content is useful.",
+    "metaTitle": "Reading Instagram Insights to Find Your Most Effective Content - OPTIMARK Blog",
+    "metaDescription": "Likes aren’t the only measure. Saves and shares often show more honestly which content is useful.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Instagram Insights offers plenty of numbers, and it’s easy to get lost. A few metrics are enough to decide which content to repeat."
+      },
+      {
+        "type": "h2",
+        "text": "Focus on saves and shares"
+      },
+      {
+        "type": "p",
+        "text": "Saved content is seen as useful, shared content as worth recommending. These two reflect a post’s value better than likes."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Compare posts by format: photo, carousel, Reels",
+          "Sort posts by number of saves",
+          "Note the posting times of your top five posts",
+          "Repeat the best topics in a different format"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Note",
+        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
       }
     ]
   }

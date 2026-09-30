@@ -4,7 +4,6 @@ import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
-import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 
 type Props = {
@@ -58,7 +57,6 @@ export default async function BlogPage({ params }: Props) {
       <Header />
       <main className="relative pt-24">
         <BlogIndexSection />
-        <CtaSection />
       </main>
       <Footer />
     </div>

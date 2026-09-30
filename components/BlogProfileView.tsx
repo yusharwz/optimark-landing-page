@@ -81,7 +81,7 @@ export function BlogProfileView(props: Props) {
           </div>
 
           <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
-            <BlogPersonAvatar name={name} size="xl" kind={props.kind} />
+            <BlogPersonAvatar id={props.id} name={name} size="xl" kind={props.kind} />
             <div className="min-w-0">
               {!isAuthor && (
                 <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#94C748]/30 bg-[#94C748]/10 px-3 py-1 text-xs font-semibold text-[#1E280E]">

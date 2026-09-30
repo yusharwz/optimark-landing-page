@@ -1,41 +1,61 @@
-import { initialsOf } from "@/config/blog";
+import Image from "next/image";
+import {
+  BLOG_PERSON_PHOTOS,
+  initialsOf,
+  type BlogAuthorId,
+  type BlogReviewerId,
+} from "@/config/blog";
 import { cx } from "@/utils/cx";
 
 const SIZES = {
+  xs: "h-6 w-6 text-[0.5625rem]",
   sm: "h-9 w-9 text-xs",
   md: "h-12 w-12 text-sm",
   lg: "h-16 w-16 text-lg",
   xl: "h-28 w-28 text-3xl sm:h-32 sm:w-32",
 } as const;
 
+/** Rendered pixel width per size, for the `sizes` hint on the photo. */
+const PIXELS: Record<keyof typeof SIZES, number> = { xs: 24, sm: 36, md: 48, lg: 64, xl: 128 };
+
 /**
- * Initials avatar for authors and reviewers. Profiles carry no photos yet, and
- * a generated stand-in face would misrepresent a real person, so this shows
- * initials on a brand tint instead. Swap for `next/image` once real headshots
- * exist.
+ * Avatar for authors and reviewers: their headshot from BLOG_PERSON_PHOTOS
+ * when one exists, otherwise initials on a brand tint.
  */
 export function BlogPersonAvatar({
+  id,
   name,
   size = "md",
   kind = "author",
   className,
 }: {
+  id: BlogAuthorId | BlogReviewerId;
   name: string;
   size?: keyof typeof SIZES;
   kind?: "author" | "reviewer";
   className?: string;
 }) {
+  const photo = BLOG_PERSON_PHOTOS[id];
+
   return (
     <span
       aria-hidden
       className={cx(
-        "flex shrink-0 items-center justify-center rounded-full font-semibold tracking-wide ring-4 ring-white",
-        kind === "reviewer" ? "bg-[#1E280E] text-[#C7E59A]" : "bg-[#94C748]/15 text-[#3F5B17]",
+        "relative flex shrink-0 items-center justify-center overflow-hidden rounded-full font-semibold tracking-wide ring-4 ring-white",
+        photo
+          ? "bg-gray-100 outline outline-[0.5px] -outline-offset-[0.5px] outline-black/8"
+          : kind === "reviewer"
+            ? "bg-[#1E280E] text-[#C7E59A]"
+            : "bg-[#94C748]/15 text-[#3F5B17]",
         SIZES[size],
         className,
       )}
     >
-      {initialsOf(name)}
+      {photo ? (
+        <Image src={photo} alt="" fill sizes={`${PIXELS[size]}px`} className="object-cover" />
+      ) : (
+        initialsOf(name)
+      )}
     </span>
   );
 }
