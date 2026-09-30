@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, BadgeCheck, Check, Clock, Info, Link2 } from "lucide-react";
@@ -132,7 +133,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                 href={authorHref(post.author)}
                 className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
               >
-                <BlogPersonAvatar name={authorName} size="sm" />
+                <BlogPersonAvatar id={post.author} name={authorName} size="sm" />
                 <span className="leading-tight">
                   <span className="text-detail block text-xs">{tPost("writtenBy")}</span>
                   <span className="block text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
@@ -145,7 +146,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                 href={reviewerHref(post.reviewer)}
                 className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
               >
-                <BlogPersonAvatar name={reviewerName} size="sm" kind="reviewer" />
+                <BlogPersonAvatar id={post.reviewer} name={reviewerName} size="sm" kind="reviewer" />
                 <span className="leading-tight">
                   <span className="text-detail inline-flex items-center gap-1 text-xs">
                     {tPost("reviewedBy")}
@@ -205,11 +206,23 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
 
       {/* Body */}
       <article className="relative mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+        {post.cover && (
+          <div className="relative mb-10 aspect-video overflow-hidden rounded-3xl border-[0.5px] border-black/10">
+            <Image
+              src={post.cover}
+              alt=""
+              fill
+              priority
+              sizes="(min-width: 768px) 720px, 100vw"
+              className="object-cover"
+            />
+          </div>
+        )}
         <BlogArticle slug={slug} />
 
         {/* About the author */}
         <aside className="mt-14 flex flex-col gap-5 rounded-3xl border border-gray-200/80 bg-white p-6 sm:flex-row sm:items-start sm:p-8">
-          <BlogPersonAvatar name={authorName} size="lg" />
+          <BlogPersonAvatar id={post.author} name={authorName} size="lg" />
           <div className="min-w-0">
             <p className="text-detail text-xs font-semibold uppercase tracking-[0.12em]">
               {tPost("aboutAuthor")}

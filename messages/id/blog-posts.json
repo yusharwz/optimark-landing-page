@@ -1,68 +1,64 @@
 {
-  "memulai-kalender-konten": {
-    "title": "Memulai kalender konten yang benar-benar dipakai",
-    "excerpt": "Contoh artikel. Kalender konten gagal bukan karena template-nya jelek, tapi karena diisi terlalu ambisius di minggu pertama.",
-    "metaTitle": "Memulai Kalender Konten yang Benar-benar Dipakai - Blog OPTIMARK",
-    "metaDescription": "Contoh artikel blog Optimark: cara menyusun kalender konten yang realistis dan tetap jalan setelah minggu kedua.",
+  "riset-keyword-bisnis-lokal": {
+    "title": "Cara Riset Keyword untuk Bisnis Lokal Tanpa Tools Berbayar",
+    "excerpt": "Kata kunci yang dicari pelanggan di sekitar Anda bisa ditemukan dari Google sendiri, tanpa langganan tools SEO.",
+    "metaTitle": "Cara Riset Keyword untuk Bisnis Lokal Tanpa Tools Berbayar - Blog OPTIMARK",
+    "metaDescription": "Kata kunci yang dicari pelanggan di sekitar Anda bisa ditemukan dari Google sendiri, tanpa langganan tools SEO.",
     "blocks": [
       {
         "type": "p",
-        "text": "Hampir semua tim pernah membuat kalender konten. Yang jarang terjadi adalah kalender itu masih dipakai di bulan ketiga. Masalahnya biasanya bukan di alatnya, tapi di jumlah yang direncanakan pada minggu pertama saat semangat masih penuh."
+        "text": "Bisnis lokal jarang butuh ribuan kata kunci. Yang dibutuhkan adalah beberapa frasa yang benar-benar diketik calon pelanggan di kota Anda, dan sebagian besar bisa ditemukan gratis."
       },
-      { "type": "h2", "text": "Mulai dari jumlah yang membosankan" },
+      {
+        "type": "h2",
+        "text": "Mulai dari kolom pencarian Google"
+      },
       {
         "type": "p",
-        "text": "Tentukan jumlah post yang Anda yakin bisa dipenuhi di minggu tersibuk, bukan di minggu terluang. Kalau angkanya dua post per minggu, tulis dua. Kalender yang selalu terpenuhi jauh lebih berguna daripada kalender ambisius yang ditinggalkan."
-      },
-      { "type": "h2", "text": "Isi dulu temanya, bukan naskahnya" },
-      {
-        "type": "p",
-        "text": "Satu bulan ke depan cukup diisi tema per slot: tips, produk, testimoni, di balik layar. Naskah lengkapnya menyusul. Memisahkan keputusan tema dari pekerjaan menulis bikin dua-duanya lebih cepat selesai."
+        "text": "Ketik layanan Anda plus nama kota, lalu catat saran autocomplete dan bagian “Penelusuran terkait” di bawah halaman. Dua sumber ini berasal dari pencarian nyata."
       },
       {
         "type": "ul",
         "items": [
-          "Tetapkan jumlah post berdasarkan minggu tersibuk Anda",
-          "Isi tema dulu untuk sebulan, naskah menyusul per minggu",
-          "Sisakan satu slot kosong tiap minggu untuk hal yang mendadak",
-          "Tinjau ulang setiap akhir bulan, bukan setiap hari"
+          "Catat saran autocomplete untuk layanan + nama kota",
+          "Lihat pertanyaan di kotak “Orang lain juga bertanya”",
+          "Periksa kata yang dipakai pesaing di judul Google Business Profile",
+          "Kelompokkan frasa berdasarkan niat: cari info, bandingkan, atau beli"
         ]
       },
       {
         "type": "callout",
         "title": "Catatan",
         "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
-      },
-      {
-        "type": "quote",
-        "text": "Kalender yang selalu terpenuhi mengalahkan kalender ambisius yang ditinggalkan di minggu kedua."
       }
     ]
   },
-  "audit-seo-dasar": {
-    "title": "Empat hal yang diperiksa sebelum artikel tayang",
-    "excerpt": "Contoh artikel. Pemeriksaan singkat di tahap draf jauh lebih murah daripada memperbaiki artikel yang sudah tayang.",
-    "metaTitle": "Empat Hal yang Diperiksa Sebelum Artikel Tayang - Blog OPTIMARK",
-    "metaDescription": "Contoh artikel blog Optimark: empat pemeriksaan SEO dasar yang bisa diselesaikan sebelum tombol publish ditekan.",
+  "jadwal-posting-instagram-umkm-kuliner": {
+    "title": "Jadwal Posting Instagram Terbaik untuk UMKM Kuliner di Tahun 2026",
+    "excerpt": "Jam posting terbaik bukan angka universal. Untuk bisnis kuliner, jam lapar pelanggan Anda adalah patokannya.",
+    "metaTitle": "Jadwal Posting Instagram Terbaik untuk UMKM Kuliner di Tahun 2026 - Blog OPTIMARK",
+    "metaDescription": "Jam posting terbaik bukan angka universal. Untuk bisnis kuliner, jam lapar pelanggan Anda adalah patokannya.",
     "blocks": [
       {
         "type": "p",
-        "text": "Memperbaiki artikel yang sudah tayang selalu lebih mahal. Mesin pencari butuh waktu merayapi ulang halaman yang diubah, jadi setiap perbaikan baru terasa hasilnya beberapa minggu kemudian."
+        "text": "Artikel “jam terbaik posting Instagram” biasanya memberi satu angka untuk semua bisnis. Untuk kuliner, patokan yang lebih jujur adalah kapan pelanggan Anda mulai memikirkan makanan."
       },
-      { "type": "h2", "text": "Empat pemeriksaan cepat" },
       {
-        "type": "ol",
+        "type": "h2",
+        "text": "Ikuti jam makan, bukan jam kantor"
+      },
+      {
+        "type": "p",
+        "text": "Posting 30–60 menit sebelum jam makan siang dan makan malam memberi waktu orang melihat, lalu memesan. Cek Insight akun Anda untuk memastikan polanya."
+      },
+      {
+        "type": "ul",
         "items": [
-          "Kata kunci utama muncul di judul, dalam 60 karakter pertama.",
-          "Ada satu H1 dan beberapa H2 yang bertingkat rapi, bukan satu blok teks panjang.",
-          "Meta deskripsi 150–160 karakter yang menyebut manfaat konkret.",
-          "Dua sampai tiga internal link ke artikel lama yang berkaitan."
+          "Uji slot 10.30–11.30 dan 16.30–17.30 selama dua minggu",
+          "Bandingkan jangkauan per slot di Instagram Insight",
+          "Simpan Reels menu baru untuk akhir pekan",
+          "Posting promo sehari sebelum hari gajian"
         ]
-      },
-      { "type": "h2", "text": "Kenapa internal link sering terlewat" },
-      {
-        "type": "p",
-        "text": "Tiga yang pertama terasa seperti pekerjaan menulis, jadi biasanya dikerjakan. Internal link terasa seperti pekerjaan administratif, jadi sering dilewat — padahal ini cara paling murah menaikkan halaman lama tanpa menulis apa pun yang baru."
       },
       {
         "type": "callout",
@@ -71,34 +67,309 @@
       }
     ]
   },
-  "menghitung-biaya-konten": {
-    "title": "Menghitung biaya produksi konten sebulan",
-    "excerpt": "Contoh artikel. Biaya konten jadi bisa diprediksi begitu Anda menghitungnya per pekerjaan, bukan per langganan.",
-    "metaTitle": "Menghitung Biaya Produksi Konten Sebulan - Blog OPTIMARK",
-    "metaDescription": "Contoh artikel blog Optimark: cara memperkirakan biaya produksi konten bulanan berdasarkan jumlah materi yang benar-benar diproduksi.",
+  "foto-produk-ai-smartphone": {
+    "title": "Panduan Membuat Foto Produk Menarik Pakai AI dari Smartphone",
+    "excerpt": "Foto dari smartphone plus sedikit bantuan AI sudah cukup untuk katalog yang rapi, asalkan bahan awalnya benar.",
+    "metaTitle": "Panduan Membuat Foto Produk Menarik Pakai AI dari Smartphone - Blog OPTIMARK",
+    "metaDescription": "Foto dari smartphone plus sedikit bantuan AI sudah cukup untuk katalog yang rapi, asalkan bahan awalnya benar.",
     "blocks": [
       {
         "type": "p",
-        "text": "Pertanyaan yang paling sering muncul saat menyusun anggaran pemasaran bukan soal alat mana yang dipakai, tapi berapa yang akan habis bulan depan. Selama biayanya berbentuk langganan, jawabannya selalu kira-kira."
+        "text": "AI bisa membersihkan latar, merapikan cahaya, dan membuat variasi suasana. Tapi hasilnya hanya sebaik foto awal yang Anda ambil dengan smartphone."
       },
-      { "type": "h2", "text": "Hitung dari materi, bukan dari paket" },
+      {
+        "type": "h2",
+        "text": "Ambil foto awal yang bersih"
+      },
       {
         "type": "p",
-        "text": "Mulai dari jumlah materi yang benar-benar Anda produksi bulan lalu: berapa caption, berapa artikel, berapa gambar. Angka itu jauh lebih akurat daripada menebak dari paket yang ditawarkan."
+        "text": "Gunakan cahaya jendela dari samping, latar polos, dan posisi kamera sejajar produk. Foto yang tajam dan terang memberi AI bahan yang cukup untuk diolah."
       },
-      { "type": "h2", "text": "Jangan lupa revisi" },
       {
-        "type": "p",
-        "text": "Revisi hampir selalu luput dari hitungan. Menulis ulang satu caption dengan nada berbeda tetap sebuah pekerjaan, begitu juga varian rasio gambar. Tambahkan sekitar 20 persen di atas hitungan awal Anda."
+        "type": "ul",
+        "items": [
+          "Foto di dekat jendela, hindari lampu kuning",
+          "Bersihkan lensa sebelum memotret",
+          "Ambil beberapa sudut untuk setiap produk",
+          "Gunakan AI untuk latar dan variasi, bukan untuk mengubah bentuk produk"
+        ]
       },
       {
         "type": "callout",
         "title": "Catatan",
         "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "strategi-content-pillar": {
+    "title": "Strategi Content Pillar yang Bikin Brand Kecil Tetap Konsisten Posting",
+    "excerpt": "Tiga sampai empat pilar konten membuat Anda tidak lagi bingung mau posting apa setiap pagi.",
+    "metaTitle": "Strategi Content Pillar yang Bikin Brand Kecil Tetap Konsisten Posting - Blog OPTIMARK",
+    "metaDescription": "Tiga sampai empat pilar konten membuat Anda tidak lagi bingung mau posting apa setiap pagi.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Brand kecil jarang kehabisan ide karena malas. Biasanya karena setiap hari dimulai dari nol. Content pillar memberi kerangka supaya ide tidak perlu dicari ulang."
       },
       {
-        "type": "quote",
-        "text": "Kalau sebuah biaya tidak bisa Anda hitung sendiri, itu bukan anggaran — itu harapan."
+        "type": "h2",
+        "text": "Pilih pilar dari pertanyaan pelanggan"
+      },
+      {
+        "type": "p",
+        "text": "Tulis pertanyaan yang paling sering diajukan pelanggan, lalu kelompokkan. Tiap kelompok bisa menjadi satu pilar, misalnya edukasi, produk, di balik layar, dan testimoni."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Batasi tiga sampai empat pilar",
+          "Tetapkan porsi tiap pilar per minggu",
+          "Siapkan lima ide cadangan per pilar",
+          "Tinjau pilar yang paling banyak disimpan dan dibagikan tiap bulan"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "website-belum-muncul-di-google": {
+    "title": "Kenapa Website Kamu Belum Muncul di Halaman Pertama Google",
+    "excerpt": "Sebelum menyalahkan algoritma, periksa dulu apakah Google sudah bisa menemukan dan memahami halaman Anda.",
+    "metaTitle": "Kenapa Website Kamu Belum Muncul di Halaman Pertama Google - Blog OPTIMARK",
+    "metaDescription": "Sebelum menyalahkan algoritma, periksa dulu apakah Google sudah bisa menemukan dan memahami halaman Anda.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Website yang tidak muncul di halaman pertama belum tentu kontennya buruk. Sering kali Google belum mengindeks halaman itu, atau tidak paham halaman itu menjawab pencarian apa."
+      },
+      {
+        "type": "h2",
+        "text": "Periksa indeks sebelum konten"
+      },
+      {
+        "type": "p",
+        "text": "Ketik site:domainanda.com di Google. Kalau halaman penting tidak muncul, masalahnya ada di pengindeksan, bukan di tulisan. Google Search Console bisa menunjukkan alasannya."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Daftarkan situs dan sitemap di Google Search Console",
+          "Pastikan setiap halaman punya judul dan H1 yang jelas",
+          "Perbaiki halaman yang lambat dibuka di ponsel",
+          "Tautkan halaman baru dari halaman lama yang sudah ramai"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "warna-feed-instagram": {
+    "title": "Tips Memilih Warna Feed Instagram yang Sesuai dengan Karakter Brand",
+    "excerpt": "Palet feed yang konsisten membuat akun mudah dikenali, bahkan sebelum orang membaca nama brand Anda.",
+    "metaTitle": "Tips Memilih Warna Feed Instagram yang Sesuai dengan Karakter Brand - Blog OPTIMARK",
+    "metaDescription": "Palet feed yang konsisten membuat akun mudah dikenali, bahkan sebelum orang membaca nama brand Anda.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Feed yang rapi bukan soal semua foto harus sama. Yang penting ada dua atau tiga warna yang terus muncul, sehingga akun Anda terasa punya satu karakter."
+      },
+      {
+        "type": "h2",
+        "text": "Turunkan warna dari logo dan produk"
+      },
+      {
+        "type": "p",
+        "text": "Ambil satu warna utama dari logo, satu warna netral, dan satu aksen dari produk. Gunakan ketiganya di latar foto, teks, dan properti."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Batasi palet pada tiga warna",
+          "Simpan kode warna agar desainer dan fotografer sepakat",
+          "Pakai preset edit yang sama untuk semua foto",
+          "Lihat grid sembilan post terakhir sebelum mengunggah"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "caption-tiktok": {
+    "title": "Cara Menulis Caption TikTok yang Mendorong Penonton untuk Berinteraksi",
+    "excerpt": "Caption TikTok yang baik tidak mengulang isi video. Ia memberi penonton alasan untuk berkomentar.",
+    "metaTitle": "Cara Menulis Caption TikTok yang Mendorong Penonton untuk Berinteraksi - Blog OPTIMARK",
+    "metaDescription": "Caption TikTok yang baik tidak mengulang isi video. Ia memberi penonton alasan untuk berkomentar.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Penonton TikTok sudah melihat videonya. Caption yang hanya mengulang isi video tidak menambah apa-apa. Caption yang baik membuka percakapan."
+      },
+      {
+        "type": "h2",
+        "text": "Akhiri dengan pertanyaan yang mudah dijawab"
+      },
+      {
+        "type": "p",
+        "text": "Pertanyaan pilihan seperti “Tim pedas atau tim manis?” lebih mudah dijawab daripada pertanyaan terbuka. Semakin ringan jawabannya, semakin banyak yang berkomentar."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Taruh kalimat terpenting di baris pertama",
+          "Ajukan satu pertanyaan pilihan di akhir caption",
+          "Pakai tiga sampai lima hashtag yang relevan",
+          "Balas komentar awal dalam satu jam pertama"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "artikel-jadi-konten-media-sosial": {
+    "title": "Cara Mengubah Satu Artikel Blog Menjadi Sepuluh Konten Media Sosial",
+    "excerpt": "Satu artikel yang sudah diriset bisa menjadi bahan konten untuk dua minggu, tanpa menulis dari nol lagi.",
+    "metaTitle": "Cara Mengubah Satu Artikel Blog Menjadi Sepuluh Konten Media Sosial - Blog OPTIMARK",
+    "metaDescription": "Satu artikel yang sudah diriset bisa menjadi bahan konten untuk dua minggu, tanpa menulis dari nol lagi.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Artikel blog yang baik berisi riset, contoh, dan kesimpulan. Semua itu bisa dipecah menjadi konten media sosial yang lebih pendek."
+      },
+      {
+        "type": "h2",
+        "text": "Pecah per poin, bukan per paragraf"
+      },
+      {
+        "type": "p",
+        "text": "Setiap poin utama bisa menjadi satu carousel, setiap kutipan kuat menjadi satu post teks, dan setiap langkah praktis menjadi satu video singkat."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Satu carousel untuk ringkasan artikel",
+          "Tiga post kutipan dari kalimat terkuat",
+          "Tiga video singkat untuk tiap langkah praktis",
+          "Satu polling dan dua story untuk mengajak diskusi"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "video-promosi-singkat": {
+    "title": "Membuat Video Promosi Singkat yang Menarik Tanpa Harus Menyewa Editor",
+    "excerpt": "Video promosi 15 detik bisa direkam dan diedit sendiri dari smartphone, asalkan tiga detik pertamanya kuat.",
+    "metaTitle": "Membuat Video Promosi Singkat yang Menarik Tanpa Harus Menyewa Editor - Blog OPTIMARK",
+    "metaDescription": "Video promosi 15 detik bisa direkam dan diedit sendiri dari smartphone, asalkan tiga detik pertamanya kuat.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Penonton memutuskan menonton atau menggeser dalam beberapa detik pertama. Editor profesional pun tidak bisa menyelamatkan video yang pembukaannya lemah."
+      },
+      {
+        "type": "h2",
+        "text": "Buka dengan hasil, bukan logo"
+      },
+      {
+        "type": "p",
+        "text": "Tunjukkan produk dipakai atau hasil akhirnya di detik pertama. Logo dan nama brand bisa muncul di akhir."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Rencanakan tiga adegan: hasil, proses, ajakan",
+          "Rekam dalam format vertikal 9:16",
+          "Tambahkan teks di layar untuk yang menonton tanpa suara",
+          "Batasi durasi 15–30 detik"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "target-audiens": {
+    "title": "Menentukan Target Audiens Sebelum Mulai Membuat Konten untuk Bisnis Online",
+    "excerpt": "Konten untuk semua orang biasanya tidak menarik siapa pun. Tentukan dulu siapa yang Anda ajak bicara.",
+    "metaTitle": "Menentukan Target Audiens Sebelum Mulai Membuat Konten untuk Bisnis Online - Blog OPTIMARK",
+    "metaDescription": "Konten untuk semua orang biasanya tidak menarik siapa pun. Tentukan dulu siapa yang Anda ajak bicara.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Banyak bisnis online mulai membuat konten sebelum tahu siapa pembacanya. Hasilnya konten yang sopan, tapi tidak terasa ditujukan untuk siapa pun."
+      },
+      {
+        "type": "h2",
+        "text": "Mulai dari pelanggan yang sudah membeli"
+      },
+      {
+        "type": "p",
+        "text": "Lihat sepuluh pelanggan terakhir Anda: usia, pekerjaan, kota, dan alasan mereka membeli. Pola yang muncul adalah titik awal target audiens."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Wawancarai tiga pelanggan tentang alasan mereka membeli",
+          "Tulis satu paragraf profil pelanggan ideal",
+          "Catat kata-kata yang mereka pakai saat bertanya",
+          "Uji konten ke satu segmen dulu sebelum melebar"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+      }
+    ]
+  },
+  "insight-instagram": {
+    "title": "Membaca Insight Instagram untuk Mengetahui Konten Mana yang Paling Efektif",
+    "excerpt": "Jumlah like bukan satu-satunya ukuran. Simpan dan bagikan sering lebih jujur menunjukkan konten yang berguna.",
+    "metaTitle": "Membaca Insight Instagram untuk Mengetahui Konten Mana yang Paling Efektif - Blog OPTIMARK",
+    "metaDescription": "Jumlah like bukan satu-satunya ukuran. Simpan dan bagikan sering lebih jujur menunjukkan konten yang berguna.",
+    "blocks": [
+      {
+        "type": "p",
+        "text": "Instagram Insight menyediakan banyak angka, dan mudah tersesat di dalamnya. Beberapa metrik saja sudah cukup untuk menentukan konten apa yang perlu diulang."
+      },
+      {
+        "type": "h2",
+        "text": "Fokus pada simpan dan bagikan"
+      },
+      {
+        "type": "p",
+        "text": "Konten yang disimpan dianggap berguna, konten yang dibagikan dianggap layak direkomendasikan. Dua metrik ini lebih mencerminkan nilai konten daripada like."
+      },
+      {
+        "type": "ul",
+        "items": [
+          "Bandingkan post per format: foto, carousel, Reels",
+          "Urutkan post berdasarkan jumlah simpan",
+          "Catat jam posting dari lima post terbaik",
+          "Ulangi topik terbaik dengan format berbeda"
+        ]
+      },
+      {
+        "type": "callout",
+        "title": "Catatan",
+        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
       }
     ]
   }

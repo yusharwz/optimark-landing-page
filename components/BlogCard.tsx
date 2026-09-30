@@ -1,9 +1,17 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { ArrowRight, Clock } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { BLOG_CATEGORY_ICONS, BLOG_CATEGORY_STYLES, blogHref, type BlogPost } from "@/config/blog";
+import { BlogPersonAvatar } from "@/components/BlogPersonAvatar";
+import {
+  BLOG_CATEGORY_ICONS,
+  BLOG_CATEGORY_STYLES,
+  authorHref,
+  blogHref,
+  type BlogPost,
+} from "@/config/blog";
 import { formatBlogDate } from "@/lib/blog";
 import type { AppLocale } from "@/lib/locale";
 import { cx } from "@/utils/cx";
@@ -11,16 +19,24 @@ import { cx } from "@/utils/cx";
 type BlogCardProps = {
   post: BlogPost;
   locale: AppLocale;
-  /** Wide two-column treatment for the one featured post on the index. */
-  variant?: "default" | "featured";
 };
 
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
+
 /**
- * A post card. Posts ship without photography, so the cover is a gradient wash
- * plus the category icon (see BLOG_CATEGORY_STYLES) rather than an <Image> that
- * would 404 — it keeps the grid even while real art is still pending.
+ * A post card: cover, category, two-line title, date · read time, author.
+ *
+ * Cover and title link to the post, the author links to their profile — so the
+ * card is not one big link, and each part has its own hover state (per the
+ * Figma "Blog Index" spec): cover zooms, category darkens, title turns brand
+ * green, author darkens. A title cut off by the two-line clamp shows its full
+ * text in a tooltip on hover-capable devices.
+ *
+ * Posts without a `cover` photo paint the category wash plus its icon (see
+ * BLOG_CATEGORY_STYLES) so the grid stays even while real art is pending.
  */
-export function BlogCard({ post, locale, variant = "default" }: BlogCardProps) {
+export function BlogCard({ post, locale }: BlogCardProps) {
   const t = useTranslations("blog");
   // Each post is its own namespace, so the slug selects the namespace rather
   // than being looked up as a key inside `blogPosts`.
@@ -29,89 +45,100 @@ export function BlogCard({ post, locale, variant = "default" }: BlogCardProps) {
 
   const style = BLOG_CATEGORY_STYLES[post.category];
   const Icon = BLOG_CATEGORY_ICONS[post.category];
-  const featured = variant === "featured";
+  const title = tPost("title");
+  const authorName = tPeople(`authors.${post.author}.name`);
+
+  const titleRef = useRef<HTMLHeadingElement>(null);
+  const [truncated, setTruncated] = useState(false);
+
+  // The clamp depends on the column width, so re-check whenever it resizes.
+  useEffect(() => {
+    const el = titleRef.current;
+    if (!el) return;
+    const check = () => setTruncated(el.scrollHeight > el.clientHeight + 1);
+    check();
+    const observer = new ResizeObserver(check);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [title]);
 
   return (
-    <Link
-      href={blogHref(post.slug)}
-      className={cx(
-        "group flex overflow-hidden rounded-3xl border border-gray-200/80 bg-white transition-all duration-200",
-        "hover:-translate-y-1 hover:border-[#94C748]/40 hover:shadow-lg",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2",
-        featured ? "flex-col lg:flex-row" : "h-full flex-col",
-      )}
-    >
+    <article className="flex h-full flex-col gap-3">
       {/* Cover */}
-      <div
-        className={cx(
-          "relative flex shrink-0 items-center justify-center overflow-hidden",
-          featured ? "min-h-[13rem] lg:w-[45%]" : "h-40",
-        )}
-        style={{ background: style.cover }}
+      <Link
+        href={blogHref(post.slug)}
+        tabIndex={-1}
         aria-hidden
+        className="group relative flex h-37.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-[0.5px] border-black/10"
+        style={post.cover ? undefined : { background: style.cover }}
       >
-        <div
-          className="flex items-center justify-center rounded-2xl border border-white/70 bg-white/70 shadow-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-105"
-          style={{ height: featured ? "4.5rem" : "3.5rem", width: featured ? "4.5rem" : "3.5rem" }}
-        >
-          <Icon
-            className={featured ? "h-8 w-8" : "h-6 w-6"}
-            style={{ color: style.accent }}
-            strokeWidth={1.75}
+        {post.cover ? (
+          <Image
+            src={post.cover}
+            alt=""
+            fill
+            sizes="(min-width: 1024px) 260px, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-        </div>
-      </div>
+        ) : (
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-white/70 bg-white/70 shadow-sm backdrop-blur-sm transition-transform duration-300 group-hover:scale-105">
+            <Icon className="h-6 w-6" style={{ color: style.accent }} strokeWidth={1.75} />
+          </div>
+        )}
+      </Link>
 
       {/* Body */}
-      <div className={cx("flex flex-1 flex-col p-6", featured && "lg:p-8")}>
-        <div className="flex flex-wrap items-center gap-3">
-          <span
-            className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold"
-            style={{ backgroundColor: style.accentSoft, color: style.accent }}
-          >
+      <div className="flex flex-1 flex-col gap-5">
+        <div className="flex flex-col gap-2">
+          <span className="w-fit text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]">
             {t(`categories.${post.category}`)}
           </span>
-          <span className="text-detail inline-flex items-center gap-1.5 text-xs">
-            <Clock className="h-3.5 w-3.5" aria-hidden />
-            {t("readTime", { minutes: post.readMinutes })}
-          </span>
-        </div>
 
-        <h3
-          className={cx(
-            "text-display mt-4 transition-colors group-hover:text-[#94C748]",
-            featured ? "text-2xl lg:text-3xl" : "text-lg",
-          )}
-        >
-          {tPost("title")}
-        </h3>
+          <div className="group/title relative">
+            <h3
+              ref={titleRef}
+              className="line-clamp-2 text-lg font-semibold tracking-tight text-[#1E280E]"
+            >
+              <Link
+                href={blogHref(post.slug)}
+                className={cx(
+                  "rounded transition-colors hover:text-[#769F3A] active:text-[#769F3A]",
+                  focusRing,
+                )}
+              >
+                {title}
+              </Link>
+            </h3>
+            {/* `hidden` rather than `invisible`: a hidden-but-laid-out nowrap
+                tooltip widens the page on phones. */}
+            {truncated && (
+              <span
+                aria-hidden
+                className="pointer-events-none absolute left-0 top-full z-20 mt-1 hidden whitespace-nowrap rounded-md bg-[#0A0D12] px-1.5 py-1 text-xs font-medium text-white shadow-sm [@media(hover:hover)]:group-hover/title:block"
+              >
+                {title}
+              </span>
+            )}
+          </div>
 
-        <p
-          className={cx(
-            "text-lead mt-3 flex-1",
-            featured ? "text-base lg:text-lg" : "line-clamp-3 text-sm",
-          )}
-        >
-          {tPost("excerpt")}
-        </p>
-
-        <div className="mt-6 flex items-center justify-between gap-4 border-t border-gray-200/80 pt-4">
-          <span className="text-detail min-w-0 truncate text-xs">
-            <span className="font-medium text-[#1E280E]">
-              {tPeople(`authors.${post.author}.name`)}
-            </span>
-            {" · "}
+          <p className="flex items-center gap-2.5 text-sm tracking-tight text-[#717680]">
             <time dateTime={post.publishedAt}>{formatBlogDate(post.publishedAt, locale)}</time>
-          </span>
-          <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
-            {t("readMore")}
-            <ArrowRight
-              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-              aria-hidden
-            />
-          </span>
+            <span aria-hidden className="h-1 w-1 rounded-full bg-[#A4A7AE]" />
+            <span>{t("readTime", { minutes: post.readMinutes })}</span>
+          </p>
         </div>
+
+        <Link
+          href={authorHref(post.author)}
+          className={cx(
+            "mt-auto flex w-fit items-center gap-1.5 rounded text-sm tracking-tight text-[#535862] transition-colors hover:text-[#252B37] active:text-[#252B37]",
+            focusRing,
+          )}
+        >
+          <BlogPersonAvatar id={post.author} name={authorName} size="xs" className="ring-0" />
+          <span className="truncate">{authorName}</span>
+        </Link>
       </div>
-    </Link>
+    </article>
   );
 }

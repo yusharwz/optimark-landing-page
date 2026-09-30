@@ -118,7 +118,7 @@ export function Header() {
               />
             </Link>
 
-            <nav className="hidden items-center gap-8 md:flex">
+            <nav className="hidden items-center gap-8 lg:flex">
               {NAV_ITEMS.map((item) => {
                 if (item.href === null) {
                   return (
@@ -186,7 +186,7 @@ export function Header() {
 
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
               <LanguageSwitcher onDark={overDarkHero} />
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <Button href={GET_STARTED_URL} color="primary" size="sm" className="text-white">
                   {t("getStarted")}
                 </Button>
@@ -194,7 +194,7 @@ export function Header() {
 
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors sm:h-9 sm:w-9 md:hidden ${
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg border transition-colors sm:h-9 sm:w-9 lg:hidden ${
                   overDarkHero
                     ? "border-white/20 bg-white/10 text-white hover:bg-white/20"
                     : "border-gray-100 bg-gray-50/50 text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -214,7 +214,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.2 }}
-              className="mt-2 flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-4 shadow-lg md:hidden"
+              className="mt-2 flex flex-col gap-3 rounded-2xl border border-gray-100 bg-white p-4 shadow-lg lg:hidden"
             >
               {NAV_ITEMS.map((item) => {
                 if (item.href === null) {
