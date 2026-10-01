@@ -7,6 +7,7 @@ import { buildOgImageUrl } from "@/lib/og";
 import { BLOG_POSTS, authorHref, blogHref, getBlogPost } from "@/config/blog";
 import { Header } from "@/components/Header";
 import { BlogPostView } from "@/components/BlogPostView";
+import { BlogTocBar } from "@/components/BlogToc";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { SCROLL_UP_THRESHOLD, SITE_URL } from "@/config/site";
@@ -114,8 +115,10 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      <Header />
-      <main className="relative pt-24">
+      {/* Below lg the "Daftar Isi" rides in the header card, so the header is
+          taller there and the page starts lower. */}
+      <Header subnav={<BlogTocBar slug={post.slug} />} />
+      <main className="relative pt-36 sm:pt-40 lg:pt-24">
         <BlogPostView slug={post.slug} />
       </main>
       <Footer />

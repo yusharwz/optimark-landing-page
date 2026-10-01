@@ -9,10 +9,14 @@ import type { BlogSlug } from "@/config/blog";
  */
 export type BlogBlock =
   | { type: "h2"; text: string }
+  | { type: "h3"; text: string }
+  /** `text` may contain inline links as `[label](href)`; see BlogArticle. */
   | { type: "p"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
-  | { type: "quote"; text: string }
+  /** `image` is a path under `public/`; the caption is the translated part. */
+  | { type: "figure"; image: string; caption?: string }
+  | { type: "quote"; text: string; cite?: string }
   | { type: "callout"; title: string; text: string };
 
 export interface BlogPostMessages {
@@ -20,7 +24,15 @@ export interface BlogPostMessages {
   excerpt: string;
   metaTitle: string;
   metaDescription: string;
+  tags: string[];
   blocks: BlogBlock[];
+}
+
+/** One "Daftar Isi" entry, derived from the post's h2/h3 blocks. */
+export interface BlogTocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
 }
 
 /**

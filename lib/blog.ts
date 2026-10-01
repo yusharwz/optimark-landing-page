@@ -1,4 +1,5 @@
 import type { AppLocale } from "@/lib/locale";
+import type { BlogBlock, BlogTocItem } from "@/types/blog";
 
 /**
  * Publish dates are stored as plain ISO dates in `config/blog.ts` and formatted
@@ -9,13 +10,52 @@ import type { AppLocale } from "@/lib/locale";
  * parsing them in a timezone behind UTC would otherwise render the previous
  * day. Every page is prerendered, so this has to be deterministic at build time.
  */
-export function formatBlogDate(isoDate: string, locale: AppLocale): string {
+export function formatBlogDate(
+  isoDate: string,
+  locale: AppLocale,
+  month: "short" | "long" = "short",
+): string {
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", {
     day: "numeric",
-    // Short month ("15 Sep 2026"), matching Mekari's article header — two
-    // dates side by side stay on one line on phones.
-    month: "short",
+    // Short ("15 Sep 2026") on cards; the article header spells it out
+    // ("15 September 2026").
+    month,
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T00:00:00Z`));
+}
+
+/**
+ * Anchor id for a heading. Derived from the heading text so links stay stable
+ * across builds; ids are unique per article because the TOC de-duplicates.
+ */
+function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+/**
+ * The "Daftar Isi" for a post: every h2/h3 block in order, each with the
+ * anchor id BlogArticle puts on the rendered heading. Both read from this one
+ * function, so the TOC links and heading ids can never drift apart.
+ */
+export function buildBlogToc(blocks: BlogBlock[]): BlogTocItem[] {
+  const seen = new Map<string, number>();
+  const toc: BlogTocItem[] = [];
+  for (const block of blocks) {
+    if (block.type !== "h2" && block.type !== "h3") continue;
+    const base = slugifyHeading(block.text) || "section";
+    const count = seen.get(base) ?? 0;
+    seen.set(base, count + 1);
+    toc.push({
+      id: count === 0 ? base : `${base}-${count + 1}`,
+      text: block.text,
+      level: block.type === "h2" ? 2 : 3,
+    });
+  }
+  return toc;
 }

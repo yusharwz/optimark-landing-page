@@ -4,32 +4,110 @@
     "excerpt": "Kata kunci yang dicari pelanggan di sekitar Anda bisa ditemukan dari Google sendiri, tanpa langganan tools SEO.",
     "metaTitle": "Cara Riset Keyword untuk Bisnis Lokal Tanpa Tools Berbayar - Blog OPTIMARK",
     "metaDescription": "Kata kunci yang dicari pelanggan di sekitar Anda bisa ditemukan dari Google sendiri, tanpa langganan tools SEO.",
+    "tags": [
+      "Riset Keyword",
+      "SEO Lokal",
+      "UMKM",
+      "Google Autocomplete"
+    ],
     "blocks": [
       {
         "type": "p",
-        "text": "Bisnis lokal jarang butuh ribuan kata kunci. Yang dibutuhkan adalah beberapa frasa yang benar-benar diketik calon pelanggan di kota Anda, dan sebagian besar bisa ditemukan gratis."
+        "text": "Riset keyword adalah langkah awal penting sebelum membuat konten digital. Meskipun ada banyak tool berbayar, Anda tetap bisa memulai riset keyword untuk bisnis lokal dengan cara manual yang efektif. Artikel ini membahas cara memulai riset keyword tanpa biaya tambahan, mulai dari memahami kebutuhan bisnis, mencari kata kunci relevan, hingga menentukan prioritas konten yang tepat."
       },
       {
         "type": "h2",
-        "text": "Mulai dari kolom pencarian Google"
+        "text": "1. Pahami kebutuhan bisnis Anda"
       },
       {
         "type": "p",
-        "text": "Ketik layanan Anda plus nama kota, lalu catat saran autocomplete dan bagian “Penelusuran terkait” di bawah halaman. Dua sumber ini berasal dari pencarian nyata."
+        "text": "Sebelum mencari keyword, kenali dulu siapa target audiens Anda dan apa yang mereka cari. Bisnis lokal seperti toko makanan, jasa servis, atau klinik kecantikan memiliki kebutuhan yang berbeda-beda. Misalnya, jika Anda memiliki toko makanan di Jakarta Selatan, target Anda mungkin orang-orang yang mencari “restoran dekat sini” atau “menu makan siang murah”."
+      },
+      {
+        "type": "p",
+        "text": "Sebelum lanjut, jawab tiga pertanyaan ini:"
       },
       {
         "type": "ul",
         "items": [
-          "Catat saran autocomplete untuk layanan + nama kota",
-          "Lihat pertanyaan di kotak “Orang lain juga bertanya”",
-          "Periksa kata yang dipakai pesaing di judul Google Business Profile",
-          "Kelompokkan frasa berdasarkan niat: cari info, bandingkan, atau beli"
+          "Siapa pelanggan utama Anda dan di area mana mereka berada?",
+          "Masalah apa yang ingin mereka selesaikan?",
+          "Kata apa yang mereka pakai saat bertanya ke teman atau di media sosial?"
         ]
       },
       {
-        "type": "callout",
-        "title": "Catatan",
-        "text": "Ini artikel contoh yang dipakai untuk meninjau tampilan halaman blog. Gantilah dengan tulisan asli sebelum situs dipublikasikan."
+        "type": "h2",
+        "text": "2. Gunakan Google Autocomplete"
+      },
+      {
+        "type": "p",
+        "text": "Ketikkan kata kunci utama Anda di Google, lalu lihat saran yang muncul. Fitur autocomplete ini menunjukkan apa yang paling sering dicari orang. Contohnya, jika Anda mengetik “cuci ac”, Google mungkin menyarankan “cuci ac jakarta”, “cuci ac bandung”, atau “cuci ac murah”. Ini membantu Anda menemukan long-tail keyword yang spesifik dan memiliki kompetisi lebih rendah."
+      },
+      {
+        "type": "h3",
+        "text": "Catat pola yang muncul"
+      },
+      {
+        "type": "p",
+        "text": "Salin setiap saran ke spreadsheet sederhana, lalu kelompokkan berdasarkan lokasi, harga, atau jenis layanan. Pola yang paling sering muncul adalah topik yang paling layak dibuatkan konten."
+      },
+      {
+        "type": "figure",
+        "image": "/images/blog/artikel-jadi-konten-media-sosial.jpg",
+        "caption": "Kelompokkan saran autocomplete berdasarkan pola supaya prioritas kontennya terlihat."
+      },
+      {
+        "type": "h3",
+        "text": "Bandingkan dengan Google Trends"
+      },
+      {
+        "type": "p",
+        "text": "Untuk membandingkan dua keyword, buka [Google Trends](https://trends.google.com/trends/?geo=ID) dan pilih wilayah Indonesia. Anda bisa melihat keyword mana yang lebih sering dicari dan kapan minatnya naik."
+      },
+      {
+        "type": "h2",
+        "text": "3. Analisis kompetitor"
+      },
+      {
+        "type": "p",
+        "text": "Lihat website kompetitor Anda. Perhatikan judul halaman, deskripsi meta, dan subjudul mereka. Ini memberikan gambaran tentang keyword apa yang mereka targetkan. Jangan lupa untuk mencatat juga kekurangan konten mereka, sehingga Anda bisa membuat konten yang lebih lengkap dan relevan."
+      },
+      {
+        "type": "p",
+        "text": "Lakukan tiga langkah ini untuk setiap keyword utama:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Cari keyword utama Anda di Google dan buka tiga hasil teratas.",
+          "Catat judul, deskripsi meta, dan subjudul di setiap halaman.",
+          "Tandai topik yang belum mereka bahas, lalu jadikan bahan konten Anda."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "4. Prioritaskan keyword lokal"
+      },
+      {
+        "type": "p",
+        "text": "Jika bisnis Anda berfokus pada area tertentu, pastikan untuk menyertakan nama kota atau wilayah. Misalnya, “jasa fotocopy jakarta timur” atau “kursus memasak bogor”. Keyword lokal memiliki volume pencarian yang lebih kecil, tapi konversinya lebih tinggi karena orang yang mencari biasanya sudah siap untuk melakukan aksi."
+      },
+      {
+        "type": "quote",
+        "text": "Keyword lokal memang jarang dicari, tapi orang yang mengetiknya biasanya sudah siap datang ke toko Anda.",
+        "cite": "Jonathan Anderson T., SEO Specialist"
+      },
+      {
+        "type": "p",
+        "text": "Kalau website Anda belum juga muncul di hasil pencarian, cek penyebabnya di artikel [kenapa website belum muncul di halaman pertama Google](/blog/website-belum-muncul-di-google)."
+      },
+      {
+        "type": "h2",
+        "text": "Penutup"
+      },
+      {
+        "type": "p",
+        "text": "Riset keyword tanpa tools berbayar memang membutuhkan waktu lebih lama, tapi hasilnya sangat berharga. Dengan memahami kebutuhan audiens dan menggunakan sumber daya gratis seperti Google, Anda bisa membuat konten yang relevan dan meningkatkan visibilitas bisnis lokal Anda di mesin pencari."
       }
     ]
   },
@@ -38,6 +116,11 @@
     "excerpt": "Jam posting terbaik bukan angka universal. Untuk bisnis kuliner, jam lapar pelanggan Anda adalah patokannya.",
     "metaTitle": "Jadwal Posting Instagram Terbaik untuk UMKM Kuliner di Tahun 2026 - Blog OPTIMARK",
     "metaDescription": "Jam posting terbaik bukan angka universal. Untuk bisnis kuliner, jam lapar pelanggan Anda adalah patokannya.",
+    "tags": [
+      "Instagram",
+      "UMKM Kuliner",
+      "Jadwal Posting"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -72,6 +155,11 @@
     "excerpt": "Foto dari smartphone plus sedikit bantuan AI sudah cukup untuk katalog yang rapi, asalkan bahan awalnya benar.",
     "metaTitle": "Panduan Membuat Foto Produk Menarik Pakai AI dari Smartphone - Blog OPTIMARK",
     "metaDescription": "Foto dari smartphone plus sedikit bantuan AI sudah cukup untuk katalog yang rapi, asalkan bahan awalnya benar.",
+    "tags": [
+      "Foto Produk",
+      "AI",
+      "Smartphone"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -106,6 +194,11 @@
     "excerpt": "Tiga sampai empat pilar konten membuat Anda tidak lagi bingung mau posting apa setiap pagi.",
     "metaTitle": "Strategi Content Pillar yang Bikin Brand Kecil Tetap Konsisten Posting - Blog OPTIMARK",
     "metaDescription": "Tiga sampai empat pilar konten membuat Anda tidak lagi bingung mau posting apa setiap pagi.",
+    "tags": [
+      "Content Pillar",
+      "Konsistensi",
+      "Brand Kecil"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -140,6 +233,11 @@
     "excerpt": "Sebelum menyalahkan algoritma, periksa dulu apakah Google sudah bisa menemukan dan memahami halaman Anda.",
     "metaTitle": "Kenapa Website Kamu Belum Muncul di Halaman Pertama Google - Blog OPTIMARK",
     "metaDescription": "Sebelum menyalahkan algoritma, periksa dulu apakah Google sudah bisa menemukan dan memahami halaman Anda.",
+    "tags": [
+      "SEO",
+      "Google Search Console",
+      "Indexing"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -174,6 +272,11 @@
     "excerpt": "Palet feed yang konsisten membuat akun mudah dikenali, bahkan sebelum orang membaca nama brand Anda.",
     "metaTitle": "Tips Memilih Warna Feed Instagram yang Sesuai dengan Karakter Brand - Blog OPTIMARK",
     "metaDescription": "Palet feed yang konsisten membuat akun mudah dikenali, bahkan sebelum orang membaca nama brand Anda.",
+    "tags": [
+      "Instagram",
+      "Branding",
+      "Palet Warna"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -208,6 +311,11 @@
     "excerpt": "Caption TikTok yang baik tidak mengulang isi video. Ia memberi penonton alasan untuk berkomentar.",
     "metaTitle": "Cara Menulis Caption TikTok yang Mendorong Penonton untuk Berinteraksi - Blog OPTIMARK",
     "metaDescription": "Caption TikTok yang baik tidak mengulang isi video. Ia memberi penonton alasan untuk berkomentar.",
+    "tags": [
+      "TikTok",
+      "Caption",
+      "Engagement"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -242,6 +350,11 @@
     "excerpt": "Satu artikel yang sudah diriset bisa menjadi bahan konten untuk dua minggu, tanpa menulis dari nol lagi.",
     "metaTitle": "Cara Mengubah Satu Artikel Blog Menjadi Sepuluh Konten Media Sosial - Blog OPTIMARK",
     "metaDescription": "Satu artikel yang sudah diriset bisa menjadi bahan konten untuk dua minggu, tanpa menulis dari nol lagi.",
+    "tags": [
+      "Repurpose Konten",
+      "Media Sosial",
+      "Blog"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -276,6 +389,11 @@
     "excerpt": "Video promosi 15 detik bisa direkam dan diedit sendiri dari smartphone, asalkan tiga detik pertamanya kuat.",
     "metaTitle": "Membuat Video Promosi Singkat yang Menarik Tanpa Harus Menyewa Editor - Blog OPTIMARK",
     "metaDescription": "Video promosi 15 detik bisa direkam dan diedit sendiri dari smartphone, asalkan tiga detik pertamanya kuat.",
+    "tags": [
+      "Video",
+      "Promosi",
+      "Smartphone"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -310,6 +428,11 @@
     "excerpt": "Konten untuk semua orang biasanya tidak menarik siapa pun. Tentukan dulu siapa yang Anda ajak bicara.",
     "metaTitle": "Menentukan Target Audiens Sebelum Mulai Membuat Konten untuk Bisnis Online - Blog OPTIMARK",
     "metaDescription": "Konten untuk semua orang biasanya tidak menarik siapa pun. Tentukan dulu siapa yang Anda ajak bicara.",
+    "tags": [
+      "Target Audiens",
+      "Bisnis Online",
+      "Riset Pelanggan"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -344,6 +467,11 @@
     "excerpt": "Jumlah like bukan satu-satunya ukuran. Simpan dan bagikan sering lebih jujur menunjukkan konten yang berguna.",
     "metaTitle": "Membaca Insight Instagram untuk Mengetahui Konten Mana yang Paling Efektif - Blog OPTIMARK",
     "metaDescription": "Jumlah like bukan satu-satunya ukuran. Simpan dan bagikan sering lebih jujur menunjukkan konten yang berguna.",
+    "tags": [
+      "Instagram Insight",
+      "Analitik",
+      "Engagement"
+    ],
     "blocks": [
       {
         "type": "p",

@@ -111,7 +111,7 @@ export const BLOG_AUTHOR_IDS = ["thia-rahmani", "rafi-rizky"] as const;
 
 export type BlogAuthorId = (typeof BLOG_AUTHOR_IDS)[number];
 
-export const BLOG_REVIEWER_IDS = ["andi-wijaya"] as const;
+export const BLOG_REVIEWER_IDS = ["jonathan-anderson"] as const;
 
 export type BlogReviewerId = (typeof BLOG_REVIEWER_IDS)[number];
 
@@ -119,6 +119,7 @@ export type BlogReviewerId = (typeof BLOG_REVIEWER_IDS)[number];
 export const BLOG_PERSON_PHOTOS: Partial<Record<BlogAuthorId | BlogReviewerId, string>> = {
   "thia-rahmani": "/images/blog/people/thia-rahmani.jpg",
   "rafi-rizky": "/images/blog/people/rafi-rizky.jpg",
+  "jonathan-anderson": "/images/blog/people/jonathan-anderson.jpg",
 };
 
 export type BlogPost = {
@@ -140,6 +141,11 @@ export type BlogPost = {
   author: BlogAuthorId;
   /** Subject-matter expert who checked the post before publishing. */
   reviewer: BlogReviewerId;
+  /**
+   * Hand-picked "Artikel Terkait". Without it the page falls back to same
+   * category first, then the newest posts (see getRelatedPosts).
+   */
+  related?: BlogSlug[];
 };
 
 /** Newest first. Order here is the order the index renders. */
@@ -148,10 +154,12 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "riset-keyword-bisnis-lokal",
     category: "seo",
     publishedAt: "2026-10-01",
+    updatedAt: "2026-10-02",
     readMinutes: 6,
     cover: "/images/blog/riset-keyword-bisnis-lokal.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
+    related: ["website-belum-muncul-di-google", "strategi-content-pillar", "target-audiens"],
   },
   {
     slug: "jadwal-posting-instagram-umkm-kuliner",
@@ -160,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/jadwal-posting-instagram-umkm-kuliner.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "foto-produk-ai-smartphone",
@@ -169,7 +177,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 5,
     cover: "/images/blog/foto-produk-ai-smartphone.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "strategi-content-pillar",
@@ -178,7 +186,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 7,
     cover: "/images/blog/strategi-content-pillar.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "website-belum-muncul-di-google",
@@ -187,7 +195,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 8,
     cover: "/images/blog/website-belum-muncul-di-google.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "warna-feed-instagram",
@@ -196,7 +204,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/warna-feed-instagram.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "caption-tiktok",
@@ -205,7 +213,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 3,
     cover: "/images/blog/caption-tiktok.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "artikel-jadi-konten-media-sosial",
@@ -214,7 +222,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 7,
     cover: "/images/blog/artikel-jadi-konten-media-sosial.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "video-promosi-singkat",
@@ -223,7 +231,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 5,
     cover: "/images/blog/video-promosi-singkat.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "target-audiens",
@@ -232,7 +240,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/target-audiens.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "insight-instagram",
@@ -241,7 +249,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 6,
     cover: "/images/blog/insight-instagram.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
 ];
 
@@ -293,6 +301,13 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 export function getRelatedPosts(slug: BlogSlug, limit = 3): BlogPost[] {
   const current = getBlogPost(slug);
   if (!current) return BLOG_POSTS.slice(0, limit);
+
+  if (current.related?.length) {
+    return current.related
+      .map((item) => getBlogPost(item))
+      .filter((post): post is BlogPost => Boolean(post))
+      .slice(0, limit);
+  }
 
   const others = BLOG_POSTS.filter((post) => post.slug !== slug);
   const sameCategory = others.filter((post) => post.category === current.category);
