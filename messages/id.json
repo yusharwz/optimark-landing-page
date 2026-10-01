@@ -645,7 +645,6 @@
   "blog": {
     "title": "Optimark Blog",
     "description": "Tips dan strategi digital marketing untuk bisnis Anda",
-    "sampleNotice": "Tulisan di bawah ini masih contoh untuk meninjau tampilan halaman. Konten asli menyusul.",
     "latestLabel": "Artikel Terbaru",
     "allCategories": "Semua",
     "readTime": "{minutes} menit baca",

@@ -29,15 +29,6 @@ const ARTICLE_ID = "blog-article";
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-/**
- * Blog post page body, per the Figma "Blog Post" canvas: breadcrumb, intro
- * (category · read time, title, dates, author + reviewer), cover, rich text,
- * author/reviewer cards, tags, and "Artikel Terkait".
- *
- * The "Daftar Isi" is a sticky column beside the article from `lg` up; below
- * that it lives in the header card (BlogTocBar, wired up in the page). A 2px
- * reading-progress bar tracks the article body.
- */
 export function BlogPostView({ slug }: { slug: BlogSlug }) {
   const t = useTranslations("blog");
   const tPost = useTranslations("blog.post");
@@ -59,9 +50,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
     <>
       <ReadingProgress targetId={ARTICLE_ID} />
 
-      {/* Hero */}
       <section className="relative">
-        {/* Dot-grid wash behind the header and intro, as in the design. */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-x-0 -top-36 h-120 opacity-8 lg:-top-24"
@@ -164,7 +153,6 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
         </div>
       </section>
 
-      {/* Article */}
       <section className="relative pb-16 pt-6 sm:pt-10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-[minmax(12.75rem,1fr)_minmax(0,42.5rem)_minmax(0,1fr)] lg:gap-x-16">
           <aside className="hidden lg:block">
@@ -277,7 +265,6 @@ function ExpertBadge({ label }: { label: string }) {
   );
 }
 
-/** "Ditulis oleh: [avatar] Name" in the intro. */
 function Byline({
   label,
   href,
@@ -313,7 +300,6 @@ function Byline({
   );
 }
 
-/** The author/reviewer cards under the article, linking to their profiles. */
 function ProfileCard({
   label,
   href,
@@ -340,7 +326,13 @@ function ProfileCard({
         focusRing,
       )}
     >
-      <BlogPersonAvatar id={person} name={name} size="lg" kind={kind} className="h-14 w-14 ring-0" />
+      <BlogPersonAvatar
+        id={person}
+        name={name}
+        size="lg"
+        kind={kind}
+        className="h-14 w-14 ring-0"
+      />
       <div className="flex min-w-0 flex-1 items-center gap-4 sm:self-stretch">
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <p className="text-sm tracking-tight text-[#535862]">{label}</p>

@@ -19,25 +19,12 @@ import { cx } from "@/utils/cx";
 type BlogCardProps = {
   post: BlogPost;
   locale: AppLocale;
-  /** `lg`: the taller "Artikel Terkait" card on the post page (200px cover). */
   size?: "md" | "lg";
 };
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-/**
- * A post card: cover, category, two-line title, date · read time, author.
- *
- * Cover and title link to the post, the author links to their profile — so the
- * card is not one big link, and each part has its own hover state (per the
- * Figma "Blog Index" spec): cover zooms, category darkens, title turns brand
- * green, author darkens. A title cut off by the two-line clamp shows its full
- * text in a tooltip on hover-capable devices.
- *
- * Posts without a `cover` photo paint the category wash plus its icon (see
- * BLOG_CATEGORY_STYLES) so the grid stays even while real art is pending.
- */
 export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
   const t = useTranslations("blog");
   // Each post is its own namespace, so the slug selects the namespace rather
@@ -53,7 +40,6 @@ export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [truncated, setTruncated] = useState(false);
 
-  // The clamp depends on the column width, so re-check whenever it resizes.
   useEffect(() => {
     const el = titleRef.current;
     if (!el) return;
@@ -118,8 +104,6 @@ export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
                 {title}
               </Link>
             </h3>
-            {/* `hidden` rather than `invisible`: a hidden-but-laid-out nowrap
-                tooltip widens the page on phones. */}
             {truncated && (
               <span
                 aria-hidden

@@ -4,7 +4,6 @@ import { useMemo, useState, type FormEvent, type ReactNode } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
-import { Info } from "lucide-react";
 import { SearchMd } from "@untitledui/icons";
 import { BlogCard } from "@/components/BlogCard";
 import { Button } from "@/components/base/buttons/button";
@@ -25,7 +24,6 @@ import { cx } from "@/utils/cx";
 
 type Filter = BlogCategoryId | "all";
 
-/** How many posts the "latest" block and each per-topic block show on the overview. */
 const LATEST_LIMIT = 6;
 const TOPIC_LIMIT = 3;
 
@@ -35,7 +33,6 @@ export function BlogIndexSection() {
   const locale = resolveLocale(useLocale());
 
   const [filter, setFilter] = useState<Filter>("all");
-  // `draft` is what is in the box; `query` is what was submitted with "Cari".
   const [draft, setDraft] = useState("");
   const [query, setQuery] = useState("");
 
@@ -49,8 +46,6 @@ export function BlogIndexSection() {
     });
   }, [filter, query, locale, tPosts]);
 
-  // With no topic and no search the page is an overview: the newest posts, then
-  // a short row per topic. Anything narrower is a single full list.
   const isOverview = filter === "all" && !query.trim();
 
   const selectFilter = (value: Filter) => {
@@ -110,17 +105,9 @@ export function BlogIndexSection() {
           >
             {t("description")}
           </motion.p>
-
         </div>
 
         <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:gap-16">
-          {/*
-            Sidebar. Desktop: the whole column (search + categories) sticks
-            beside the posts while scrolling. Below lg the aside dissolves
-            (`contents`) so the search form can stick under the header across
-            the full page height, per the Figma "Scrolled" state; the category
-            tabs scroll away with the content.
-          */}
           <aside className="flex shrink-0 flex-col gap-6 max-lg:contents lg:sticky lg:top-24 lg:w-75 lg:self-start">
             <form
               role="search"
@@ -174,7 +161,6 @@ export function BlogIndexSection() {
             </div>
           </aside>
 
-          {/* Posts */}
           <div className="flex min-w-0 flex-1 flex-col gap-16">
             {isOverview ? (
               <>
@@ -207,16 +193,12 @@ export function BlogIndexSection() {
                 })}
               </>
             ) : (
-              // Keyed on the view so the grid re-mounts and the reveal replays
-              // when the reader switches topic or searches again.
               <PostSection
                 key={`${filter}:${query}`}
                 title={listTitle}
                 posts={matches}
                 locale={locale}
-                emptyText={
-                  query.trim() ? t("searchEmpty", { query: query.trim() }) : t("empty")
-                }
+                emptyText={query.trim() ? t("searchEmpty", { query: query.trim() }) : t("empty")}
               />
             )}
           </div>

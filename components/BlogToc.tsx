@@ -10,7 +10,6 @@ import { scrollToElement } from "@/lib/lenis";
 import type { BlogBlock, BlogTocItem } from "@/types/blog";
 import { cx } from "@/utils/cx";
 
-/** How far below the viewport top a heading counts as "being read". */
 const ACTIVE_OFFSET = 160;
 
 function useToc(slug: BlogSlug): BlogTocItem[] {
@@ -18,10 +17,6 @@ function useToc(slug: BlogSlug): BlogTocItem[] {
   return buildBlogToc(tPost.raw("blocks") as BlogBlock[]);
 }
 
-/**
- * The heading currently being read: the last one whose top has scrolled past
- * ACTIVE_OFFSET. Before the first heading nothing is active.
- */
 function useActiveHeading(items: BlogTocItem[]): string | null {
   const [active, setActive] = useState<string | null>(null);
   const ids = items.map((item) => item.id).join("|");
@@ -63,7 +58,6 @@ function useActiveHeading(items: BlogTocItem[]): string | null {
 function goTo(id: string) {
   const target = document.getElementById(id);
   if (!target) return;
-  // Leave room for the fixed header (taller on tablet/mobile with the TOC bar).
   scrollToElement(target, window.matchMedia("(min-width: 1024px)").matches ? 112 : 160);
   history.replaceState(null, "", `#${id}`);
 }
@@ -112,7 +106,6 @@ function TocList({
   );
 }
 
-/** Desktop "Daftar Isi": a sticky column beside the article. */
 export function BlogToc({ slug, className }: { slug: BlogSlug; className?: string }) {
   const t = useTranslations("blog.post");
   const items = useToc(slug);
@@ -127,11 +120,6 @@ export function BlogToc({ slug, className }: { slug: BlogSlug; className?: strin
   );
 }
 
-/**
- * Tablet/mobile "Daftar Isi": a collapsible bar that sits inside the header
- * card (passed to Header as `subnav`), so it stays pinned under the top nav.
- * Picking an entry scrolls there and folds the panel back up.
- */
 export function BlogTocBar({ slug }: { slug: BlogSlug }) {
   const t = useTranslations("blog.post");
   const items = useToc(slug);
@@ -188,7 +176,6 @@ export function BlogTocBar({ slug }: { slug: BlogSlug }) {
             className="overflow-hidden"
           >
             <div className="px-4 pb-4">
-              {/* Lenis would otherwise swallow wheel/touch scrolling inside the panel. */}
               <div
                 data-lenis-prevent
                 className="max-h-[60vh] overflow-y-auto rounded-xl border border-[#E9EAEB] bg-white p-3"

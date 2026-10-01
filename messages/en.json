@@ -645,7 +645,6 @@
   "blog": {
     "title": "Optimark Blog",
     "description": "Digital marketing tips and strategies for your business",
-    "sampleNotice": "The posts below are samples used to review the layout. Real content is on the way.",
     "latestLabel": "Latest Articles",
     "allCategories": "All",
     "readTime": "{minutes} min read",

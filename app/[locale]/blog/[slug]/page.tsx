@@ -115,8 +115,6 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
-      {/* Below lg the "Daftar Isi" rides in the header card, so the header is
-          taller there and the page starts lower. */}
       <Header subnav={<BlogTocBar slug={post.slug} />} />
       <main className="relative pt-36 sm:pt-40 lg:pt-24">
         <BlogPostView slug={post.slug} />

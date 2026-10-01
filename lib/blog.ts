@@ -17,18 +17,12 @@ export function formatBlogDate(
 ): string {
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", {
     day: "numeric",
-    // Short ("15 Sep 2026") on cards; the article header spells it out
-    // ("15 September 2026").
     month,
     year: "numeric",
     timeZone: "UTC",
   }).format(new Date(`${isoDate}T00:00:00Z`));
 }
 
-/**
- * Anchor id for a heading. Derived from the heading text so links stay stable
- * across builds; ids are unique per article because the TOC de-duplicates.
- */
 function slugifyHeading(text: string): string {
   return text
     .toLowerCase()
@@ -38,11 +32,6 @@ function slugifyHeading(text: string): string {
     .replace(/^-+|-+$/g, "");
 }
 
-/**
- * The "Daftar Isi" for a post: every h2/h3 block in order, each with the
- * anchor id BlogArticle puts on the rendered heading. Both read from this one
- * function, so the TOC links and heading ids can never drift apart.
- */
 export function buildBlogToc(blocks: BlogBlock[]): BlogTocItem[] {
   const seen = new Map<string, number>();
   const toc: BlogTocItem[] = [];

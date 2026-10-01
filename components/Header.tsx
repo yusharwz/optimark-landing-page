@@ -27,11 +27,6 @@ const NAV_ITEMS = [
 
 const FEATURES_PREFIX = "/features";
 
-/**
- * `subnav` renders inside the header card, under the nav row, below `lg` only —
- * e.g. the blog post "Daftar Isi" bar, which has to stay pinned with the top
- * nav on tablet and mobile. On desktop the page shows its own version.
- */
 export function Header({ subnav }: { subnav?: ReactNode } = {}) {
   const t = useTranslations("header");
   const tf = useTranslations("features");
@@ -107,7 +102,9 @@ export function Header({ subnav }: { subnav?: ReactNode } = {}) {
       <div className="mx-auto max-w-7xl">
         <div
           className={`rounded-2xl p-3 transition-all duration-300 sm:p-4 ${
-            subnav ? "max-lg:overflow-hidden max-lg:border max-lg:border-gray-100/50 max-lg:bg-white/85 max-lg:shadow-sm max-lg:backdrop-blur-md " : ""
+            subnav
+              ? "max-lg:overflow-hidden max-lg:border max-lg:border-gray-100/50 max-lg:bg-white/85 max-lg:shadow-sm max-lg:backdrop-blur-md "
+              : ""
           }${
             isScrolled
               ? "border border-gray-100/50 bg-white/85 shadow-sm backdrop-blur-md"

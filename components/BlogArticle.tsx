@@ -10,32 +10,20 @@ import { buildBlogToc } from "@/lib/blog";
 import type { BlogBlock } from "@/types/blog";
 import { cx } from "@/utils/cx";
 
-/**
- * Renders a post body from its message blocks.
- *
- * Translators supply text only — every class here is decided by this renderer.
- * That is deliberate: it keeps markup out of the JSON and keeps typography
- * consistent across posts. Sizes and spacing follow the Figma "Blog Post"
- * rich-text frame: 18/28 body, 24/32 h2, 20/30 h3 (one step smaller on phones).
- */
+/** Renders a post body from its message blocks; all styling lives here, not in the JSON. */
 export function BlogArticle({ slug }: { slug: BlogSlug }) {
   const tPost = useTranslations(`blogPosts.${slug}`);
   const blocks = tPost.raw("blocks") as BlogBlock[];
 
-  // Heading ids come from the same builder as the "Daftar Isi", so every TOC
-  // link has a matching target.
   const toc = buildBlogToc(blocks);
   let headingIndex = 0;
 
   return (
     <div>
       {blocks.map((block, index) => {
-        const id =
-          block.type === "h2" || block.type === "h3" ? toc[headingIndex++]?.id : undefined;
+        const id = block.type === "h2" || block.type === "h3" ? toc[headingIndex++]?.id : undefined;
         return (
-          <Fragment key={index}>
-            {renderBlock(block, blocks[index - 1], index === 0, id)}
-          </Fragment>
+          <Fragment key={index}>{renderBlock(block, blocks[index - 1], index === 0, id)}</Fragment>
         );
       })}
     </div>
@@ -44,11 +32,6 @@ export function BlogArticle({ slug }: { slug: BlogSlug }) {
 
 const body = "text-lg leading-7 tracking-tight text-[#535862]";
 
-/**
- * Top margin per block, from the gaps in the design: 24px before a section
- * heading, 12px between blocks inside a section, 8px under an h3, and 20px
- * around a figure.
- */
 function spacing(block: BlogBlock, previous: BlogBlock | undefined): string {
   if (!previous) return "";
   if (block.type === "h2" || block.type === "h3") return "mt-6";
@@ -64,8 +47,6 @@ function renderBlock(
   id: string | undefined,
 ) {
   const mt = first ? "" : spacing(block, previous);
-  // Headings scroll into view below the fixed header (and the TOC bar on
-  // tablet/mobile), so they need room above them.
   const anchor = "scroll-mt-40 lg:scroll-mt-28";
 
   switch (block.type) {
@@ -177,11 +158,6 @@ const LINK_PATTERN = /\[([^\]]+)\]\(([^)\s]+)\)/g;
 const linkClass =
   "rounded-sm text-[#59772B] underline underline-offset-2 transition-colors hover:text-[#3F5B17] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]";
 
-/**
- * Turns `[label](href)` in copy into links. Site paths go through the locale-
- * aware Link so `/blog/...` keeps the reader's language; anything else opens in
- * a new tab.
- */
 function renderInline(text: string): ReactNode {
   const parts: ReactNode[] = [];
   let last = 0;
