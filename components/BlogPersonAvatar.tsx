@@ -15,13 +15,8 @@ const SIZES = {
   xl: "h-28 w-28 text-3xl sm:h-32 sm:w-32",
 } as const;
 
-/** Rendered pixel width per size, for the `sizes` hint on the photo. */
 const PIXELS: Record<keyof typeof SIZES, number> = { xs: 24, sm: 36, md: 48, lg: 64, xl: 128 };
 
-/**
- * Avatar for authors and reviewers: their headshot from BLOG_PERSON_PHOTOS
- * when one exists, otherwise initials on a brand tint.
- */
 export function BlogPersonAvatar({
   id,
   name,

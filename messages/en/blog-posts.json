@@ -4,32 +4,110 @@
     "excerpt": "The phrases nearby customers search for can be found in Google itself, no SEO tool subscription needed.",
     "metaTitle": "How to Research Keywords for a Local Business Without Paid Tools - OPTIMARK Blog",
     "metaDescription": "The phrases nearby customers search for can be found in Google itself, no SEO tool subscription needed.",
+    "tags": [
+      "Keyword Research",
+      "Local SEO",
+      "Small Business",
+      "Google Autocomplete"
+    ],
     "blocks": [
       {
         "type": "p",
-        "text": "A local business rarely needs thousands of keywords. It needs a handful of phrases real customers in your city type, and most of them can be found for free."
+        "text": "Keyword research is an essential first step before creating digital content. Paid tools are plentiful, but you can still start keyword research for a local business with an effective manual approach. This article covers how to research keywords at no extra cost, from understanding your business needs and finding relevant keywords to deciding which content to prioritise."
       },
       {
         "type": "h2",
-        "text": "Start from the Google search box"
+        "text": "1. Understand your business needs"
       },
       {
         "type": "p",
-        "text": "Type your service plus your city name, then note the autocomplete suggestions and the “Related searches” at the bottom of the page. Both come from real searches."
+        "text": "Before looking for keywords, get to know your target audience and what they are searching for. Local businesses such as food shops, repair services, or beauty clinics all have different needs. For example, if you run a food shop in South Jakarta, your audience may be people searching for “restaurants near me” or “cheap lunch menu”."
+      },
+      {
+        "type": "p",
+        "text": "Before going further, answer these three questions:"
       },
       {
         "type": "ul",
         "items": [
-          "Note autocomplete suggestions for service + city",
-          "Read the questions in the “People also ask” box",
-          "Check the wording competitors use in their Google Business Profile",
-          "Group phrases by intent: learn, compare, or buy"
+          "Who are your main customers, and where are they?",
+          "What problem are they trying to solve?",
+          "What words do they use when asking friends or posting on social media?"
         ]
       },
       {
-        "type": "callout",
-        "title": "Note",
-        "text": "This is a sample article used to review the blog layout. Replace it with real writing before the site goes live."
+        "type": "h2",
+        "text": "2. Use Google Autocomplete"
+      },
+      {
+        "type": "p",
+        "text": "Type your main keyword into Google and look at the suggestions that appear. Autocomplete shows what people search for most often. For example, if you type “ac cleaning”, Google might suggest “ac cleaning jakarta”, “ac cleaning bandung”, or “cheap ac cleaning”. This helps you find specific long-tail keywords with lower competition."
+      },
+      {
+        "type": "h3",
+        "text": "Note the patterns that appear"
+      },
+      {
+        "type": "p",
+        "text": "Copy every suggestion into a simple spreadsheet, then group them by location, price, or service type. The patterns that show up most often are the topics most worth writing about."
+      },
+      {
+        "type": "figure",
+        "image": "/images/blog/artikel-jadi-konten-media-sosial.jpg",
+        "caption": "Group autocomplete suggestions by pattern so your content priorities become clear."
+      },
+      {
+        "type": "h3",
+        "text": "Compare with Google Trends"
+      },
+      {
+        "type": "p",
+        "text": "To compare two keywords, open [Google Trends](https://trends.google.com/trends/?geo=ID) and choose Indonesia as the region. You can see which keyword is searched more often and when interest rises."
+      },
+      {
+        "type": "h2",
+        "text": "3. Analyse your competitors"
+      },
+      {
+        "type": "p",
+        "text": "Look at your competitors’ websites. Pay attention to their page titles, meta descriptions, and subheadings. This shows you which keywords they are targeting. Also note the gaps in their content, so you can write something more complete and relevant."
+      },
+      {
+        "type": "p",
+        "text": "Follow these three steps for each main keyword:"
+      },
+      {
+        "type": "ol",
+        "items": [
+          "Search for your main keyword on Google and open the top three results.",
+          "Note the title, meta description, and subheadings on each page.",
+          "Mark the topics they have not covered, and turn them into your content."
+        ]
+      },
+      {
+        "type": "h2",
+        "text": "4. Prioritise local keywords"
+      },
+      {
+        "type": "p",
+        "text": "If your business focuses on a specific area, make sure to include the city or district name. For example, “photocopy service east jakarta” or “cooking class bogor”. Local keywords have smaller search volumes, but they convert better because people searching for them are usually ready to act."
+      },
+      {
+        "type": "quote",
+        "text": "Local keywords may not be searched often, but the people typing them are usually ready to walk into your shop.",
+        "cite": "Jonathan Anderson T., SEO Specialist"
+      },
+      {
+        "type": "p",
+        "text": "If your website still isn’t showing up in search results, find out why in [why your website isn’t on Google’s first page yet](/blog/website-belum-muncul-di-google)."
+      },
+      {
+        "type": "h2",
+        "text": "Conclusion"
+      },
+      {
+        "type": "p",
+        "text": "Keyword research without paid tools takes longer, but the results are well worth it. By understanding your audience and using free resources like Google, you can create relevant content and improve your local business’s visibility in search engines."
       }
     ]
   },
@@ -38,6 +116,11 @@
     "excerpt": "There is no universal best time to post. For food businesses, your customers’ hungry hours are the benchmark.",
     "metaTitle": "The Best Instagram Posting Schedule for Food Businesses in 2026 - OPTIMARK Blog",
     "metaDescription": "There is no universal best time to post. For food businesses, your customers’ hungry hours are the benchmark.",
+    "tags": [
+      "Instagram",
+      "Food Business",
+      "Posting Schedule"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -72,6 +155,11 @@
     "excerpt": "Smartphone photos plus a little AI help are enough for a clean catalogue, as long as the source shot is right.",
     "metaTitle": "A Guide to Attractive Product Photos Using AI and a Smartphone - OPTIMARK Blog",
     "metaDescription": "Smartphone photos plus a little AI help are enough for a clean catalogue, as long as the source shot is right.",
+    "tags": [
+      "Product Photos",
+      "AI",
+      "Smartphone"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -106,6 +194,11 @@
     "excerpt": "Three or four content pillars mean you no longer wonder what to post every morning.",
     "metaTitle": "A Content Pillar Strategy That Keeps Small Brands Posting Consistently - OPTIMARK Blog",
     "metaDescription": "Three or four content pillars mean you no longer wonder what to post every morning.",
+    "tags": [
+      "Content Pillars",
+      "Consistency",
+      "Small Brands"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -140,6 +233,11 @@
     "excerpt": "Before blaming the algorithm, check whether Google can actually find and understand your pages.",
     "metaTitle": "Why Your Website Isn’t on Google’s First Page Yet - OPTIMARK Blog",
     "metaDescription": "Before blaming the algorithm, check whether Google can actually find and understand your pages.",
+    "tags": [
+      "SEO",
+      "Google Search Console",
+      "Indexing"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -174,6 +272,11 @@
     "excerpt": "A consistent feed palette makes an account recognisable before anyone reads your brand name.",
     "metaTitle": "Tips for Choosing Instagram Feed Colours That Match Your Brand - OPTIMARK Blog",
     "metaDescription": "A consistent feed palette makes an account recognisable before anyone reads your brand name.",
+    "tags": [
+      "Instagram",
+      "Branding",
+      "Colour Palette"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -208,6 +311,11 @@
     "excerpt": "A good TikTok caption doesn’t repeat the video. It gives viewers a reason to comment.",
     "metaTitle": "How to Write TikTok Captions That Get Viewers Interacting - OPTIMARK Blog",
     "metaDescription": "A good TikTok caption doesn’t repeat the video. It gives viewers a reason to comment.",
+    "tags": [
+      "TikTok",
+      "Captions",
+      "Engagement"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -242,6 +350,11 @@
     "excerpt": "One well-researched article can feed two weeks of content without writing from scratch again.",
     "metaTitle": "How to Turn One Blog Post Into Ten Social Media Posts - OPTIMARK Blog",
     "metaDescription": "One well-researched article can feed two weeks of content without writing from scratch again.",
+    "tags": [
+      "Content Repurposing",
+      "Social Media",
+      "Blog"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -276,6 +389,11 @@
     "excerpt": "A 15-second promo can be shot and edited on a smartphone, as long as the first three seconds are strong.",
     "metaTitle": "Making Short, Engaging Promo Videos Without Hiring an Editor - OPTIMARK Blog",
     "metaDescription": "A 15-second promo can be shot and edited on a smartphone, as long as the first three seconds are strong.",
+    "tags": [
+      "Video",
+      "Promotion",
+      "Smartphone"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -310,6 +428,11 @@
     "excerpt": "Content for everyone usually appeals to no one. Decide who you are talking to first.",
     "metaTitle": "Defining Your Target Audience Before Creating Content for an Online Business - OPTIMARK Blog",
     "metaDescription": "Content for everyone usually appeals to no one. Decide who you are talking to first.",
+    "tags": [
+      "Target Audience",
+      "Online Business",
+      "Customer Research"
+    ],
     "blocks": [
       {
         "type": "p",
@@ -344,6 +467,11 @@
     "excerpt": "Likes aren’t the only measure. Saves and shares often show more honestly which content is useful.",
     "metaTitle": "Reading Instagram Insights to Find Your Most Effective Content - OPTIMARK Blog",
     "metaDescription": "Likes aren’t the only measure. Saves and shares often show more honestly which content is useful.",
+    "tags": [
+      "Instagram Insights",
+      "Analytics",
+      "Engagement"
+    ],
     "blocks": [
       {
         "type": "p",

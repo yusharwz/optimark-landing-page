@@ -1,31 +1,33 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, BadgeCheck, Check, Clock, Info, Link2 } from "lucide-react";
-import { Button } from "@/components/base/buttons/button";
+import { CheckVerified02, ChevronRight } from "@untitledui/icons";
 import { BlogArticle } from "@/components/BlogArticle";
 import { BlogCard } from "@/components/BlogCard";
 import { BlogPersonAvatar } from "@/components/BlogPersonAvatar";
+import { BlogToc } from "@/components/BlogToc";
+import { ReadingProgress } from "@/components/ReadingProgress";
 import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
 import {
-  BLOG_CATEGORY_ICONS,
-  BLOG_CATEGORY_STYLES,
   authorHref,
   getBlogPost,
   getRelatedPosts,
   reviewerHref,
+  type BlogAuthorId,
+  type BlogReviewerId,
   type BlogSlug,
 } from "@/config/blog";
-import { GET_STARTED_URL } from "@/config/site";
 import { formatBlogDate } from "@/lib/blog";
-import { heroDescription, heroTitle } from "@/lib/animations";
 import { resolveLocale } from "@/lib/locale";
+import { cx } from "@/utils/cx";
 
-const COPIED_RESET_MS = 2000;
+const ARTICLE_ID = "blog-article";
+
+const focusRing =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
 export function BlogPostView({ slug }: { slug: BlogSlug }) {
   const t = useTranslations("blog");
@@ -33,253 +35,317 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
   const tCopy = useTranslations(`blogPosts.${slug}`);
   const tPeople = useTranslations("blogPeople");
   const locale = resolveLocale(useLocale());
-  const [copied, setCopied] = useState(false);
 
   const post = getBlogPost(slug);
   const related = getRelatedPosts(slug);
 
-  useEffect(() => {
-    if (!copied) return;
-    const timer = window.setTimeout(() => setCopied(false), COPIED_RESET_MS);
-    return () => window.clearTimeout(timer);
-  }, [copied]);
-
-  // The page is prerendered, so the canonical URL is not known to this
-  // component — read the address bar instead of rebuilding it from config.
-  const copyLink = async () => {
-    try {
-      await navigator.clipboard.writeText(window.location.href);
-      setCopied(true);
-    } catch {
-      // Clipboard access denied (insecure context or a refused permission).
-      // Nothing to recover from: the URL is already in the address bar.
-    }
-  };
-
   if (!post) return null;
 
-  const style = BLOG_CATEGORY_STYLES[post.category];
-  const Icon = BLOG_CATEGORY_ICONS[post.category];
+  const title = tCopy("title");
+  const tags = tCopy.raw("tags") as string[];
   const authorName = tPeople(`authors.${post.author}.name`);
   const reviewerName = tPeople(`reviewers.${post.reviewer}.name`);
 
   return (
     <>
-      {/* Article header */}
-      <section className="relative overflow-hidden">
+      <ReadingProgress targetId={ARTICLE_ID} />
+
+      <section className="relative">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0"
+          className="pointer-events-none absolute inset-x-0 -top-36 h-120 opacity-8 lg:-top-24"
           style={{
-            background:
-              "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(242,248,231,0.5) 100%)",
+            backgroundImage: "url('/images/hero-swatch.png')",
+            backgroundSize: "400px 400px",
+            maskImage: "linear-gradient(to bottom, black 60%, transparent)",
           }}
         />
 
-        <div className="relative mx-auto max-w-3xl px-4 pb-10 pt-16 sm:px-6 lg:pt-20">
-          <Link
-            href="/blog"
-            className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-[#535862] transition-colors hover:text-[#94C748] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-          >
-            <ArrowLeft className="h-4 w-4" aria-hidden />
-            {tPost("back")}
-          </Link>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+          <nav aria-label="Breadcrumb" className="py-4">
+            <ol className="flex min-w-0 items-center gap-1.5 text-sm font-medium tracking-tight">
+              <li className="shrink-0">
+                <Link
+                  href="/"
+                  className="rounded text-[#717680] transition-colors hover:text-[#535862] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
+                >
+                  {t("profile.breadcrumbHome")}
+                </Link>
+              </li>
+              <li aria-hidden className="shrink-0 text-[#D5D7DA]">
+                /
+              </li>
+              <li className="shrink-0">
+                <Link
+                  href="/blog"
+                  className="rounded text-[#717680] transition-colors hover:text-[#535862] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
+                >
+                  {t("profile.breadcrumbBlog")}
+                </Link>
+              </li>
+              <li aria-hidden className="shrink-0 text-[#D5D7DA]">
+                /
+              </li>
+              <li aria-current="page" className="min-w-0 truncate text-[#535862]">
+                {title}
+              </li>
+            </ol>
+          </nav>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
-            <span
-              className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
-              style={{ backgroundColor: style.accentSoft, color: style.accent }}
-            >
-              <Icon className="h-3.5 w-3.5" aria-hidden />
-              {t(`categories.${post.category}`)}
-            </span>
-            <span className="text-detail inline-flex items-center gap-1.5 text-xs">
-              <Clock className="h-3.5 w-3.5" aria-hidden />
-              {t("readTime", { minutes: post.readMinutes })}
-            </span>
-          </div>
-
-          <motion.h1
-            variants={heroTitle}
-            initial="hidden"
-            animate="visible"
-            className="text-display mt-5 text-3xl sm:text-4xl lg:text-[2.75rem]"
-          >
-            {tCopy("title")}
-          </motion.h1>
-
-          <motion.p
-            variants={heroDescription}
-            initial="hidden"
-            animate="visible"
-            className="text-lead mt-5 text-base lg:text-lg"
-          >
-            {tCopy("excerpt")}
-          </motion.p>
-
-          {/* Placeholder banner — remove together with the sample posts. */}
-          <div className="mt-7 flex items-start gap-2.5 rounded-2xl border border-amber-300/50 bg-amber-50/70 px-4 py-3">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden />
-            <p className="text-sm text-amber-900">{tPost("sampleNotice")}</p>
-          </div>
-
-          {/* Byline: who wrote it and who checked it, each linking to their
-              profile. The reviewer line is what gives the article its
-              expert-checked standing, so it sits beside the author, not in
-              the footer. */}
-          <div className="mt-8 border-t border-gray-200/80 pt-5">
-            <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
-              <Link
-                href={authorHref(post.author)}
-                className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-              >
-                <BlogPersonAvatar id={post.author} name={authorName} size="sm" />
-                <span className="leading-tight">
-                  <span className="text-detail block text-xs">{tPost("writtenBy")}</span>
-                  <span className="block text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
-                    {authorName}
-                  </span>
+          <div className="mx-auto flex max-w-170 flex-col gap-8 py-8 sm:py-12">
+            <div className="flex flex-col gap-4">
+              <p className="flex items-center gap-2.5 text-sm tracking-tight">
+                <span className="font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]">
+                  {t(`categories.${post.category}`)}
                 </span>
-              </Link>
-
-              <Link
-                href={reviewerHref(post.reviewer)}
-                className="group flex items-center gap-3 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-              >
-                <BlogPersonAvatar id={post.reviewer} name={reviewerName} size="sm" kind="reviewer" />
-                <span className="leading-tight">
-                  <span className="text-detail inline-flex items-center gap-1 text-xs">
-                    {tPost("reviewedBy")}
-                    <BadgeCheck className="h-3.5 w-3.5 text-[#94C748]" aria-hidden />
-                  </span>
-                  <span className="block text-sm font-semibold text-[#1E280E] transition-colors group-hover:text-[#94C748]">
-                    {reviewerName}
-                  </span>
+                <Dot />
+                <span className="text-[#717680]">
+                  {t("readTime", { minutes: post.readMinutes })}
                 </span>
-              </Link>
+              </p>
+
+              <h1 className="text-[2rem] leading-10 font-semibold tracking-tight text-[#1E280E] sm:text-[2.5rem] sm:leading-12">
+                {title}
+              </h1>
+
+              <dl className="flex items-center gap-2.5 text-sm tracking-tight text-[#535862]">
+                <div className="sm:flex sm:gap-1">
+                  <dt className="font-semibold">{tPost("published")}</dt>
+                  <dd>
+                    <time dateTime={post.publishedAt}>
+                      {formatBlogDate(post.publishedAt, locale, "long")}
+                    </time>
+                  </dd>
+                </div>
+                {post.updatedAt && (
+                  <>
+                    <Dot />
+                    <div className="sm:flex sm:gap-1">
+                      <dt className="font-semibold">{tPost("updated")}</dt>
+                      <dd>
+                        <time dateTime={post.updatedAt}>
+                          {formatBlogDate(post.updatedAt, locale, "long")}
+                        </time>
+                      </dd>
+                    </div>
+                  </>
+                )}
+              </dl>
             </div>
-          </div>
 
-          <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
-            {/* Published · Updated, as on Mekari's article header. "Updated"
-                only shows once a post has actually been edited. */}
-            <dl className="text-detail flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <div className="flex gap-1.5">
-                <dt>{tPost("published")}</dt>
-                <dd className="font-medium text-[#1E280E]">
-                  <time dateTime={post.publishedAt}>
-                    {formatBlogDate(post.publishedAt, locale)}
-                  </time>
-                </dd>
-              </div>
-              {post.updatedAt && (
-                <>
-                  <span aria-hidden>·</span>
-                  <div className="flex gap-1.5">
-                    <dt>{tPost("updated")}</dt>
-                    <dd className="font-medium text-[#1E280E]">
-                      <time dateTime={post.updatedAt}>
-                        {formatBlogDate(post.updatedAt, locale)}
-                      </time>
-                    </dd>
-                  </div>
-                </>
-              )}
-            </dl>
-
-            <button
-              type="button"
-              onClick={copyLink}
-              aria-label={tPost("shareLabel")}
-              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-gray-200/80 bg-white px-4 text-sm font-medium text-[#535862] transition-colors duration-200 hover:border-[#94C748] hover:text-[#1E280E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-            >
-              {copied ? (
-                <Check className="h-4 w-4 text-[#94C748]" aria-hidden />
-              ) : (
-                <Link2 className="h-4 w-4" aria-hidden />
-              )}
-              {copied ? tPost("copied") : tPost("copyLink")}
-            </button>
+            <div className="flex flex-wrap gap-4 sm:gap-8">
+              <Byline
+                label={tPost("writtenBy")}
+                href={authorHref(post.author)}
+                person={post.author}
+                name={authorName}
+              />
+              <Byline
+                label={tPost("reviewedBy")}
+                href={reviewerHref(post.reviewer)}
+                person={post.reviewer}
+                name={reviewerName}
+                kind="reviewer"
+                badge={<ExpertBadge label={tPost("expertReviewer")} />}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Body */}
-      <article className="relative mx-auto max-w-3xl px-4 pb-20 sm:px-6">
-        {post.cover && (
-          <div className="relative mb-10 aspect-video overflow-hidden rounded-3xl border-[0.5px] border-black/10">
-            <Image
-              src={post.cover}
-              alt=""
-              fill
-              priority
-              sizes="(min-width: 768px) 720px, 100vw"
-              className="object-cover"
-            />
-          </div>
-        )}
-        <BlogArticle slug={slug} />
+      <section className="relative pb-16 pt-6 sm:pt-10">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-[minmax(12.75rem,1fr)_minmax(0,42.5rem)_minmax(0,1fr)] lg:gap-x-16">
+          <aside className="hidden lg:block">
+            <BlogToc slug={slug} className="sticky top-28" />
+          </aside>
 
-        {/* About the author */}
-        <aside className="mt-14 flex flex-col gap-5 rounded-3xl border border-gray-200/80 bg-white p-6 sm:flex-row sm:items-start sm:p-8">
-          <BlogPersonAvatar id={post.author} name={authorName} size="lg" />
-          <div className="min-w-0">
-            <p className="text-detail text-xs font-semibold uppercase tracking-[0.12em]">
-              {tPost("aboutAuthor")}
-            </p>
-            <p className="text-display mt-1.5 text-lg">{authorName}</p>
-            <p className="text-detail text-sm">{tPeople(`authors.${post.author}.role`)}</p>
-            <p className="text-lead mt-3 text-sm lg:text-base">
-              {tPeople(`authors.${post.author}.bio`)}
-            </p>
-            <Link
-              href={authorHref(post.author)}
-              className="mt-4 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-[#1E280E] transition-colors hover:text-[#94C748] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-            >
-              {tPost("viewProfile")}
-              <ArrowRight className="h-4 w-4" aria-hidden />
-            </Link>
-          </div>
-        </aside>
-      </article>
-
-      {/* In-article CTA */}
-      <section className="relative pb-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <Reveal y={30} duration={0.7}>
-            <div className="rounded-3xl border border-[#94C748]/25 bg-[#F8FDF1] p-8 text-center lg:p-10">
-              <h2 className="text-display text-2xl lg:text-3xl">{tPost("ctaTitle")}</h2>
-              <p className="text-lead mx-auto mt-4 max-w-xl text-base">{tPost("ctaDescription")}</p>
-              <div className="mt-7">
-                <Button href={GET_STARTED_URL} size="xl" className="text-white">
-                  {tPost("ctaButton")}
-                </Button>
+          <div className="mx-auto flex max-w-170 flex-col gap-8 lg:mx-0 lg:max-w-none">
+            {post.cover && (
+              <div className="relative h-50 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-75">
+                <Image
+                  src={post.cover}
+                  alt=""
+                  fill
+                  priority
+                  sizes="(min-width: 768px) 680px, 100vw"
+                  className="object-cover"
+                />
               </div>
-              <p className="text-detail mt-4 text-xs">{tPost("ctaNote")}</p>
-            </div>
-          </Reveal>
+            )}
+
+            <article id={ARTICLE_ID}>
+              <BlogArticle slug={slug} />
+            </article>
+
+            <footer className="flex flex-col gap-8 border-t border-[#E9EAEB] pt-8">
+              <div className="flex flex-col gap-4">
+                <ProfileCard
+                  label={tPost("writtenBy")}
+                  href={authorHref(post.author)}
+                  person={post.author}
+                  name={authorName}
+                  ariaLabel={tPost("viewProfile", { name: authorName })}
+                />
+                <ProfileCard
+                  label={tPost("reviewedBy")}
+                  href={reviewerHref(post.reviewer)}
+                  person={post.reviewer}
+                  name={reviewerName}
+                  kind="reviewer"
+                  badge={<ExpertBadge label={tPost("expertReviewer")} />}
+                  ariaLabel={tPost("viewProfile", { name: reviewerName })}
+                />
+              </div>
+
+              {tags.length > 0 && (
+                <div className="flex flex-col gap-3">
+                  <p className="text-sm font-semibold tracking-tight text-[#1E280E]">
+                    {tPost("tags")}
+                  </p>
+                  <ul className="flex flex-wrap gap-2">
+                    {tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862]"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </footer>
+          </div>
         </div>
       </section>
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="relative border-t border-gray-200/80 py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-display text-2xl lg:text-3xl">{tPost("relatedTitle")}</h2>
+        <section className="relative pb-16 pt-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+            <div className="flex items-center justify-between gap-4 border-b border-[#E9EAEB] pb-5">
+              <h2 className="text-display text-display-xs sm:text-display-sm">
+                {tPost("relatedTitle")}
+              </h2>
+              <Link
+                href="/blog"
+                className="rounded text-md font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
+              >
+                {t("viewAll")}
+              </Link>
+            </div>
             <Reveal
               stagger
               staggerAmount={0.1}
               y={30}
               duration={0.6}
-              className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              className="mt-6 grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3"
             >
               {related.map((item) => (
-                <BlogCard key={item.slug} post={item} locale={locale} />
+                <BlogCard key={item.slug} post={item} locale={locale} size="lg" />
               ))}
             </Reveal>
           </div>
         </section>
       )}
     </>
+  );
+}
+
+function Dot() {
+  return <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-[#A4A7AE]" />;
+}
+
+function ExpertBadge({ label }: { label: string }) {
+  return (
+    <span className="inline-flex shrink-0 items-center gap-0.5 rounded-full border border-[#C7D7FE] bg-[#EEF4FF] py-0.5 pl-1.5 pr-2 text-xs font-medium text-[#3538CD]">
+      <CheckVerified02 aria-hidden className="size-3" />
+      {label}
+    </span>
+  );
+}
+
+function Byline({
+  label,
+  href,
+  person,
+  name,
+  kind = "author",
+  badge,
+}: {
+  label: string;
+  href: string;
+  person: BlogAuthorId | BlogReviewerId;
+  name: string;
+  kind?: "author" | "reviewer";
+  badge?: ReactNode;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <p className="text-sm tracking-tight text-[#717680]">{label}</p>
+      <div className="flex flex-wrap items-center gap-1.5">
+        <Link
+          href={href}
+          className={cx(
+            "group flex items-center gap-1.5 rounded text-sm tracking-tight text-[#1E280E] transition-colors hover:text-[#252B37]",
+            focusRing,
+          )}
+        >
+          <BlogPersonAvatar id={person} name={name} size="xs" kind={kind} className="ring-0" />
+          <span className="underline-offset-2 group-hover:underline">{name}</span>
+        </Link>
+        {badge}
+      </div>
+    </div>
+  );
+}
+
+function ProfileCard({
+  label,
+  href,
+  person,
+  name,
+  kind = "author",
+  badge,
+  ariaLabel,
+}: {
+  label: string;
+  href: string;
+  person: BlogAuthorId | BlogReviewerId;
+  name: string;
+  kind?: "author" | "reviewer";
+  badge?: ReactNode;
+  ariaLabel: string;
+}) {
+  return (
+    <Link
+      href={href}
+      aria-label={ariaLabel}
+      className={cx(
+        "group flex flex-col gap-3 rounded-2xl border border-[#E9EAEB] bg-[#FAFAFA] p-4 transition-colors hover:border-[#D5D7DA] hover:bg-[#F5F5F5] sm:flex-row sm:items-start",
+        focusRing,
+      )}
+    >
+      <BlogPersonAvatar
+        id={person}
+        name={name}
+        size="lg"
+        kind={kind}
+        className="h-14 w-14 ring-0"
+      />
+      <div className="flex min-w-0 flex-1 items-center gap-4 sm:self-stretch">
+        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+          <p className="text-sm tracking-tight text-[#535862]">{label}</p>
+          <div className="flex flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-2">
+            <p className="text-lg font-semibold tracking-tight text-[#1E280E]">{name}</p>
+            {badge}
+          </div>
+        </div>
+        <ChevronRight
+          aria-hidden
+          className="size-6 shrink-0 text-[#A4A7AE] transition-transform group-hover:translate-x-0.5"
+        />
+      </div>
+    </Link>
   );
 }
