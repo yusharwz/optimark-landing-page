@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, type ReactNode } from "react";
 import { useTranslations } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
@@ -27,7 +27,7 @@ const NAV_ITEMS = [
 
 const FEATURES_PREFIX = "/features";
 
-export function Header() {
+export function Header({ subnav }: { subnav?: ReactNode } = {}) {
   const t = useTranslations("header");
   const tf = useTranslations("features");
   const pathname = usePathname();
@@ -102,6 +102,10 @@ export function Header() {
       <div className="mx-auto max-w-7xl">
         <div
           className={`rounded-2xl p-3 transition-all duration-300 sm:p-4 ${
+            subnav
+              ? "max-lg:overflow-hidden max-lg:border max-lg:border-gray-100/50 max-lg:bg-white/85 max-lg:shadow-sm max-lg:backdrop-blur-md "
+              : ""
+          }${
             isScrolled
               ? "border border-gray-100/50 bg-white/85 shadow-sm backdrop-blur-md"
               : overDarkHero
@@ -205,6 +209,12 @@ export function Header() {
               </button>
             </div>
           </div>
+
+          {subnav && (
+            <div className="-mx-3 -mb-3 mt-3 border-t border-gray-100 sm:-mx-4 sm:-mb-4 sm:mt-4 lg:hidden">
+              {subnav}
+            </div>
+          )}
         </div>
 
         <AnimatePresence>

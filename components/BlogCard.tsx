@@ -19,24 +19,13 @@ import { cx } from "@/utils/cx";
 type BlogCardProps = {
   post: BlogPost;
   locale: AppLocale;
+  size?: "md" | "lg";
 };
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-/**
- * A post card: cover, category, two-line title, date · read time, author.
- *
- * Cover and title link to the post, the author links to their profile — so the
- * card is not one big link, and each part has its own hover state (per the
- * Figma "Blog Index" spec): cover zooms, category darkens, title turns brand
- * green, author darkens. A title cut off by the two-line clamp shows its full
- * text in a tooltip on hover-capable devices.
- *
- * Posts without a `cover` photo paint the category wash plus its icon (see
- * BLOG_CATEGORY_STYLES) so the grid stays even while real art is pending.
- */
-export function BlogCard({ post, locale }: BlogCardProps) {
+export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
   const t = useTranslations("blog");
   // Each post is its own namespace, so the slug selects the namespace rather
   // than being looked up as a key inside `blogPosts`.
@@ -51,7 +40,6 @@ export function BlogCard({ post, locale }: BlogCardProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [truncated, setTruncated] = useState(false);
 
-  // The clamp depends on the column width, so re-check whenever it resizes.
   useEffect(() => {
     const el = titleRef.current;
     if (!el) return;
@@ -63,13 +51,16 @@ export function BlogCard({ post, locale }: BlogCardProps) {
   }, [title]);
 
   return (
-    <article className="flex h-full flex-col gap-3">
+    <article className={cx("flex h-full flex-col", size === "lg" ? "gap-4" : "gap-3")}>
       {/* Cover */}
       <Link
         href={blogHref(post.slug)}
         tabIndex={-1}
         aria-hidden
-        className="group relative flex h-37.5 shrink-0 items-center justify-center overflow-hidden rounded-2xl border-[0.5px] border-black/10"
+        className={cx(
+          "group relative flex shrink-0 items-center justify-center overflow-hidden rounded-2xl border-[0.5px] border-black/10",
+          size === "lg" ? "h-50" : "h-37.5",
+        )}
         style={post.cover ? undefined : { background: style.cover }}
       >
         {post.cover ? (
@@ -77,7 +68,11 @@ export function BlogCard({ post, locale }: BlogCardProps) {
             src={post.cover}
             alt=""
             fill
-            sizes="(min-width: 1024px) 260px, (min-width: 640px) 50vw, 100vw"
+            sizes={
+              size === "lg"
+                ? "(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
+                : "(min-width: 1024px) 260px, (min-width: 640px) 50vw, 100vw"
+            }
             className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
@@ -109,8 +104,6 @@ export function BlogCard({ post, locale }: BlogCardProps) {
                 {title}
               </Link>
             </h3>
-            {/* `hidden` rather than `invisible`: a hidden-but-laid-out nowrap
-                tooltip widens the page on phones. */}
             {truncated && (
               <span
                 aria-hidden

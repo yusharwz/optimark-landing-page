@@ -3,16 +3,17 @@ import type { BlogSlug } from "@/config/blog";
 /**
  * Shape of the per-post copy in `messages/{locale}/blog-posts.json`.
  *
- * Post bodies are structured blocks rather than raw HTML so the renderer keeps
- * full control of the Clarity Ladder classes (see DESIGN.md §2.2) — translators
- * supply text, never markup or styling.
+ * Post bodies are structured blocks rather than raw HTML, so translators supply
+ * text, never markup or styling.
  */
 export type BlogBlock =
   | { type: "h2"; text: string }
+  | { type: "h3"; text: string }
   | { type: "p"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
-  | { type: "quote"; text: string }
+  | { type: "figure"; image: string; caption?: string }
+  | { type: "quote"; text: string; cite?: string }
   | { type: "callout"; title: string; text: string };
 
 export interface BlogPostMessages {
@@ -20,7 +21,14 @@ export interface BlogPostMessages {
   excerpt: string;
   metaTitle: string;
   metaDescription: string;
+  tags: string[];
   blocks: BlogBlock[];
+}
+
+export interface BlogTocItem {
+  id: string;
+  text: string;
+  level: 2 | 3;
 }
 
 /**

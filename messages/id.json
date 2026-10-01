@@ -645,7 +645,6 @@
   "blog": {
     "title": "Optimark Blog",
     "description": "Tips dan strategi digital marketing untuk bisnis Anda",
-    "sampleNotice": "Tulisan di bawah ini masih contoh untuk meninjau tampilan halaman. Konten asli menyusul.",
     "latestLabel": "Artikel Terbaru",
     "allCategories": "Semua",
     "readTime": "{minutes} menit baca",
@@ -664,22 +663,16 @@
       "visual-content": "Visual Content"
     },
     "post": {
-      "back": "Kembali ke blog",
-      "shareLabel": "Bagikan tulisan ini",
-      "copyLink": "Salin tautan",
-      "copied": "Tautan tersalin",
-      "sampleNotice": "Ini artikel contoh. Isinya dipakai untuk meninjau tampilan, bukan tulisan final.",
-      "relatedTitle": "Bacaan lain",
-      "ctaTitle": "Coba langsung di akun Anda",
-      "ctaDescription": "Buat caption, audit draf artikel, dan jadwalkan posting dari satu tempat. Beli token sesuai kebutuhan, tanpa langganan bulanan.",
-      "ctaButton": "Mulai Gratis",
-      "ctaNote": "Tanpa kartu kredit",
-      "writtenBy": "Ditulis oleh",
-      "reviewedBy": "Direview oleh",
-      "aboutAuthor": "Tentang penulis",
-      "viewProfile": "Lihat profil",
-      "published": "Tayang",
-      "updated": "Diperbarui"
+      "writtenBy": "Ditulis oleh:",
+      "reviewedBy": "Direview oleh:",
+      "expertReviewer": "Expert Reviewer",
+      "published": "Tayang:",
+      "updated": "Diperbarui:",
+      "toc": "Daftar Isi",
+      "tags": "Tag",
+      "relatedTitle": "Artikel Terkait",
+      "viewProfile": "Lihat profil {name}",
+      "readingProgress": "Progres membaca"
     },
     "profile": {
       "sampleNotice": "Profil ini masih contoh untuk meninjau tampilan halaman. Data penulis dan reviewer asli menyusul.",
@@ -826,10 +819,10 @@
       }
     },
     "reviewers": {
-      "andi-wijaya": {
-        "name": "Andi Wijaya, S.E., M.M.",
-        "role": "Konsultan Digital Marketing",
-        "bio": "Andi membantu UMKM dan brand ritel menyusun strategi pemasaran digital, dari perencanaan konten sampai pengelolaan anggaran iklan. Ia memeriksa setiap artikel blog Optimark sebelum tayang untuk memastikan isinya akurat dan bisa langsung dipraktikkan."
+      "jonathan-anderson": {
+        "name": "Jonathan Anderson T.",
+        "role": "SEO Specialist",
+        "bio": "Jonathan membantu bisnis lokal dan UMKM tampil di hasil pencarian Google lewat riset kata kunci, SEO on-page, dan Google Business Profile. Ia memeriksa setiap artikel blog Optimark sebelum tayang untuk memastikan isinya akurat dan bisa langsung dipraktikkan."
       }
     }
   },

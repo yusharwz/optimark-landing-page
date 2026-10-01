@@ -5,13 +5,9 @@ import { BarChart3, ImageIcon, PenLine, Share2 } from "lucide-react";
  * Structural blog data. Copy lives in `messages/{locale}/blog-posts.json`,
  * keyed by the slugs below — nothing user-facing belongs in this file.
  *
- * SAMPLE DATA. There is no real editorial content or CMS yet. Titles, dates,
- * authors and covers mirror the Figma blog design; the article bodies are
- * placeholders. Replace the entries here and the matching keys in both
- * `blog-posts.json` files when the real articles arrive.
+ * SAMPLE DATA, mirroring the Figma blog design. Replace when real articles arrive.
  */
 
-/** Order here is the order of the sidebar tabs. */
 export const BLOG_CATEGORY_IDS = [
   "seo",
   "content-marketing",
@@ -21,7 +17,6 @@ export const BLOG_CATEGORY_IDS = [
 
 export type BlogCategoryId = (typeof BLOG_CATEGORY_IDS)[number];
 
-/** Order of the per-topic blocks on the index overview (differs from the tabs, per the design). */
 export const BLOG_SECTION_ORDER: readonly BlogCategoryId[] = [
   "seo",
   "social-media",
@@ -29,11 +24,6 @@ export const BLOG_SECTION_ORDER: readonly BlogCategoryId[] = [
   "visual-content",
 ];
 
-/**
- * Wide banner between "latest" and the per-topic blocks on the index.
- * PLACEHOLDER: the design only has a transparency-grid stand-in here. Swap
- * `image` for the real banner (820×200) and set `href` if it should link.
- */
 export const BLOG_BANNER: { image: string; href?: string } = {
   image: "/images/blog/banner.png",
 };
@@ -46,9 +36,8 @@ export const BLOG_CATEGORY_ICONS: Record<BlogCategoryId, LucideIcon> = {
 };
 
 /**
- * Per-category cover treatment. Posts have no photography yet, so each card
- * paints a gradient wash plus its category icon instead of an <Image> that
- * would 404. `accent` is the chip/icon colour, `cover` the card wash.
+ * Fallback cover for posts without a photo: a gradient wash plus the category
+ * icon. `accent` is the icon colour, `cover` the wash.
  */
 export const BLOG_CATEGORY_STYLES: Record<
   BlogCategoryId,
@@ -103,22 +92,20 @@ export type BlogSlug = (typeof BLOG_SLUGS)[number];
  * (`/blog/author/<id>`, `/blog/reviewer/<id>`) and the key of their copy under
  * `blogPeople.authors.*` / `blogPeople.reviewers.*` in the messages.
  *
- * SAMPLE DATA, like the posts: names and photos come from the Figma design;
- * roles and bios are placeholders. Confirm them with the editorial team
- * before the blog goes live.
+ * SAMPLE DATA: roles and bios are placeholders.
  */
 export const BLOG_AUTHOR_IDS = ["thia-rahmani", "rafi-rizky"] as const;
 
 export type BlogAuthorId = (typeof BLOG_AUTHOR_IDS)[number];
 
-export const BLOG_REVIEWER_IDS = ["andi-wijaya"] as const;
+export const BLOG_REVIEWER_IDS = ["jonathan-anderson"] as const;
 
 export type BlogReviewerId = (typeof BLOG_REVIEWER_IDS)[number];
 
-/** Headshots under `public/`. People without one fall back to initials. */
 export const BLOG_PERSON_PHOTOS: Partial<Record<BlogAuthorId | BlogReviewerId, string>> = {
   "thia-rahmani": "/images/blog/people/thia-rahmani.jpg",
   "rafi-rizky": "/images/blog/people/rafi-rizky.jpg",
+  "jonathan-anderson": "/images/blog/people/jonathan-anderson.jpg",
 };
 
 export type BlogPost = {
@@ -132,14 +119,11 @@ export type BlogPost = {
    */
   updatedAt?: string;
   readMinutes: number;
-  /**
-   * Cover photo under `public/`, e.g. "/images/blog/caption-tiktok.jpg".
-   * Optional: without one the card paints the category wash instead.
-   */
   cover?: string;
   author: BlogAuthorId;
   /** Subject-matter expert who checked the post before publishing. */
   reviewer: BlogReviewerId;
+  related?: BlogSlug[];
 };
 
 /** Newest first. Order here is the order the index renders. */
@@ -148,10 +132,12 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: "riset-keyword-bisnis-lokal",
     category: "seo",
     publishedAt: "2026-10-01",
+    updatedAt: "2026-10-02",
     readMinutes: 6,
     cover: "/images/blog/riset-keyword-bisnis-lokal.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
+    related: ["website-belum-muncul-di-google", "strategi-content-pillar", "target-audiens"],
   },
   {
     slug: "jadwal-posting-instagram-umkm-kuliner",
@@ -160,7 +146,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/jadwal-posting-instagram-umkm-kuliner.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "foto-produk-ai-smartphone",
@@ -169,7 +155,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 5,
     cover: "/images/blog/foto-produk-ai-smartphone.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "strategi-content-pillar",
@@ -178,7 +164,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 7,
     cover: "/images/blog/strategi-content-pillar.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "website-belum-muncul-di-google",
@@ -187,7 +173,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 8,
     cover: "/images/blog/website-belum-muncul-di-google.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "warna-feed-instagram",
@@ -196,7 +182,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/warna-feed-instagram.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "caption-tiktok",
@@ -205,7 +191,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 3,
     cover: "/images/blog/caption-tiktok.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "artikel-jadi-konten-media-sosial",
@@ -214,7 +200,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 7,
     cover: "/images/blog/artikel-jadi-konten-media-sosial.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "video-promosi-singkat",
@@ -223,7 +209,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 5,
     cover: "/images/blog/video-promosi-singkat.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "target-audiens",
@@ -232,7 +218,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 4,
     cover: "/images/blog/target-audiens.jpg",
     author: "rafi-rizky",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
   {
     slug: "insight-instagram",
@@ -241,7 +227,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readMinutes: 6,
     cover: "/images/blog/insight-instagram.jpg",
     author: "thia-rahmani",
-    reviewer: "andi-wijaya",
+    reviewer: "jonathan-anderson",
   },
 ];
 
@@ -293,6 +279,13 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 export function getRelatedPosts(slug: BlogSlug, limit = 3): BlogPost[] {
   const current = getBlogPost(slug);
   if (!current) return BLOG_POSTS.slice(0, limit);
+
+  if (current.related?.length) {
+    return current.related
+      .map((item) => getBlogPost(item))
+      .filter((post): post is BlogPost => Boolean(post))
+      .slice(0, limit);
+  }
 
   const others = BLOG_POSTS.filter((post) => post.slug !== slug);
   const sameCategory = others.filter((post) => post.category === current.category);
