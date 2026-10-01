@@ -73,13 +73,6 @@ export function BlogProfileView(props: Props) {
             </ol>
           </nav>
 
-          {/* Placeholder banner — remove with `blog.profile.sampleNotice` once
-              the real editorial team is in config/blog.ts. */}
-          <div className="mt-6 flex items-start gap-2.5 rounded-2xl border border-amber-300/50 bg-amber-50/70 px-4 py-3">
-            <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden />
-            <p className="text-sm text-amber-900">{t("sampleNotice")}</p>
-          </div>
-
           <div className="mt-10 flex flex-col items-start gap-6 sm:flex-row sm:items-center">
             <BlogPersonAvatar id={props.id} name={name} size="xl" kind={props.kind} />
             <div className="min-w-0">
