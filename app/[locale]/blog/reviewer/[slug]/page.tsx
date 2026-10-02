@@ -4,7 +4,21 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import { BLOG_REVIEWER_IDS, isBlogReviewerId } from "@/config/blog";
+import {
+  BLOG_REVIEWER_IDS,
+  BLOG_PERSON_LINKEDIN,
+  BLOG_PERSON_PHOTOS,
+  reviewerHref,
+  isBlogReviewerId,
+} from "@/config/blog";
+import {
+  breadcrumbJsonLd,
+  firstParagraph,
+  localeAlternates,
+  localizedUrl,
+  profilePageJsonLd,
+} from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogProfileView } from "@/components/BlogProfileView";
 import { Footer } from "@/components/Footer";
@@ -26,12 +40,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tPerson = await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` });
 
   const title = tProfile("reviewerMetaTitle", { name: tPerson("name") });
-  const description = tPerson("bio");
+  const description = firstParagraph(tPerson("bio"));
   const ogImage = buildOgImageUrl({ title, description, locale });
 
   return {
     title,
     description,
+    alternates: localeAlternates(locale, reviewerHref(slug)),
     openGraph: {
       title,
       description,
@@ -53,14 +68,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogReviewerPage({ params }: Props) {
   const { locale: localeParam, slug } = await params;
-  setRequestLocale(resolveLocale(localeParam));
+  const locale = resolveLocale(localeParam);
+  setRequestLocale(locale);
 
   if (!isBlogReviewerId(slug)) {
     notFound();
   }
 
+  const tBlog = await getTranslations({ locale, namespace: "blog" });
+  const tPerson = await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` });
+  const name = tPerson("name");
+  const url = localizedUrl(locale, reviewerHref(slug));
+
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tBlog("profile.breadcrumbHome"), url: localizedUrl(locale, "/") },
+          { name: tBlog("profile.breadcrumbBlog"), url: localizedUrl(locale, "/blog") },
+          { name, url },
+        ])}
+      />
+      <JsonLd
+        data={profilePageJsonLd({
+          url,
+          name,
+          jobTitle: tPerson("role"),
+          description: firstParagraph(tPerson("bio")),
+          image: BLOG_PERSON_PHOTOS[slug],
+          knowsAbout: tPerson.raw("expertise") as string[],
+          sameAs: BLOG_PERSON_LINKEDIN[slug] || undefined,
+        })}
+      />
       <Header />
       <main className="relative pt-24">
         <BlogProfileView kind="reviewer" id={slug} />

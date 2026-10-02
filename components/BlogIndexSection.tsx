@@ -15,6 +15,7 @@ import {
   BLOG_CATEGORY_IDS,
   BLOG_POSTS,
   BLOG_SECTION_ORDER,
+  blogCategoryHref,
   type BlogCategoryId,
   type BlogPost,
 } from "@/config/blog";
@@ -26,13 +27,14 @@ type Filter = BlogCategoryId | "all";
 
 const LATEST_LIMIT = 6;
 const TOPIC_LIMIT = 3;
+const FIRST_ROW = 3;
 
-export function BlogIndexSection() {
+export function BlogIndexSection({ category }: { category?: BlogCategoryId } = {}) {
   const t = useTranslations("blog");
   const tPosts = useTranslations("blogPosts");
   const locale = resolveLocale(useLocale());
 
-  const [filter, setFilter] = useState<Filter>("all");
+  const filter: Filter = category ?? "all";
   const [draft, setDraft] = useState("");
   const [query, setQuery] = useState("");
 
@@ -47,11 +49,6 @@ export function BlogIndexSection() {
   }, [filter, query, locale, tPosts]);
 
   const isOverview = filter === "all" && !query.trim();
-
-  const selectFilter = (value: Filter) => {
-    setFilter(value);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
 
   const onSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,9 +79,28 @@ export function BlogIndexSection() {
             <li aria-hidden className="text-[#D5D7DA]">
               /
             </li>
-            <li aria-current="page" className="text-[#535862]">
-              {t("profile.breadcrumbBlog")}
-            </li>
+            {category ? (
+              <>
+                <li>
+                  <Link
+                    href="/blog"
+                    className="rounded text-[#717680] transition-colors hover:text-[#535862] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
+                  >
+                    {t("profile.breadcrumbBlog")}
+                  </Link>
+                </li>
+                <li aria-hidden className="text-[#D5D7DA]">
+                  /
+                </li>
+                <li aria-current="page" className="text-[#535862]">
+                  {t(`categories.${category}`)}
+                </li>
+              </>
+            ) : (
+              <li aria-current="page" className="text-[#535862]">
+                {t("profile.breadcrumbBlog")}
+              </li>
+            )}
           </ol>
         </nav>
 
@@ -95,15 +111,15 @@ export function BlogIndexSection() {
             animate="visible"
             className="text-display text-display-xs sm:text-display-md"
           >
-            {t("title")}
+            {category ? t(`categoryPages.${category}.title`) : t("title")}
           </motion.h1>
           <motion.p
             variants={heroDescription}
             initial="hidden"
             animate="visible"
-            className="text-lead mt-2 text-md sm:text-lg"
+            className="text-lead mt-2 max-w-3xl text-md sm:text-lg"
           >
-            {t("description")}
+            {category ? t(`categoryPages.${category}.description`) : t("description")}
           </motion.p>
         </div>
 
@@ -132,19 +148,17 @@ export function BlogIndexSection() {
               <p className="text-sm font-semibold tracking-tight text-[#769F3A]">
                 {t("filterLabel")}
               </p>
-              <div
-                role="group"
+              <nav
                 aria-label={t("filterLabel")}
                 className="scrollbar-hide -mx-1 flex gap-0.5 overflow-x-auto px-1 lg:mx-0 lg:flex-col lg:gap-0 lg:overflow-visible lg:px-0"
               >
                 {filters.map((value) => {
                   const active = filter === value;
                   return (
-                    <button
+                    <Link
                       key={value}
-                      type="button"
-                      onClick={() => selectFilter(value)}
-                      aria-pressed={active}
+                      href={value === "all" ? "/blog" : blogCategoryHref(value)}
+                      aria-current={active ? "page" : undefined}
                       className={cx(
                         "flex h-9 shrink-0 items-center rounded-lg px-3 text-sm font-semibold tracking-tight transition-colors duration-200",
                         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]",
@@ -154,10 +168,10 @@ export function BlogIndexSection() {
                       )}
                     >
                       {value === "all" ? t("allCategories") : t(`categories.${value}`)}
-                    </button>
+                    </Link>
                   );
                 })}
-              </div>
+              </nav>
             </div>
           </aside>
 
@@ -168,25 +182,25 @@ export function BlogIndexSection() {
                   title={t("latestLabel")}
                   posts={BLOG_POSTS.slice(0, LATEST_LIMIT)}
                   locale={locale}
+                  eagerFirstRow
                 />
                 <Banner />
-                {BLOG_SECTION_ORDER.map((category) => {
-                  const posts = BLOG_POSTS.filter((post) => post.category === category);
+                {BLOG_SECTION_ORDER.map((id) => {
+                  const posts = BLOG_POSTS.filter((post) => post.category === id);
                   if (posts.length === 0) return null;
                   return (
                     <PostSection
-                      key={category}
-                      title={t(`categories.${category}`)}
+                      key={id}
+                      title={t(`categories.${id}`)}
                       posts={posts.slice(0, TOPIC_LIMIT)}
                       locale={locale}
                       action={
-                        <button
-                          type="button"
-                          onClick={() => selectFilter(category)}
+                        <Link
+                          href={blogCategoryHref(id)}
                           className="rounded text-md font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#5E7F2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
                         >
                           {t("viewAll")}
-                        </button>
+                        </Link>
                       }
                     />
                   );
@@ -199,6 +213,7 @@ export function BlogIndexSection() {
                 posts={matches}
                 locale={locale}
                 emptyText={query.trim() ? t("searchEmpty", { query: query.trim() }) : t("empty")}
+                eagerFirstRow
               />
             )}
           </div>
@@ -209,25 +224,21 @@ export function BlogIndexSection() {
 }
 
 function Banner() {
-  const image = (
-    <Image
-      src={BLOG_BANNER.image}
-      alt=""
-      fill
-      sizes="(min-width: 1024px) 820px, 100vw"
-      className="object-cover"
-    />
-  );
-  const className = "relative block h-50 overflow-hidden rounded-2xl";
-
-  return BLOG_BANNER.href ? (
-    <a href={BLOG_BANNER.href} className={className}>
-      {image}
-    </a>
-  ) : (
-    <div aria-hidden className={className}>
-      {image}
-    </div>
+  const t = useTranslations("blog");
+  return (
+    <Link
+      href={BLOG_BANNER.href}
+      className="block overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+    >
+      <Image
+        src={BLOG_BANNER.image}
+        alt={t("bannerAlt")}
+        width={BLOG_BANNER.width}
+        height={BLOG_BANNER.height}
+        sizes="(min-width: 1024px) 820px, 100vw"
+        className="h-50 w-full object-cover transition-opacity duration-200 hover:opacity-95"
+      />
+    </Link>
   );
 }
 
@@ -237,12 +248,14 @@ function PostSection({
   locale,
   action,
   emptyText,
+  eagerFirstRow = false,
 }: {
   title: string;
   posts: BlogPost[];
   locale: AppLocale;
   action?: ReactNode;
   emptyText?: string;
+  eagerFirstRow?: boolean;
 }) {
   return (
     <section className="flex flex-col gap-6">
@@ -263,8 +276,13 @@ function PostSection({
           duration={0.6}
           className="grid gap-x-6 gap-y-8 sm:grid-cols-2 lg:grid-cols-3"
         >
-          {posts.map((post) => (
-            <BlogCard key={post.slug} post={post} locale={locale} />
+          {posts.map((post, index) => (
+            <BlogCard
+              key={post.slug}
+              post={post}
+              locale={locale}
+              eager={eagerFirstRow && index < FIRST_ROW}
+            />
           ))}
         </Reveal>
       )}

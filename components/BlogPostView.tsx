@@ -13,6 +13,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
 import {
   authorHref,
+  blogCategoryHref,
   getBlogPost,
   getRelatedPosts,
   reviewerHref,
@@ -95,9 +96,15 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
           <div className="mx-auto flex max-w-170 flex-col gap-8 py-8 sm:py-12">
             <div className="flex flex-col gap-4">
               <p className="flex items-center gap-2.5 text-sm tracking-tight">
-                <span className="font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]">
+                <Link
+                  href={blogCategoryHref(post.category)}
+                  className={cx(
+                    "rounded font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]",
+                    focusRing,
+                  )}
+                >
                   {t(`categories.${post.category}`)}
-                </span>
+                </Link>
                 <Dot />
                 <span className="text-[#717680]">
                   {t("readTime", { minutes: post.readMinutes })}
@@ -164,9 +171,9 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
               <div className="relative h-50 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-75">
                 <Image
                   src={post.cover}
-                  alt=""
+                  alt={tCopy("coverAlt")}
                   fill
-                  priority
+                  preload
                   sizes="(min-width: 768px) 680px, 100vw"
                   className="object-cover"
                 />

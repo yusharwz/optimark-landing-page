@@ -10,6 +10,8 @@ import { routing } from "@/i18n/routing";
 import { GA_MEASUREMENT_ID, GSC_VERIFICATION, GTM_ID } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl, getBaseUrl } from "@/lib/og";
+import { organizationJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import "@/styles/globals.css";
 
 const inter = Inter({
@@ -164,7 +166,9 @@ export default async function LocaleLayout({ children, params }: Props) {
           </>
         )}
       </head>
-      <body className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}>
+      <body
+        className={`${inter.variable} ${specialGothic.variable} font-sans antialiased smooth-scroll`}
+      >
         {/* Google Tag Manager (noscript) — must stay first inside <body>. */}
         {GTM_ID && (
           <noscript>
@@ -176,6 +180,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             />
           </noscript>
         )}
+        <JsonLd data={organizationJsonLd()} />
         <NextIntlClientProvider messages={messages}>
           <SmoothScrollProvider>
             <ThemeProvider>

@@ -675,7 +675,6 @@
       "readingProgress": "Reading progress"
     },
     "profile": {
-      "sampleNotice": "This profile is a sample used to review the page layout. Real author and reviewer details are on the way.",
       "breadcrumbHome": "Home",
       "breadcrumbBlog": "Blog",
       "articleCount": "{count} articles",
@@ -685,8 +684,37 @@
       "reviewedArticles": "Reviewed articles",
       "empty": "No articles yet.",
       "authorMetaTitle": "{name} - OPTIMARK Blog Author",
-      "reviewerMetaTitle": "{name} - OPTIMARK Blog Reviewer"
-    }
+      "reviewerMetaTitle": "{name} - OPTIMARK Blog Reviewer",
+      "expertise": "Expertise",
+      "linkedin": "{name} on LinkedIn"
+    },
+    "categoryPages": {
+      "seo": {
+        "title": "SEO Articles for Local Businesses",
+        "description": "Practical SEO guides for small and local businesses: keyword research without paid tools, getting your site indexed by Google, and climbing to the first page of search results.",
+        "metaTitle": "SEO Articles for Small & Local Businesses - OPTIMARK Blog",
+        "metaDescription": "Practical SEO guides for small businesses: free keyword research, Google indexing, and getting a local business website onto the first page."
+      },
+      "content-marketing": {
+        "title": "Content Marketing Articles",
+        "description": "Content marketing strategies for small brands and online businesses: building content pillars, defining your target audience, and turning one article into many pieces of content.",
+        "metaTitle": "Content Marketing Articles for Small Brands - OPTIMARK Blog",
+        "metaDescription": "Content marketing strategies for small and online businesses: content pillars, target audiences, and repurposing content to post consistently."
+      },
+      "social-media": {
+        "title": "Social Media Marketing Articles",
+        "description": "Tips for running business social media: the best Instagram posting times, TikTok captions that spark interaction, and reading Insights to see which content works.",
+        "metaTitle": "Social Media Marketing Articles for Small Businesses - OPTIMARK Blog",
+        "metaDescription": "Social media tips for businesses: Instagram posting schedules, engaging TikTok captions, and how to read Instagram Insights."
+      },
+      "visual-content": {
+        "title": "Visual Content Articles",
+        "description": "Guides to creating engaging visual content without a big team: AI product photos from a smartphone, choosing Instagram feed colours, and making short promo videos.",
+        "metaTitle": "Visual Content Articles: Photos, Video & Feed - OPTIMARK Blog",
+        "metaDescription": "Visual content guides for small businesses: AI product photos, consistent Instagram feed colours, and short promo videos shot on a smartphone."
+      }
+    },
+    "bannerAlt": "Try the Optimark SEO Analyzer to check your website SEO"
   },
   "about": {
     "hero": {
@@ -809,20 +837,46 @@
     "authors": {
       "thia-rahmani": {
         "name": "Thia Rahmani",
-        "role": "Content Strategist",
-        "bio": "Thia builds content and SEO strategies for small businesses and local brands. She writes about keyword research, content planning, and producing consistent visual content without a big team."
+        "role": "Social Media & Visual Content Specialist",
+        "bio": "Thia Rahmani is a digital marketing specialist focused on Social Media Marketing and Visual Content. She has experience developing content ideas, building social media strategies, and creating visual material that fits the needs of brands and their audiences. At Optimark, Thia contributes to digital content, social media, and visual marketing that help businesses deliver their message in a more engaging and consistent way.",
+        "expertise": [
+          "Social Media Marketing",
+          "Content Planning",
+          "Visual Content",
+          "Digital Marketing"
+        ]
       },
       "rafi-rizky": {
         "name": "Rafi Rizky",
-        "role": "Social Media Specialist",
-        "bio": "Rafi runs social media for food and retail businesses. He writes practical guides on posting schedules, product photography, and turning one idea into many pieces of content."
+        "role": "SEO & Content Marketing Specialist",
+        "bio": "Rafi Rizky is a digital marketing specialist focused on SEO and Content Marketing. He has experience developing search-intent-driven content strategies, SEO optimisation, and informative content that is relevant to its audience. At Optimark, Rafi contributes to SEO content and content marketing strategy to grow organic visibility and build topical relevance.",
+        "expertise": [
+          "SEO",
+          "Content Marketing",
+          "Keyword Research",
+          "Search Intent",
+          "Content Strategy"
+        ]
       }
     },
     "reviewers": {
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
-        "role": "SEO Specialist",
-        "bio": "Jonathan helps local and small businesses show up in Google search through keyword research, on-page SEO, and Google Business Profile. He checks every Optimark blog article before it goes live to make sure it is accurate and ready to act on."
+        "role": "SEO Lead & Editorial Reviewer",
+        "bio": "Jonathan Anderson is the SEO Lead and Editorial Reviewer at Optimark, focused on SEO strategy, content marketing, AI-driven search, and digital marketing. He has experience developing organic search strategy, technical SEO, content strategy, and optimising content for search engines and AI-powered search.\n\nAs Editorial Reviewer, Jonathan reviews Optimark content for SEO, search intent, content quality, AEO, GEO, topical relevance, and E-E-A-T before it is published. His role is to make sure published content is accurate, relevant, easy to understand, and follows good SEO practice and editorial standards.",
+        "expertise": [
+          "SEO",
+          "Technical SEO",
+          "Content Strategy",
+          "Content Marketing",
+          "AEO",
+          "GEO",
+          "AI SEO",
+          "On-Page SEO",
+          "International SEO",
+          "Local SEO",
+          "Digital Marketing"
+        ]
       }
     }
   },

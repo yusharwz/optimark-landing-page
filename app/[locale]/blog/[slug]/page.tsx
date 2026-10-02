@@ -10,6 +10,8 @@ import { BlogPostView } from "@/components/BlogPostView";
 import { BlogTocBar } from "@/components/BlogToc";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
+import { JsonLd } from "@/components/JsonLd";
+import { ORGANIZATION_ID, breadcrumbJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
 import { SCROLL_UP_THRESHOLD, SITE_URL } from "@/config/site";
 
 type Props = {
@@ -49,6 +51,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: metaTitle,
     description: metaDescription,
+    alternates: localeAlternates(locale, blogHref(entry.slug)),
     openGraph: {
       title: metaTitle,
       description: metaDescription,
@@ -88,14 +91,10 @@ export default async function BlogPostPage({ params }: Props) {
 
   const t = await getTranslations({ locale, namespace: `blogPosts.${post.slug}` });
   const tPeople = await getTranslations({ locale, namespace: "blogPeople" });
-  const localePrefix = locale === routing.defaultLocale ? "" : `/${locale}`;
+  const tBlog = await getTranslations({ locale, namespace: "blog" });
+  const url = localizedUrl(locale, blogHref(post.slug));
 
-  /**
-   * BlogPosting structured data. `dateModified` is what search engines read
-   * for "last updated", so it mirrors the date shown in the article header.
-   * `<` is escaped so copy can never close the script tag early.
-   */
-  const jsonLd = JSON.stringify({
+  const blogPosting = {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
     headline: t("title"),
@@ -103,18 +102,28 @@ export default async function BlogPostPage({ params }: Props) {
     inLanguage: locale,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt ?? post.publishedAt,
-    url: `${SITE_URL}${localePrefix}${blogHref(post.slug)}`,
+    url,
+    mainEntityOfPage: url,
+    ...(post.cover && { image: `${SITE_URL}${post.cover}` }),
+    keywords: (t.raw("tags") as string[]).join(", "),
     author: {
       "@type": "Person",
       name: tPeople(`authors.${post.author}.name`),
-      url: `${SITE_URL}${localePrefix}${authorHref(post.author)}`,
+      url: localizedUrl(locale, authorHref(post.author)),
     },
-    publisher: { "@type": "Organization", name: "Optimark", url: SITE_URL },
-  }).replace(/</g, "\\u003c");
+    publisher: { "@id": ORGANIZATION_ID },
+  };
 
   return (
     <div className="min-h-screen bg-white">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd }} />
+      <JsonLd data={blogPosting} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tBlog("profile.breadcrumbHome"), url: localizedUrl(locale, "/") },
+          { name: tBlog("profile.breadcrumbBlog"), url: localizedUrl(locale, "/blog") },
+          { name: t("title"), url },
+        ])}
+      />
       <Header subnav={<BlogTocBar slug={post.slug} />} />
       <main className="relative pt-36 sm:pt-40 lg:pt-24">
         <BlogPostView slug={post.slug} />

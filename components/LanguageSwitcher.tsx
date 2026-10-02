@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { getPathname, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cx } from "@/utils/cx";
 
@@ -16,7 +16,6 @@ interface LanguageSwitcherProps {
 export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
   const t = useTranslations("localeSwitcher");
   const locale = useLocale();
-  const router = useRouter();
   const pathname = usePathname();
 
   return (
@@ -28,10 +27,10 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
     >
       <legend className="sr-only">{t("label")}</legend>
       {routing.locales.map((loc) => (
-        <button
+        <a
           key={loc}
-          type="button"
-          onClick={() => router.replace(pathname, { locale: loc })}
+          href={getPathname({ href: pathname, locale: loc })}
+          hrefLang={loc}
           aria-label={t(loc)}
           aria-current={locale === loc ? "true" : undefined}
           className={cx(
@@ -44,7 +43,7 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
           )}
         >
           {loc}
-        </button>
+        </a>
       ))}
     </fieldset>
   );

@@ -24,9 +24,13 @@ export const BLOG_SECTION_ORDER: readonly BlogCategoryId[] = [
   "visual-content",
 ];
 
-export const BLOG_BANNER: { image: string; href?: string } = {
+export const BLOG_BANNER = {
+  /** PLACEHOLDER image until the final banner design lands; keep it 820x200. */
   image: "/images/blog/banner.png",
-};
+  width: 820,
+  height: 200,
+  href: "/features/seo-analyzer",
+} as const;
 
 export const BLOG_CATEGORY_ICONS: Record<BlogCategoryId, LucideIcon> = {
   seo: BarChart3,
@@ -102,6 +106,16 @@ export const BLOG_REVIEWER_IDS = ["jonathan-anderson"] as const;
 
 export type BlogReviewerId = (typeof BLOG_REVIEWER_IDS)[number];
 
+/**
+ * LinkedIn profiles, used for the profile-page link and the Person schema
+ * `sameAs`. Empty entries are not rendered.
+ */
+export const BLOG_PERSON_LINKEDIN: Record<BlogAuthorId | BlogReviewerId, string> = {
+  "thia-rahmani": "https://www.linkedin.com/in/thiarahmani",
+  "rafi-rizky": "https://www.linkedin.com/in/rafirizky",
+  "jonathan-anderson": "https://www.linkedin.com/in/jonathan-anderson-tjitrabudi",
+};
+
 export const BLOG_PERSON_PHOTOS: Partial<Record<BlogAuthorId | BlogReviewerId, string>> = {
   "thia-rahmani": "/images/blog/people/thia-rahmani.jpg",
   "rafi-rizky": "/images/blog/people/rafi-rizky.jpg",
@@ -135,7 +149,7 @@ export const BLOG_POSTS: BlogPost[] = [
     updatedAt: "2026-10-02",
     readMinutes: 6,
     cover: "/images/blog/riset-keyword-bisnis-lokal.jpg",
-    author: "thia-rahmani",
+    author: "rafi-rizky",
     reviewer: "jonathan-anderson",
     related: ["website-belum-muncul-di-google", "strategi-content-pillar", "target-audiens"],
   },
@@ -145,7 +159,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-29",
     readMinutes: 4,
     cover: "/images/blog/jadwal-posting-instagram-umkm-kuliner.jpg",
-    author: "rafi-rizky",
+    author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
   {
@@ -154,7 +168,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-26",
     readMinutes: 5,
     cover: "/images/blog/foto-produk-ai-smartphone.jpg",
-    author: "rafi-rizky",
+    author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
   {
@@ -163,7 +177,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-23",
     readMinutes: 7,
     cover: "/images/blog/strategi-content-pillar.jpg",
-    author: "thia-rahmani",
+    author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
   {
@@ -172,7 +186,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-19",
     readMinutes: 8,
     cover: "/images/blog/website-belum-muncul-di-google.jpg",
-    author: "thia-rahmani",
+    author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
   {
@@ -181,7 +195,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-16",
     readMinutes: 4,
     cover: "/images/blog/warna-feed-instagram.jpg",
-    author: "rafi-rizky",
+    author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
   {
@@ -230,6 +244,25 @@ export const BLOG_POSTS: BlogPost[] = [
     reviewer: "jonathan-anderson",
   },
 ];
+
+/** Posts shown on the /blog overview: the latest six, then three per topic. */
+export function getBlogOverviewPosts(): BlogPost[] {
+  const shown = [
+    ...BLOG_POSTS.slice(0, 6),
+    ...BLOG_SECTION_ORDER.flatMap((id) =>
+      BLOG_POSTS.filter((post) => post.category === id).slice(0, 3),
+    ),
+  ];
+  return shown.filter((post, index) => shown.indexOf(post) === index);
+}
+
+export function blogCategoryHref(id: BlogCategoryId): string {
+  return `/blog/kategori/${id}`;
+}
+
+export function isBlogCategoryId(value: string): value is BlogCategoryId {
+  return (BLOG_CATEGORY_IDS as readonly string[]).includes(value);
+}
 
 export function blogHref(slug: BlogSlug): string {
   return `/blog/${slug}`;
