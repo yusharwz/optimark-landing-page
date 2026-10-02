@@ -5,11 +5,17 @@ export const SITE = {
 
 export const SCROLL_UP_THRESHOLD = 0.85;
 
-export const SOCIAL_LINKS = [
-  { name: "Instagram", href: "https://instagram.com", icon: "/images/connect/instagram.svg" },
-  { name: "Facebook", href: "https://facebook.com", icon: "/images/connect/facebook.svg" },
-  { name: "TikTok", href: "https://tiktok.com", icon: "/images/connect/tiktok.svg" },
-] as const;
+/**
+ * Official Optimark accounts. Facebook and TikTok URLs are still pending; an
+ * empty `href` is not rendered anywhere and is left out of the Organization schema.
+ */
+const SOCIAL_ACCOUNTS: { name: string; href: string; icon: string }[] = [
+  { name: "Instagram", href: "https://www.instagram.com/optimark.ai", icon: "/images/connect/instagram.svg" },
+  { name: "Facebook", href: "", icon: "/images/connect/facebook.svg" },
+  { name: "TikTok", href: "", icon: "/images/connect/tiktok.svg" },
+];
+
+export const SOCIAL_LINKS = SOCIAL_ACCOUNTS.filter((account) => account.href);
 
 export const CONNECT_PLATFORMS = [
   { name: "Instagram", icon: "/images/connect/instagram.svg" },
