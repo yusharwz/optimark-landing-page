@@ -19,6 +19,7 @@ export type BlogBlock =
 export interface BlogPostMessages {
   title: string;
   excerpt: string;
+  coverAlt: string;
   metaTitle: string;
   metaDescription: string;
   tags: string[];

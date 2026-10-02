@@ -9,6 +9,7 @@ import {
   BLOG_CATEGORY_ICONS,
   BLOG_CATEGORY_STYLES,
   authorHref,
+  blogCategoryHref,
   blogHref,
   type BlogPost,
 } from "@/config/blog";
@@ -20,12 +21,14 @@ type BlogCardProps = {
   post: BlogPost;
   locale: AppLocale;
   size?: "md" | "lg";
+  /** Above-the-fold card: load the cover immediately at high priority. */
+  eager?: boolean;
 };
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
+export function BlogCard({ post, locale, size = "md", eager = false }: BlogCardProps) {
   const t = useTranslations("blog");
   // Each post is its own namespace, so the slug selects the namespace rather
   // than being looked up as a key inside `blogPosts`.
@@ -66,8 +69,10 @@ export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
         {post.cover ? (
           <Image
             src={post.cover}
-            alt=""
+            alt={tPost("coverAlt")}
             fill
+            loading={eager ? "eager" : "lazy"}
+            fetchPriority={eager ? "high" : undefined}
             sizes={
               size === "lg"
                 ? "(min-width: 1024px) 380px, (min-width: 640px) 50vw, 100vw"
@@ -85,9 +90,15 @@ export function BlogCard({ post, locale, size = "md" }: BlogCardProps) {
       {/* Body */}
       <div className="flex flex-1 flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <span className="w-fit text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]">
+          <Link
+            href={blogCategoryHref(post.category)}
+            className={cx(
+              "w-fit rounded text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]",
+              focusRing,
+            )}
+          >
             {t(`categories.${post.category}`)}
-          </span>
+          </Link>
 
           <div className="group/title relative">
             <h3

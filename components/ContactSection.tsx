@@ -373,26 +373,28 @@ export function ContactSection() {
               </span>
               <h3 className="text-display mt-6 text-lg">{ts("socialTitle")}</h3>
               <p className="text-lead mt-2 flex-1 text-sm">{ts("socialDescription")}</p>
-              <div className="mt-6 flex items-center gap-2">
-                {SOCIAL_LINKS.map((social) => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.name}
-                    className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200/80 bg-white transition-colors duration-200 hover:border-[#94C748] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-                  >
-                    <Image
-                      src={social.icon}
-                      alt=""
-                      width={18}
-                      height={18}
-                      className="h-[18px] w-[18px] object-contain"
-                    />
-                  </a>
-                ))}
-              </div>
+              {SOCIAL_LINKS.length > 0 && (
+                <div className="mt-6 flex items-center gap-2">
+                  {SOCIAL_LINKS.map((social) => (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={social.name}
+                      className="flex h-11 w-11 items-center justify-center rounded-full border border-gray-200/80 bg-white transition-colors duration-200 hover:border-[#94C748] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+                    >
+                      <Image
+                        src={social.icon}
+                        alt=""
+                        width={18}
+                        height={18}
+                        className="h-[18px] w-[18px] object-contain"
+                      />
+                    </a>
+                  ))}
+                </div>
+              )}
             </div>
           </Reveal>
 

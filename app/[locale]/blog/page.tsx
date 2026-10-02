@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
+import { breadcrumbJsonLd, collectionPageJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
+import { blogHref, getBlogOverviewPosts } from "@/config/blog";
+import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
@@ -24,6 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    alternates: localeAlternates(locale, "/blog"),
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -50,10 +54,34 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPage({ params }: Props) {
   const { locale: localeParam } = await params;
-  setRequestLocale(resolveLocale(localeParam));
+  const locale = resolveLocale(localeParam);
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "blogMetadata" });
+  const tBlog = await getTranslations({ locale, namespace: "blog" });
+  const tPosts = await getTranslations({ locale, namespace: "blogPosts" });
+  const url = localizedUrl(locale, "/blog");
 
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tBlog("profile.breadcrumbHome"), url: localizedUrl(locale, "/") },
+          { name: tBlog("profile.breadcrumbBlog"), url },
+        ])}
+      />
+      <JsonLd
+        data={collectionPageJsonLd({
+          name: t("title"),
+          description: t("description"),
+          url,
+          locale,
+          items: getBlogOverviewPosts().map((post) => ({
+            name: tPosts(`${post.slug}.title`),
+            url: localizedUrl(locale, blogHref(post.slug)),
+          })),
+        })}
+      />
       <Header />
       <main className="relative pt-24">
         <BlogIndexSection />

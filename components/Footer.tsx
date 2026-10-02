@@ -42,32 +42,34 @@ export function Footer() {
 
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-[#535862]">{t("tagline")}</p>
 
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-medium text-[#717680]">{t("followUs")}</span>
-                <div className="flex items-center gap-2">
-                  {SOCIAL_LINKS.map((social) => (
-                    <motion.a
-                      key={social.name}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.name}
-                      whileHover={{ y: -2 }}
-                      className="group flex h-9 w-9 items-center justify-center rounded-full border border-[#E9EAEB] bg-white/70 shadow-[0_1px_0_rgba(16,24,40,0.02)] transition-all hover:border-[#94C748] hover:bg-white hover:shadow-sm"
-                    >
-                      <Image
-                        src={social.icon}
-                        alt={social.name}
-                        width={18}
-                        height={18}
-                        className="h-[18px] w-[18px] object-contain opacity-90 transition-opacity group-hover:opacity-100"
-                      />
-                    </motion.a>
-                  ))}
+            {SOCIAL_LINKS.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-xs font-medium text-[#717680]">{t("followUs")}</span>
+                  <div className="flex items-center gap-2">
+                    {SOCIAL_LINKS.map((social) => (
+                      <motion.a
+                        key={social.name}
+                        href={social.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={social.name}
+                        whileHover={{ y: -2 }}
+                        className="group flex h-9 w-9 items-center justify-center rounded-full border border-[#E9EAEB] bg-white/70 shadow-[0_1px_0_rgba(16,24,40,0.02)] transition-all hover:border-[#94C748] hover:bg-white hover:shadow-sm"
+                      >
+                        <Image
+                          src={social.icon}
+                          alt={social.name}
+                          width={18}
+                          height={18}
+                          className="h-[18px] w-[18px] object-contain opacity-90 transition-opacity group-hover:opacity-100"
+                        />
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
           </motion.div>
 
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-7 lg:gap-12">

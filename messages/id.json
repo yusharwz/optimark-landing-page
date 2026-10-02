@@ -675,7 +675,6 @@
       "readingProgress": "Progres membaca"
     },
     "profile": {
-      "sampleNotice": "Profil ini masih contoh untuk meninjau tampilan halaman. Data penulis dan reviewer asli menyusul.",
       "breadcrumbHome": "Beranda",
       "breadcrumbBlog": "Blog",
       "articleCount": "{count} artikel",
@@ -685,8 +684,37 @@
       "reviewedArticles": "Daftar artikel yang direview",
       "empty": "Belum ada artikel.",
       "authorMetaTitle": "{name} - Penulis Blog OPTIMARK",
-      "reviewerMetaTitle": "{name} - Reviewer Blog OPTIMARK"
-    }
+      "reviewerMetaTitle": "{name} - Reviewer Blog OPTIMARK",
+      "expertise": "Keahlian",
+      "linkedin": "Profil LinkedIn {name}"
+    },
+    "categoryPages": {
+      "seo": {
+        "title": "Artikel SEO untuk Bisnis Lokal",
+        "description": "Panduan SEO praktis untuk UMKM dan bisnis lokal: riset kata kunci tanpa tools berbayar, cara agar website terindeks Google, dan langkah naik ke halaman pertama hasil pencarian.",
+        "metaTitle": "Artikel SEO untuk UMKM & Bisnis Lokal - Blog OPTIMARK",
+        "metaDescription": "Panduan SEO praktis untuk UMKM: riset keyword gratis, indexing Google, dan cara agar website bisnis lokal muncul di halaman pertama."
+      },
+      "content-marketing": {
+        "title": "Artikel Content Marketing",
+        "description": "Strategi content marketing untuk brand kecil dan bisnis online: menyusun content pillar, menentukan target audiens, dan mengubah satu artikel menjadi banyak konten.",
+        "metaTitle": "Artikel Content Marketing untuk Brand Kecil - Blog OPTIMARK",
+        "metaDescription": "Strategi content marketing untuk UMKM dan bisnis online: content pillar, target audiens, dan cara repurpose konten agar konsisten posting."
+      },
+      "social-media": {
+        "title": "Artikel Social Media Marketing",
+        "description": "Tips mengelola media sosial bisnis: jadwal posting Instagram terbaik, menulis caption TikTok yang mengundang interaksi, dan membaca Insight untuk tahu konten mana yang efektif.",
+        "metaTitle": "Artikel Social Media Marketing untuk UMKM - Blog OPTIMARK",
+        "metaDescription": "Tips media sosial untuk bisnis: jadwal posting Instagram, caption TikTok yang engaging, dan cara membaca Instagram Insight."
+      },
+      "visual-content": {
+        "title": "Artikel Visual Content",
+        "description": "Panduan membuat konten visual yang menarik tanpa tim besar: foto produk pakai AI dari smartphone, memilih warna feed Instagram, dan membuat video promosi singkat.",
+        "metaTitle": "Artikel Visual Content: Foto, Video & Feed - Blog OPTIMARK",
+        "metaDescription": "Panduan konten visual untuk UMKM: foto produk dengan AI, warna feed Instagram yang konsisten, dan video promosi singkat dari smartphone."
+      }
+    },
+    "bannerAlt": "Coba SEO Analyzer Optimark untuk cek SEO website Anda"
   },
   "about": {
     "hero": {
@@ -809,20 +837,46 @@
     "authors": {
       "thia-rahmani": {
         "name": "Thia Rahmani",
-        "role": "Content Strategist",
-        "bio": "Thia menyusun strategi konten dan SEO untuk UMKM dan brand lokal. Tulisannya membahas riset kata kunci, perencanaan konten, dan cara membuat konten visual yang konsisten tanpa tim besar."
+        "role": "Social Media & Visual Content Specialist",
+        "bio": "Thia Rahmani adalah digital marketing specialist yang berfokus pada Social Media Marketing dan Visual Content. Ia memiliki pengalaman dalam mengembangkan ide konten, menyusun strategi media sosial, serta membuat materi visual yang relevan dengan kebutuhan brand dan audiens. Di Optimark, Thia berkontribusi dalam pengembangan konten digital, social media, dan visual marketing untuk membantu bisnis menyampaikan pesan secara lebih menarik dan konsisten.",
+        "expertise": [
+          "Social Media Marketing",
+          "Content Planning",
+          "Visual Content",
+          "Digital Marketing"
+        ]
       },
       "rafi-rizky": {
         "name": "Rafi Rizky",
-        "role": "Social Media Specialist",
-        "bio": "Rafi mengelola media sosial untuk bisnis kuliner dan ritel. Ia menulis panduan praktis soal jadwal posting, foto produk, dan cara mengubah satu ide menjadi banyak konten."
+        "role": "SEO & Content Marketing Specialist",
+        "bio": "Rafi Rizky adalah digital marketing specialist yang berfokus pada SEO dan Content Marketing. Ia memiliki pengalaman dalam mengembangkan strategi konten berbasis search intent, optimasi SEO, serta pembuatan konten yang informatif dan relevan bagi audiens. Di Optimark, Rafi berkontribusi dalam pengembangan konten SEO dan strategi content marketing untuk meningkatkan visibilitas organik serta membangun topical relevance.",
+        "expertise": [
+          "SEO",
+          "Content Marketing",
+          "Keyword Research",
+          "Search Intent",
+          "Content Strategy"
+        ]
       }
     },
     "reviewers": {
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
-        "role": "SEO Specialist",
-        "bio": "Jonathan membantu bisnis lokal dan UMKM tampil di hasil pencarian Google lewat riset kata kunci, SEO on-page, dan Google Business Profile. Ia memeriksa setiap artikel blog Optimark sebelum tayang untuk memastikan isinya akurat dan bisa langsung dipraktikkan."
+        "role": "SEO Lead & Editorial Reviewer",
+        "bio": "Jonathan Anderson adalah SEO Lead dan Editorial Reviewer di Optimark yang berfokus pada strategi SEO, content marketing, AI-driven search, dan digital marketing. Ia memiliki pengalaman dalam mengembangkan strategi organic search, technical SEO, content strategy, serta optimasi konten untuk search engine dan AI-powered search.\n\nSebagai Editorial Reviewer, Jonathan meninjau konten Optimark dari sisi SEO, search intent, content quality, AEO, GEO, topical relevance, dan E-E-A-T sebelum dipublikasikan. Perannya memastikan konten yang diterbitkan akurat, relevan, mudah dipahami, dan mengikuti praktik SEO serta standar editorial yang baik.",
+        "expertise": [
+          "SEO",
+          "Technical SEO",
+          "Content Strategy",
+          "Content Marketing",
+          "AEO",
+          "GEO",
+          "AI SEO",
+          "On-Page SEO",
+          "International SEO",
+          "Local SEO",
+          "Digital Marketing"
+        ]
       }
     }
   },

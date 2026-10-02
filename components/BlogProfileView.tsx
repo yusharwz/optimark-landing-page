@@ -1,12 +1,13 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { BadgeCheck, ChevronRight, FileText, Info } from "lucide-react";
+import { BadgeCheck, ChevronRight, FileText, Linkedin } from "lucide-react";
 import { BlogCard } from "@/components/BlogCard";
 import { BlogPersonAvatar } from "@/components/BlogPersonAvatar";
 import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
 import {
+  BLOG_PERSON_LINKEDIN,
   getPostsByAuthor,
   getPostsByReviewer,
   type BlogAuthorId,
@@ -16,14 +17,7 @@ import { resolveLocale } from "@/lib/locale";
 
 type Props = { kind: "author"; id: BlogAuthorId } | { kind: "reviewer"; id: BlogReviewerId };
 
-/**
- * Author and reviewer profile page — kept deliberately minimal while the
- * profiles are placeholders: avatar, name, role, article count, bio, and the
- * articles they wrote or reviewed.
- *
- * The fuller Mekari-style reviewer layout (experience, education, credential
- * grid) is worth building once real editorial profiles exist to fill it.
- */
+/** Author and reviewer profile page: bio, expertise, LinkedIn, and their articles. */
 export function BlogProfileView(props: Props) {
   const t = useTranslations("blog.profile");
   const tPeople = useTranslations("blogPeople");
@@ -35,6 +29,8 @@ export function BlogProfileView(props: Props) {
   const name = tPeople(`${person}.name`);
   const role = tPeople(`${person}.role`);
   const bio = tPeople(`${person}.bio`);
+  const expertise = tPeople.raw(`${person}.expertise`) as string[];
+  const linkedin = BLOG_PERSON_LINKEDIN[props.id];
   const posts = isAuthor ? getPostsByAuthor(props.id) : getPostsByReviewer(props.id);
 
   const crumbLink =
@@ -93,7 +89,40 @@ export function BlogProfileView(props: Props) {
             </div>
           </div>
 
-          <p className="text-lead mt-8 text-base lg:text-lg">{bio}</p>
+          <div className="mt-8 flex flex-col gap-4">
+            {bio.split("\n\n").map((paragraph) => (
+              <p key={paragraph.slice(0, 32)} className="text-lead text-base lg:text-lg">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3">
+            <p className="text-sm font-semibold tracking-tight text-[#1E280E]">{t("expertise")}</p>
+            <ul className="flex flex-wrap gap-2">
+              {expertise.map((item) => (
+                <li
+                  key={item}
+                  className="rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862]"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {linkedin && (
+            <a
+              href={linkedin}
+              target="_blank"
+              rel="noopener noreferrer me"
+              aria-label={t("linkedin", { name })}
+              className="mt-8 inline-flex items-center gap-2 rounded-lg border border-[#D5D7DA] bg-white px-3.5 py-2 text-sm font-semibold text-[#414651] shadow-xs transition-colors hover:bg-[#FAFAFA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
+            >
+              <Linkedin className="h-4 w-4 text-[#0A66C2]" aria-hidden />
+              LinkedIn
+            </a>
+          )}
         </div>
       </section>
 
