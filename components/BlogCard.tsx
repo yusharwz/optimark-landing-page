@@ -9,6 +9,7 @@ import {
   BLOG_CATEGORY_ICONS,
   BLOG_CATEGORY_STYLES,
   authorHref,
+  reviewerHref,
   blogCategoryHref,
   blogHref,
   type BlogPost,
@@ -23,12 +24,23 @@ type BlogCardProps = {
   size?: "md" | "lg";
   /** Above-the-fold card: load the cover immediately at high priority. */
   eager?: boolean;
+  /** Adds the reviewer under the author, as on the reviewer profile page. */
+  showReviewer?: boolean;
 };
+
+const personLink =
+  "flex w-fit items-center gap-1.5 rounded text-sm tracking-tight text-[#535862] transition-colors hover:text-[#252B37] active:text-[#252B37] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-export function BlogCard({ post, locale, size = "md", eager = false }: BlogCardProps) {
+export function BlogCard({
+  post,
+  locale,
+  size = "md",
+  eager = false,
+  showReviewer = false,
+}: BlogCardProps) {
   const t = useTranslations("blog");
   // Each post is its own namespace, so the slug selects the namespace rather
   // than being looked up as a key inside `blogPosts`.
@@ -132,16 +144,24 @@ export function BlogCard({ post, locale, size = "md", eager = false }: BlogCardP
           </p>
         </div>
 
-        <Link
-          href={authorHref(post.author)}
-          className={cx(
-            "mt-auto flex w-fit items-center gap-1.5 rounded text-sm tracking-tight text-[#535862] transition-colors hover:text-[#252B37] active:text-[#252B37]",
-            focusRing,
+        <div className="mt-auto flex flex-col gap-3">
+          <Link href={authorHref(post.author)} className={personLink}>
+            <BlogPersonAvatar id={post.author} name={authorName} size="xs" className="ring-0" />
+            <span className="truncate">{authorName}</span>
+          </Link>
+          {showReviewer && (
+            <Link href={reviewerHref(post.reviewer)} className={personLink}>
+              <BlogPersonAvatar
+                id={post.reviewer}
+                name={tPeople(`reviewers.${post.reviewer}.fullName`)}
+                size="xs"
+                kind="reviewer"
+                className="ring-0"
+              />
+              <span className="truncate">{tPeople(`reviewers.${post.reviewer}.fullName`)}</span>
+            </Link>
           )}
-        >
-          <BlogPersonAvatar id={post.author} name={authorName} size="xs" className="ring-0" />
-          <span className="truncate">{authorName}</span>
-        </Link>
+        </div>
       </div>
     </article>
   );

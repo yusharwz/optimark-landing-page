@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const tProfile = await getTranslations({ locale, namespace: "blog.profile" });
   const tPerson = await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` });
 
-  const title = tProfile("reviewerMetaTitle", { name: tPerson("name") });
+  const title = tProfile("reviewerMetaTitle", { name: tPerson("fullName") });
   const description = firstParagraph(tPerson("bio"));
   const ogImage = buildOgImageUrl({ title, description, locale });
 
@@ -77,7 +77,7 @@ export default async function BlogReviewerPage({ params }: Props) {
 
   const tBlog = await getTranslations({ locale, namespace: "blog" });
   const tPerson = await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` });
-  const name = tPerson("name");
+  const name = tPerson("fullName");
   const url = localizedUrl(locale, reviewerHref(slug));
 
   return (
