@@ -677,16 +677,28 @@
     "profile": {
       "breadcrumbHome": "Home",
       "breadcrumbBlog": "Blog",
-      "articleCount": "{count} articles",
-      "reviewedCount": "{count} articles reviewed",
+      "expertReviewer": "Expert Reviewer",
+      "worksAt": "at {company}",
+      "profile": "Profile",
+      "role": "Role:",
+      "expertise": "Expertise:",
+      "experience": "Experience",
+      "education": "Education",
+      "show": "Show",
+      "hide": "Hide",
+      "linkedin": "{name} on LinkedIn",
       "articlesBy": "Articles by {name}",
-      "reviewerBadge": "Optimark Reviewer",
-      "reviewedArticles": "Reviewed articles",
-      "empty": "No articles yet.",
+      "reviewedArticles": "Articles",
+      "filterLabel": "Filter articles by category",
+      "allCategories": "All",
+      "empty": "No articles to show",
+      "pagination": "Article pages",
+      "previous": "Previous page",
+      "next": "Next page",
+      "pageOf": "Page {page} of {total}",
+      "goToPage": "Page {page}",
       "authorMetaTitle": "{name} - OPTIMARK Blog Author",
-      "reviewerMetaTitle": "{name} - OPTIMARK Blog Reviewer",
-      "expertise": "Expertise",
-      "linkedin": "{name} on LinkedIn"
+      "reviewerMetaTitle": "{name} - OPTIMARK Blog Reviewer"
     },
     "categoryPages": {
       "seo": {
@@ -837,6 +849,8 @@
     "authors": {
       "thia-rahmani": {
         "name": "Thia Rahmani",
+        "fullName": "Thia Rahmani",
+        "position": "Social Media & Visual Content Specialist",
         "role": "Social Media & Visual Content Specialist",
         "bio": "Thia Rahmani is a digital marketing specialist focused on Social Media Marketing and Visual Content. She has experience developing content ideas, building social media strategies, and creating visual material that fits the needs of brands and their audiences. At Optimark, Thia contributes to digital content, social media, and visual marketing that help businesses deliver their message in a more engaging and consistent way.",
         "expertise": [
@@ -848,6 +862,8 @@
       },
       "rafi-rizky": {
         "name": "Rafi Rizky",
+        "fullName": "Rafi Rizky",
+        "position": "SEO & Content Marketing Specialist",
         "role": "SEO & Content Marketing Specialist",
         "bio": "Rafi Rizky is a digital marketing specialist focused on SEO and Content Marketing. He has experience developing search-intent-driven content strategies, SEO optimisation, and informative content that is relevant to its audience. At Optimark, Rafi contributes to SEO content and content marketing strategy to grow organic visibility and build topical relevance.",
         "expertise": [
@@ -862,6 +878,42 @@
     "reviewers": {
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
+        "fullName": "Jonathan Anderson Tjitrabudi, S.E.",
+        "position": "SEO Lead",
+        "experience": [
+          {
+            "title": "SEO Lead",
+            "org": "PT Usaha Kreatif Indonesia",
+            "period": "2025 - Present",
+            "logo": "/images/blog/people/logos/usaha-kreatif.png"
+          },
+          {
+            "title": "Digital Project Consultant",
+            "org": "Sribu",
+            "period": "2023 - 2025",
+            "logo": "/images/blog/people/logos/sribu.png"
+          },
+          {
+            "title": "SEO Specialist",
+            "org": "MNC Media",
+            "period": "2021 - 2023",
+            "logo": "/images/blog/people/logos/mnc-media.png"
+          },
+          {
+            "title": "Marketing Property",
+            "org": "MNC Media",
+            "period": "2019 - 2020",
+            "logo": "/images/blog/people/logos/cj-pro.png"
+          }
+        ],
+        "education": [
+          {
+            "title": "Bachelor of Human Resources Management",
+            "org": "Sanata Dharma University",
+            "period": "2015 - 2019",
+            "logo": "/images/blog/people/logos/sanata-dharma.png"
+          }
+        ],
         "role": "SEO Lead & Editorial Reviewer",
         "bio": "Jonathan Anderson is the SEO Lead and Editorial Reviewer at Optimark, focused on SEO strategy, content marketing, AI-driven search, and digital marketing. He has experience developing organic search strategy, technical SEO, content strategy, and optimising content for search engines and AI-powered search.\n\nAs Editorial Reviewer, Jonathan reviews Optimark content for SEO, search intent, content quality, AEO, GEO, topical relevance, and E-E-A-T before it is published. His role is to make sure published content is accurate, relevant, easy to understand, and follows good SEO practice and editorial standards.",
         "expertise": [
