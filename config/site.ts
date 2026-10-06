@@ -1,6 +1,7 @@
 export const SITE = {
   contactEmail: "admin@usahakreatif.co.id",
   brandName: "Optimark",
+  companyName: "PT Usaha Kreatif Indonesia",
 } as const;
 
 export const SCROLL_UP_THRESHOLD = 0.85;
@@ -10,7 +11,11 @@ export const SCROLL_UP_THRESHOLD = 0.85;
  * empty `href` is not rendered anywhere and is left out of the Organization schema.
  */
 const SOCIAL_ACCOUNTS: { name: string; href: string; icon: string }[] = [
-  { name: "Instagram", href: "https://www.instagram.com/optimark.ai", icon: "/images/connect/instagram.svg" },
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/optimark.ai",
+    icon: "/images/connect/instagram.svg",
+  },
   { name: "Facebook", href: "", icon: "/images/connect/facebook.svg" },
   { name: "TikTok", href: "", icon: "/images/connect/tiktok.svg" },
 ];

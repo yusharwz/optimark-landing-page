@@ -677,16 +677,28 @@
     "profile": {
       "breadcrumbHome": "Beranda",
       "breadcrumbBlog": "Blog",
-      "articleCount": "{count} artikel",
-      "reviewedCount": "{count} artikel direview",
-      "articlesBy": "Artikel oleh {name}",
-      "reviewerBadge": "Reviewer Optimark",
-      "reviewedArticles": "Daftar artikel yang direview",
-      "empty": "Belum ada artikel.",
+      "expertReviewer": "Expert Reviewer",
+      "worksAt": "di {company}",
+      "profile": "Profil",
+      "role": "Role:",
+      "expertise": "Expertise:",
+      "experience": "Pengalaman",
+      "education": "Pendidikan",
+      "show": "Tampilkan",
+      "hide": "Sembunyikan",
+      "linkedin": "Profil LinkedIn {name}",
+      "articlesBy": "Daftar Artikel oleh {name}",
+      "reviewedArticles": "Daftar Artikel",
+      "filterLabel": "Filter kategori artikel",
+      "allCategories": "Semua",
+      "empty": "Tidak ada artikel yang ditampilkan",
+      "pagination": "Navigasi halaman artikel",
+      "previous": "Halaman sebelumnya",
+      "next": "Halaman berikutnya",
+      "pageOf": "Halaman {page} dari {total}",
+      "goToPage": "Halaman {page}",
       "authorMetaTitle": "{name} - Penulis Blog OPTIMARK",
-      "reviewerMetaTitle": "{name} - Reviewer Blog OPTIMARK",
-      "expertise": "Keahlian",
-      "linkedin": "Profil LinkedIn {name}"
+      "reviewerMetaTitle": "{name} - Reviewer Blog OPTIMARK"
     },
     "categoryPages": {
       "seo": {
@@ -837,6 +849,8 @@
     "authors": {
       "thia-rahmani": {
         "name": "Thia Rahmani",
+        "fullName": "Thia Rahmani",
+        "position": "Social Media & Visual Content Specialist",
         "role": "Social Media & Visual Content Specialist",
         "bio": "Thia Rahmani adalah digital marketing specialist yang berfokus pada Social Media Marketing dan Visual Content. Ia memiliki pengalaman dalam mengembangkan ide konten, menyusun strategi media sosial, serta membuat materi visual yang relevan dengan kebutuhan brand dan audiens. Di Optimark, Thia berkontribusi dalam pengembangan konten digital, social media, dan visual marketing untuk membantu bisnis menyampaikan pesan secara lebih menarik dan konsisten.",
         "expertise": [
@@ -848,6 +862,8 @@
       },
       "rafi-rizky": {
         "name": "Rafi Rizky",
+        "fullName": "Rafi Rizky",
+        "position": "SEO & Content Marketing Specialist",
         "role": "SEO & Content Marketing Specialist",
         "bio": "Rafi Rizky adalah digital marketing specialist yang berfokus pada SEO dan Content Marketing. Ia memiliki pengalaman dalam mengembangkan strategi konten berbasis search intent, optimasi SEO, serta pembuatan konten yang informatif dan relevan bagi audiens. Di Optimark, Rafi berkontribusi dalam pengembangan konten SEO dan strategi content marketing untuk meningkatkan visibilitas organik serta membangun topical relevance.",
         "expertise": [
@@ -862,6 +878,42 @@
     "reviewers": {
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
+        "fullName": "Jonathan Anderson Tjitrabudi, S.E.",
+        "position": "SEO Lead",
+        "experience": [
+          {
+            "title": "SEO Lead",
+            "org": "PT Usaha Kreatif Indonesia",
+            "period": "2025 - Saat ini",
+            "logo": "/images/blog/people/logos/usaha-kreatif.png"
+          },
+          {
+            "title": "Digital Project Consultant",
+            "org": "Sribu",
+            "period": "2023 - 2025",
+            "logo": "/images/blog/people/logos/sribu.png"
+          },
+          {
+            "title": "SEO Specialist",
+            "org": "MNC Media",
+            "period": "2021 - 2023",
+            "logo": "/images/blog/people/logos/mnc-media.png"
+          },
+          {
+            "title": "Marketing Property",
+            "org": "MNC Media",
+            "period": "2019 - 2020",
+            "logo": "/images/blog/people/logos/cj-pro.png"
+          }
+        ],
+        "education": [
+          {
+            "title": "Sarjana Human Resources Management",
+            "org": "Sanata Dharma University",
+            "period": "2015 - 2019",
+            "logo": "/images/blog/people/logos/sanata-dharma.png"
+          }
+        ],
         "role": "SEO Lead & Editorial Reviewer",
         "bio": "Jonathan Anderson adalah SEO Lead dan Editorial Reviewer di Optimark yang berfokus pada strategi SEO, content marketing, AI-driven search, dan digital marketing. Ia memiliki pengalaman dalam mengembangkan strategi organic search, technical SEO, content strategy, serta optimasi konten untuk search engine dan AI-powered search.\n\nSebagai Editorial Reviewer, Jonathan meninjau konten Optimark dari sisi SEO, search intent, content quality, AEO, GEO, topical relevance, dan E-E-A-T sebelum dipublikasikan. Perannya memastikan konten yang diterbitkan akurat, relevan, mudah dipahami, dan mengikuti praktik SEO serta standar editorial yang baik.",
         "expertise": [
