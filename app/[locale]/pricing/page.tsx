@@ -2,6 +2,14 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
+import {
+  SOFTWARE_ID,
+  breadcrumbJsonLd,
+  localeAlternates,
+  localizedUrl,
+  webPageJsonLd,
+} from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 // import { PricingSection } from "@/components/PricingSection"; // TEMP — restore setelah launch
 import { PricingFreeTrial } from "@/components/PricingFreeTrial";
@@ -26,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    alternates: localeAlternates(locale, "/pricing"),
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -51,10 +60,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PricingPage({ params }: Props) {
   const { locale: localeParam } = await params;
-  setRequestLocale(resolveLocale(localeParam));
+  const locale = resolveLocale(localeParam);
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "pricingTrialMetadata" });
+  const tCrumb = await getTranslations({ locale, namespace: "header" });
+  const url = localizedUrl(locale, "/pricing");
 
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tCrumb("nav.home"), url: localizedUrl(locale, "/") },
+          { name: tCrumb("nav.pricing"), url },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          type: "WebPage",
+          name: t("title"),
+          description: t("description"),
+          url,
+          locale,
+          about: { "@id": SOFTWARE_ID },
+        })}
+      />
       <Header />
       <main className="relative pt-24">
         <div className="relative z-10">
