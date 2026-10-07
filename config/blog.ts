@@ -17,6 +17,43 @@ export const BLOG_CATEGORY_IDS = [
 
 export type BlogCategoryId = (typeof BLOG_CATEGORY_IDS)[number];
 
+/** Tag slugs: the /blog/tag/<id> URL and the key of the label under `blog.tags`. */
+export const BLOG_TAG_IDS = [
+  "riset-keyword",
+  "seo-lokal",
+  "umkm",
+  "google-autocomplete",
+  "instagram",
+  "umkm-kuliner",
+  "jadwal-posting",
+  "foto-produk",
+  "ai",
+  "smartphone",
+  "content-pillar",
+  "konsistensi",
+  "brand-kecil",
+  "seo",
+  "google-search-console",
+  "indexing",
+  "branding",
+  "palet-warna",
+  "tiktok",
+  "caption",
+  "engagement",
+  "repurpose-konten",
+  "media-sosial",
+  "blog",
+  "video",
+  "promosi",
+  "target-audiens",
+  "bisnis-online",
+  "riset-pelanggan",
+  "instagram-insight",
+  "analitik",
+] as const;
+
+export type BlogTagId = (typeof BLOG_TAG_IDS)[number];
+
 export const BLOG_SECTION_ORDER: readonly BlogCategoryId[] = [
   "seo",
   "social-media",
@@ -134,6 +171,7 @@ export type BlogPost = {
   updatedAt?: string;
   readMinutes: number;
   cover?: string;
+  tags: BlogTagId[];
   author: BlogAuthorId;
   /** Subject-matter expert who checked the post before publishing. */
   reviewer: BlogReviewerId;
@@ -149,6 +187,7 @@ export const BLOG_POSTS: BlogPost[] = [
     updatedAt: "2026-10-02",
     readMinutes: 6,
     cover: "/images/blog/riset-keyword-bisnis-lokal.jpg",
+    tags: ["riset-keyword", "seo-lokal", "umkm", "google-autocomplete"],
     author: "rafi-rizky",
     reviewer: "jonathan-anderson",
     related: ["website-belum-muncul-di-google", "strategi-content-pillar", "target-audiens"],
@@ -159,6 +198,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-29",
     readMinutes: 4,
     cover: "/images/blog/jadwal-posting-instagram-umkm-kuliner.jpg",
+    tags: ["instagram", "umkm-kuliner", "jadwal-posting"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -168,6 +208,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-26",
     readMinutes: 5,
     cover: "/images/blog/foto-produk-ai-smartphone.jpg",
+    tags: ["foto-produk", "ai", "smartphone"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -177,6 +218,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-23",
     readMinutes: 7,
     cover: "/images/blog/strategi-content-pillar.jpg",
+    tags: ["content-pillar", "konsistensi", "brand-kecil"],
     author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
@@ -186,6 +228,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-19",
     readMinutes: 8,
     cover: "/images/blog/website-belum-muncul-di-google.jpg",
+    tags: ["seo", "google-search-console", "indexing"],
     author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
@@ -195,6 +238,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-16",
     readMinutes: 4,
     cover: "/images/blog/warna-feed-instagram.jpg",
+    tags: ["instagram", "branding", "palet-warna"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -204,6 +248,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-12",
     readMinutes: 3,
     cover: "/images/blog/caption-tiktok.jpg",
+    tags: ["tiktok", "caption", "engagement"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -213,6 +258,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-09",
     readMinutes: 7,
     cover: "/images/blog/artikel-jadi-konten-media-sosial.jpg",
+    tags: ["repurpose-konten", "media-sosial", "blog"],
     author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
@@ -222,6 +268,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-09-02",
     readMinutes: 5,
     cover: "/images/blog/video-promosi-singkat.jpg",
+    tags: ["video", "promosi", "smartphone"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -231,6 +278,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-08-28",
     readMinutes: 4,
     cover: "/images/blog/target-audiens.jpg",
+    tags: ["target-audiens", "bisnis-online", "riset-pelanggan"],
     author: "rafi-rizky",
     reviewer: "jonathan-anderson",
   },
@@ -240,6 +288,7 @@ export const BLOG_POSTS: BlogPost[] = [
     publishedAt: "2026-08-25",
     readMinutes: 6,
     cover: "/images/blog/insight-instagram.jpg",
+    tags: ["instagram-insight", "analitik", "engagement"],
     author: "thia-rahmani",
     reviewer: "jonathan-anderson",
   },
@@ -254,6 +303,27 @@ export function getBlogOverviewPosts(): BlogPost[] {
     ),
   ];
   return shown.filter((post, index) => shown.indexOf(post) === index);
+}
+
+export function blogTagHref(id: BlogTagId): string {
+  return `/blog/tag/${id}`;
+}
+
+export function isBlogTagId(value: string): value is BlogTagId {
+  return (BLOG_TAG_IDS as readonly string[]).includes(value);
+}
+
+export function getPostsByTag(id: BlogTagId): BlogPost[] {
+  return BLOG_POSTS.filter((post) => post.tags.includes(id));
+}
+
+/** The most used tags across the blog (ties keep BLOG_TAG_IDS order), minus `exclude`. */
+export function getPopularTags(exclude?: BlogTagId, limit = 5): BlogTagId[] {
+  return BLOG_TAG_IDS.filter((id) => id !== exclude)
+    .map((id) => ({ id, count: getPostsByTag(id).length }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+    .map(({ id }) => id);
 }
 
 export function blogCategoryHref(id: BlogCategoryId): string {

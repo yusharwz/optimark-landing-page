@@ -105,7 +105,7 @@ export default async function BlogPostPage({ params }: Props) {
     url,
     mainEntityOfPage: url,
     ...(post.cover && { image: `${SITE_URL}${post.cover}` }),
-    keywords: (t.raw("tags") as string[]).join(", "),
+    keywords: post.tags.map((tag) => tBlog(`tags.${tag}`)).join(", "),
     author: {
       "@type": "Person",
       name: tPeople(`authors.${post.author}.name`),

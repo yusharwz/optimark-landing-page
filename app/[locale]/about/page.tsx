@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
+import { breadcrumbJsonLd, localeAlternates, localizedUrl, webPageJsonLd } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import {
   AboutClosing,
@@ -32,6 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    alternates: localeAlternates(locale, "/about"),
     openGraph: {
       title: t("title"),
       description: t("description"),
@@ -59,10 +62,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 /** Section order follows the approved About Us handoff (1–9). */
 export default async function AboutPage({ params }: Props) {
   const { locale: localeParam } = await params;
-  setRequestLocale(resolveLocale(localeParam));
+  const locale = resolveLocale(localeParam);
+  setRequestLocale(locale);
+
+  const t = await getTranslations({ locale, namespace: "aboutMetadata" });
+  const tCrumb = await getTranslations({ locale, namespace: "header" });
+  const url = localizedUrl(locale, "/about");
 
   return (
     <div className="min-h-screen bg-white">
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tCrumb("nav.home"), url: localizedUrl(locale, "/") },
+          { name: tCrumb("nav.about"), url },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          type: "AboutPage",
+          name: t("title"),
+          description: t("description"),
+          url,
+          locale,
+        })}
+      />
       <Header />
       <main className="relative pt-24">
         <AboutHero />
