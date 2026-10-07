@@ -726,7 +726,44 @@
         "metaDescription": "Panduan konten visual untuk UMKM: foto produk dengan AI, warna feed Instagram yang konsisten, dan video promosi singkat dari smartphone."
       }
     },
-    "bannerAlt": "Coba SEO Analyzer Optimark untuk cek SEO website Anda"
+    "bannerAlt": "Coba SEO Analyzer Optimark untuk cek SEO website Anda",
+    "tags": {
+      "riset-keyword": "Riset Keyword",
+      "seo-lokal": "SEO Lokal",
+      "umkm": "UMKM",
+      "google-autocomplete": "Google Autocomplete",
+      "instagram": "Instagram",
+      "umkm-kuliner": "UMKM Kuliner",
+      "jadwal-posting": "Jadwal Posting",
+      "foto-produk": "Foto Produk",
+      "ai": "AI",
+      "smartphone": "Smartphone",
+      "content-pillar": "Content Pillar",
+      "konsistensi": "Konsistensi",
+      "brand-kecil": "Brand Kecil",
+      "seo": "SEO",
+      "google-search-console": "Google Search Console",
+      "indexing": "Indexing",
+      "branding": "Branding",
+      "palet-warna": "Palet Warna",
+      "tiktok": "TikTok",
+      "caption": "Caption",
+      "engagement": "Engagement",
+      "repurpose-konten": "Repurpose Konten",
+      "media-sosial": "Media Sosial",
+      "blog": "Blog",
+      "video": "Video",
+      "promosi": "Promosi",
+      "target-audiens": "Target Audiens",
+      "bisnis-online": "Bisnis Online",
+      "riset-pelanggan": "Riset Pelanggan",
+      "instagram-insight": "Instagram Insight",
+      "analitik": "Analitik"
+    },
+    "articleCount": "{count} Artikel",
+    "tagMetaTitle": "{tag} - Arsip Artikel Blog OPTIMARK",
+    "tagMetaDescription": "Kumpulan artikel blog Optimark dengan tag {tag}: panduan digital marketing praktis untuk UMKM dan bisnis lokal.",
+    "popularTags": "Tag populer"
   },
   "about": {
     "hero": {

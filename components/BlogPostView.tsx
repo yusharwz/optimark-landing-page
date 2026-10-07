@@ -14,6 +14,7 @@ import { Link } from "@/i18n/navigation";
 import {
   authorHref,
   blogCategoryHref,
+  blogTagHref,
   getBlogPost,
   getRelatedPosts,
   reviewerHref,
@@ -43,7 +44,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
   if (!post) return null;
 
   const title = tCopy("title");
-  const tags = tCopy.raw("tags") as string[];
+  const tags = post.tags;
   const authorName = tPeople(`authors.${post.author}.name`);
   const reviewerName = tPeople(`reviewers.${post.reviewer}.name`);
 
@@ -211,11 +212,16 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                   </p>
                   <ul className="flex flex-wrap gap-2">
                     {tags.map((tag) => (
-                      <li
-                        key={tag}
-                        className="rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862]"
-                      >
-                        {tag}
+                      <li key={tag}>
+                        <Link
+                          href={blogTagHref(tag)}
+                          className={cx(
+                            "inline-flex rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862] transition-colors hover:border-[#D4E9B6] hover:bg-[#EAF4DA] hover:text-[#59772B]",
+                            focusRing,
+                          )}
+                        >
+                          {t(`tags.${tag}`)}
+                        </Link>
                       </li>
                     ))}
                   </ul>

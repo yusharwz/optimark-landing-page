@@ -4,10 +4,12 @@ import { localizedUrl } from "@/lib/seo";
 import {
   BLOG_AUTHOR_IDS,
   BLOG_CATEGORY_IDS,
+  BLOG_TAG_IDS,
   BLOG_POSTS,
   BLOG_REVIEWER_IDS,
   authorHref,
   blogCategoryHref,
+  blogTagHref,
   blogHref,
   reviewerHref,
 } from "@/config/blog";
@@ -36,6 +38,7 @@ const ROUTES = [
   // Post URLs come from config/blog.ts, so a new post lands in the sitemap
   // without a second edit here.
   ...BLOG_CATEGORY_IDS.map(blogCategoryHref),
+  ...BLOG_TAG_IDS.map(blogTagHref),
   ...BLOG_POSTS.map((post) => blogHref(post.slug)),
   ...BLOG_AUTHOR_IDS.map(authorHref),
   ...BLOG_REVIEWER_IDS.map(reviewerHref),

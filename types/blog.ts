@@ -22,7 +22,6 @@ export interface BlogPostMessages {
   coverAlt: string;
   metaTitle: string;
   metaDescription: string;
-  tags: string[];
   blocks: BlogBlock[];
 }
 
