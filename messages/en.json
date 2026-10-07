@@ -726,7 +726,44 @@
         "metaDescription": "Visual content guides for small businesses: AI product photos, consistent Instagram feed colours, and short promo videos shot on a smartphone."
       }
     },
-    "bannerAlt": "Try the Optimark SEO Analyzer to check your website SEO"
+    "bannerAlt": "Try the Optimark SEO Analyzer to check your website SEO",
+    "tags": {
+      "riset-keyword": "Keyword Research",
+      "seo-lokal": "Local SEO",
+      "umkm": "Small Business",
+      "google-autocomplete": "Google Autocomplete",
+      "instagram": "Instagram",
+      "umkm-kuliner": "Food Business",
+      "jadwal-posting": "Posting Schedule",
+      "foto-produk": "Product Photos",
+      "ai": "AI",
+      "smartphone": "Smartphone",
+      "content-pillar": "Content Pillars",
+      "konsistensi": "Consistency",
+      "brand-kecil": "Small Brands",
+      "seo": "SEO",
+      "google-search-console": "Google Search Console",
+      "indexing": "Indexing",
+      "branding": "Branding",
+      "palet-warna": "Colour Palette",
+      "tiktok": "TikTok",
+      "caption": "Captions",
+      "engagement": "Engagement",
+      "repurpose-konten": "Content Repurposing",
+      "media-sosial": "Social Media",
+      "blog": "Blog",
+      "video": "Video",
+      "promosi": "Promotion",
+      "target-audiens": "Target Audience",
+      "bisnis-online": "Online Business",
+      "riset-pelanggan": "Customer Research",
+      "instagram-insight": "Instagram Insights",
+      "analitik": "Analytics"
+    },
+    "articleCount": "{count, plural, one {# Article} other {# Articles}}",
+    "tagMetaTitle": "{tag} - OPTIMARK Blog Archive",
+    "tagMetaDescription": "Optimark blog articles tagged {tag}: practical digital marketing guides for small and local businesses.",
+    "popularTags": "Popular tags"
   },
   "about": {
     "hero": {

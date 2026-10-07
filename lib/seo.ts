@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import type { AppLocale } from "@/lib/locale";
-import { SITE, SITE_URL, SOCIAL_LINKS } from "@/config/site";
+import { GET_STARTED_URL, SITE, SITE_URL, SOCIAL_LINKS } from "@/config/site";
 
 /** Absolute URL of `path` (no locale prefix) in `locale`. */
 export function localizedUrl(locale: AppLocale, path: string): string {
@@ -25,6 +25,8 @@ export function localeAlternates(locale: AppLocale, path: string): Metadata["alt
 }
 
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
+export const WEBSITE_ID = `${SITE_URL}/#website`;
+export const SOFTWARE_ID = `${SITE_URL}/#software`;
 
 export function organizationJsonLd() {
   const sameAs = SOCIAL_LINKS.map((link) => link.href).filter(Boolean);
@@ -33,9 +35,114 @@ export function organizationJsonLd() {
     "@type": "Organization",
     "@id": ORGANIZATION_ID,
     name: SITE.brandName,
+    legalName: SITE.companyName,
     url: SITE_URL,
     logo: `${SITE_URL}/images/avatar-optimark.png`,
+    email: SITE.contactEmail,
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      email: SITE.contactEmail,
+      availableLanguage: ["Indonesian", "English"],
+    },
     ...(sameAs.length > 0 && { sameAs }),
+  };
+}
+
+/** Site-level entity; only the home page emits it, as Google recommends. */
+export function websiteJsonLd({ name, locale }: { name: string; locale: AppLocale }) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    name,
+    url: localizedUrl(locale, "/"),
+    inLanguage: locale,
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
+/**
+ * The product itself. The offer is the free plan (config/pricing.ts) — the only
+ * tier on sale today — so it stays true while paid pricing is parked.
+ */
+export function softwareApplicationJsonLd({
+  name,
+  description,
+  locale,
+}: {
+  name: string;
+  description: string;
+  locale: AppLocale;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": SOFTWARE_ID,
+    name,
+    description,
+    url: localizedUrl(locale, "/"),
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    inLanguage: locale,
+    publisher: { "@id": ORGANIZATION_ID },
+    offers: {
+      "@type": "Offer",
+      price: 0,
+      priceCurrency: "IDR",
+      url: GET_STARTED_URL,
+    },
+  };
+}
+
+/** A plain page of the site; `type` narrows it (AboutPage, ContactPage, …). */
+export function webPageJsonLd({
+  type = "WebPage",
+  name,
+  description,
+  url,
+  locale,
+  about,
+}: {
+  type?: "WebPage" | "AboutPage" | "ContactPage";
+  name: string;
+  description: string;
+  url: string;
+  locale: AppLocale;
+  about?: { "@id": string };
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": type,
+    name,
+    description,
+    url,
+    inLanguage: locale,
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORGANIZATION_ID },
+    ...(about && { about }),
+  };
+}
+
+export function faqPageJsonLd({
+  url,
+  locale,
+  items,
+}: {
+  url: string;
+  locale: AppLocale;
+  items: { question: string; answer: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    url,
+    inLanguage: locale,
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer },
+    })),
   };
 }
 
