@@ -3,8 +3,15 @@ import { PrivacyPolicyView } from "@/components/PrivacyPolicyView";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import { defaultRobots, localeAlternates, localizedUrl } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  defaultRobots,
+  localeAlternates,
+  localizedUrl,
+  webPageJsonLd,
+} from "@/lib/seo";
 import { getSeoKeywords } from "@/config/seo";
+import { JsonLd } from "@/components/JsonLd";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -53,7 +60,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PrivacyPolicy({ params }: Props) {
   const { locale: localeParam } = await params;
-  setRequestLocale(resolveLocale(localeParam));
+  const locale = resolveLocale(localeParam);
+  setRequestLocale(locale);
 
-  return <PrivacyPolicyView />;
+  const t = await getTranslations({ locale, namespace: "privacyMetadata" });
+  const tHeader = await getTranslations({ locale, namespace: "header" });
+  const url = localizedUrl(locale, "/privacy-policy");
+
+  return (
+    <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: tHeader("nav.home"), url: localizedUrl(locale, "/") },
+          { name: t("title"), url },
+        ])}
+      />
+      <JsonLd
+        data={webPageJsonLd({
+          name: t("title"),
+          description: t("description"),
+          url,
+          locale,
+        })}
+      />
+      <PrivacyPolicyView />
+    </>
+  );
 }

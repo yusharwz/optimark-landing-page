@@ -4,19 +4,19 @@ import type { AppLocale } from "@/lib/locale";
 import { GET_STARTED_URL, SITE, SITE_URL, SOCIAL_LINKS } from "@/config/site";
 
 /** Absolute URL of `path` (no locale prefix) in `locale`. */
-export function localizedUrl(locale: AppLocale, path: string): string {
+export function localizedUrl(locale: AppLocale, path: string, origin: string = SITE_URL): string {
   if (
     path === "/perencana-konten" ||
     path === "/content-planner" ||
     path === "/features/perencana-konten" ||
     path === "/features/content-planner"
   ) {
-    return locale === "en" ? `${SITE_URL}/en/content-planner` : `${SITE_URL}/perencana-konten`;
+    return locale === "en" ? `${origin}/en/content-planner` : `${origin}/perencana-konten`;
   }
   const cleanPath = path.startsWith("/features/") ? path.replace("/features/", "/") : path;
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   const suffix = cleanPath === "/" ? "" : cleanPath;
-  return `${SITE_URL}${prefix}${suffix}`;
+  return `${origin}${prefix}${suffix}`;
 }
 
 /**
@@ -87,14 +87,24 @@ export function organizationJsonLd() {
 
 /** Site-level entity; only the home page emits it, as Google recommends. */
 export function websiteJsonLd({ name, locale }: { name: string; locale: AppLocale }) {
+  const homeUrl = localizedUrl(locale, "/");
+  const blogUrl = localizedUrl(locale, "/blog");
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     name,
-    url: localizedUrl(locale, "/"),
+    url: homeUrl,
     inLanguage: locale,
     publisher: { "@id": ORGANIZATION_ID },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${blogUrl}?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 
@@ -273,3 +283,48 @@ export function profilePageJsonLd({
 export function firstParagraph(text: string): string {
   return text.split("\n\n")[0];
 }
+
+/** BlogPosting / Article schema for blog posts */
+export function blogPostingJsonLd({
+  headline,
+  description,
+  url,
+  locale,
+  publishedAt,
+  updatedAt,
+  cover,
+  author,
+  keywords,
+}: {
+  headline: string;
+  description: string;
+  url: string;
+  locale: AppLocale;
+  publishedAt: string;
+  updatedAt?: string | null;
+  cover?: string;
+  author: { name: string; url: string };
+  keywords?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline,
+    description,
+    inLanguage: locale,
+    datePublished: publishedAt,
+    dateModified: updatedAt ?? publishedAt,
+    url,
+    mainEntityOfPage: url,
+    ...(cover && { image: cover.startsWith("http") ? cover : `${SITE_URL}${cover}` }),
+    ...(keywords && keywords.length > 0 && { keywords: keywords.join(", ") }),
+    author: {
+      "@type": "Person",
+      name: author.name,
+      url: author.url,
+    },
+    publisher: { "@id": ORGANIZATION_ID },
+  };
+}
+
+export const articleJsonLd = blogPostingJsonLd;

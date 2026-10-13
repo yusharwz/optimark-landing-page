@@ -31,7 +31,12 @@ export async function POST(request: NextRequest) {
 
     const path = body.path || request.nextUrl.searchParams.get("path") || "/sitemap.xml";
 
-    if (path) {
+    if (path === "/sitemap.xml" || path === "/sitemap_index.xml") {
+      revalidatePath("/sitemap.xml");
+      revalidatePath("/sitemap_index.xml");
+      revalidatePath("/page-sitemap.xml");
+      revalidatePath("/blog-sitemap.xml");
+    } else if (path) {
       revalidatePath(path);
     }
 

@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { getBaseUrl } from "@/lib/og";
 
 export default function robots(): MetadataRoute.Robots {
+  const baseUrl = getBaseUrl();
   return {
     rules: {
       userAgent: "*",
@@ -10,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       // indexing — it renders no page content of its own.
       disallow: "/api/",
     },
-    sitemap: `${getBaseUrl()}/sitemap.xml`,
+    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/sitemap_index.xml`],
   };
 }

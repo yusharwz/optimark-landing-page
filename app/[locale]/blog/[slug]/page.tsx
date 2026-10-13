@@ -11,8 +11,8 @@ import { BlogTocBar } from "@/components/BlogToc";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { JsonLd } from "@/components/JsonLd";
-import { ORGANIZATION_ID, breadcrumbJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
-import { SCROLL_UP_THRESHOLD, SITE_URL } from "@/config/site";
+import { blogPostingJsonLd, breadcrumbJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
+import { SCROLL_UP_THRESHOLD } from "@/config/site";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -94,25 +94,20 @@ export default async function BlogPostPage({ params }: Props) {
   const tBlog = await getTranslations({ locale, namespace: "blog" });
   const url = localizedUrl(locale, blogHref(post.slug));
 
-  const blogPosting = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
+  const blogPosting = blogPostingJsonLd({
     headline: t("title"),
     description: t("metaDescription"),
-    inLanguage: locale,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt ?? post.publishedAt,
     url,
-    mainEntityOfPage: url,
-    ...(post.cover && { image: `${SITE_URL}${post.cover}` }),
-    keywords: post.tags.map((tag) => tBlog(`tags.${tag}`)).join(", "),
+    locale,
+    publishedAt: post.publishedAt,
+    updatedAt: post.updatedAt,
+    cover: post.cover,
+    keywords: post.tags.map((tag) => tBlog(`tags.${tag}`)),
     author: {
-      "@type": "Person",
       name: tPeople(`authors.${post.author}.name`),
       url: localizedUrl(locale, authorHref(post.author)),
     },
-    publisher: { "@id": ORGANIZATION_ID },
-  };
+  });
 
   return (
     <div className="min-h-screen bg-white">
