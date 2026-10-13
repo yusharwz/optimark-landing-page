@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "title": "OPTIMARK - All-in-One Digital Marketing Platform",
-    "description": "All digital marketing tools in one platform. Schedule content, boost SEO visibility, optimize ads, and create content faster with AI assistance."
+    "title": "Optimark - All-in-One AI Digital Marketing Platform",
+    "description": "Optimark helps businesses manage SEO, content marketing, social media, and visual content with AI in one digital marketing platform."
   },
   "privacyMetadata": {
-    "title": "Privacy Policy - OPTIMARK",
-    "description": "Optimark Privacy Policy - Learn how we collect, use, and protect your personal information."
+    "title": "Optimark Privacy Policy - User Data Protection",
+    "description": "Learn how Optimark collects, uses, and protects personal data and user information when using our platform and services."
   },
   "termsMetadata": {
-    "title": "Terms of Service - OPTIMARK",
-    "description": "Optimark Terms of Service - The terms and conditions that govern your use of the Optimark platform."
+    "title": "Optimark Terms of Service - Service Terms",
+    "description": "Learn about the terms and conditions for using Optimark, including services, subscriptions, tokens, user rights, and responsibilities."
   },
   "pricingMetadata": {
-    "title": "Token Pricing - OPTIMARK",
-    "description": "Buy Optimark tokens as you need without monthly subscriptions. Get access to AI Content Planner, SEO Analyzer, Ads Manager, and more."
+    "title": "Optimark Pricing - Plans for AI Digital Marketing",
+    "description": "Choose an Optimark plan based on your business needs and manage SEO, content, social media, images, and videos with AI in one platform."
   },
   "pricingTrialMetadata": {
-    "title": "Pricing - OPTIMARK",
-    "description": "Start with a free trial and get full access to every OPTIMARK AI feature - content planning, SEO, ads, image and video generation."
+    "title": "Optimark Pricing - Plans for AI Digital Marketing",
+    "description": "Choose an Optimark plan based on your business needs and manage SEO, content, social media, images, and videos with AI in one platform."
   },
   "pricingTrial": {
     "badge": "Free Trial",
@@ -44,20 +44,20 @@
     "contactCta": "Contact us"
   },
   "faqMetadata": {
-    "title": "Frequently Asked Questions - OPTIMARK",
-    "description": "Find answers to frequently asked questions about Optimark — features, pricing, integrations, and how to get started."
+    "title": "Frequently Asked Questions About AI Digital Marketing Platform - Optimark",
+    "description": "Find answers to common questions about Optimark features, pricing, and how to use the platform."
   },
   "blogMetadata": {
-    "title": "Blog - OPTIMARK",
-    "description": "Practical guides on SEO, social content, and what producing content actually costs. Written for marketing teams and business owners."
+    "title": "Optimark Blog | Digital Marketing Tips & Strategies",
+    "description": "Discover digital marketing tips and strategies for businesses, covering SEO, content marketing, social media, and AI-powered visual content."
   },
   "aboutMetadata": {
-    "title": "About Us - OPTIMARK",
-    "description": "OPTIMARK is an AI-powered, all-in-one digital marketing platform developed by UKI — built to help businesses simplify, streamline, and elevate their digital marketing."
+    "title": "About Optimark - All-in-One AI Digital Marketing Platform",
+    "description": "Optimark is an all-in-one AI digital marketing platform that helps businesses manage SEO, content, social media, images, and videos in one platform."
   },
   "contactMetadata": {
-    "title": "Contact Us - OPTIMARK",
-    "description": "Send questions about features, token pricing, or your team's needs to the Optimark support team. Or reach us directly on WhatsApp, email, and social media."
+    "title": "Contact Optimark - Contact Our Marketing Team",
+    "description": "Contact the Optimark team for product questions, support, business partnerships, or digital marketing needs for your business."
   },
   "productOverviewMetadata": {
     "title": "Product Overview - OPTIMARK",
@@ -502,11 +502,7 @@
       "Want to try it too? Check the link in bio! 👆"
     ],
     "hashtags": "#FlimtyFiber #FlimtyID #HealthyLiving #DailyFiber #SmoothDigestion #MorningRoutine #BodyGoals",
-    "refineChips": [
-      "Shorter",
-      "More persuasive",
-      "Add hashtags"
-    ],
+    "refineChips": ["Shorter", "More persuasive", "Add hashtags"],
     "apply": "Apply"
   },
   "bestTimeModal": {
@@ -672,7 +668,17 @@
       "tags": "Tags",
       "relatedTitle": "Related Articles",
       "viewProfile": "View {name}'s profile",
-      "readingProgress": "Reading progress"
+      "readingProgress": "Reading progress",
+      "share": {
+        "title": "Share this article",
+        "facebook": "Share to Facebook",
+        "twitter": "Share to X",
+        "linkedin": "Share to LinkedIn",
+        "email": "Share via Email",
+        "copy": "Copy link",
+        "copied": "Link copied!",
+        "titleCopied": "Title copied to clipboard! (Ctrl+V)"
+      }
     },
     "profile": {
       "breadcrumbHome": "Home",
@@ -726,7 +732,7 @@
         "metaDescription": "Visual content guides for small businesses: AI product photos, consistent Instagram feed colours, and short promo videos shot on a smartphone."
       }
     },
-    "bannerAlt": "Try the Optimark SEO Analyzer to check your website SEO",
+    "bannerAlt": "Optimark - Create an Account Now and Claim Free Tokens to Explore AI Features",
     "tags": {
       "riset-keyword": "Keyword Research",
       "seo-lokal": "Local SEO",
@@ -763,7 +769,34 @@
     "articleCount": "{count, plural, one {# Article} other {# Articles}}",
     "tagMetaTitle": "{tag} - OPTIMARK Blog Archive",
     "tagMetaDescription": "Optimark blog articles tagged {tag}: practical digital marketing guides for small and local businesses.",
-    "popularTags": "Popular tags"
+    "popularTags": "Popular tags",
+    "comments": {
+      "title": "Comments",
+      "count": "{count, plural, =0 {No comments yet} =1 {1 Comment} other {# Comments}}",
+      "empty": "No comments yet. Be the first to share your thoughts!",
+      "formTitle": "Write a Comment",
+      "formSubtitle": "Your email address will not be published. Required fields are marked *",
+      "nameLabel": "Full Name *",
+      "namePlaceholder": "Name",
+      "emailLabel": "Email Address *",
+      "emailPlaceholder": "Email",
+      "websiteLabel": "Website (Optional)",
+      "websitePlaceholder": "Website",
+      "commentLabel": "Comment *",
+      "commentPlaceholder": "Write your comment here...",
+      "submit": "Post Comment",
+      "submitting": "Posting...",
+      "moderationNotice": "Comments undergo editorial moderation before being published. Links automatically use rel=\"ugc nofollow\".",
+      "pendingBadge": "Pending Moderation",
+      "pendingAlert": "Your comment has been submitted and is pending editorial moderation before being publicly visible.",
+      "reply": "Reply",
+      "charactersRemaining": "{remaining} characters remaining",
+      "errorRequired": "Name, email, and comment content are required.",
+      "errorEmail": "Invalid email address format.",
+      "errorGeneric": "Failed to submit comment. Please try again shortly.",
+      "saveDataLabel": "Save my name, email, and website for future comments.",
+      "like": "Like"
+    }
   },
   "about": {
     "hero": {
@@ -916,7 +949,7 @@
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
         "fullName": "Jonathan Anderson Tjitrabudi, S.E.",
-        "position": "SEO Lead",
+        "position": "SEO Lead & Editorial Reviewer",
         "experience": [
           {
             "title": "SEO Lead",
@@ -925,34 +958,40 @@
             "logo": "/images/blog/people/logos/usaha-kreatif.png"
           },
           {
-            "title": "Digital Project Consultant",
-            "org": "Sribu",
+            "title": "Digital Client Solutions Manager",
+            "org": "PT Sribu Digital Kreatif",
             "period": "2023 - 2025",
             "logo": "/images/blog/people/logos/sribu.png"
           },
           {
             "title": "SEO Specialist",
-            "org": "MNC Media",
+            "org": "MNC Group",
             "period": "2021 - 2023",
             "logo": "/images/blog/people/logos/mnc-media.png"
           },
           {
-            "title": "Marketing Property",
-            "org": "MNC Media",
+            "title": "Lead Marketing",
+            "org": "PT. Citra Jasa Andalan",
             "period": "2019 - 2020",
             "logo": "/images/blog/people/logos/cj-pro.png"
           }
         ],
         "education": [
           {
-            "title": "Bachelor of Human Resources Management",
+            "title": "Bachelor’s in Management",
             "org": "Sanata Dharma University",
             "period": "2015 - 2019",
             "logo": "/images/blog/people/logos/sanata-dharma.png"
+          },
+          {
+            "title": "Digital Marketing (SEO Specialist)",
+            "org": "Purwadhika Digital Technology School",
+            "period": "",
+            "logo": "/images/blog/people/logos/purwadhika.png"
           }
         ],
         "role": "SEO Lead & Editorial Reviewer",
-        "bio": "Jonathan Anderson is the SEO Lead and Editorial Reviewer at Optimark, focused on SEO strategy, content marketing, AI-driven search, and digital marketing. He has experience developing organic search strategy, technical SEO, content strategy, and optimising content for search engines and AI-powered search.\n\nAs Editorial Reviewer, Jonathan reviews Optimark content for SEO, search intent, content quality, AEO, GEO, topical relevance, and E-E-A-T before it is published. His role is to make sure published content is accurate, relevant, easy to understand, and follows good SEO practice and editorial standards.",
+        "bio": "Jonathan Anderson is the SEO Lead and Editorial Reviewer at Optimark, focusing on SEO strategy, content strategy, and advancements in AI-driven search. He has extensive experience in developing organic search strategies, technical SEO, content marketing, and optimizing content to improve website visibility and relevance in search engines.\n\nAs Editorial Reviewer, he is responsible for reviewing and evaluating Optimark content before publication. The review process covers search intent, structure and content quality, topical relevance, on-page SEO, as well as the implementation of AEO and GEO strategies to align content with the evolution of AI-based search.\n\nIn carrying out his role, he combines an SEO approach with a deep understanding of user needs and information quality. His focus is to ensure every piece of content published by Optimark is accurate, relevant, well-structured, and provides real value to readers.",
         "expertise": [
           "SEO",
           "Technical SEO",
@@ -1102,5 +1141,54 @@
       ],
       "linkLabel": "See the full token rates"
     }
+  },
+  "featuresMetadata": {
+    "title": "Optimark Features - AI-Powered SEO, Content, and Scheduling Tools",
+    "description": "Explore Optimark features from SEO research, automated content creation, scheduling, to publishing in one AI platform."
+  },
+  "featureSeoMetadata": {
+    "ai": {
+      "title": "AI Content Maker - Create Content with AI | Optimark",
+      "description": "Create articles, marketing copy, captions, and content ideas with Optimark AI Content Maker. Customize your content to match your brand and business needs."
+    },
+    "perencana": {
+      "title": "Content Planner - Plan & Schedule Content with AI | Optimark",
+      "description": "Plan and manage your social media content with Optimark Content Planner. Organize content and schedules in one platform for your marketing needs."
+    },
+    "seo": {
+      "title": "AI SEO Analyzer - Audit Your Website with AI | Optimark",
+      "description": "Audit your website, analyze keywords, and discover SEO opportunities with Optimark AI SEO Analyzer to improve your organic search performance."
+    },
+    "aiImage": {
+      "title": "AI Image Generator - Create Images with AI | Optimark",
+      "description": "Create images with AI for your content and marketing needs. Optimark AI Image helps turn your ideas into images for your business."
+    },
+    "aiVideo": {
+      "title": "AI Video Generator - Create Videos with AI | Optimark",
+      "description": "Create videos with AI for your content and marketing needs. Optimark AI Video helps turn your ideas into videos ready for your business content."
+    }
+  },
+  "notFound": {
+    "badge": "404 Error",
+    "title": "Page Not Found",
+    "subtitle": "Oops! The page you are looking for might have been moved, removed, or the link is incorrect.",
+    "description": "Don’t worry, you can easily navigate back to the Optimark homepage or explore our AI features and blog articles below.",
+    "backHome": "Back to Homepage",
+    "backHomeId": "Kembali ke Beranda",
+    "visitBlog": "Visit Blog",
+    "exploreFeatures": "Explore Features",
+    "quickLinksTitle": "Quick Navigation:",
+    "switchLanguage": "Tampilkan dalam Bahasa Indonesia",
+    "links": {
+      "home": "Home",
+      "features": "AI Features",
+      "pricing": "Pricing & Plans",
+      "blog": "Blog Articles",
+      "faq": "FAQ",
+      "about": "About Us",
+      "contact": "Contact Us"
+    },
+    "metaTitle": "404 — Page Not Found | Optimark",
+    "metaDescription": "The page you are looking for was not found. Return to the Optimark homepage to explore our leading AI content and marketing automation platform."
   }
 }

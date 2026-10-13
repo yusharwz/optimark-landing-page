@@ -22,6 +22,59 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/id", destination: "/", permanent: true },
+      // Content planner / perencana konten redirects
+      {
+        source: "/en/features/perencana-konten",
+        destination: "/en/content-planner",
+        permanent: true,
+      },
+      {
+        source: "/en/features/content-planner",
+        destination: "/en/content-planner",
+        permanent: true,
+      },
+      {
+        source: "/features/content-planner",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/features/perencana-konten",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/id/features/content-planner",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/id/features/perencana-konten",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/content-planner",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/id/content-planner",
+        destination: "/perencana-konten",
+        permanent: true,
+      },
+      {
+        source: "/en/perencana-konten",
+        destination: "/en/content-planner",
+        permanent: true,
+      },
+      // Generic feature path strip
+      { source: "/features", destination: "/#features", permanent: true },
+      { source: "/en/features", destination: "/en#features", permanent: true },
+      { source: "/features/:path*", destination: "/:path*", permanent: true },
+      { source: "/en/features/:path*", destination: "/en/:path*", permanent: true },
+      { source: "/id/features/:path*", destination: "/:path*", permanent: true },
+      // Generic /id prefix strip
       { source: "/id/:path*", destination: "/:path*", permanent: true },
     ];
   },

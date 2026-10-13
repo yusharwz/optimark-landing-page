@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, type ReactNode } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { Button } from "@/components/base/buttons/button";
@@ -20,16 +20,25 @@ const NAV_ITEMS = [
   { key: "home", href: "/" },
   { key: "features", href: null },
   { key: "pricing", href: "/pricing" },
-  { key: "faq", href: "/faq" },
+  // { key: "faq", href: "/faq" }, // TEMP DISABLED — FAQ 404
   { key: "blog", href: "/blog" },
   { key: "about", href: "/about" },
 ] as const;
 
-const FEATURES_PREFIX = "/features";
+const FEATURE_PATHS = [
+  "/ai-content-maker",
+  "/perencana-konten",
+  "/content-planner",
+  "/seo-analyzer",
+  "/ai-image",
+  "/ai-video",
+  "/features",
+];
 
 export function Header({ subnav }: { subnav?: ReactNode } = {}) {
   const t = useTranslations("header");
   const tf = useTranslations("features");
+  const locale = useLocale();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
@@ -72,7 +81,7 @@ export function Header({ subnav }: { subnav?: ReactNode } = {}) {
     return pathname.startsWith(href);
   };
 
-  const featuresActive = pathname.startsWith(FEATURES_PREFIX);
+  const featuresActive = FEATURE_PATHS.some((p) => pathname.startsWith(p));
 
   // Only the homepage has a dark hero behind the (transparent) header. While
   // sitting over it — i.e. before the user scrolls and the white bar appears —
@@ -154,12 +163,16 @@ export function Header({ subnav }: { subnav?: ReactNode } = {}) {
                             className="absolute left-1/2 top-full z-50 mt-3 w-56 -translate-x-1/2 overflow-hidden rounded-2xl border border-gray-100 bg-white p-2 shadow-xl"
                           >
                             {ALL_FEATURE_IDS.map((id) => {
-                              const active = pathname.startsWith(featureHref(id));
+                              const href = featureHref(id, locale);
+                              const active =
+                                pathname.startsWith(href) ||
+                                pathname.startsWith(featureHref(id, "id")) ||
+                                pathname.startsWith(featureHref(id, "en"));
                               return (
                                 <Link
                                   key={id}
                                   role="menuitem"
-                                  href={featureHref(id)}
+                                  href={href}
                                   onClick={() => setFeaturesOpen(false)}
                                   className={`block whitespace-nowrap rounded-xl px-3 py-2.5 text-sm font-medium transition-colors ${
                                     active
@@ -259,11 +272,15 @@ export function Header({ subnav }: { subnav?: ReactNode } = {}) {
                           >
                             <div className="mt-1 flex flex-col gap-1 border-l border-gray-100 pl-3">
                               {ALL_FEATURE_IDS.map((id) => {
-                                const active = pathname.startsWith(featureHref(id));
+                                const href = featureHref(id, locale);
+                                const active =
+                                  pathname.startsWith(href) ||
+                                  pathname.startsWith(featureHref(id, "id")) ||
+                                  pathname.startsWith(featureHref(id, "en"));
                                 return (
                                   <Link
                                     key={id}
-                                    href={featureHref(id)}
+                                    href={href}
                                     onClick={() => {
                                       setMobileMenuOpen(false);
                                       setMobileFeaturesOpen(false);

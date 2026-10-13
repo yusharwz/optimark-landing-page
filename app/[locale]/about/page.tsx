@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { breadcrumbJsonLd, localeAlternates, localizedUrl, webPageJsonLd } from "@/lib/seo";
+import { getSeoKeywords } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import {
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    keywords: getSeoKeywords("about", locale),
     alternates: localeAlternates(locale, "/about"),
     openGraph: {
       title: t("title"),

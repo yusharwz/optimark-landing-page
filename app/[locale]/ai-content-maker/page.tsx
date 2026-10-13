@@ -8,6 +8,7 @@ import { BestTimeModal } from "@/components/best-time";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FeatureNavSection } from "@/components/FeatureNavSection";
+import { SeoFaqSection } from "@/components/SeoFaqSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import {
   Sparkles,
@@ -50,9 +51,9 @@ export default function AiContentMakerPage() {
   };
 
   const checks = t.raw("ai.checks") as string[];
-  const deepFeatures = (
-    t.raw("ai.cards") as { title: string; description: string }[]
-  ).map((card, i) => ({ ...card, icon: cardIcons[i] }));
+  const deepFeatures = (t.raw("ai.cards") as { title: string; description: string }[]).map(
+    (card, i) => ({ ...card, icon: cardIcons[i] }),
+  );
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -93,12 +94,7 @@ export default function AiContentMakerPage() {
 
           {/* Hero Section */}
           <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-            <motion.div
-              variants={fadeInUp}
-              initial="hidden"
-              animate="visible"
-              className="max-w-xl"
-            >
+            <motion.div variants={fadeInUp} initial="hidden" animate="visible" className="max-w-xl">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-[#94C748]/10 px-4 py-1.5 text-xs font-semibold text-[#1E280E] border border-[#94C748]/20">
                 <Sparkles className="h-3 w-3 text-[#94C748]" />
                 {t("ai.badge")}
@@ -106,9 +102,7 @@ export default function AiContentMakerPage() {
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
                 {t("ai.title")}
               </h1>
-              <p className="mt-6 text-lg text-[#535862] leading-relaxed">
-                {t("ai.description")}
-              </p>
+              <p className="mt-6 text-lg text-[#535862] leading-relaxed">{t("ai.description")}</p>
 
               {/* Checkmarks */}
               <div className="mt-8 space-y-4">
@@ -178,7 +172,7 @@ export default function AiContentMakerPage() {
           {/* Deep Feature List */}
           <div className="mt-28">
             <h2 className="text-3xl font-bold text-[#1E280E] text-center mb-16">
-              {t('ai.deepTitle')}
+              {t("ai.deepTitle")}
             </h2>
 
             <motion.div
@@ -198,13 +192,18 @@ export default function AiContentMakerPage() {
                     <feat.icon className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-bold text-[#1E280E]">{feat.title}</h3>
-                  <p className="mt-3 text-sm text-[#535862] leading-relaxed">
-                    {feat.description}
-                  </p>
+                  <p className="mt-3 text-sm text-[#535862] leading-relaxed">{feat.description}</p>
                 </motion.div>
               ))}
             </motion.div>
           </div>
+
+          {/* SEO Content FAQ Section */}
+          <SeoFaqSection
+            pageKey="ai-content-maker"
+            className="pt-16 sm:pt-24 pb-0"
+            containerClassName="px-0"
+          />
         </div>
       </main>
 

@@ -7,12 +7,14 @@ import { ConnectSection } from "@/components/ConnectSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { ImageShowcaseSection } from "@/components/ImageShowcaseSection";
 import { VideoShowcaseSection } from "@/components/VideoShowcaseSection";
+import { SeoFaqSection } from "@/components/SeoFaqSection";
 import { CtaSection } from "@/components/CtaSection";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { SCROLL_UP_THRESHOLD, SITE } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { localeAlternates, softwareApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { getSeoData } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -23,7 +25,14 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam } = await params;
-  return { alternates: localeAlternates(resolveLocale(localeParam), "/") };
+  const locale = resolveLocale(localeParam);
+  const seo = getSeoData("home", locale);
+  return {
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    keywords: seo.keywords,
+    alternates: localeAlternates(locale, "/"),
+  };
 }
 
 export default async function Home({ params }: Props) {
@@ -55,6 +64,7 @@ export default async function Home({ params }: Props) {
         <HowItWorksSection />
         <ImageShowcaseSection />
         <VideoShowcaseSection />
+        <SeoFaqSection pageKey="home" />
         <CtaSection />
       </main>
       <Footer />

@@ -8,6 +8,7 @@ import { useTranslations } from "next-intl";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FeatureNavSection } from "@/components/FeatureNavSection";
+import { SeoFaqSection } from "@/components/SeoFaqSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 import { Link } from "@/i18n/navigation";
@@ -189,6 +190,13 @@ export function FeatureDetailLayout({
               ))}
             </motion.div>
           </div>
+
+          {/* SEO Content FAQ Section */}
+          <SeoFaqSection
+            pageKey={id === "aiImage" ? "ai-image" : "ai-video"}
+            className="pt-16 sm:pt-24 pb-0"
+            containerClassName="px-0"
+          />
         </div>
       </main>
 

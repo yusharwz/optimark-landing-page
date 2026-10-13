@@ -5,8 +5,11 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { CheckVerified02, ChevronRight } from "@untitledui/icons";
 import { BlogArticle } from "@/components/BlogArticle";
+import { BlogBanner } from "@/components/BlogBanner";
 import { BlogCard } from "@/components/BlogCard";
+import { BlogCommentSection } from "@/components/BlogCommentSection";
 import { BlogPersonAvatar } from "@/components/BlogPersonAvatar";
+import { BlogSocialShare } from "@/components/BlogSocialShare";
 import { BlogToc } from "@/components/BlogToc";
 import { ReadingProgress } from "@/components/ReadingProgress";
 import { Reveal } from "@/components/motion/Reveal";
@@ -14,6 +17,7 @@ import { Link } from "@/i18n/navigation";
 import {
   authorHref,
   blogCategoryHref,
+  blogHref,
   blogTagHref,
   getBlogPost,
   getRelatedPosts,
@@ -24,6 +28,7 @@ import {
 } from "@/config/blog";
 import { formatBlogDate } from "@/lib/blog";
 import { resolveLocale } from "@/lib/locale";
+import { localizedUrl } from "@/lib/seo";
 import { cx } from "@/utils/cx";
 
 const ARTICLE_ID = "blog-article";
@@ -47,6 +52,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
   const tags = post.tags;
   const authorName = tPeople(`authors.${post.author}.name`);
   const reviewerName = tPeople(`reviewers.${post.reviewer}.name`);
+  const shareUrl = localizedUrl(locale, blogHref(slug));
 
   return (
     <>
@@ -141,30 +147,35 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
               </dl>
             </div>
 
-            <div className="flex flex-wrap gap-4 sm:gap-8">
-              <Byline
-                label={tPost("writtenBy")}
-                href={authorHref(post.author)}
-                person={post.author}
-                name={authorName}
-              />
-              <Byline
-                label={tPost("reviewedBy")}
-                href={reviewerHref(post.reviewer)}
-                person={post.reviewer}
-                name={reviewerName}
-                kind="reviewer"
-                badge={<ExpertBadge label={tPost("expertReviewer")} />}
-              />
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-[#E9EAEB] pt-6">
+              <div className="flex flex-wrap gap-4 sm:gap-8">
+                <Byline
+                  label={tPost("writtenBy")}
+                  href={authorHref(post.author)}
+                  person={post.author}
+                  name={authorName}
+                />
+                <Byline
+                  label={tPost("reviewedBy")}
+                  href={reviewerHref(post.reviewer)}
+                  person={post.reviewer}
+                  name={reviewerName}
+                  kind="reviewer"
+                  badge={<ExpertBadge label={tPost("expertReviewer")} />}
+                />
+              </div>
+              <BlogSocialShare url={shareUrl} title={title} variant="compact" />
             </div>
           </div>
         </div>
       </section>
 
       <section className="relative pb-16 pt-6 sm:pt-10">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-[minmax(12.75rem,1fr)_minmax(0,42.5rem)_minmax(0,1fr)] lg:gap-x-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-[minmax(12rem,1fr)_minmax(0,42.5rem)_minmax(4.5rem,1fr)] lg:gap-x-8 xl:gap-x-12 2xl:gap-x-16">
           <aside className="hidden lg:block">
-            <BlogToc slug={slug} className="sticky top-28" />
+            <div className="sticky top-28 flex flex-col gap-6">
+              <BlogToc slug={slug} />
+            </div>
           </aside>
 
           <div className="mx-auto flex max-w-170 flex-col gap-8 lg:mx-0 lg:max-w-none">
@@ -184,6 +195,10 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
             <article id={ARTICLE_ID}>
               <BlogArticle slug={slug} />
             </article>
+
+            <BlogSocialShare url={shareUrl} title={title} variant="default" className="my-2" />
+
+            <BlogBanner className="my-2" />
 
             <footer className="flex flex-col gap-8 border-t border-[#E9EAEB] pt-8">
               <div className="flex flex-col gap-4">
@@ -227,8 +242,20 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                   </ul>
                 </div>
               )}
+
+              {/* Comments Section (AC-01) */}
+              <div className="border-t border-[#E9EAEB] pt-8">
+                <BlogCommentSection slug={slug} />
+              </div>
             </footer>
           </div>
+
+          {/* Right Column: Sticky Vertical Share Dock (Image 3) */}
+          <aside className="hidden lg:block">
+            <div className="sticky top-28 flex flex-col items-center">
+              <BlogSocialShare url={shareUrl} title={title} variant="vertical-dock" />
+            </div>
+          </aside>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { FeatureNavSection } from "@/components/FeatureNavSection";
+import { SeoFaqSection } from "@/components/SeoFaqSection";
 import { InteractiveDotGrid } from "@/components/InteractiveDotGrid";
 import {
   BarChart3,
@@ -22,9 +23,9 @@ export default function SeoAnalyzerPage() {
   const t = useTranslations("featureDetail");
   const cardIcons = [Search, FileCheck, TrendingUp];
   const checks = t.raw("seo.checks") as string[];
-  const deepFeatures = (
-    t.raw("seo.cards") as { title: string; description: string }[]
-  ).map((card, i) => ({ ...card, icon: cardIcons[i] }));
+  const deepFeatures = (t.raw("seo.cards") as { title: string; description: string }[]).map(
+    (card, i) => ({ ...card, icon: cardIcons[i] }),
+  );
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden">
@@ -78,9 +79,7 @@ export default function SeoAnalyzerPage() {
               <h1 className="mt-4 text-4xl font-bold tracking-tight text-[#1E280E] sm:text-5xl lg:text-[3.5rem] leading-tight">
                 {t("seo.title")}
               </h1>
-              <p className="mt-6 text-lg text-[#535862] leading-relaxed">
-                {t("seo.description")}
-              </p>
+              <p className="mt-6 text-lg text-[#535862] leading-relaxed">{t("seo.description")}</p>
 
               {/* Checkmarks */}
               <div className="mt-8 space-y-4">
@@ -106,7 +105,9 @@ export default function SeoAnalyzerPage() {
                   <div className="h-2.5 w-2.5 rounded-full bg-red-400" />
                   <div className="h-2.5 w-2.5 rounded-full bg-amber-400" />
                   <div className="h-2.5 w-2.5 rounded-full bg-green-400" />
-                  <span className="text-xs font-semibold text-gray-400 ml-4">optimark.io/seo-editor</span>
+                  <span className="text-xs font-semibold text-gray-400 ml-4">
+                    optimark.io/seo-editor
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-xs font-bold text-[#94C748]">
                   <Activity className="h-4 w-4 animate-pulse" />
@@ -117,7 +118,9 @@ export default function SeoAnalyzerPage() {
               {/* Body Representation of SEO Auditor */}
               <div className="my-6 space-y-4 flex-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-500">Artikel: &quot;Cara Pemasaran Digital Terbaik 2026&quot;</span>
+                  <span className="text-xs font-bold text-gray-500">
+                    Artikel: &quot;Cara Pemasaran Digital Terbaik 2026&quot;
+                  </span>
                   <span className="text-xs font-bold bg-[#94C748]/10 text-[#94C748] px-2 py-0.5 rounded-full border border-[#94C748]/20">
                     Skor: 92/100
                   </span>
@@ -125,15 +128,21 @@ export default function SeoAnalyzerPage() {
 
                 <div className="space-y-2">
                   <div className="rounded-xl border border-emerald-100 bg-emerald-50/30 p-3 text-xs flex items-center justify-between">
-                    <span className="text-emerald-700">✓ Kata kunci utama ada di judul halaman (H1)</span>
+                    <span className="text-emerald-700">
+                      ✓ Kata kunci utama ada di judul halaman (H1)
+                    </span>
                     <span className="font-semibold text-emerald-600">Terpenuhi</span>
                   </div>
                   <div className="rounded-xl border border-emerald-100 bg-emerald-50/30 p-3 text-xs flex items-center justify-between">
-                    <span className="text-emerald-700">✓ Meta deskripsi mengandung kata kunci terarah</span>
+                    <span className="text-emerald-700">
+                      ✓ Meta deskripsi mengandung kata kunci terarah
+                    </span>
                     <span className="font-semibold text-emerald-600">Terpenuhi</span>
                   </div>
                   <div className="rounded-xl border border-amber-100 bg-amber-50/30 p-3 text-xs flex items-center justify-between">
-                    <span className="text-amber-700">! Tambahkan setidaknya 2 sub-heading H2 / H3</span>
+                    <span className="text-amber-700">
+                      ! Tambahkan setidaknya 2 sub-heading H2 / H3
+                    </span>
                     <span className="font-semibold text-amber-600">Rekomendasi</span>
                   </div>
                 </div>
@@ -142,11 +151,17 @@ export default function SeoAnalyzerPage() {
               {/* Top Keywords Tracker widget */}
               <div className="rounded-xl bg-gray-50 border border-gray-100 p-4 flex items-center justify-between">
                 <div>
-                  <span className="text-[10px] uppercase font-bold text-gray-400">Target Keyword</span>
-                  <div className="text-xs font-bold text-[#1E280E] mt-0.5">&quot;digital marketing ukm&quot;</div>
+                  <span className="text-[10px] uppercase font-bold text-gray-400">
+                    Target Keyword
+                  </span>
+                  <div className="text-xs font-bold text-[#1E280E] mt-0.5">
+                    &quot;digital marketing ukm&quot;
+                  </div>
                 </div>
                 <div className="text-right">
-                  <span className="text-[10px] uppercase font-bold text-gray-400">Peringkat Est.</span>
+                  <span className="text-[10px] uppercase font-bold text-gray-400">
+                    Peringkat Est.
+                  </span>
                   <div className="text-xs font-bold text-blue-600 mt-0.5">Halaman 1 (#3)</div>
                 </div>
               </div>
@@ -176,13 +191,18 @@ export default function SeoAnalyzerPage() {
                     <feat.icon className="h-5 w-5" />
                   </div>
                   <h3 className="text-lg font-bold text-[#1E280E]">{feat.title}</h3>
-                  <p className="mt-3 text-sm text-[#535862] leading-relaxed">
-                    {feat.description}
-                  </p>
+                  <p className="mt-3 text-sm text-[#535862] leading-relaxed">{feat.description}</p>
                 </motion.div>
               ))}
             </motion.div>
           </div>
+
+          {/* SEO Content FAQ Section */}
+          <SeoFaqSection
+            pageKey="seo-analyzer"
+            className="pt-16 sm:pt-24 pb-0"
+            containerClassName="px-0"
+          />
         </div>
       </main>
 

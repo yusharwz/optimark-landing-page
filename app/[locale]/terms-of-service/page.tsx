@@ -3,6 +3,8 @@ import { TermsOfServiceView } from "@/components/TermsOfServiceView";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
+import { localeAlternates } from "@/lib/seo";
+import { getSeoKeywords } from "@/config/seo";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,6 +24,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    keywords: getSeoKeywords("terms-of-service", locale),
+    alternates: localeAlternates(locale, "/terms-of-service"),
     openGraph: {
       title: t("title"),
       description: t("description"),

@@ -18,6 +18,19 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
   const locale = useLocale();
   const pathname = usePathname();
 
+  const getTargetHref = (targetLocale: "id" | "en") => {
+    if (targetLocale === "en") {
+      if (pathname === "/perencana-konten" || pathname === "/features/perencana-konten") {
+        return "/en/content-planner";
+      }
+    } else {
+      if (pathname === "/content-planner" || pathname === "/features/content-planner") {
+        return "/perencana-konten";
+      }
+    }
+    return getPathname({ href: pathname, locale: targetLocale });
+  };
+
   return (
     <fieldset
       className={cx(
@@ -29,7 +42,7 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
       {routing.locales.map((loc) => (
         <a
           key={loc}
-          href={getPathname({ href: pathname, locale: loc })}
+          href={getTargetHref(loc)}
           hrefLang={loc}
           aria-label={t(loc)}
           aria-current={locale === loc ? "true" : undefined}

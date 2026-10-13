@@ -5,8 +5,17 @@ import { GET_STARTED_URL, SITE, SITE_URL, SOCIAL_LINKS } from "@/config/site";
 
 /** Absolute URL of `path` (no locale prefix) in `locale`. */
 export function localizedUrl(locale: AppLocale, path: string): string {
+  if (
+    path === "/perencana-konten" ||
+    path === "/content-planner" ||
+    path === "/features/perencana-konten" ||
+    path === "/features/content-planner"
+  ) {
+    return locale === "en" ? `${SITE_URL}/en/content-planner` : `${SITE_URL}/perencana-konten`;
+  }
+  const cleanPath = path.startsWith("/features/") ? path.replace("/features/", "/") : path;
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
-  const suffix = path === "/" ? "" : path;
+  const suffix = cleanPath === "/" ? "" : cleanPath;
   return `${SITE_URL}${prefix}${suffix}`;
 }
 

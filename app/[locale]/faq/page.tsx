@@ -1,8 +1,20 @@
+import { notFound } from "next/navigation";
+
+/**
+ * TEMP DISABLED: Halaman FAQ dinonaktifkan sementara agar menghasilkan 404.
+ * Kode asli dipertahankan di bawah dalam bentuk komentar agar mudah diaktifkan kembali.
+ */
+export default function FaqPage() {
+  notFound();
+}
+
+/*
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { breadcrumbJsonLd, faqPageJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
+import { getSeoKeywords } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { FaqSection } from "@/components/FaqSection";
@@ -12,7 +24,6 @@ type Props = {
   params: Promise<{ locale: string }>;
 };
 
-/** Same questions, in the same order, as components/FaqSection.tsx renders. */
 const FAQ_NUMBERS = [1, 2, 3, 4, 5] as const;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,6 +40,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    keywords: getSeoKeywords("faq", locale),
     alternates: localeAlternates(locale, "/faq"),
     openGraph: {
       title: t("title"),
@@ -53,7 +65,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function FaqPage({ params }: Props) {
+export async function OriginalFaqPage({ params }: Props) {
   const { locale: localeParam } = await params;
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
@@ -90,3 +102,4 @@ export default async function FaqPage({ params }: Props) {
     </div>
   );
 }
+*/

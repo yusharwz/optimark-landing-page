@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { SITE, SOCIAL_LINKS } from "@/config/site";
 import { Link } from "@/i18n/navigation";
 import { ALL_FEATURE_IDS, featureHref } from "@/config/features";
@@ -12,6 +12,7 @@ const FOOTER_GRADIENT = "linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(24
 export function Footer() {
   const t = useTranslations("footer");
   const tf = useTranslations("features");
+  const locale = useLocale();
 
   return (
     <footer
@@ -91,7 +92,7 @@ export function Footer() {
                 {ALL_FEATURE_IDS.map((id) => (
                   <li key={id}>
                     <Link
-                      href={featureHref(id)}
+                      href={featureHref(id, locale)}
                       className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                     >
                       {tf(`items.${id}.title`)}
@@ -119,14 +120,14 @@ export function Footer() {
                     {t("links.pricing")}
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     href="/faq"
                     className="text-sm text-[#535862] transition-colors hover:text-[#1E280E]"
                   >
                     {t("links.faq")}
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link
                     href="/blog"

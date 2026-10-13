@@ -62,11 +62,10 @@ export const BLOG_SECTION_ORDER: readonly BlogCategoryId[] = [
 ];
 
 export const BLOG_BANNER = {
-  /** PLACEHOLDER image until the final banner design lands; keep it 820x200. */
-  image: "/images/blog/banner.png",
-  width: 820,
-  height: 200,
-  href: "/features/seo-analyzer",
+  image: "/images/blog/banner.webp",
+  width: 2048,
+  height: 683,
+  href: "https://app.optimark.ai/login",
 } as const;
 
 export const BLOG_CATEGORY_ICONS: Record<BlogCategoryId, LucideIcon> = {

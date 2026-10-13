@@ -9,6 +9,7 @@ import {
   localizedUrl,
   webPageJsonLd,
 } from "@/lib/seo";
+import { getSeoKeywords } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 // import { PricingSection } from "@/components/PricingSection"; // TEMP — restore setelah launch
@@ -34,6 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: t("title"),
     description: t("description"),
+    keywords: getSeoKeywords("pricing", locale),
     alternates: localeAlternates(locale, "/pricing"),
     openGraph: {
       title: t("title"),

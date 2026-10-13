@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { SearchMd } from "@untitledui/icons";
@@ -9,9 +8,9 @@ import { BlogCard } from "@/components/BlogCard";
 import { Button } from "@/components/base/buttons/button";
 import { Input } from "@/components/base/input/input";
 import { Reveal } from "@/components/motion/Reveal";
+import { BlogBanner } from "@/components/BlogBanner";
 import { Link } from "@/i18n/navigation";
 import {
-  BLOG_BANNER,
   BLOG_CATEGORY_IDS,
   BLOG_POSTS,
   BLOG_SECTION_ORDER,
@@ -218,7 +217,7 @@ export function BlogIndexSection({
                   locale={locale}
                   eagerFirstRow
                 />
-                <Banner />
+                <BlogBanner />
                 {BLOG_SECTION_ORDER.map((id) => {
                   const posts = BLOG_POSTS.filter((post) => post.category === id);
                   if (posts.length === 0) return null;
@@ -264,25 +263,6 @@ export function BlogIndexSection({
         </div>
       </div>
     </section>
-  );
-}
-
-function Banner() {
-  const t = useTranslations("blog");
-  return (
-    <Link
-      href={BLOG_BANNER.href}
-      className="block overflow-hidden rounded-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
-    >
-      <Image
-        src={BLOG_BANNER.image}
-        alt={t("bannerAlt")}
-        width={BLOG_BANNER.width}
-        height={BLOG_BANNER.height}
-        sizes="(min-width: 1024px) 820px, 100vw"
-        className="h-50 w-full object-cover transition-opacity duration-200 hover:opacity-95"
-      />
-    </Link>
   );
 }
 

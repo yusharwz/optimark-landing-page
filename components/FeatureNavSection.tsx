@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
@@ -117,13 +117,14 @@ type FeatureCardProps = {
 };
 
 function FeatureCard({ id, category, tf }: FeatureCardProps) {
+  const locale = useLocale();
   const Icon = ALL_FEATURE_ICONS[id];
   const videoRef = useRef<HTMLVideoElement>(null);
 
   return (
     <Link
       data-card
-      href={featureHref(id)}
+      href={featureHref(id, locale)}
       onMouseEnter={() => videoRef.current?.play().catch(() => {})}
       onMouseLeave={() => videoRef.current?.pause()}
       className="group w-[78%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-4 rounded-2xl"

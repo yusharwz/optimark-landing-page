@@ -64,9 +64,27 @@ export const ALL_FEATURE_ICONS: Record<AnyFeatureId, LucideIcon> = {
   ...EXTRA_FEATURE_ICONS,
 };
 
+export const FEATURE_ROUTES_BY_LOCALE: Record<string, Record<AnyFeatureId, string>> = {
+  id: {
+    ai: "ai-content-maker",
+    perencana: "perencana-konten",
+    seo: "seo-analyzer",
+    aiImage: "ai-image",
+    aiVideo: "ai-video",
+  },
+  en: {
+    ai: "ai-content-maker",
+    perencana: "content-planner",
+    seo: "seo-analyzer",
+    aiImage: "ai-image",
+    aiVideo: "ai-video",
+  },
+};
+
 /** Locale-aware href for a feature's detail page. */
-export function featureHref(id: AnyFeatureId): string {
-  return `/features/${ALL_FEATURE_ROUTES[id]}`;
+export function featureHref(id: AnyFeatureId, locale: string = "id"): string {
+  const routes = FEATURE_ROUTES_BY_LOCALE[locale] ?? FEATURE_ROUTES_BY_LOCALE.id;
+  return `/${routes[id]}`;
 }
 
 /**

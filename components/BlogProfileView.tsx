@@ -243,7 +243,7 @@ function HistorySection({ title, entries }: { title: string; entries: HistoryEnt
           >
             {entries.map((entry, index) => (
               <li
-                key={`${entry.title}-${entry.period}`}
+                key={`${entry.title}-${entry.org}-${entry.period || index}`}
                 className={cx("flex items-center gap-3", index === 0 ? "pt-4" : "pt-5")}
               >
                 <span className="relative flex size-11.5 shrink-0 items-center justify-center overflow-hidden rounded-[10px] bg-[#F5F5F5]">
@@ -261,8 +261,12 @@ function HistorySection({ title, entries }: { title: string; entries: HistoryEnt
                   </p>
                   <p className="flex flex-wrap items-center gap-x-2 text-sm tracking-tight text-[#535862]">
                     <span>{entry.org}</span>
-                    <span aria-hidden className="h-1 w-1 rounded-full bg-[#A4A7AE]" />
-                    <span>{entry.period}</span>
+                    {entry.period ? (
+                      <>
+                        <span aria-hidden className="h-1 w-1 rounded-full bg-[#A4A7AE]" />
+                        <span>{entry.period}</span>
+                      </>
+                    ) : null}
                   </p>
                 </div>
               </li>

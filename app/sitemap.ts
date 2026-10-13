@@ -24,17 +24,17 @@ import {
 const ROUTES = [
   "",
   "/pricing",
-  "/faq",
+  // "/faq", // TEMP DISABLED — 404
   "/blog",
   "/about",
   "/contact",
   "/privacy-policy",
   "/terms-of-service",
-  "/features/ai-content-maker",
-  "/features/perencana-konten",
-  "/features/seo-analyzer",
-  "/features/ai-image",
-  "/features/ai-video",
+  "/ai-content-maker",
+  "/perencana-konten",
+  "/seo-analyzer",
+  "/ai-image",
+  "/ai-video",
   // Post URLs come from config/blog.ts, so a new post lands in the sitemap
   // without a second edit here.
   ...BLOG_CATEGORY_IDS.map(blogCategoryHref),

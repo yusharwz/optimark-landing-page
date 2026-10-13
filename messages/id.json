@@ -1,23 +1,23 @@
 {
   "metadata": {
-    "title": "OPTIMARK - Platform All-in-One Digital Marketing",
-    "description": "Semua tools digital marketing dalam satu platform. Jadwalkan konten, tingkatkan visibilitas SEO, optimalkan iklan, dan buat konten lebih cepat dengan bantuan AI."
+    "title": "Optimark - Platform AI Digital Marketing All-in-One",
+    "description": "Optimark membantu bisnis mengelola SEO, content marketing, media sosial, serta visual content dengan AI dalam satu platform digital marketing."
   },
   "privacyMetadata": {
-    "title": "Kebijakan Privasi - OPTIMARK",
-    "description": "Kebijakan Privasi Optimark - Pelajari bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda."
+    "title": "Kebijakan Privasi Optimark - Perlindungan Data Pengguna",
+    "description": "Pelajari kebijakan Optimark dalam mengumpulkan, menggunakan, dan melindungi data pribadi serta informasi pengguna."
   },
   "termsMetadata": {
-    "title": "Ketentuan Layanan - OPTIMARK",
-    "description": "Ketentuan Layanan Optimark - Syarat dan ketentuan yang mengatur penggunaan Anda atas platform Optimark."
+    "title": "Syarat dan Ketentuan Optimark - Ketentuan Layanan",
+    "description": "Pelajari syarat dan ketentuan penggunaan Optimark, termasuk layanan, langganan, token, hak pengguna, dan tanggung jawab dalam menggunakan platform."
   },
   "pricingMetadata": {
-    "title": "Harga Token - OPTIMARK",
-    "description": "Beli paket token Optimark sesuai kebutuhan bisnis Anda tanpa berlangganan bulanan. Dapatkan akses ke Perencana Konten AI, SEO Analyzer, Ads Manager, dan banyak lagi."
+    "title": "Harga & Paket Optimark untuk Digital Marketing | Optimark",
+    "description": "Pilih paket Optimark sesuai kebutuhan bisnis Anda untuk mengelola SEO, konten, media sosial, gambar, dan video berbasis AI dalam satu platform."
   },
   "pricingTrialMetadata": {
-    "title": "Harga - OPTIMARK",
-    "description": "Mulai dengan free trial dan dapatkan akses penuh ke semua fitur AI OPTIMARK - perencanaan konten, SEO, iklan, serta pembuatan gambar dan video."
+    "title": "Harga & Paket Optimark untuk Digital Marketing | Optimark",
+    "description": "Pilih paket Optimark sesuai kebutuhan bisnis Anda untuk mengelola SEO, konten, media sosial, gambar, dan video berbasis AI dalam satu platform."
   },
   "pricingTrial": {
     "badge": "Uji Coba Gratis",
@@ -44,20 +44,20 @@
     "contactCta": "Hubungi kami"
   },
   "faqMetadata": {
-    "title": "Pertanyaan yang Sering Diajukan - OPTIMARK",
-    "description": "Temukan jawaban atas pertanyaan yang sering diajukan tentang Optimark — fitur, harga, integrasi, dan cara memulai."
+    "title": "Pertanyaan Seputar Platform Digital Marketing AI - Optimark",
+    "description": "Temukan jawaban atas pertanyaan umum seputar fitur, harga, dan cara penggunaan platform Optimark."
   },
   "blogMetadata": {
-    "title": "Blog - OPTIMARK",
-    "description": "Panduan praktis soal SEO, konten media sosial, dan biaya produksi konten. Ditulis untuk tim pemasaran dan pemilik usaha."
+    "title": "Blog Optimark | Tips & Strategi Digital Marketing",
+    "description": "Temukan tips dan strategi digital marketing untuk bisnis, mulai dari SEO, content marketing, social media, hingga visual content berbasis AI."
   },
   "aboutMetadata": {
-    "title": "Tentang Kami - OPTIMARK",
-    "description": "OPTIMARK adalah platform digital marketing all-in-one berbasis AI yang dikembangkan oleh UKI — dibuat untuk membantu bisnis menyederhanakan dan meningkatkan pemasaran digitalnya."
+    "title": "Tentang Optimark - Platform AI Digital Marketing All-in-One",
+    "description": "Optimark adalah platform AI digital marketing all-in-one yang membantu bisnis mengelola SEO, konten, media sosial, gambar, dan video dalam satu platform."
   },
   "contactMetadata": {
-    "title": "Hubungi Kami - OPTIMARK",
-    "description": "Kirim pertanyaan soal fitur, harga token, atau kebutuhan tim Anda ke tim support Optimark. Atau hubungi kami langsung lewat WhatsApp, email, dan media sosial."
+    "title": "Kontak Optimark - Hubungi Tim Marketing Kami",
+    "description": "Hubungi tim Optimark untuk pertanyaan produk, dukungan, kerja sama bisnis, atau kebutuhan digital marketing Anda."
   },
   "productOverviewMetadata": {
     "title": "Product Overview - OPTIMARK",
@@ -502,11 +502,7 @@
       "Mau coba juga? Cek link di bio! 👆"
     ],
     "hashtags": "#FlimtyFiber #FlimtyID #HidupSehat #FiberHarian #PencernaanLancar #MorningRoutine #BodyGoals",
-    "refineChips": [
-      "Lebih pendek",
-      "Lebih persuasif",
-      "Tambah hashtag"
-    ],
+    "refineChips": ["Lebih pendek", "Lebih persuasif", "Tambah hashtag"],
     "apply": "Terapkan"
   },
   "bestTimeModal": {
@@ -672,7 +668,17 @@
       "tags": "Tag",
       "relatedTitle": "Artikel Terkait",
       "viewProfile": "Lihat profil {name}",
-      "readingProgress": "Progres membaca"
+      "readingProgress": "Progres membaca",
+      "share": {
+        "title": "Bagikan artikel ini",
+        "facebook": "Bagikan ke Facebook",
+        "twitter": "Bagikan ke X",
+        "linkedin": "Bagikan ke LinkedIn",
+        "email": "Bagikan via Email",
+        "copy": "Salin tautan",
+        "copied": "Tautan tersalin!",
+        "titleCopied": "Judul disalin ke clipboard! (Ctrl+V)"
+      }
     },
     "profile": {
       "breadcrumbHome": "Beranda",
@@ -726,7 +732,7 @@
         "metaDescription": "Panduan konten visual untuk UMKM: foto produk dengan AI, warna feed Instagram yang konsisten, dan video promosi singkat dari smartphone."
       }
     },
-    "bannerAlt": "Coba SEO Analyzer Optimark untuk cek SEO website Anda",
+    "bannerAlt": "Optimark - Buat Akun Sekarang dan Klaim Free Token untuk Eksplor Fitur AI",
     "tags": {
       "riset-keyword": "Riset Keyword",
       "seo-lokal": "SEO Lokal",
@@ -763,7 +769,34 @@
     "articleCount": "{count} Artikel",
     "tagMetaTitle": "{tag} - Arsip Artikel Blog OPTIMARK",
     "tagMetaDescription": "Kumpulan artikel blog Optimark dengan tag {tag}: panduan digital marketing praktis untuk UMKM dan bisnis lokal.",
-    "popularTags": "Tag populer"
+    "popularTags": "Tag populer",
+    "comments": {
+      "title": "Komentar",
+      "count": "{count, plural, =0 {Belum ada komentar} =1 {1 Komentar} other {# Komentar}}",
+      "empty": "Belum ada komentar. Jadilah yang pertama memberikan tanggapan!",
+      "formTitle": "Tulis Komentar",
+      "formSubtitle": "Alamat email Anda tidak akan dipublikasikan. Kolom wajib ditandai *",
+      "nameLabel": "Nama Lengkap *",
+      "namePlaceholder": "Nama",
+      "emailLabel": "Alamat Email *",
+      "emailPlaceholder": "Email",
+      "websiteLabel": "Website (Opsional)",
+      "websitePlaceholder": "Website",
+      "commentLabel": "Komentar *",
+      "commentPlaceholder": "Tulis komentar Anda di sini...",
+      "submit": "Kirim Komentar",
+      "submitting": "Mengirim...",
+      "moderationNotice": "Komentar akan melalui moderasi tim editorial sebelum ditampilkan. Tautan otomatis diberi atribut rel=\"ugc nofollow\".",
+      "pendingBadge": "Menunggu Moderasi",
+      "pendingAlert": "Komentar Anda telah terkirim dan sedang menunggu moderasi tim editorial sebelum ditampilkan ke publik.",
+      "reply": "Balas",
+      "charactersRemaining": "{remaining} karakter tersisa",
+      "errorRequired": "Nama, email, dan isi komentar wajib diisi.",
+      "errorEmail": "Format alamat email tidak valid.",
+      "errorGeneric": "Gagal mengirim komentar. Silakan coba beberapa saat lagi.",
+      "saveDataLabel": "Simpan nama, email, dan website saya untuk komentar berikutnya.",
+      "like": "Suka"
+    }
   },
   "about": {
     "hero": {
@@ -916,7 +949,7 @@
       "jonathan-anderson": {
         "name": "Jonathan Anderson T.",
         "fullName": "Jonathan Anderson Tjitrabudi, S.E.",
-        "position": "SEO Lead",
+        "position": "SEO Lead & Editorial Reviewer",
         "experience": [
           {
             "title": "SEO Lead",
@@ -925,34 +958,40 @@
             "logo": "/images/blog/people/logos/usaha-kreatif.png"
           },
           {
-            "title": "Digital Project Consultant",
-            "org": "Sribu",
+            "title": "Digital Client Solutions Manager",
+            "org": "PT Sribu Digital Kreatif",
             "period": "2023 - 2025",
             "logo": "/images/blog/people/logos/sribu.png"
           },
           {
             "title": "SEO Specialist",
-            "org": "MNC Media",
+            "org": "MNC Group",
             "period": "2021 - 2023",
             "logo": "/images/blog/people/logos/mnc-media.png"
           },
           {
-            "title": "Marketing Property",
-            "org": "MNC Media",
+            "title": "Lead Marketing",
+            "org": "PT. Citra Jasa Andalan",
             "period": "2019 - 2020",
             "logo": "/images/blog/people/logos/cj-pro.png"
           }
         ],
         "education": [
           {
-            "title": "Sarjana Human Resources Management",
+            "title": "Bachelor’s in Management",
             "org": "Sanata Dharma University",
             "period": "2015 - 2019",
             "logo": "/images/blog/people/logos/sanata-dharma.png"
+          },
+          {
+            "title": "Digital Marketing (SEO Specialist)",
+            "org": "Purwadhika Digital Technology School",
+            "period": "",
+            "logo": "/images/blog/people/logos/purwadhika.png"
           }
         ],
         "role": "SEO Lead & Editorial Reviewer",
-        "bio": "Jonathan Anderson adalah SEO Lead dan Editorial Reviewer di Optimark yang berfokus pada strategi SEO, content marketing, AI-driven search, dan digital marketing. Ia memiliki pengalaman dalam mengembangkan strategi organic search, technical SEO, content strategy, serta optimasi konten untuk search engine dan AI-powered search.\n\nSebagai Editorial Reviewer, Jonathan meninjau konten Optimark dari sisi SEO, search intent, content quality, AEO, GEO, topical relevance, dan E-E-A-T sebelum dipublikasikan. Perannya memastikan konten yang diterbitkan akurat, relevan, mudah dipahami, dan mengikuti praktik SEO serta standar editorial yang baik.",
+        "bio": "Jonathan Anderson adalah SEO Lead dan Editorial Reviewer di Optimark yang berfokus pada strategi SEO, content strategy, dan perkembangan AI-driven search. Ia memiliki pengalaman dalam mengembangkan strategi organic search, technical SEO, content marketing, serta optimasi konten untuk meningkatkan visibilitas dan relevansi website di mesin pencari.\n\nSebagai Editorial Reviewer, ia bertanggung jawab meninjau dan mengevaluasi konten Optimark sebelum dipublikasikan. Proses review mencakup search intent, struktur dan kualitas konten, topical relevance, on-page SEO, serta penerapan strategi AEO dan GEO untuk menyesuaikan konten dengan perkembangan pencarian berbasis AI.\n\nDalam menjalankan perannya, ia menggabungkan pendekatan SEO dengan pemahaman terhadap kebutuhan pengguna dan kualitas informasi. Fokusnya adalah memastikan setiap konten yang diterbitkan Optimark memiliki informasi yang akurat, relevan, terstruktur dengan baik, dan memberikan nilai nyata bagi pembaca.",
         "expertise": [
           "SEO",
           "Technical SEO",
@@ -1102,5 +1141,54 @@
       ],
       "linkLabel": "Lihat tarif token lengkap"
     }
+  },
+  "featuresMetadata": {
+    "title": "Fitur Optimark - Tools SEO, Konten, dan Scheduling Berbasis AI",
+    "description": "Jelajahi fitur Optimark mulai dari riset SEO, pembuatan konten otomatis, penjadwalan, hingga publishing dalam satu platform AI."
+  },
+  "featureSeoMetadata": {
+    "ai": {
+      "title": "AI Content Maker - Buat Konten Otomatis dengan AI | Optimark",
+      "description": "Buat artikel, copy marketing, caption, dan ide konten dengan AI Content Maker Optimark. Sesuaikan konten dengan kebutuhan dan gaya brand Anda."
+    },
+    "perencana": {
+      "title": "Perencanaan Konten - Atur Jadwal Konten dengan AI | Optimark",
+      "description": "Rencanakan dan kelola konten media sosial dengan lebih teratur menggunakan Optimark dalam satu platform untuk mendukung aktivitas marketing bisnis."
+    },
+    "seo": {
+      "title": "AI SEO Analyzer - Audit SEO Website dengan AI | Optimark",
+      "description": "Audit SEO website, riset kata kunci, dan temukan peluang optimasi dengan AI SEO Analyzer Optimark untuk membantu meningkatkan performa traffic organik."
+    },
+    "aiImage": {
+      "title": "AI Image Generator - Buat Gambar dengan AI | Optimark",
+      "description": "Buat gambar dengan AI untuk kebutuhan konten dan marketing. AI Image Optimark membantu mengubah ide menjadi gambar sesuai kebutuhan bisnis Anda."
+    },
+    "aiVideo": {
+      "title": "AI Video Generator - Buat Video dengan AI | Optimark",
+      "description": "Buat video dengan AI untuk kebutuhan konten dan marketing bisnis. AI Video Optimark membantu mengubah ide menjadi video yang siap digunakan."
+    }
+  },
+  "notFound": {
+    "badge": "404 Error",
+    "title": "Halaman Tidak Ditemukan",
+    "subtitle": "Oops! Halaman yang Anda cari mungkin telah dipindahkan, dihapus, atau tautan yang Anda tuju salah.",
+    "description": "Jangan khawatir, Anda dapat kembali ke beranda Optimark atau menjelajahi fitur dan artikel blog kami di bawah ini.",
+    "backHome": "Kembali ke Beranda",
+    "backHomeEn": "Back to Homepage",
+    "visitBlog": "Kunjungi Blog",
+    "exploreFeatures": "Jelajahi Fitur",
+    "quickLinksTitle": "Navigasi Cepat:",
+    "switchLanguage": "Lihat dalam Bahasa Inggris (Switch to English)",
+    "links": {
+      "home": "Beranda",
+      "features": "Fitur AI",
+      "pricing": "Harga & Paket",
+      "blog": "Artikel Blog",
+      "faq": "Tanya Jawab (FAQ)",
+      "about": "Tentang Kami",
+      "contact": "Hubungi Kami"
+    },
+    "metaTitle": "404 — Halaman Tidak Ditemukan | Optimark",
+    "metaDescription": "Halaman yang Anda tuju tidak ditemukan. Kembali ke beranda Optimark untuk menjelajahi platform otomasi konten dan pemasaran AI terdepan."
   }
 }

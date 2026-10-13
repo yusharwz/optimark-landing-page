@@ -1,7 +1,6 @@
 "use client";
-
 import { useRef } from "react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import {
   EXTRA_FEATURE_ICONS,
   EXTRA_FEATURE_IDS,
@@ -26,6 +25,7 @@ const FEATURED_ID: FeatureId = "ai";
 
 export function BentoFeaturesSection() {
   const t = useTranslations("features");
+  const locale = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Featured tile first so the grid places it in the tall left column.
@@ -213,7 +213,7 @@ export function BentoFeaturesSection() {
                 illustration={illustration}
                 featured={id === FEATURED_ID}
                 highlight={id === "ai"}
-                href={featureHref(id)}
+                href={featureHref(id, locale)}
                 ctaLabel={t("learnMore")}
                 className={cx(id === FEATURED_ID ? "lg:row-span-2" : undefined, `bento-card-${id}`)}
               />
@@ -232,7 +232,7 @@ export function BentoFeaturesSection() {
               description={t(`items.${id}.description`)}
               badge={t("availableNow")}
               showcase={id === "aiImage" ? <AiImageShowcase /> : <AiVideoShowcase />}
-              href={featureHref(id)}
+              href={featureHref(id, locale)}
               ctaLabel={t("learnMore")}
             />
           ))}

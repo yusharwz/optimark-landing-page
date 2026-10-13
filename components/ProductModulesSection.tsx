@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/motion/Reveal";
 import { Link } from "@/i18n/navigation";
@@ -13,6 +13,7 @@ import { ALL_FEATURE_ICONS, ALL_FEATURE_IDS, featureHref } from "@/config/featur
 export function ProductModulesSection() {
   const t = useTranslations("productOverview.modules");
   const tf = useTranslations("features");
+  const locale = useLocale();
 
   return (
     <section className="relative py-20 lg:py-24">
@@ -37,7 +38,7 @@ export function ProductModulesSection() {
             return (
               <Link
                 key={id}
-                href={featureHref(id)}
+                href={featureHref(id, locale)}
                 className="group flex h-full flex-col rounded-3xl border border-gray-200/80 bg-white p-7 transition-all duration-200 hover:-translate-y-1 hover:border-[#94C748]/40 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2"
               >
                 <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#94C748]/12">
