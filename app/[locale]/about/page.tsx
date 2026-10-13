@@ -2,7 +2,13 @@ import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import { breadcrumbJsonLd, localeAlternates, localizedUrl, webPageJsonLd } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  defaultRobots,
+  localeAlternates,
+  localizedUrl,
+  webPageJsonLd,
+} from "@/lib/seo";
 import { getSeoKeywords } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
@@ -36,10 +42,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("description"),
     keywords: getSeoKeywords("about", locale),
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, "/about"),
     openGraph: {
       title: t("title"),
       description: t("description"),
+      url: localizedUrl(locale, "/about"),
       type: "website",
       images: [
         {

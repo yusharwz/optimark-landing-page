@@ -10,7 +10,7 @@ import { routing } from "@/i18n/routing";
 import { GA_MEASUREMENT_ID, GSC_VERIFICATION, GTM_ID } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl, getBaseUrl } from "@/lib/og";
-import { organizationJsonLd } from "@/lib/seo";
+import { defaultRobots, organizationJsonLd } from "@/lib/seo";
 import { getSeoData } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import "@/styles/globals.css";
@@ -96,6 +96,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     keywords: seo.keywords,
+    robots: defaultRobots(true),
     other: {
       google: "notranslate",
     },

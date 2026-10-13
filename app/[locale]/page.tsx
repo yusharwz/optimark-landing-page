@@ -13,7 +13,14 @@ import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { SCROLL_UP_THRESHOLD, SITE } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
-import { localeAlternates, softwareApplicationJsonLd, websiteJsonLd } from "@/lib/seo";
+import { buildOgImageUrl } from "@/lib/og";
+import {
+  defaultRobots,
+  localeAlternates,
+  localizedUrl,
+  softwareApplicationJsonLd,
+  websiteJsonLd,
+} from "@/lib/seo";
 import { getSeoData } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
@@ -27,11 +34,41 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam } = await params;
   const locale = resolveLocale(localeParam);
   const seo = getSeoData("home", locale);
+  const canonicalUrl = localizedUrl(locale, "/");
+  const ogImage = buildOgImageUrl({
+    title: seo.metaTitle,
+    description: seo.metaDescription,
+    locale,
+  });
+
   return {
     title: seo.metaTitle,
     description: seo.metaDescription,
     keywords: seo.keywords,
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, "/"),
+    openGraph: {
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      url: canonicalUrl,
+      type: "website",
+      images: [
+        {
+          url: ogImage,
+          secureUrl: ogImage,
+          width: 1200,
+          height: 630,
+          alt: seo.metaTitle,
+          type: "image/png",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: seo.metaTitle,
+      description: seo.metaDescription,
+      images: [ogImage],
+    },
   };
 }
 

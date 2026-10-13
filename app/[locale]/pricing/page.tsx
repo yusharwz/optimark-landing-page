@@ -5,6 +5,7 @@ import { buildOgImageUrl } from "@/lib/og";
 import {
   SOFTWARE_ID,
   breadcrumbJsonLd,
+  defaultRobots,
   localeAlternates,
   localizedUrl,
   webPageJsonLd,
@@ -36,10 +37,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("description"),
     keywords: getSeoKeywords("pricing", locale),
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, "/pricing"),
     openGraph: {
       title: t("title"),
       description: t("description"),
+      url: localizedUrl(locale, "/pricing"),
       images: [
         {
           url: ogImage,

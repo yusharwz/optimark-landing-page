@@ -3,7 +3,7 @@ import { PrivacyPolicyView } from "@/components/PrivacyPolicyView";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import { localeAlternates } from "@/lib/seo";
+import { defaultRobots, localeAlternates, localizedUrl } from "@/lib/seo";
 import { getSeoKeywords } from "@/config/seo";
 
 type Props = {
@@ -25,10 +25,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: t("title"),
     description: t("description"),
     keywords: getSeoKeywords("privacy-policy", locale),
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, "/privacy-policy"),
     openGraph: {
       title: t("title"),
       description: t("description"),
+      url: localizedUrl(locale, "/privacy-policy"),
       images: [
         {
           url: ogImage,

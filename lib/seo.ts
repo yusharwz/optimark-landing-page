@@ -33,6 +33,33 @@ export function localeAlternates(locale: AppLocale, path: string): Metadata["alt
   };
 }
 
+/**
+ * Dynamic robots configuration for optimal indexing and rich SERP snippets.
+ */
+export function defaultRobots(index: boolean = true): Metadata["robots"] {
+  if (!index) {
+    return {
+      index: false,
+      follow: true,
+      googleBot: {
+        index: false,
+        follow: true,
+      },
+    };
+  }
+  return {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  };
+}
+
 export const ORGANIZATION_ID = `${SITE_URL}/#organization`;
 export const WEBSITE_ID = `${SITE_URL}/#website`;
 export const SOFTWARE_ID = `${SITE_URL}/#software`;

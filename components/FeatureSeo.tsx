@@ -7,6 +7,7 @@ import { buildOgImageUrl } from "@/lib/og";
 import {
   SOFTWARE_ID,
   breadcrumbJsonLd,
+  defaultRobots,
   localeAlternates,
   localizedUrl,
   webPageJsonLd,
@@ -34,14 +35,18 @@ export async function featureMetadata(id: AnyFeatureId, locale: AppLocale): Prom
   const keywords = seo.keywords;
   const ogImage = buildOgImageUrl({ title, description, locale });
 
+  const canonicalUrl = localizedUrl(locale, featureHref(id, locale));
+
   return {
     title,
     description,
     keywords,
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, featureHref(id, locale)),
     openGraph: {
       title,
       description,
+      url: canonicalUrl,
       type: "website",
       images: [
         {
