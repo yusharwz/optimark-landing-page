@@ -21,9 +21,18 @@ import { PrismaClient } from "@/generated/prisma/client";
 const globalForPrisma = globalThis as unknown as { prisma?: PrismaClient };
 
 function createClient() {
-  const connectionString = process.env.DATABASE_URL;
+  let connectionString = process.env.DATABASE_URL;
   if (!connectionString) {
     throw new Error("DATABASE_URL is not set. Add it to .env.local (see .env.example).");
+  }
+  // When connection string specifies a schema (e.g. optimark_landing), ensure
+  // PostgreSQL search_path matches so enum comparisons (BlogPostStatus, Locale)
+  // resolve in the same schema without type mismatch.
+  const schemaMatch = connectionString.match(/[?&]schema=([^&]+)/);
+  if (schemaMatch && !connectionString.includes("search_path")) {
+    const schema = schemaMatch[1];
+    const separator = connectionString.includes("?") ? "&" : "?";
+    connectionString += `${separator}options=-csearch_path%3D${schema},public`;
   }
   return new PrismaClient({ adapter: new PrismaPg({ connectionString }) });
 }

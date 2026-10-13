@@ -184,3 +184,98 @@ export function listPostsByPerson(
     as === "author" ? { author: { slug } } : { reviewer: { slug } },
   );
 }
+
+export type SitemapPostRecord = {
+  slug: string;
+  updatedAt: Date;
+  publishedAt: Date;
+  contentUpdatedAt: Date | null;
+  locales: AppLocale[];
+};
+
+/**
+ * Returns all published blog post slugs with timestamps for sitemap generation.
+ * Uses text cast on status (status::text = 'PUBLISHED') for schema-agnostic robustness.
+ * Fails safely if the database is not accessible.
+ */
+export async function getPublishedPostsForSitemap(): Promise<SitemapPostRecord[]> {
+  if (!process.env.DATABASE_URL) return [];
+  try {
+    const rows = await db.$queryRaw<
+      Array<{
+        slug: string;
+        updated_at: Date;
+        published_at: Date;
+        content_updated_at: Date | null;
+      }>
+    >`
+      SELECT slug, updated_at, published_at, content_updated_at
+      FROM blog_posts
+      WHERE status::text = 'PUBLISHED'
+        AND published_at <= NOW()
+      ORDER BY published_at DESC
+    `;
+
+    return rows.map((r) => ({
+      slug: r.slug,
+      updatedAt: r.updated_at,
+      publishedAt: r.published_at ?? new Date(),
+      contentUpdatedAt: r.content_updated_at,
+      locales: ["id", "en"] as AppLocale[],
+    }));
+  } catch (err) {
+    console.warn("[sitemap] Database query failed for blog posts:", err);
+    return [];
+  }
+}
+
+/**
+ * Returns all blog category slugs from the database for sitemap generation.
+ */
+export async function getCategoriesForSitemap(): Promise<string[]> {
+  if (!process.env.DATABASE_URL) return [];
+  try {
+    const rows = await db.$queryRaw<Array<{ slug: string }>>`
+      SELECT slug
+      FROM blog_categories
+      ORDER BY sort_order ASC
+    `;
+    return rows.map((r) => r.slug);
+  } catch (err) {
+    console.warn("[sitemap] Database query failed for categories:", err);
+    return [];
+  }
+}
+
+/**
+ * Returns authors and reviewers who have at least one published post.
+ */
+export async function getPeopleForSitemap(): Promise<{
+  authors: string[];
+  reviewers: string[];
+}> {
+  if (!process.env.DATABASE_URL) return { authors: [], reviewers: [] };
+  try {
+    const authors = await db.$queryRaw<Array<{ slug: string }>>`
+      SELECT DISTINCT p.slug
+      FROM blog_people p
+      JOIN blog_posts b ON b.author_id = p.id
+      WHERE b.status::text = 'PUBLISHED'
+    `;
+
+    const reviewers = await db.$queryRaw<Array<{ slug: string }>>`
+      SELECT DISTINCT p.slug
+      FROM blog_people p
+      JOIN blog_posts b ON b.reviewer_id = p.id
+      WHERE b.status::text = 'PUBLISHED'
+    `;
+
+    return {
+      authors: authors.map((r) => r.slug),
+      reviewers: reviewers.map((r) => r.slug),
+    };
+  } catch (err) {
+    console.warn("[sitemap] Database query failed for people:", err);
+    return { authors: [], reviewers: [] };
+  }
+}

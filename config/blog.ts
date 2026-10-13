@@ -325,7 +325,7 @@ export function getPopularTags(exclude?: BlogTagId, limit = 5): BlogTagId[] {
     .map(({ id }) => id);
 }
 
-export function blogCategoryHref(id: BlogCategoryId): string {
+export function blogCategoryHref(id: BlogCategoryId | string): string {
   return `/blog/kategori/${id}`;
 }
 
@@ -333,15 +333,15 @@ export function isBlogCategoryId(value: string): value is BlogCategoryId {
   return (BLOG_CATEGORY_IDS as readonly string[]).includes(value);
 }
 
-export function blogHref(slug: BlogSlug): string {
+export function blogHref(slug: BlogSlug | string): string {
   return `/blog/${slug}`;
 }
 
-export function authorHref(id: BlogAuthorId): string {
+export function authorHref(id: BlogAuthorId | string): string {
   return `/blog/author/${id}`;
 }
 
-export function reviewerHref(id: BlogReviewerId): string {
+export function reviewerHref(id: BlogReviewerId | string): string {
   return `/blog/reviewer/${id}`;
 }
 

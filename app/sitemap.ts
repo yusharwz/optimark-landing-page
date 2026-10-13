@@ -13,60 +13,146 @@ import {
   blogHref,
   reviewerHref,
 } from "@/config/blog";
+import {
+  getCategoriesForSitemap,
+  getPeopleForSitemap,
+  getPublishedPostsForSitemap,
+} from "@/server/blog/queries";
 
 /**
- * Every indexable route, without a locale prefix.
+ * Revalidate interval: 60 seconds (ISR).
+ * Googlebot gets fast cached responses, while newly published CMS articles
+ * and editorial updates automatically flow into the sitemap within 60 seconds
+ * without requiring any rebuild or code changes.
  *
- * This list is maintained by hand — Next does not discover routes for the
- * sitemap. Add an entry here whenever a page is added under `app/[locale]/`,
- * and drop one when a page is removed.
+ * For instant on-demand cache invalidation directly from the CMS:
+ *   POST /api/revalidate with { "path": "/sitemap.xml" }
  */
-const ROUTES = [
-  "",
-  "/pricing",
-  // "/faq", // TEMP DISABLED — 404
-  "/blog",
-  "/about",
-  "/contact",
-  "/privacy-policy",
-  "/terms-of-service",
-  "/ai-content-maker",
-  "/perencana-konten",
-  "/seo-analyzer",
-  "/ai-image",
-  "/ai-video",
-  // Post URLs come from config/blog.ts, so a new post lands in the sitemap
-  // without a second edit here.
-  ...BLOG_CATEGORY_IDS.map(blogCategoryHref),
-  ...BLOG_TAG_IDS.map(blogTagHref),
-  ...BLOG_POSTS.map((post) => blogHref(post.slug)),
-  ...BLOG_AUTHOR_IDS.map(authorHref),
-  ...BLOG_REVIEWER_IDS.map(reviewerHref),
-] as const;
+export const revalidate = 60;
+
+interface SitemapItemConfig {
+  path: string;
+  changeFrequency: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
+  priority: number;
+  lastModified?: Date;
+}
 
 /**
- * Routing uses `localePrefix: "as-needed"` with `defaultLocale: "id"`, so the
- * Indonesian pages live at the bare path and only English carries an `/en`
- * prefix. Each page is listed once per locale, and every entry declares both
- * locales plus `x-default` (Indonesian) as `alternates` so Google pairs them
- * instead of treating them as duplicates.
- *
- * `/id/…` URLs are never listed: they only 308 to the bare path (see
- * next.config.ts).
+ * Core indexable static routes (without a locale prefix).
+ * Note: /faq is 404 (temporarily disabled) and excluded from the sitemap.
  */
-export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+const STATIC_PAGE_CONFIGS: SitemapItemConfig[] = [
+  // Homepage
+  { path: "", changeFrequency: "daily", priority: 1.0 },
+  // 5 Features (direct root routes; /perencana-konten maps to /en/content-planner via localizedUrl)
+  { path: "/ai-content-maker", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/perencana-konten", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/seo-analyzer", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/ai-image", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/ai-video", changeFrequency: "weekly", priority: 0.9 },
+  // High-value marketing pages
+  { path: "/pricing", changeFrequency: "weekly", priority: 0.8 },
+  { path: "/blog", changeFrequency: "daily", priority: 0.8 },
+  // Info & company pages
+  { path: "/about", changeFrequency: "monthly", priority: 0.6 },
+  { path: "/contact", changeFrequency: "monthly", priority: 0.6 },
+  // Legal
+  { path: "/privacy-policy", changeFrequency: "monthly", priority: 0.3 },
+  { path: "/terms-of-service", changeFrequency: "monthly", priority: 0.3 },
+];
 
-  return ROUTES.flatMap((route) => {
-    const path = route || "/";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const now = new Date();
+  const items: SitemapItemConfig[] = [...STATIC_PAGE_CONFIGS];
+
+  // 1. Dynamic Blog Posts: query PostgreSQL published posts with fallback to config
+  const dbPosts = await getPublishedPostsForSitemap();
+  const postMap = new Map<string, { lastmod: Date }>();
+
+  if (dbPosts.length === 0) {
+    // Fallback to static posts when DB is not yet populated
+    for (const post of BLOG_POSTS) {
+      postMap.set(post.slug, { lastmod: now });
+    }
+  } else {
+    for (const post of dbPosts) {
+      postMap.set(post.slug, {
+        lastmod: post.contentUpdatedAt ?? post.updatedAt ?? post.publishedAt,
+      });
+    }
+  }
+
+  for (const [slug, { lastmod }] of postMap.entries()) {
+    items.push({
+      path: blogHref(slug),
+      changeFrequency: "weekly",
+      priority: 0.7,
+      lastModified: lastmod,
+    });
+  }
+
+  // 2. Dynamic Categories: DB with fallback to config
+  const dbCategories = await getCategoriesForSitemap();
+  const categorySlugs =
+    dbCategories.length > 0 ? dbCategories : (BLOG_CATEGORY_IDS as readonly string[]);
+  for (const catSlug of categorySlugs) {
+    items.push({
+      path: blogCategoryHref(catSlug),
+      changeFrequency: "weekly",
+      priority: 0.5,
+      lastModified: now,
+    });
+  }
+
+  // 3. Dynamic Authors & Reviewers: DB with fallback to config
+  const dbPeople = await getPeopleForSitemap();
+  const authorSlugs =
+    dbPeople.authors.length > 0 ? dbPeople.authors : (BLOG_AUTHOR_IDS as readonly string[]);
+  for (const authorSlug of authorSlugs) {
+    items.push({
+      path: authorHref(authorSlug),
+      changeFrequency: "monthly",
+      priority: 0.5,
+      lastModified: now,
+    });
+  }
+
+  const reviewerSlugs =
+    dbPeople.reviewers.length > 0 ? dbPeople.reviewers : (BLOG_REVIEWER_IDS as readonly string[]);
+  for (const reviewerSlug of reviewerSlugs) {
+    items.push({
+      path: reviewerHref(reviewerSlug),
+      changeFrequency: "monthly",
+      priority: 0.5,
+      lastModified: now,
+    });
+  }
+
+  // 4. Tags
+  for (const tagId of BLOG_TAG_IDS) {
+    items.push({
+      path: blogTagHref(tagId),
+      changeFrequency: "weekly",
+      priority: 0.4,
+      lastModified: now,
+    });
+  }
+
+  // 5. Expand each route into bilingual entries (ID & EN) with alternate hreflang
+  return items.flatMap(({ path, changeFrequency, priority, lastModified }) => {
+    const normalizedPath = path || "/";
+    const date = lastModified ?? now;
     const languages = {
-      id: localizedUrl("id", path),
-      en: localizedUrl("en", path),
-      "x-default": localizedUrl("id", path),
+      id: localizedUrl("id", normalizedPath),
+      en: localizedUrl("en", normalizedPath),
+      "x-default": localizedUrl("id", normalizedPath),
     };
+
     return routing.locales.map((locale) => ({
-      url: localizedUrl(locale, path),
-      lastModified,
+      url: localizedUrl(locale, normalizedPath),
+      lastModified: date,
+      changeFrequency,
+      priority,
       alternates: { languages },
     }));
   });
