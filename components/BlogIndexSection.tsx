@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useMemo, useState, useEffect, type FormEvent, type ReactNode } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { SearchMd } from "@untitledui/icons";
@@ -62,6 +62,13 @@ export function BlogIndexSection({
   const filter: Filter = category ?? "all";
   const [draft, setDraft] = useState("");
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setQuery(draft);
+    }, 250);
+    return () => clearTimeout(timer);
+  }, [draft]);
 
   const matches = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase(locale);
