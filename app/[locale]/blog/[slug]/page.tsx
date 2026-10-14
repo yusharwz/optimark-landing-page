@@ -19,8 +19,8 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export const dynamic = "force-dynamic";
 export const dynamicParams = true;
-export const revalidate = 60;
 
 /**
  * Prerender known slugs at build time. Dynamic slugs created in CMS

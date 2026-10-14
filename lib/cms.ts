@@ -125,7 +125,7 @@ export async function fetchCmsPosts(params?: {
   try {
     const res = await fetch(url, {
       headers: { Accept: "application/json" },
-      next: { revalidate: 60, tags: ["cms-posts"] },
+      cache: "no-store",
       signal: AbortSignal.timeout(4000),
     });
 

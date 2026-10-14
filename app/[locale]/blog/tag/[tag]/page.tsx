@@ -12,6 +12,8 @@ import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
 import { cmsArticleToBlogPost, fetchCmsPosts } from "@/lib/cms";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   params: Promise<{ locale: string; tag: string }>;
 };
