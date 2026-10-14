@@ -15,12 +15,22 @@ export function formatBlogDate(
   locale: AppLocale,
   month: "short" | "long" = "short",
 ): string {
+  if (!isoDate) return "";
+  let date: Date;
+  if (isoDate.includes("T")) {
+    date = new Date(isoDate);
+  } else {
+    date = new Date(`${isoDate}T00:00:00Z`);
+  }
+  if (isNaN(date.getTime())) {
+    date = new Date();
+  }
   return new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-GB", {
     day: "numeric",
     month,
     year: "numeric",
     timeZone: "UTC",
-  }).format(new Date(`${isoDate}T00:00:00Z`));
+  }).format(date);
 }
 
 function slugifyHeading(text: string): string {
