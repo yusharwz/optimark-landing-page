@@ -311,6 +311,62 @@ export async function getPublishedPostsForSitemap(): Promise<
   }));
 }
 
+export interface CmsProfileItem {
+  title: string;
+  org: string;
+  period: string;
+  logo?: string;
+}
+
+export interface CmsPerson {
+  id: string;
+  name: string;
+  slug: string;
+  role: string;
+  roleId?: string | null;
+  roleEn?: string | null;
+  positionId?: string | null;
+  positionEn?: string | null;
+  bio?: string | null;
+  bioId?: string | null;
+  bioEn?: string | null;
+  expertiseId?: string[];
+  expertiseEn?: string[];
+  experienceId?: CmsProfileItem[] | null;
+  experienceEn?: CmsProfileItem[] | null;
+  educationId?: CmsProfileItem[] | null;
+  educationEn?: CmsProfileItem[] | null;
+  avatarUrl?: string | null;
+  linkedinUrl?: string | null;
+  type: 'AUTHOR' | 'REVIEWER' | 'BOTH';
+  authoredArticles?: any[];
+  reviewedArticles?: any[];
+}
+
+export async function fetchCmsPeople(): Promise<CmsPerson[]> {
+  try {
+    const res = await fetch(`${getCmsBaseUrl()}/people`, {
+      cache: 'no-store',
+    });
+    if (!res.ok) return [];
+    return (await res.json()) as CmsPerson[];
+  } catch {
+    return [];
+  }
+}
+
+export async function fetchCmsPersonBySlug(slug: string): Promise<CmsPerson | null> {
+  try {
+    const res = await fetch(`${getCmsBaseUrl()}/people/${slug}`, {
+      cache: 'no-store',
+    });
+    if (!res.ok) return null;
+    return (await res.json()) as CmsPerson;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Get categories for sitemap.
  */
@@ -319,14 +375,33 @@ export async function getCategoriesForSitemap(): Promise<string[]> {
 }
 
 /**
- * Get people (authors & reviewers) for sitemap.
+ * Get people (authors & reviewers) for sitemap dynamically from CMS.
  */
 export async function getPeopleForSitemap(): Promise<{
   authors: string[];
   reviewers: string[];
 }> {
-  return {
-    authors: [...BLOG_AUTHOR_IDS],
-    reviewers: [...BLOG_REVIEWER_IDS],
-  };
+  try {
+    const people = await fetchCmsPeople();
+    const authors = new Set<string>([...BLOG_AUTHOR_IDS]);
+    const reviewers = new Set<string>([...BLOG_REVIEWER_IDS]);
+    for (const p of people) {
+      if (!p.slug) continue;
+      if (p.type === 'AUTHOR' || p.type === 'BOTH') {
+        authors.add(p.slug);
+      }
+      if (p.type === 'REVIEWER' || p.type === 'BOTH') {
+        reviewers.add(p.slug);
+      }
+    }
+    return {
+      authors: Array.from(authors),
+      reviewers: Array.from(reviewers),
+    };
+  } catch {
+    return {
+      authors: [...BLOG_AUTHOR_IDS],
+      reviewers: [...BLOG_REVIEWER_IDS],
+    };
+  }
 }

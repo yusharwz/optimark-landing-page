@@ -24,17 +24,24 @@ import {
   type BlogAuthorId,
   type BlogCategoryId,
   type BlogReviewerId,
+  type BlogPost,
 } from "@/config/blog";
 import { SITE } from "@/config/site";
 import { resolveLocale } from "@/lib/locale";
 import { scrollToElement } from "@/lib/lenis";
 import { cx } from "@/utils/cx";
+import type { CmsPerson } from "@/lib/cms";
 
-type Props = { kind: "author"; id: BlogAuthorId } | { kind: "reviewer"; id: BlogReviewerId };
+export type BlogProfileViewProps = {
+  kind: "author" | "reviewer";
+  id: string;
+  cmsPerson?: CmsPerson | null;
+  initialPosts?: BlogPost[];
+};
 
 type Filter = BlogCategoryId | "all";
 
-type HistoryEntry = { title: string; org: string; period: string; logo: string };
+type HistoryEntry = { title: string; org: string; period: string; logo?: string };
 
 const PAGE_SIZE = 8;
 
@@ -46,18 +53,24 @@ const focusRing =
  * Profile" canvases: a profile card beside (desktop) or above (tablet/mobile)
  * the list of their articles, which can be filtered by category and paged.
  */
-export function BlogProfileView(props: Props) {
+export function BlogProfileView(props: BlogProfileViewProps) {
   const t = useTranslations("blog.profile");
-  const tPeople = useTranslations("blogPeople");
+  const tPeople = useTranslations("blogPeople") as any;
+  const locale = resolveLocale(useLocale());
 
   const isReviewer = props.kind === "reviewer";
-  const person = isReviewer
-    ? (`reviewers.${props.id}` as const)
-    : (`authors.${props.id as BlogAuthorId}` as const);
-  const fullName = tPeople(`${person}.fullName`);
-  const posts = isReviewer
+  const personKey = isReviewer ? `reviewers.${props.id}` : `authors.${props.id}`;
+
+  const fullName = props.cmsPerson?.name
+    ? props.cmsPerson.name
+    : tPeople.has(personKey)
+    ? tPeople(`${personKey}.fullName`)
+    : props.id;
+
+  const fallbackPosts = isReviewer
     ? getPostsByReviewer(props.id as BlogReviewerId)
     : getPostsByAuthor(props.id as BlogAuthorId);
+  const posts = props.initialPosts?.length ? props.initialPosts : fallbackPosts;
 
   const listTitle = isReviewer
     ? t("reviewedArticles")
@@ -105,29 +118,97 @@ export function BlogProfileView(props: Props) {
   );
 }
 
-function ProfileCard(props: Props) {
+function ProfileCard(props: BlogProfileViewProps) {
   const t = useTranslations("blog.profile");
-  const tPeople = useTranslations("blogPeople");
+  const tPeople = useTranslations("blogPeople") as any;
+  const locale = resolveLocale(useLocale());
 
   const isReviewer = props.kind === "reviewer";
-  const person = isReviewer
-    ? (`reviewers.${props.id}` as const)
-    : (`authors.${props.id as BlogAuthorId}` as const);
-  const fullName = tPeople(`${person}.fullName`);
-  const bio = tPeople(`${person}.bio`);
-  const linkedin = BLOG_PERSON_LINKEDIN[props.id];
-  const expertise = (tPeople.raw(`${person}.expertise`) as string[]).join(", ");
+  const personKey = isReviewer ? `reviewers.${props.id}` : `authors.${props.id}`;
+
+  const hasStatic = tPeople.has(personKey);
+  const cp = props.cmsPerson;
+
+  const fullName = cp?.name || (hasStatic ? tPeople(`${personKey}.fullName`) : props.id);
+
+  const role = cp
+    ? locale === "en"
+      ? cp.roleEn || cp.role
+      : cp.roleId || cp.role
+    : hasStatic
+    ? tPeople(`${personKey}.role`)
+    : "";
+
+  const position = cp
+    ? locale === "en"
+      ? cp.positionEn || cp.positionId || ""
+      : cp.positionId || cp.positionEn || ""
+    : hasStatic
+    ? tPeople(`${personKey}.position`)
+    : "";
+
+  const bio = cp
+    ? locale === "en"
+      ? cp.bioEn || cp.bio || ""
+      : cp.bioId || cp.bio || ""
+    : hasStatic
+    ? tPeople(`${personKey}.bio`)
+    : "";
+
+  const linkedin = cp?.linkedinUrl || (BLOG_PERSON_LINKEDIN as any)[props.id];
+
+  const expertiseList: string[] = cp
+    ? locale === "en"
+      ? cp.expertiseEn?.length
+        ? cp.expertiseEn
+        : cp.expertiseId || []
+      : cp.expertiseId?.length
+      ? cp.expertiseId
+      : cp.expertiseEn || []
+    : hasStatic
+    ? (tPeople.raw(`${personKey}.expertise`) as string[])
+    : [];
+
+  const expertise = expertiseList.join(", ");
+
+  const experience: HistoryEntry[] = (
+    cp
+      ? locale === "en"
+        ? cp.experienceEn || cp.experienceId || []
+        : cp.experienceId || cp.experienceEn || []
+      : hasStatic && isReviewer
+      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.experience`) as HistoryEntry[])
+      : []
+  ) as HistoryEntry[];
+
+  const education: HistoryEntry[] = (
+    cp
+      ? locale === "en"
+        ? cp.educationEn || cp.educationId || []
+        : cp.educationId || cp.educationEn || []
+      : hasStatic && isReviewer
+      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.education`) as HistoryEntry[])
+      : []
+  ) as HistoryEntry[];
 
   return (
     <aside className="flex w-full shrink-0 flex-col gap-5 rounded-2xl bg-[#FAFAFA] p-6 lg:w-120">
       <div className="flex flex-col items-start gap-3">
-        <BlogPersonAvatar
-          id={props.id}
-          name={fullName}
-          size="xl"
-          kind={props.kind}
-          className="h-37.5 w-37.5 ring-0 sm:h-37.5 sm:w-37.5"
-        />
+        {cp?.avatarUrl ? (
+          <img
+            src={cp.avatarUrl}
+            alt={fullName}
+            className="h-37.5 w-37.5 rounded-full object-cover border border-[#eaecf0]"
+          />
+        ) : (
+          <BlogPersonAvatar
+            id={props.id as any}
+            name={fullName}
+            size="xl"
+            kind={props.kind}
+            className="h-37.5 w-37.5 ring-0 sm:h-37.5 sm:w-37.5"
+          />
+        )}
         <div className="flex flex-col gap-1.5">
           <div className="flex flex-col items-start gap-1">
             <h1 className="text-2xl leading-8 font-semibold tracking-tight text-[#1E280E]">
@@ -140,10 +221,12 @@ function ProfileCard(props: Props) {
               </span>
             )}
           </div>
-          <p className="text-sm tracking-tight text-[#1E280E]">
-            <span className="font-semibold">{tPeople(`${person}.position`)}</span>{" "}
-            {t("worksAt", { company: SITE.companyName })}
-          </p>
+          {position && (
+            <p className="text-sm tracking-tight text-[#1E280E]">
+              <span className="font-semibold">{position}</span>{" "}
+              {t("worksAt", { company: SITE.companyName })}
+            </p>
+          )}
         </div>
         {linkedin && (
           <a
@@ -169,33 +252,41 @@ function ProfileCard(props: Props) {
           {t("profile")}
         </h2>
         <div className="flex flex-col gap-5.5 text-md tracking-tight text-[#1E280E]">
-          {bio.split("\n\n").map((paragraph) => (
-            <p key={paragraph.slice(0, 32)}>{paragraph}</p>
-          ))}
-          <p>
-            <span className="font-semibold">{t("role")}</span> {tPeople(`${person}.role`)}
-            <br />
-            <span className="font-semibold">{t("expertise")}</span> {expertise}
-          </p>
+          {String(bio || "")
+            .split("\n\n")
+            .filter(Boolean)
+            .map((paragraph: string, idx: number) => (
+              <p key={idx}>{paragraph}</p>
+            ))}
+          {(role || expertise) && (
+            <p>
+              {role && (
+                <>
+                  <span className="font-semibold">{t("role")}</span> {role}
+                  <br />
+                </>
+              )}
+              {expertise && (
+                <>
+                  <span className="font-semibold">{t("expertise")}</span> {expertise}
+                </>
+              )}
+            </p>
+          )}
         </div>
       </div>
 
-      {isReviewer && (
+      {experience.length > 0 && (
         <>
           <hr className="border-[#E9EAEB]" />
-          <HistorySection
-            title={t("experience")}
-            entries={
-              tPeople.raw(`reviewers.${props.id as BlogReviewerId}.experience`) as HistoryEntry[]
-            }
-          />
+          <HistorySection title={t("experience")} entries={experience} />
+        </>
+      )}
+
+      {education.length > 0 && (
+        <>
           <hr className="border-[#E9EAEB]" />
-          <HistorySection
-            title={t("education")}
-            entries={
-              tPeople.raw(`reviewers.${props.id as BlogReviewerId}.education`) as HistoryEntry[]
-            }
-          />
+          <HistorySection title={t("education")} entries={education} />
         </>
       )}
     </aside>
@@ -247,13 +338,19 @@ function HistorySection({ title, entries }: { title: string; entries: HistoryEnt
                 className={cx("flex items-center gap-3", index === 0 ? "pt-4" : "pt-5")}
               >
                 <span className="relative flex size-11.5 shrink-0 items-center justify-center overflow-hidden rounded-[10px] bg-[#F5F5F5]">
-                  <Image
-                    src={entry.logo}
-                    alt={entry.org}
-                    width={46}
-                    height={46}
-                    className="size-full object-contain"
-                  />
+                  {entry.logo ? (
+                    <Image
+                      src={entry.logo}
+                      alt={entry.org}
+                      width={46}
+                      height={46}
+                      className="size-full object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold text-[#465984]">
+                      {entry.org?.charAt(0) || "O"}
+                    </span>
+                  )}
                 </span>
                 <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                   <p className="text-md font-semibold tracking-tight text-[#232933]">

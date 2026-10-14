@@ -12,7 +12,13 @@ import { BlogTocBar } from "@/components/BlogToc";
 import { Footer } from "@/components/Footer";
 import { ScrollUpButton } from "@/components/ScrollUpButton";
 import { JsonLd } from "@/components/JsonLd";
-import { blogPostingJsonLd, breadcrumbJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
+import {
+  blogPostingJsonLd,
+  breadcrumbJsonLd,
+  defaultRobots,
+  localeAlternates,
+  localizedUrl,
+} from "@/lib/seo";
 import { SCROLL_UP_THRESHOLD } from "@/config/site";
 
 type Props = {
@@ -67,13 +73,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale,
     });
 
+  const canonicalUrl = localizedUrl(locale, blogHref(entry.slug));
+
   return {
     title: metaTitle,
     description: metaDescription,
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, blogHref(entry.slug)),
     openGraph: {
       title: metaTitle,
       description: metaDescription,
+      url: canonicalUrl,
       type: "article",
       publishedTime: entry.publishedAt,
       modifiedTime: entry.updatedAt ?? entry.publishedAt,

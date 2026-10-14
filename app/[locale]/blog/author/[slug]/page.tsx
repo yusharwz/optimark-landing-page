@@ -10,18 +10,25 @@ import {
   BLOG_PERSON_PHOTOS,
   authorHref,
   isBlogAuthorId,
+  getPostsByAuthor,
+  type BlogAuthorId,
 } from "@/config/blog";
 import {
   breadcrumbJsonLd,
+  defaultRobots,
   firstParagraph,
   localeAlternates,
   localizedUrl,
   profilePageJsonLd,
 } from "@/lib/seo";
+import { fetchCmsPersonBySlug, cmsArticleToBlogPost, type CmsPerson } from "@/lib/cms";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogProfileView } from "@/components/BlogProfileView";
 import { Footer } from "@/components/Footer";
+
+export const dynamic = "force-dynamic";
+export const dynamicParams = true;
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -34,22 +41,39 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   const locale = resolveLocale(localeParam);
-  if (!isBlogAuthorId(slug)) return {};
+
+  const cmsPerson = await fetchCmsPersonBySlug(slug);
+  const isStatic = isBlogAuthorId(slug);
+
+  if (!cmsPerson && !isStatic) return {};
 
   const tProfile = await getTranslations({ locale, namespace: "blog.profile" });
-  const tPerson = await getTranslations({ locale, namespace: `blogPeople.authors.${slug}` });
+  let fullName = slug;
+  let description = "";
 
-  const title = tProfile("authorMetaTitle", { name: tPerson("fullName") });
-  const description = firstParagraph(tPerson("bio"));
+  if (cmsPerson) {
+    fullName = cmsPerson.name;
+    const rawBio = locale === "en" ? cmsPerson.bioEn || cmsPerson.bio : cmsPerson.bioId || cmsPerson.bio;
+    description = firstParagraph(rawBio || `Profil penulis editorial Optimark: ${fullName}.`);
+  } else if (isStatic) {
+    const tPerson = (await getTranslations({ locale, namespace: `blogPeople.authors.${slug}` as any })) as any;
+    fullName = tPerson("fullName");
+    description = firstParagraph(tPerson("bio"));
+  }
+
+  const title = tProfile("authorMetaTitle", { name: fullName });
   const ogImage = buildOgImageUrl({ title, description, locale });
+  const canonicalUrl = localizedUrl(locale, authorHref(slug));
 
   return {
     title,
     description,
+    robots: defaultRobots(true),
     alternates: localeAlternates(locale, authorHref(slug)),
     openGraph: {
       title,
       description,
+      url: canonicalUrl,
       type: "profile",
       images: [
         {
@@ -71,14 +95,52 @@ export default async function BlogAuthorPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  if (!isBlogAuthorId(slug)) {
+  const cmsPerson = await fetchCmsPersonBySlug(slug);
+  const isStatic = isBlogAuthorId(slug);
+
+  if (!cmsPerson && !isStatic) {
     notFound();
   }
 
   const tBlog = await getTranslations({ locale, namespace: "blog" });
-  const tPerson = await getTranslations({ locale, namespace: `blogPeople.authors.${slug}` });
-  const name = tPerson("fullName");
+  let name = slug;
+  let role = "Author";
+  let bio = "";
+  let image = "";
+  let expertise: string[] = [];
+  let linkedin: string | undefined;
+
+  if (cmsPerson) {
+    name = cmsPerson.name;
+    role = (locale === "en" ? cmsPerson.roleEn || cmsPerson.role : cmsPerson.roleId || cmsPerson.role) || "Author";
+    bio = (locale === "en" ? cmsPerson.bioEn || cmsPerson.bio : cmsPerson.bioId || cmsPerson.bio) || "";
+    image = cmsPerson.avatarUrl || "";
+    expertise = locale === "en"
+      ? cmsPerson.expertiseEn?.length ? cmsPerson.expertiseEn : cmsPerson.expertiseId || []
+      : cmsPerson.expertiseId?.length ? cmsPerson.expertiseId : cmsPerson.expertiseEn || [];
+    linkedin = cmsPerson.linkedinUrl || (BLOG_PERSON_LINKEDIN as any)[slug] || undefined;
+  } else {
+    const tPerson = (await getTranslations({ locale, namespace: `blogPeople.authors.${slug}` as any })) as any;
+    name = tPerson("fullName");
+    role = tPerson("role");
+    bio = tPerson("bio");
+    image = BLOG_PERSON_PHOTOS[slug as keyof typeof BLOG_PERSON_PHOTOS] || "";
+    expertise = tPerson.raw("expertise") as string[];
+    linkedin = (BLOG_PERSON_LINKEDIN as any)[slug] || undefined;
+  }
+
   const url = localizedUrl(locale, authorHref(slug));
+
+  // Collect articles: CMS articles first, then merge static fallback if any
+  const cmsArticles = (cmsPerson?.authoredArticles || []).map(cmsArticleToBlogPost);
+  const staticArticles = isStatic ? getPostsByAuthor(slug as BlogAuthorId) : [];
+  const articleMap = new Map<string, any>();
+  for (const a of [...cmsArticles, ...staticArticles]) {
+    if (!articleMap.has(a.slug)) {
+      articleMap.set(a.slug, a);
+    }
+  }
+  const initialPosts = Array.from(articleMap.values());
 
   return (
     <div className="min-h-screen bg-white">
@@ -93,16 +155,21 @@ export default async function BlogAuthorPage({ params }: Props) {
         data={profilePageJsonLd({
           url,
           name,
-          jobTitle: tPerson("role"),
-          description: firstParagraph(tPerson("bio")),
-          image: BLOG_PERSON_PHOTOS[slug],
-          knowsAbout: tPerson.raw("expertise") as string[],
-          sameAs: BLOG_PERSON_LINKEDIN[slug] || undefined,
+          jobTitle: role,
+          description: firstParagraph(bio || `Profil penulis editorial Optimark: ${name}.`),
+          image: image || undefined,
+          knowsAbout: expertise,
+          sameAs: linkedin,
         })}
       />
       <Header />
       <main className="relative pt-24">
-        <BlogProfileView kind="author" id={slug} />
+        <BlogProfileView
+          kind="author"
+          id={slug}
+          cmsPerson={cmsPerson}
+          initialPosts={initialPosts}
+        />
       </main>
       <Footer />
     </div>
