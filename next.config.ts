@@ -8,6 +8,30 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "optimark-staging-media.dritech.co.id",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.r2.dev",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.cloudflarestorage.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "file.usahakreatif.co.id",
+        pathname: "/**",
+      },
+    ],
+  },
 
   /**
    * Indonesian is the default locale and lives at the bare path, so any
