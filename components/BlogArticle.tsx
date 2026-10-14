@@ -21,7 +21,7 @@ export function BlogArticle({
   blocks?: BlogBlock[];
   content?: string | null;
 }) {
-  const tPost = useTranslations(`blogPosts.${slug}`);
+  const tBlogPosts = useTranslations("blogPosts");
 
   let blocks: BlogBlock[] = initialBlocks || [];
   if (blocks.length === 0 && content) {
@@ -29,7 +29,9 @@ export function BlogArticle({
   }
   if (blocks.length === 0) {
     try {
-      blocks = (tPost.raw("blocks") as BlogBlock[]) || [];
+      if (tBlogPosts.has(`${slug}.blocks` as never)) {
+        blocks = (tBlogPosts.raw(`${slug}.blocks` as never) as BlogBlock[]) || [];
+      }
     } catch {
       blocks = [];
     }

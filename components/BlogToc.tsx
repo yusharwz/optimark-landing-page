@@ -18,7 +18,7 @@ function useToc(
   initialItems?: BlogTocItem[],
   content?: string | null,
 ): BlogTocItem[] {
-  const tPost = useTranslations(`blogPosts.${slug}` as never);
+  const tBlogPosts = useTranslations("blogPosts");
   if (initialItems && initialItems.length > 0) return initialItems;
   if (content) {
     const blocks = markdownToBlocks(content);
@@ -26,10 +26,14 @@ function useToc(
     if (toc.length > 0) return toc;
   }
   try {
-    return buildBlogToc(tPost.raw("blocks" as never) as BlogBlock[]);
+    if (tBlogPosts.has(`${slug}.blocks` as never)) {
+      const raw = tBlogPosts.raw(`${slug}.blocks` as never) as BlogBlock[];
+      if (Array.isArray(raw)) return buildBlogToc(raw);
+    }
   } catch {
     return [];
   }
+  return [];
 }
 
 function useActiveHeading(items: BlogTocItem[]): string | null {

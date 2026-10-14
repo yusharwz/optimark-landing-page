@@ -43,23 +43,23 @@ export function BlogCard({
   showReviewer = false,
 }: BlogCardProps) {
   const t = useTranslations("blog");
-  // Each post is its own namespace, so the slug selects the namespace rather
-  // than being looked up as a key inside `blogPosts`.
-  const tPost = useTranslations(`blogPosts.${post.slug}`);
+  const tBlogPosts = useTranslations("blogPosts");
   const tPeople = useTranslations("blogPeople");
 
-  const postCategory = (
-    typeof post.category === "string" && post.category in BLOG_CATEGORY_STYLES
-      ? post.category
-      : "seo"
-  ) as BlogCategoryId;
+  const postCategory = (typeof post.category === "string" && post.category in BLOG_CATEGORY_STYLES
+    ? post.category
+    : "seo") as BlogCategoryId;
   const style = BLOG_CATEGORY_STYLES[postCategory] || BLOG_CATEGORY_STYLES.seo;
   const Icon = BLOG_CATEGORY_ICONS[postCategory] || BLOG_CATEGORY_ICONS.seo;
 
   let title = post.title;
   if (!title) {
     try {
-      title = tPost("title");
+      if (tBlogPosts.has(`${post.slug}.title` as never)) {
+        title = tBlogPosts(`${post.slug}.title` as never);
+      } else {
+        title = post.slug;
+      }
     } catch {
       title = post.slug;
     }
@@ -103,7 +103,7 @@ export function BlogCard({
         {post.cover ? (
           <Image
             src={post.cover}
-            alt={tPost("coverAlt")}
+            alt={post.coverAlt || title}
             fill
             loading={eager ? "eager" : "lazy"}
             fetchPriority={eager ? "high" : undefined}

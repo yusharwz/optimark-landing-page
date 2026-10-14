@@ -45,10 +45,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   let metaTitle = entry.title || slug;
 
   try {
-    const t = await getTranslations({ locale, namespace: `blogPosts.${entry.slug}` });
-    title = title || t("title");
-    metaDescription = metaDescription || t("metaDescription");
-    metaTitle = t("metaTitle") || title;
+    const t = await getTranslations({ locale, namespace: "blogPosts" });
+    if (t.has(`${entry.slug}.title` as never)) {
+      title = title || t(`${entry.slug}.title` as never);
+    }
+    if (t.has(`${entry.slug}.metaDescription` as never)) {
+      metaDescription = metaDescription || t(`${entry.slug}.metaDescription` as never);
+    }
+    if (t.has(`${entry.slug}.metaTitle` as never)) {
+      metaTitle = t(`${entry.slug}.metaTitle` as never) || title || slug;
+    }
   } catch {
     // Dynamic post without static translations
   }
@@ -107,9 +113,13 @@ export default async function BlogPostPage({ params }: Props) {
   let metaDescription = post.excerpt || "";
 
   try {
-    const t = await getTranslations({ locale, namespace: `blogPosts.${post.slug}` });
-    title = title || t("title");
-    metaDescription = metaDescription || t("metaDescription");
+    const t = await getTranslations({ locale, namespace: "blogPosts" });
+    if (t.has(`${post.slug}.title` as never)) {
+      title = title || t(`${post.slug}.title` as never);
+    }
+    if (t.has(`${post.slug}.metaDescription` as never)) {
+      metaDescription = metaDescription || t(`${post.slug}.metaDescription` as never);
+    }
   } catch {
     // Dynamic post without static translation file
   }

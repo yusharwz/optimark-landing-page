@@ -48,7 +48,7 @@ export function BlogPostView({
 }) {
   const t = useTranslations("blog");
   const tPost = useTranslations("blog.post");
-  const tCopy = useTranslations(`blogPosts.${slug}`);
+  const tBlogPosts = useTranslations("blogPosts");
   const tPeople = useTranslations("blogPeople");
   const locale = resolveLocale(useLocale());
 
@@ -60,7 +60,11 @@ export function BlogPostView({
   let title = post.title;
   if (!title) {
     try {
-      title = tCopy("title");
+      if (tBlogPosts.has(`${slug}.title` as never)) {
+        title = tBlogPosts(`${slug}.title` as never);
+      } else {
+        title = post.slug;
+      }
     } catch {
       title = post.slug;
     }
