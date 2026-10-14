@@ -49,14 +49,15 @@ export function BlogIndexSection({
   tag,
   initialPosts,
   categoryInfo,
+  categories,
 }: {
   category?: BlogCategoryId | string;
   tag?: BlogTagId;
   initialPosts?: BlogPost[];
   categoryInfo?: { name: string; description?: string | null };
+  categories?: Array<{ id: string; name: string }>;
 } = {}) {
   const t = useTranslations("blog");
-  const tAny = t as unknown as (k: string) => string;
   const tPosts = useTranslations("blogPosts");
   const locale = resolveLocale(useLocale());
 
@@ -101,19 +102,58 @@ export function BlogIndexSection({
     setQuery(draft);
   };
 
-  const filters: Filter[] = ["all", ...BLOG_CATEGORY_IDS];
+  const dynamicCategories = useMemo(() => {
+    if (categories && categories.length > 0) {
+      return [
+        { id: "all", name: t("allCategories") },
+        ...categories.map((c) => ({
+          id: c.id,
+          name: c.name,
+        })),
+      ];
+    }
+    const seen = new Set<string>();
+    const list: Array<{ id: string; name: string }> = [
+      { id: "all", name: t("allCategories") },
+    ];
+    for (const c of BLOG_CATEGORY_IDS) {
+      seen.add(c);
+      list.push({
+        id: c,
+        name: t.has(`categories.${c}` as never) ? t(`categories.${c}` as never) : c,
+      });
+    }
+    for (const p of allPosts) {
+      if (p.category && !seen.has(p.category)) {
+        seen.add(p.category);
+        list.push({
+          id: p.category,
+          name: p.categoryName || p.category,
+        });
+      }
+    }
+    return list;
+  }, [categories, allPosts, t]);
+
+  const currentCategoryName = useMemo(() => {
+    if (categoryInfo?.name) return categoryInfo.name;
+    const found = dynamicCategories.find((c) => c.id === filter);
+    if (found && found.id !== "all") return found.name;
+    if (t.has(`categories.${filter}` as never)) return t(`categories.${filter}` as never);
+    return filter !== "all" ? String(filter) : "";
+  }, [categoryInfo, dynamicCategories, filter, t]);
 
   const listTitle = query.trim()
     ? t("searchResults", { query: query.trim() })
     : tag
-      ? t(`tags.${tag}`)
+      ? (t.has(`tags.${tag}` as never) ? t(`tags.${tag}` as never) : tag)
       : filter === "all"
         ? t("latestLabel")
-        : categoryInfo?.name || tAny(`categories.${filter}`) || filter;
+        : currentCategoryName;
   const crumb = tag
-    ? t(`tags.${tag}`)
+    ? (t.has(`tags.${tag}` as never) ? t(`tags.${tag}` as never) : tag)
     : category
-      ? categoryInfo?.name || tAny(`categories.${category}`) || category
+      ? currentCategoryName
       : null;
 
   return (
@@ -165,9 +205,7 @@ export function BlogIndexSection({
               animate="visible"
               className="text-display text-display-xs sm:text-display-md"
             >
-              {category
-                ? categoryInfo?.name || tAny(`categoryPages.${category}.title`) || category
-                : t("title")}
+              {category ? currentCategoryName : t("title")}
             </motion.h1>
             <motion.p
               variants={heroDescription}
@@ -176,9 +214,7 @@ export function BlogIndexSection({
               className="text-lead mt-2 max-w-3xl text-md sm:text-lg"
             >
               {category
-                ? categoryInfo?.description ||
-                  tAny(`categoryPages.${category}.description`) ||
-                  ""
+                ? categoryInfo?.description || ""
                 : t("description")}
             </motion.p>
           </div>
@@ -224,21 +260,22 @@ export function BlogIndexSection({
                         href={blogTagHref(value)}
                         className="rounded-md bg-[#F5F5F5] px-3 py-1.5 text-sm font-medium tracking-tight text-[#414651] transition-colors hover:bg-[#EAF4DA] hover:text-[#59772B] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
                       >
-                        {t(`tags.${value}`)} ({getPostsByTag(value).length})
+                        {t.has(`tags.${value}` as never)
+                          ? t(`tags.${value}` as never)
+                          : value}{" "}
+                        ({getPostsByTag(value).length})
                       </Link>
                     ))
-                  : filters.map((value) => {
-                      const active = filter === value;
+                  : dynamicCategories.map((cat) => {
+                      const active = filter === cat.id;
                       return (
                         <Link
-                          key={value}
-                          href={value === "all" ? "/blog" : blogCategoryHref(value)}
+                          key={cat.id}
+                          href={cat.id === "all" ? "/blog" : blogCategoryHref(cat.id)}
                           aria-current={active ? "page" : undefined}
                           className={sidebarItem(active)}
                         >
-                          {value === "all"
-                            ? t("allCategories")
-                            : tAny(`categories.${value}`) || value}
+                          {cat.name}
                         </Link>
                       );
                     })}
@@ -259,10 +296,13 @@ export function BlogIndexSection({
                 {BLOG_SECTION_ORDER.map((id) => {
                   const posts = allPosts.filter((post) => post.category === id);
                   if (posts.length === 0) return null;
+                  const catName = t.has(`categories.${id}` as never)
+                    ? t(`categories.${id}` as never)
+                    : id;
                   return (
                     <PostSection
                       key={id}
-                      title={t(`categories.${id}`)}
+                      title={catName}
                       posts={posts.slice(0, TOPIC_LIMIT)}
                       locale={locale}
                       action={
@@ -276,6 +316,32 @@ export function BlogIndexSection({
                     />
                   );
                 })}
+                {dynamicCategories
+                  .filter(
+                    (cat) =>
+                      cat.id !== "all" &&
+                      !BLOG_SECTION_ORDER.includes(cat.id as never),
+                  )
+                  .map((cat) => {
+                    const posts = allPosts.filter((post) => post.category === cat.id);
+                    if (posts.length === 0) return null;
+                    return (
+                      <PostSection
+                        key={cat.id}
+                        title={cat.name}
+                        posts={posts.slice(0, TOPIC_LIMIT)}
+                        locale={locale}
+                        action={
+                          <Link
+                            href={blogCategoryHref(cat.id)}
+                            className="rounded text-md font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#5E7F2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
+                          >
+                            {t("viewAll")}
+                          </Link>
+                        }
+                      />
+                    );
+                  })}
               </>
             ) : (
               <PostSection

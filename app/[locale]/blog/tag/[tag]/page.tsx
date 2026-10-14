@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
-import { cmsArticleToBlogPost, fetchCmsPosts } from "@/lib/cms";
+import { cmsArticleToBlogPost, fetchCmsPosts, fetchCmsCategories } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -69,10 +69,17 @@ export default async function BlogTagPage({ params }: Props) {
   const label = t(`tags.${tag}`);
   const url = localizedUrl(locale, blogTagHref(tag));
 
-  // Ingest dynamic posts from CMS API for this tag
-  const cmsRes = await fetchCmsPosts({ tag, limit: 1000 });
+  // Ingest dynamic posts and categories from CMS API
+  const [cmsRes, cmsCategories] = await Promise.all([
+    fetchCmsPosts({ tag, limit: 1000 }),
+    fetchCmsCategories(),
+  ]);
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
   const displayPosts = posts.length > 0 ? posts : getPostsByTag(tag);
+  const categories = cmsCategories.map((c) => ({
+    id: c.slug,
+    name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,
+  }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -97,7 +104,7 @@ export default async function BlogTagPage({ params }: Props) {
       />
       <Header />
       <main className="relative pt-24">
-        <BlogIndexSection tag={tag} initialPosts={displayPosts} />
+        <BlogIndexSection tag={tag} initialPosts={displayPosts} categories={categories} />
       </main>
       <Footer />
     </div>

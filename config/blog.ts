@@ -187,6 +187,7 @@ export type BlogPost = {
   reviewerName?: string;
   reviewerRole?: string;
   reviewerAvatar?: string;
+  categoryName?: string;
   tableOfContents?: Array<{ id: string; text: string; level: number }>;
 };
 

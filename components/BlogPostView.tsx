@@ -143,16 +143,27 @@ export function BlogPostView({
           <div className="mx-auto flex max-w-170 flex-col gap-8 py-8 sm:py-12">
             <div className="flex flex-col gap-4">
               <p className="flex items-center gap-2.5 text-sm tracking-tight">
-                <Link
-                  href={blogCategoryHref(post.category)}
-                  className={cx(
-                    "rounded font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]",
-                    focusRing,
-                  )}
-                >
-                  {(t as unknown as (k: string) => string)(`categories.${post.category}`) ||
-                    post.category}
-                </Link>
+                {(() => {
+                  let categoryLabel = post.categoryName;
+                  if (!categoryLabel) {
+                    if (t.has(`categories.${post.category}` as never)) {
+                      categoryLabel = t(`categories.${post.category}` as never);
+                    } else {
+                      categoryLabel = typeof post.category === "string" ? post.category : "SEO";
+                    }
+                  }
+                  return (
+                    <Link
+                      href={blogCategoryHref(post.category)}
+                      className={cx(
+                        "rounded font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]",
+                        focusRing,
+                      )}
+                    >
+                      {categoryLabel}
+                    </Link>
+                  );
+                })()}
                 <Dot />
                 <span className="text-[#717680]">
                   {t("readTime", { minutes: post.readMinutes })}
@@ -162,6 +173,12 @@ export function BlogPostView({
               <h1 className="text-[2rem] leading-10 font-semibold tracking-tight text-[#1E280E] sm:text-[2.5rem] sm:leading-12">
                 {title}
               </h1>
+
+              {post.excerpt && (
+                <p className="text-lg leading-relaxed text-[#535862] sm:text-xl font-normal">
+                  {post.excerpt}
+                </p>
+              )}
 
               <dl className="flex items-center gap-2.5 text-sm tracking-tight text-[#535862]">
                 <div className="sm:flex sm:gap-1">
@@ -238,19 +255,6 @@ export function BlogPostView({
             )}
 
             <article id={ARTICLE_ID} className="flex flex-col gap-6">
-              {post.excerpt && (
-                <div className="rounded-2xl border border-[#94C748]/40 bg-[#F9FBF6] p-5 sm:p-6 shadow-xs">
-                  <div className="mb-2 flex items-center gap-2">
-                    <span className="size-2 rounded-full bg-[#769F3A]" />
-                    <h2 className="text-xs font-bold uppercase tracking-wider text-[#59772B]">
-                      {locale === "en" ? "Executive Summary" : "Ringkasan Eksekutif"}
-                    </h2>
-                  </div>
-                  <p className="text-base leading-relaxed text-[#344054] sm:text-lg font-medium italic">
-                    &ldquo;{post.excerpt}&rdquo;
-                  </p>
-                </div>
-              )}
               <BlogArticle slug={slug} content={post.content} />
             </article>
 

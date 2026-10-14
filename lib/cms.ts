@@ -77,6 +77,7 @@ export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail)
     excerpt: item.excerpt || undefined,
     content: ("content" in item && item.content) || undefined,
     category: categorySlug,
+    categoryName: item.category?.name || undefined,
     publishedAt: item.publishedAt,
     updatedAt: item.contentUpdatedAt || item.updatedAt || undefined,
     readMinutes: item.readMinutes || 5,

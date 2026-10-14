@@ -16,7 +16,12 @@ import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
-import { cmsArticleToBlogPost, fetchCmsCategoryBySlug, fetchCmsPosts } from "@/lib/cms";
+import {
+  cmsArticleToBlogPost,
+  fetchCmsCategoryBySlug,
+  fetchCmsPosts,
+  fetchCmsCategories,
+} from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -131,9 +136,16 @@ export default async function BlogCategoryPage({ params }: Props) {
 
   categoryTitle = categoryTitle || category;
 
-  // Ingest real dynamic posts from CMS API for this category
-  const cmsRes = await fetchCmsPosts({ categorySlug: category, limit: 1000 });
+  // Ingest real dynamic posts and all dynamic categories from CMS API
+  const [cmsRes, cmsCategories] = await Promise.all([
+    fetchCmsPosts({ categorySlug: category, limit: 1000 }),
+    fetchCmsCategories(),
+  ]);
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
+  const categories = cmsCategories.map((c) => ({
+    id: c.slug,
+    name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,
+  }));
 
   return (
     <div className="min-h-screen bg-white">
@@ -161,6 +173,7 @@ export default async function BlogCategoryPage({ params }: Props) {
         <BlogIndexSection
           category={category as BlogCategoryId}
           initialPosts={posts}
+          categories={categories}
           categoryInfo={{ name: categoryTitle, description: categoryDesc }}
         />
       </main>

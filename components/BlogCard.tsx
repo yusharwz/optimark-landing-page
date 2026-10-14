@@ -124,16 +124,27 @@ export function BlogCard({
       {/* Body */}
       <div className="flex flex-1 flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <Link
-            href={blogCategoryHref(post.category)}
-            className={cx(
-              "w-fit rounded text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]",
-              focusRing,
-            )}
-          >
-            {(t as unknown as (k: string) => string)(`categories.${post.category}`) ||
-              post.category}
-          </Link>
+          {(() => {
+            let categoryLabel = post.categoryName;
+            if (!categoryLabel) {
+              if (t.has(`categories.${post.category}` as never)) {
+                categoryLabel = t(`categories.${post.category}` as never);
+              } else {
+                categoryLabel = typeof post.category === "string" ? post.category : "SEO";
+              }
+            }
+            return (
+              <Link
+                href={blogCategoryHref(post.category)}
+                className={cx(
+                  "w-fit rounded text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]",
+                  focusRing,
+                )}
+              >
+                {categoryLabel}
+              </Link>
+            );
+          })()}
 
           <div className="group/title relative">
             <h3
