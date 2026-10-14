@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getRequestOrigin, renderSitemapIndexXml, type SitemapIndexEntry } from "@/lib/sitemap";
-import { getPublishedPostsForSitemap } from "@/server/blog/queries";
+import { getPublishedPostsForSitemap } from "@/lib/cms";
 import { BLOG_POSTS } from "@/config/blog";
 
 export const dynamic = "force-dynamic";

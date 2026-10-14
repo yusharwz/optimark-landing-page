@@ -1,92 +1,34 @@
-# Multi-stage build for optimal performance and minimal image size
+FROM node:20-alpine AS base
+ENV PNPM_HOME="/pnpm"
+ENV PATH="$PNPM_HOME:$PATH"
+RUN corepack enable
 
-# Stage 1: Dependencies (cached layer)
-FROM node:22-alpine AS deps
-
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
-
-# Set working directory
+FROM base AS deps
 WORKDIR /app
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install --frozen-lockfile
 
-# Copy package files
-COPY package.json package-lock.json* yarn.lock* pnpm-lock.yaml* ./
-
-# Install dependencies based on the preferred package manager
-RUN \
-  if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
-
-# Stage 2: Builder
-FROM node:22-alpine AS builder
-
+FROM base AS builder
 WORKDIR /app
-
-# Copy dependencies from deps stage
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-
-# Set environment variables for build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+RUN pnpm run build
 
-# No build args here on purpose. Every page is statically prerendered, so any
-# `NEXT_PUBLIC_*` value would have to be correct at build time — and .env is
-# excluded from the image by .dockerignore, so a variable nobody remembers to
-# set in CI yields a silently wrong site rather than a failure. The site URL,
-# GTM container id, and Search Console token are static in config/site.ts
-# instead. Add an ARG here only alongside code that actually reads it.
-
-# Disable analytics and telemetry
-RUN npx next telemetry disable
-
-# Build the application
-RUN npm run build
-
-# Stage 3: Runner (Production)
-FROM node:22-alpine AS runner
-
+FROM node:20-alpine AS runner
 WORKDIR /app
-
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init tzdata ca-certificates
-
-# Set timezone (optional, adjust as needed)
-ENV TZ=UTC
-
-# Create non-root user for security
-RUN addgroup --system --gid 1001 nodejs && \
-  adduser --system --uid 1001 nextjs
-
-# Copy necessary files from builder
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-
-# Set ownership
-RUN chown -R nextjs:nodejs /app
-
-# Switch to non-root user
-USER nextjs
-
-# Expose port
-EXPOSE 3000
-
-# Set environment variables
+ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 
-# Health check
-HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000/api/health', (r) => {process.exit(r.statusCode === 200 ? 0 : 1)})"
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
 
-# Use dumb-init for signal handling
-ENTRYPOINT ["dumb-init", "--"]
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
-# Start the application
+USER nextjs
+EXPOSE 3000
 CMD ["node", "server.js"]

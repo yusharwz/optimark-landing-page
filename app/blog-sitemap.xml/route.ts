@@ -21,7 +21,7 @@ import {
   getCategoriesForSitemap,
   getPeopleForSitemap,
   getPublishedPostsForSitemap,
-} from "@/server/blog/queries";
+} from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 

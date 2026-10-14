@@ -10,7 +10,10 @@ import type { BlogComment } from "@/types/comment";
  * anti-spam verification, and moderation storage.
  */
 export const COMMENT_CONFIG = {
-  cmsApiUrl: process.env.CMS_COMMENT_API_URL || process.env.NEXT_PUBLIC_COMMENT_API_URL || "",
+  cmsApiUrl:
+    process.env.CMS_COMMENT_API_URL ||
+    process.env.NEXT_PUBLIC_COMMENT_API_URL ||
+    `${process.env.CMS_API_URL?.replace(/\/+$/, "") || "http://localhost:3001"}/api/public/comments`,
   internalApiEndpoint: "/api/blog/comments",
 
   // Anti-spam thresholds
