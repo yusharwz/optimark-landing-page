@@ -11,6 +11,6 @@ export default function robots(): MetadataRoute.Robots {
       // indexing — it renders no page content of its own.
       disallow: "/api/",
     },
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/sitemap_index.xml`],
+    sitemap: `${baseUrl}/sitemap.xml`,
   };
 }
