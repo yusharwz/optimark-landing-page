@@ -6,15 +6,30 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import type { BlogSlug } from "@/config/blog";
 import { buildBlogToc } from "@/lib/blog";
+import { markdownToBlocks } from "@/lib/markdown";
 import { scrollToElement } from "@/lib/lenis";
 import type { BlogBlock, BlogTocItem } from "@/types/blog";
 import { cx } from "@/utils/cx";
 
 const ACTIVE_OFFSET = 160;
 
-function useToc(slug: BlogSlug): BlogTocItem[] {
-  const tPost = useTranslations(`blogPosts.${slug}`);
-  return buildBlogToc(tPost.raw("blocks") as BlogBlock[]);
+function useToc(
+  slug: BlogSlug,
+  initialItems?: BlogTocItem[],
+  content?: string | null,
+): BlogTocItem[] {
+  const tPost = useTranslations(`blogPosts.${slug}` as never);
+  if (initialItems && initialItems.length > 0) return initialItems;
+  if (content) {
+    const blocks = markdownToBlocks(content);
+    const toc = buildBlogToc(blocks);
+    if (toc.length > 0) return toc;
+  }
+  try {
+    return buildBlogToc(tPost.raw("blocks" as never) as BlogBlock[]);
+  } catch {
+    return [];
+  }
 }
 
 function useActiveHeading(items: BlogTocItem[]): string | null {
@@ -106,9 +121,19 @@ function TocList({
   );
 }
 
-export function BlogToc({ slug, className }: { slug: BlogSlug; className?: string }) {
+export function BlogToc({
+  slug,
+  className,
+  items: initialItems,
+  content,
+}: {
+  slug: BlogSlug;
+  className?: string;
+  items?: BlogTocItem[];
+  content?: string | null;
+}) {
   const t = useTranslations("blog.post");
-  const items = useToc(slug);
+  const items = useToc(slug, initialItems, content);
   const active = useActiveHeading(items);
   if (items.length === 0) return null;
 
@@ -120,9 +145,17 @@ export function BlogToc({ slug, className }: { slug: BlogSlug; className?: strin
   );
 }
 
-export function BlogTocBar({ slug }: { slug: BlogSlug }) {
+export function BlogTocBar({
+  slug,
+  items: initialItems,
+  content,
+}: {
+  slug: BlogSlug;
+  items?: BlogTocItem[];
+  content?: string | null;
+}) {
   const t = useTranslations("blog.post");
-  const items = useToc(slug);
+  const items = useToc(slug, initialItems, content);
   const active = useActiveHeading(items);
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);

@@ -10,7 +10,7 @@ import { BrandIcon, BrandIconDefs } from "@/components/BrandIcon";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
-type Translations = ReturnType<typeof useTranslations>;
+type Translations = ReturnType<typeof useTranslations<"howItWorks">>;
 
 export function HowItWorksSection() {
   const t = useTranslations("howItWorks");
@@ -84,7 +84,7 @@ export function HowItWorksSection() {
 
       return () => mm.revert();
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   const steps = [
@@ -139,7 +139,6 @@ export function HowItWorksSection() {
 
         {/* Split screen layout: Left steps controls, Right interactive mockups */}
         <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 lg:gap-10 xl:gap-16 items-center">
-          
           {/* Left Column: Steps Controls */}
           <div className="how-it-works-steps relative flex flex-col gap-5 lg:gap-3 xl:gap-5">
             {steps.map((step, idx) => {
@@ -300,7 +299,9 @@ function StepOneVisual({ t }: { t: Translations }) {
           height={40}
           className="h-10 w-10 animate-pulse"
         />
-        <span className="font-gothic text-[11px] font-normal uppercase tracking-wide text-gray-900">optimark</span>
+        <span className="font-gothic text-[11px] font-normal uppercase tracking-wide text-gray-900">
+          optimark
+        </span>
       </div>
 
       {/* Orbiting Platforms */}
@@ -417,7 +418,9 @@ function StepTwoVisual({ t }: { t: Translations }) {
           <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
           <div className="w-2.5 h-2.5 rounded-full bg-slate-200" />
         </div>
-        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Optimark AI Studio</span>
+        <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">
+          Optimark AI Studio
+        </span>
         <div className="h-2 w-2 rounded-full bg-[#94C748] animate-ping" />
       </div>
 
@@ -425,16 +428,22 @@ function StepTwoVisual({ t }: { t: Translations }) {
       <div className="p-4 flex flex-col gap-4 flex-1">
         {/* User Prompt Input box */}
         <div className="flex flex-col gap-1">
-          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Prompt</span>
+          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">
+            Prompt
+          </span>
           <div className="bg-white border border-slate-200/80 rounded-xl p-3 shadow-xs min-h-[50px] text-[10px] text-slate-800 flex items-center">
             <span className="font-medium text-slate-700">{typedPrompt}</span>
-            {!isGenerated && <span className="inline-block w-1.5 h-3 bg-[#94C748] animate-pulse ml-0.5" />}
+            {!isGenerated && (
+              <span className="inline-block w-1.5 h-3 bg-[#94C748] animate-pulse ml-0.5" />
+            )}
           </div>
         </div>
 
         {/* AI Output preview */}
         <div className="flex flex-col gap-1">
-          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">AI Draft Output</span>
+          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">
+            AI Draft Output
+          </span>
           <AnimatePresence mode="wait">
             {!isGenerated ? (
               <motion.div
@@ -459,11 +468,16 @@ function StepTwoVisual({ t }: { t: Translations }) {
                   Optimark AI:
                 </div>
                 <p className="leading-relaxed font-mono">
-                  ☕ Hari Senin butuh dorongan ekstra? Dapatkan promo Buy 1 Get 1 Free untuk semua kopi susu literan hari ini saja! 🚀✨
+                  ☕ Hari Senin butuh dorongan ekstra? Dapatkan promo Buy 1 Get 1 Free untuk semua
+                  kopi susu literan hari ini saja! 🚀✨
                 </p>
                 <div className="flex gap-1.5 flex-wrap mt-1">
-                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#KedaiKopi</span>
-                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">#PromoKopi</span>
+                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">
+                    #KedaiKopi
+                  </span>
+                  <span className="bg-[#94C748]/10 text-emerald-800 font-bold rounded-sm px-1.5 py-0.5 text-[8px]">
+                    #PromoKopi
+                  </span>
                 </div>
               </motion.div>
             )}
@@ -494,7 +508,9 @@ function StepThreeVisual({ t }: { t: Translations }) {
     >
       {/* Top: Calendar schedule slot */}
       <div className="flex flex-col gap-1.5">
-        <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">Auto Schedule</span>
+        <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">
+          Auto Schedule
+        </span>
         <div className="grid grid-cols-3 gap-2 text-[9px] font-semibold text-slate-600">
           <div className="border border-slate-200 rounded-xl p-2 text-center bg-slate-50 opacity-60">
             <div>MON 09:00</div>
@@ -526,7 +542,9 @@ function StepThreeVisual({ t }: { t: Translations }) {
       {/* Bottom: Analytics growth display */}
       <div className="flex-1 border-t border-slate-100 pt-3 flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">{t("illustrations.growth")}</span>
+          <span className="text-[8px] text-slate-400 font-bold uppercase tracking-wider">
+            {t("illustrations.growth")}
+          </span>
           <AnimatePresence>
             {showChart && (
               <motion.div
@@ -576,7 +594,9 @@ function StepThreeVisual({ t }: { t: Translations }) {
           </svg>
           <div className="absolute inset-0 flex items-center justify-center">
             {!showChart && (
-              <span className="text-[8px] font-medium text-slate-400 italic">Simulating publication...</span>
+              <span className="text-[8px] font-medium text-slate-400 italic">
+                Simulating publication...
+              </span>
             )}
           </div>
         </div>

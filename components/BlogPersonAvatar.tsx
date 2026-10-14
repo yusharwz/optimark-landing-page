@@ -20,17 +20,23 @@ const PIXELS: Record<keyof typeof SIZES, number> = { xs: 24, sm: 36, md: 48, lg:
 export function BlogPersonAvatar({
   id,
   name,
+  avatarUrl,
   size = "md",
   kind = "author",
   className,
 }: {
-  id: BlogAuthorId | BlogReviewerId;
+  id?: BlogAuthorId | BlogReviewerId | string;
   name: string;
+  avatarUrl?: string | null;
   size?: keyof typeof SIZES;
   kind?: "author" | "reviewer";
   className?: string;
 }) {
-  const photo = BLOG_PERSON_PHOTOS[id];
+  const photo =
+    avatarUrl ||
+    (id && id in BLOG_PERSON_PHOTOS
+      ? BLOG_PERSON_PHOTOS[id as keyof typeof BLOG_PERSON_PHOTOS]
+      : undefined);
 
   return (
     <span

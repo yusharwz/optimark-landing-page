@@ -1,4 +1,11 @@
-import { BLOG_AUTHOR_IDS, BLOG_CATEGORY_IDS, BLOG_POSTS, BLOG_REVIEWER_IDS } from "@/config/blog";
+import {
+  BLOG_AUTHOR_IDS,
+  BLOG_CATEGORY_IDS,
+  BLOG_POSTS,
+  BLOG_REVIEWER_IDS,
+  type BlogCategoryId,
+  type BlogPost,
+} from "@/config/blog";
 
 export function getCmsBaseUrl(): string {
   let url =
@@ -43,6 +50,7 @@ export interface CmsArticleDetail extends CmsArticleSummary {
   metaTitle?: string | null;
   metaDescription?: string | null;
   canonicalUrl?: string | null;
+  tableOfContents?: Array<{ id: string; text: string; level: number }>;
   reviewer?: {
     id: string;
     name: string;
@@ -50,6 +58,35 @@ export interface CmsArticleDetail extends CmsArticleSummary {
     role?: string | null;
     avatarUrl?: string | null;
   } | null;
+}
+
+export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail): BlogPost {
+  const authorSlug = item.author?.slug || "rafi-rizky";
+  const reviewerSlug = ("reviewer" in item && item.reviewer?.slug) || "jonathan-anderson";
+  const categorySlug = (item.category?.slug as BlogCategoryId) || "seo";
+  return {
+    id: item.id,
+    slug: item.slug,
+    title: item.title,
+    excerpt: item.excerpt || undefined,
+    content: ("content" in item && item.content) || undefined,
+    category: categorySlug,
+    publishedAt: item.publishedAt,
+    updatedAt: item.contentUpdatedAt || item.updatedAt || undefined,
+    readMinutes: item.readMinutes || 5,
+    cover: item.coverImageUrl || undefined,
+    coverAlt: item.coverImageAlt || item.title,
+    tags: (item.tags as string[]) || [],
+    author: authorSlug,
+    authorName: item.author?.name || undefined,
+    authorRole: item.author?.role || undefined,
+    authorAvatar: item.author?.avatarUrl || undefined,
+    reviewer: reviewerSlug,
+    reviewerName: ("reviewer" in item && item.reviewer?.name) || undefined,
+    reviewerRole: ("reviewer" in item && item.reviewer?.role) || undefined,
+    reviewerAvatar: ("reviewer" in item && item.reviewer?.avatarUrl) || undefined,
+    tableOfContents: ("tableOfContents" in item && item.tableOfContents) || undefined,
+  };
 }
 
 export interface CmsPostsResponse {
@@ -74,7 +111,10 @@ export async function fetchCmsPosts(params?: {
 }): Promise<CmsPostsResponse> {
   const baseUrl = getCmsBaseUrl();
   const query = new URLSearchParams();
-  if (params?.categorySlug) query.set("categorySlug", params.categorySlug);
+  if (params?.categorySlug) {
+    query.set("category", params.categorySlug);
+    query.set("categorySlug", params.categorySlug);
+  }
   if (params?.tag) query.set("tag", params.tag);
   if (params?.search) query.set("search", params.search);
   if (params?.page) query.set("page", String(params.page));
@@ -225,14 +265,39 @@ export async function getPublishedPostsForSitemap(): Promise<
 
     if (res.ok) {
       const json: CmsPostsResponse = await res.json();
-      if (Array.isArray(json.data) && json.data.length > 0) {
-        return json.data.map((item) => ({
-          slug: item.slug,
-          publishedAt: new Date(item.publishedAt),
-          updatedAt: item.updatedAt ? new Date(item.updatedAt) : null,
-          contentUpdatedAt: item.contentUpdatedAt ? new Date(item.contentUpdatedAt) : null,
-        }));
+      const map = new Map<
+        string,
+        {
+          slug: string;
+          publishedAt: Date;
+          updatedAt?: Date | null;
+          contentUpdatedAt?: Date | null;
+        }
+      >();
+
+      // 1. Static items
+      for (const p of BLOG_POSTS) {
+        map.set(p.slug, {
+          slug: p.slug,
+          publishedAt: new Date(p.publishedAt),
+          updatedAt: p.updatedAt ? new Date(p.updatedAt) : null,
+          contentUpdatedAt: null,
+        });
       }
+
+      // 2. Dynamic CMS items take precedence and add all newly created articles
+      if (Array.isArray(json.data)) {
+        for (const item of json.data) {
+          map.set(item.slug, {
+            slug: item.slug,
+            publishedAt: new Date(item.publishedAt),
+            updatedAt: item.updatedAt ? new Date(item.updatedAt) : null,
+            contentUpdatedAt: item.contentUpdatedAt ? new Date(item.contentUpdatedAt) : null,
+          });
+        }
+      }
+
+      return Array.from(map.values());
     }
   } catch {
     // CMS unreachable — use static fallback

@@ -1,9 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  COMMENT_CONFIG,
-  DEFAULT_MOCKUP_COMMENTS,
-  INITIAL_APPROVED_COMMENTS,
-} from "@/config/comments";
+import { COMMENT_CONFIG, INITIAL_APPROVED_COMMENTS } from "@/config/comments";
 import { validateCommentSubmission } from "@/lib/comments";
 import type { BlogComment, CommentSubmissionPayload } from "@/types/comment";
 
@@ -46,12 +42,12 @@ export async function GET(request: NextRequest) {
               ? { Authorization: `Bearer ${process.env.CMS_API_KEY}` }
               : {}),
           },
-          next: { revalidate: 60 },
+          cache: "no-store",
         });
 
         if (response.ok) {
           const cmsData = await response.json();
-          return NextResponse.json({ success: true, data: cmsData });
+          return NextResponse.json({ success: true, data: Array.isArray(cmsData) ? cmsData : [] });
         }
       } catch (cmsError) {
         console.error("Failed to fetch from CMS, falling back to local store:", cmsError);
@@ -59,8 +55,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 2. Standalone fallback: return approved comments from memory/static store
-    const comments =
-      runtimeApprovedComments.get(slug) || DEFAULT_MOCKUP_COMMENTS.map((c) => ({ ...c, slug }));
+    const comments = runtimeApprovedComments.get(slug) || [];
     return NextResponse.json({
       success: true,
       data: comments,
@@ -135,8 +130,7 @@ export async function POST(request: NextRequest) {
             authorEmail: payload.authorEmail.trim(),
             authorWebsite: payload.authorWebsite?.trim() || undefined,
             content: payload.content.trim(),
-            parentId: payload.parentId || null,
-            status: "PENDING",
+            parentId: payload.parentId || undefined,
           }),
         });
 

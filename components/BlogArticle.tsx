@@ -7,13 +7,33 @@ import { Lightbulb } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import type { BlogSlug } from "@/config/blog";
 import { buildBlogToc } from "@/lib/blog";
+import { markdownToBlocks } from "@/lib/markdown";
 import type { BlogBlock } from "@/types/blog";
 import { cx } from "@/utils/cx";
 
 /** Renders a post body from its message blocks; all styling lives here, not in the JSON. */
-export function BlogArticle({ slug }: { slug: BlogSlug }) {
+export function BlogArticle({
+  slug,
+  blocks: initialBlocks,
+  content,
+}: {
+  slug: BlogSlug;
+  blocks?: BlogBlock[];
+  content?: string | null;
+}) {
   const tPost = useTranslations(`blogPosts.${slug}`);
-  const blocks = tPost.raw("blocks") as BlogBlock[];
+
+  let blocks: BlogBlock[] = initialBlocks || [];
+  if (blocks.length === 0 && content) {
+    blocks = markdownToBlocks(content);
+  }
+  if (blocks.length === 0) {
+    try {
+      blocks = (tPost.raw("blocks") as BlogBlock[]) || [];
+    } catch {
+      blocks = [];
+    }
+  }
 
   const toc = buildBlogToc(blocks);
   let headingIndex = 0;

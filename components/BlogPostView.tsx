@@ -25,6 +25,7 @@ import {
   type BlogAuthorId,
   type BlogReviewerId,
   type BlogSlug,
+  type BlogPost,
 } from "@/config/blog";
 import { formatBlogDate } from "@/lib/blog";
 import { resolveLocale } from "@/lib/locale";
@@ -36,22 +37,57 @@ const ARTICLE_ID = "blog-article";
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748] focus-visible:ring-offset-2";
 
-export function BlogPostView({ slug }: { slug: BlogSlug }) {
+export function BlogPostView({
+  slug,
+  initialPost,
+  relatedPosts: initialRelated,
+}: {
+  slug: BlogSlug;
+  initialPost?: BlogPost;
+  relatedPosts?: BlogPost[];
+}) {
   const t = useTranslations("blog");
   const tPost = useTranslations("blog.post");
   const tCopy = useTranslations(`blogPosts.${slug}`);
   const tPeople = useTranslations("blogPeople");
   const locale = resolveLocale(useLocale());
 
-  const post = getBlogPost(slug);
-  const related = getRelatedPosts(slug);
+  const post = initialPost || getBlogPost(slug);
+  const related = initialRelated || getRelatedPosts(slug);
 
   if (!post) return null;
 
-  const title = tCopy("title");
+  let title = post.title;
+  if (!title) {
+    try {
+      title = tCopy("title");
+    } catch {
+      title = post.slug;
+    }
+  }
+
   const tags = post.tags;
-  const authorName = tPeople(`authors.${post.author}.name`);
-  const reviewerName = tPeople(`reviewers.${post.reviewer}.name`);
+
+  let authorName = post.authorName;
+  if (!authorName) {
+    try {
+      authorName = (tPeople as unknown as (k: string) => string)(`authors.${post.author}.name`);
+    } catch {
+      authorName = typeof post.author === "string" ? post.author : "Optimark Team";
+    }
+  }
+
+  let reviewerName = post.reviewerName;
+  if (!reviewerName && post.reviewer) {
+    try {
+      reviewerName = (tPeople as unknown as (k: string) => string)(
+        `reviewers.${post.reviewer}.name`,
+      );
+    } catch {
+      reviewerName = typeof post.reviewer === "string" ? post.reviewer : "Reviewer";
+    }
+  }
+
   const shareUrl = localizedUrl(locale, blogHref(slug));
 
   return (
@@ -110,7 +146,8 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                     focusRing,
                   )}
                 >
-                  {t(`categories.${post.category}`)}
+                  {(t as unknown as (k: string) => string)(`categories.${post.category}`) ||
+                    post.category}
                 </Link>
                 <Dot />
                 <span className="text-[#717680]">
@@ -153,16 +190,20 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                   label={tPost("writtenBy")}
                   href={authorHref(post.author)}
                   person={post.author}
+                  avatarUrl={post.authorAvatar}
                   name={authorName}
                 />
-                <Byline
-                  label={tPost("reviewedBy")}
-                  href={reviewerHref(post.reviewer)}
-                  person={post.reviewer}
-                  name={reviewerName}
-                  kind="reviewer"
-                  badge={<ExpertBadge label={tPost("expertReviewer")} />}
-                />
+                {post.reviewer && (
+                  <Byline
+                    label={tPost("reviewedBy")}
+                    href={reviewerHref(post.reviewer)}
+                    person={post.reviewer}
+                    avatarUrl={post.reviewerAvatar}
+                    name={reviewerName || "Reviewer"}
+                    kind="reviewer"
+                    badge={<ExpertBadge label={tPost("expertReviewer")} />}
+                  />
+                )}
               </div>
               <BlogSocialShare url={shareUrl} title={title} variant="compact" />
             </div>
@@ -174,7 +215,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-8 lg:grid lg:grid-cols-[minmax(12rem,1fr)_minmax(0,42.5rem)_minmax(4.5rem,1fr)] lg:gap-x-8 xl:gap-x-12 2xl:gap-x-16">
           <aside className="hidden lg:block">
             <div className="sticky top-28 flex flex-col gap-6">
-              <BlogToc slug={slug} />
+              <BlogToc slug={slug} content={post.content} />
             </div>
           </aside>
 
@@ -183,7 +224,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
               <div className="relative h-50 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-75">
                 <Image
                   src={post.cover}
-                  alt={tCopy("coverAlt")}
+                  alt={post.coverAlt || title}
                   fill
                   preload
                   sizes="(min-width: 768px) 680px, 100vw"
@@ -193,7 +234,7 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
             )}
 
             <article id={ARTICLE_ID}>
-              <BlogArticle slug={slug} />
+              <BlogArticle slug={slug} content={post.content} />
             </article>
 
             <BlogSocialShare url={shareUrl} title={title} variant="default" className="my-2" />
@@ -206,18 +247,22 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                   label={tPost("writtenBy")}
                   href={authorHref(post.author)}
                   person={post.author}
+                  avatarUrl={post.authorAvatar}
                   name={authorName}
                   ariaLabel={tPost("viewProfile", { name: authorName })}
                 />
-                <ProfileCard
-                  label={tPost("reviewedBy")}
-                  href={reviewerHref(post.reviewer)}
-                  person={post.reviewer}
-                  name={reviewerName}
-                  kind="reviewer"
-                  badge={<ExpertBadge label={tPost("expertReviewer")} />}
-                  ariaLabel={tPost("viewProfile", { name: reviewerName })}
-                />
+                {post.reviewer && (
+                  <ProfileCard
+                    label={tPost("reviewedBy")}
+                    href={reviewerHref(post.reviewer)}
+                    person={post.reviewer}
+                    avatarUrl={post.reviewerAvatar}
+                    name={reviewerName || "Reviewer"}
+                    kind="reviewer"
+                    badge={<ExpertBadge label={tPost("expertReviewer")} />}
+                    ariaLabel={tPost("viewProfile", { name: reviewerName || "Reviewer" })}
+                  />
+                )}
               </div>
 
               {tags.length > 0 && (
@@ -226,19 +271,25 @@ export function BlogPostView({ slug }: { slug: BlogSlug }) {
                     {tPost("tags")}
                   </p>
                   <ul className="flex flex-wrap gap-2">
-                    {tags.map((tag) => (
-                      <li key={tag}>
-                        <Link
-                          href={blogTagHref(tag)}
-                          className={cx(
-                            "inline-flex rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862] transition-colors hover:border-[#D4E9B6] hover:bg-[#EAF4DA] hover:text-[#59772B]",
-                            focusRing,
-                          )}
-                        >
-                          {t(`tags.${tag}`)}
-                        </Link>
-                      </li>
-                    ))}
+                    {tags.map((tag) => {
+                      let tagLabel = tag;
+                      try {
+                        tagLabel = (t as unknown as (k: string) => string)(`tags.${tag}`) || tag;
+                      } catch {}
+                      return (
+                        <li key={tag}>
+                          <Link
+                            href={blogTagHref(tag)}
+                            className={cx(
+                              "inline-flex rounded-full border border-[#E9EAEB] bg-[#FAFAFA] px-2 py-0.5 text-sm font-medium tracking-tight text-[#535862] transition-colors hover:border-[#D4E9B6] hover:bg-[#EAF4DA] hover:text-[#59772B]",
+                              focusRing,
+                            )}
+                          >
+                            {tagLabel}
+                          </Link>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
               )}
@@ -310,30 +361,51 @@ function Byline({
   href,
   person,
   name,
+  avatarUrl,
   kind = "author",
   badge,
 }: {
   label: string;
-  href: string;
-  person: BlogAuthorId | BlogReviewerId;
+  href?: string;
+  person?: BlogAuthorId | BlogReviewerId | string;
   name: string;
+  avatarUrl?: string | null;
   kind?: "author" | "reviewer";
   badge?: ReactNode;
 }) {
+  const content = (
+    <>
+      <BlogPersonAvatar
+        id={person}
+        name={name}
+        avatarUrl={avatarUrl}
+        size="xs"
+        kind={kind}
+        className="ring-0"
+      />
+      <span className="underline-offset-2 group-hover:underline">{name}</span>
+    </>
+  );
+
   return (
     <div className="flex flex-col gap-2">
       <p className="text-sm tracking-tight text-[#717680]">{label}</p>
       <div className="flex flex-wrap items-center gap-1.5">
-        <Link
-          href={href}
-          className={cx(
-            "group flex items-center gap-1.5 rounded text-sm tracking-tight text-[#1E280E] transition-colors hover:text-[#252B37]",
-            focusRing,
-          )}
-        >
-          <BlogPersonAvatar id={person} name={name} size="xs" kind={kind} className="ring-0" />
-          <span className="underline-offset-2 group-hover:underline">{name}</span>
-        </Link>
+        {href ? (
+          <Link
+            href={href}
+            className={cx(
+              "group flex items-center gap-1.5 rounded text-sm tracking-tight text-[#1E280E] transition-colors hover:text-[#252B37]",
+              focusRing,
+            )}
+          >
+            {content}
+          </Link>
+        ) : (
+          <div className="flex items-center gap-1.5 text-sm tracking-tight text-[#1E280E]">
+            {content}
+          </div>
+        )}
         {badge}
       </div>
     </div>
@@ -345,14 +417,16 @@ function ProfileCard({
   href,
   person,
   name,
+  avatarUrl,
   kind = "author",
   badge,
   ariaLabel,
 }: {
   label: string;
   href: string;
-  person: BlogAuthorId | BlogReviewerId;
+  person: BlogAuthorId | BlogReviewerId | string;
   name: string;
+  avatarUrl?: string | null;
   kind?: "author" | "reviewer";
   badge?: ReactNode;
   ariaLabel: string;
@@ -369,6 +443,7 @@ function ProfileCard({
       <BlogPersonAvatar
         id={person}
         name={name}
+        avatarUrl={avatarUrl}
         size="lg"
         kind={kind}
         className="h-14 w-14 ring-0"

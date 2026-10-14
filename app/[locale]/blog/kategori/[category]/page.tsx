@@ -4,18 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import {
-  BLOG_CATEGORY_IDS,
-  BLOG_POSTS,
-  blogCategoryHref,
-  blogHref,
-  isBlogCategoryId,
-} from "@/config/blog";
+import { BLOG_CATEGORY_IDS, blogCategoryHref, blogHref, isBlogCategoryId } from "@/config/blog";
 import { breadcrumbJsonLd, collectionPageJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
+import { cmsArticleToBlogPost, fetchCmsPosts } from "@/lib/cms";
 
 type Props = {
   params: Promise<{ locale: string; category: string }>;
@@ -77,8 +72,11 @@ export default async function BlogCategoryPage({ params }: Props) {
   }
 
   const t = await getTranslations({ locale, namespace: "blog" });
-  const tPosts = await getTranslations({ locale, namespace: "blogPosts" });
   const url = localizedUrl(locale, blogCategoryHref(category));
+
+  // Ingest real dynamic posts from CMS API for this category
+  const cmsRes = await fetchCmsPosts({ categorySlug: category, limit: 1000 });
+  const posts = cmsRes.data.map(cmsArticleToBlogPost);
 
   return (
     <div className="min-h-screen bg-white">
@@ -95,15 +93,15 @@ export default async function BlogCategoryPage({ params }: Props) {
           description: t(`categoryPages.${category}.description`),
           url,
           locale,
-          items: BLOG_POSTS.filter((post) => post.category === category).map((post) => ({
-            name: tPosts(`${post.slug}.title`),
+          items: posts.map((post) => ({
+            name: post.title || post.slug,
             url: localizedUrl(locale, blogHref(post.slug)),
           })),
         })}
       />
       <Header />
       <main className="relative pt-24">
-        <BlogIndexSection category={category} />
+        <BlogIndexSection category={category} initialPosts={posts} />
       </main>
       <Footer />
     </div>

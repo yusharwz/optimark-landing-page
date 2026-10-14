@@ -47,10 +47,17 @@ const FIRST_ROW = 3;
 export function BlogIndexSection({
   category,
   tag,
-}: { category?: BlogCategoryId; tag?: BlogTagId } = {}) {
+  initialPosts,
+}: {
+  category?: BlogCategoryId;
+  tag?: BlogTagId;
+  initialPosts?: BlogPost[];
+} = {}) {
   const t = useTranslations("blog");
   const tPosts = useTranslations("blogPosts");
   const locale = resolveLocale(useLocale());
+
+  const allPosts = initialPosts && initialPosts.length > 0 ? initialPosts : BLOG_POSTS;
 
   const filter: Filter = category ?? "all";
   const [draft, setDraft] = useState("");
@@ -58,14 +65,23 @@ export function BlogIndexSection({
 
   const matches = useMemo(() => {
     const needle = query.trim().toLocaleLowerCase(locale);
-    return BLOG_POSTS.filter((post) => {
+    return allPosts.filter((post) => {
       if (filter !== "all" && post.category !== filter) return false;
       if (tag && !post.tags.includes(tag)) return false;
       if (!needle) return true;
-      const haystack = `${tPosts(`${post.slug}.title`)} ${tPosts(`${post.slug}.excerpt`)}`;
+      let title = post.title || "";
+      let excerpt = post.excerpt || "";
+      if (!title || !excerpt) {
+        try {
+          const tp = tPosts as unknown as (k: string) => string;
+          title = title || tp(`${post.slug}.title`);
+          excerpt = excerpt || tp(`${post.slug}.excerpt`);
+        } catch {}
+      }
+      const haystack = `${title} ${excerpt} ${post.slug}`;
       return haystack.toLocaleLowerCase(locale).includes(needle);
     });
-  }, [filter, tag, query, locale, tPosts]);
+  }, [allPosts, filter, tag, query, locale, tPosts]);
 
   const isOverview = filter === "all" && !tag && !query.trim();
   const popularTags = tag ? getPopularTags(tag) : [];
@@ -213,13 +229,13 @@ export function BlogIndexSection({
               <>
                 <PostSection
                   title={t("latestLabel")}
-                  posts={BLOG_POSTS.slice(0, LATEST_LIMIT)}
+                  posts={allPosts.slice(0, LATEST_LIMIT)}
                   locale={locale}
                   eagerFirstRow
                 />
                 <BlogBanner />
                 {BLOG_SECTION_ORDER.map((id) => {
-                  const posts = BLOG_POSTS.filter((post) => post.category === id);
+                  const posts = allPosts.filter((post) => post.category === id);
                   if (posts.length === 0) return null;
                   return (
                     <PostSection

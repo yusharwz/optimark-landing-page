@@ -12,6 +12,7 @@ import {
   reviewerHref,
   blogCategoryHref,
   blogHref,
+  type BlogCategoryId,
   type BlogPost,
 } from "@/config/blog";
 import { formatBlogDate } from "@/lib/blog";
@@ -47,10 +48,31 @@ export function BlogCard({
   const tPost = useTranslations(`blogPosts.${post.slug}`);
   const tPeople = useTranslations("blogPeople");
 
-  const style = BLOG_CATEGORY_STYLES[post.category];
-  const Icon = BLOG_CATEGORY_ICONS[post.category];
-  const title = tPost("title");
-  const authorName = tPeople(`authors.${post.author}.name`);
+  const postCategory = (
+    typeof post.category === "string" && post.category in BLOG_CATEGORY_STYLES
+      ? post.category
+      : "seo"
+  ) as BlogCategoryId;
+  const style = BLOG_CATEGORY_STYLES[postCategory] || BLOG_CATEGORY_STYLES.seo;
+  const Icon = BLOG_CATEGORY_ICONS[postCategory] || BLOG_CATEGORY_ICONS.seo;
+
+  let title = post.title;
+  if (!title) {
+    try {
+      title = tPost("title");
+    } catch {
+      title = post.slug;
+    }
+  }
+
+  let authorName = post.authorName;
+  if (!authorName) {
+    try {
+      authorName = (tPeople as unknown as (k: string) => string)(`authors.${post.author}.name`);
+    } catch {
+      authorName = typeof post.author === "string" ? post.author : "Optimark Team";
+    }
+  }
 
   const titleRef = useRef<HTMLHeadingElement>(null);
   const [truncated, setTruncated] = useState(false);
@@ -109,7 +131,8 @@ export function BlogCard({
               focusRing,
             )}
           >
-            {t(`categories.${post.category}`)}
+            {(t as unknown as (k: string) => string)(`categories.${post.category}`) ||
+              post.category}
           </Link>
 
           <div className="group/title relative">
@@ -146,19 +169,26 @@ export function BlogCard({
 
         <div className="mt-auto flex flex-col gap-3">
           <Link href={authorHref(post.author)} className={personLink}>
-            <BlogPersonAvatar id={post.author} name={authorName} size="xs" className="ring-0" />
+            <BlogPersonAvatar
+              id={post.author}
+              name={authorName}
+              avatarUrl={post.authorAvatar}
+              size="xs"
+              className="ring-0"
+            />
             <span className="truncate">{authorName}</span>
           </Link>
-          {showReviewer && (
+          {showReviewer && post.reviewer && (
             <Link href={reviewerHref(post.reviewer)} className={personLink}>
               <BlogPersonAvatar
                 id={post.reviewer}
-                name={tPeople(`reviewers.${post.reviewer}.fullName`)}
+                name={post.reviewerName || "Reviewer"}
+                avatarUrl={post.reviewerAvatar}
                 size="xs"
                 kind="reviewer"
                 className="ring-0"
               />
-              <span className="truncate">{tPeople(`reviewers.${post.reviewer}.fullName`)}</span>
+              <span className="truncate">{post.reviewerName || "Reviewer"}</span>
             </Link>
           )}
         </div>

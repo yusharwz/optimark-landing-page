@@ -125,7 +125,7 @@ export const BLOG_SLUGS = [
   "insight-instagram",
 ] as const;
 
-export type BlogSlug = (typeof BLOG_SLUGS)[number];
+export type BlogSlug = (typeof BLOG_SLUGS)[number] | string;
 
 /**
  * People behind the posts. Each id is both the URL slug of their profile page
@@ -160,7 +160,7 @@ export const BLOG_PERSON_PHOTOS: Partial<Record<BlogAuthorId | BlogReviewerId, s
 
 export type BlogPost = {
   slug: BlogSlug;
-  category: BlogCategoryId;
+  category: BlogCategoryId | string;
   /** ISO date, formatted per locale at render time. */
   publishedAt: string;
   /**
@@ -170,11 +170,24 @@ export type BlogPost = {
   updatedAt?: string;
   readMinutes: number;
   cover?: string;
-  tags: BlogTagId[];
-  author: BlogAuthorId;
+  coverAlt?: string;
+  tags: (BlogTagId | string)[];
+  author: BlogAuthorId | string;
   /** Subject-matter expert who checked the post before publishing. */
-  reviewer: BlogReviewerId;
+  reviewer?: BlogReviewerId | string;
   related?: BlogSlug[];
+  // Dynamic fields from CMS
+  id?: string;
+  title?: string;
+  excerpt?: string;
+  content?: string;
+  authorName?: string;
+  authorRole?: string;
+  authorAvatar?: string;
+  reviewerName?: string;
+  reviewerRole?: string;
+  reviewerAvatar?: string;
+  tableOfContents?: Array<{ id: string; text: string; level: number }>;
 };
 
 /** Newest first. Order here is the order the index renders. */
@@ -304,7 +317,7 @@ export function getBlogOverviewPosts(): BlogPost[] {
   return shown.filter((post, index) => shown.indexOf(post) === index);
 }
 
-export function blogTagHref(id: BlogTagId): string {
+export function blogTagHref(id: BlogTagId | string): string {
   return `/blog/tag/${id}`;
 }
 

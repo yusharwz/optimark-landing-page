@@ -9,11 +9,21 @@ import type { BlogComment } from "@/types/comment";
  * If unset, the internal Next.js route `/api/blog/comments` handles submission,
  * anti-spam verification, and moderation storage.
  */
+export function getCmsCommentApiUrl(): string {
+  if (process.env.CMS_API_URL) {
+    const base = process.env.CMS_API_URL.replace(/\/+$/, "");
+    return `${base.endsWith("/api") ? base : `${base}/api`}/public/comments`;
+  }
+  if (process.env.CMS_COMMENT_API_URL) {
+    return process.env.CMS_COMMENT_API_URL;
+  }
+  return "http://localhost:3001/api/public/comments";
+}
+
 export const COMMENT_CONFIG = {
-  cmsApiUrl:
-    process.env.CMS_COMMENT_API_URL ||
-    process.env.NEXT_PUBLIC_COMMENT_API_URL ||
-    `${process.env.CMS_API_URL?.replace(/\/+$/, "") || "http://localhost:3001"}/api/public/comments`,
+  get cmsApiUrl() {
+    return getCmsCommentApiUrl();
+  },
   internalApiEndpoint: "/api/blog/comments",
 
   // Anti-spam thresholds

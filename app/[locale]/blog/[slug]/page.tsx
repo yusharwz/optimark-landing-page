@@ -5,6 +5,7 @@ import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
 import { BLOG_POSTS, authorHref, blogHref, getBlogPost } from "@/config/blog";
+import { cmsArticleToBlogPost, fetchCmsPostBySlug } from "@/lib/cms";
 import { Header } from "@/components/Header";
 import { BlogPostView } from "@/components/BlogPostView";
 import { BlogTocBar } from "@/components/BlogToc";
@@ -18,10 +19,12 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export const dynamicParams = true;
+export const revalidate = 60;
+
 /**
- * Every post in both locales, so the whole blog prerenders at build time like
- * the rest of the site. `dynamicParams` is left at its default — an unknown
- * slug falls through to notFound() below rather than rendering an empty shell.
+ * Prerender known slugs at build time. Dynamic slugs created in CMS
+ * will be fetched and rendered on demand via dynamicParams = true.
  */
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
@@ -33,20 +36,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   const locale = resolveLocale(localeParam);
 
-  const entry = getBlogPost(slug);
+  const cmsData = await fetchCmsPostBySlug(slug);
+  const entry = cmsData ? cmsArticleToBlogPost(cmsData.post) : getBlogPost(slug);
   if (!entry) return {};
 
-  // Each post is its own message namespace, keyed by slug.
-  const t = await getTranslations({ locale, namespace: `blogPosts.${entry.slug}` });
+  let title = entry.title;
+  let metaDescription = entry.excerpt || "";
+  let metaTitle = entry.title || slug;
 
-  const metaTitle = t("metaTitle");
-  const metaDescription = t("metaDescription");
+  try {
+    const t = await getTranslations({ locale, namespace: `blogPosts.${entry.slug}` });
+    title = title || t("title");
+    metaDescription = metaDescription || t("metaDescription");
+    metaTitle = t("metaTitle") || title;
+  } catch {
+    // Dynamic post without static translations
+  }
 
-  const ogImage = buildOgImageUrl({
-    title: t("title"),
-    description: metaDescription,
-    locale,
-  });
+  const ogImage =
+    entry.cover ||
+    buildOgImageUrl({
+      title: title || slug,
+      description: metaDescription,
+      locale,
+    });
 
   return {
     title: metaTitle,
@@ -64,7 +77,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           secureUrl: ogImage,
           width: 1200,
           height: 630,
-          alt: t("title"),
+          alt: title || slug,
           type: "image/png",
         },
       ],
@@ -83,31 +96,61 @@ export default async function BlogPostPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  const post = getBlogPost(slug);
+  const cmsData = await fetchCmsPostBySlug(slug);
+  const post = cmsData ? cmsArticleToBlogPost(cmsData.post) : getBlogPost(slug);
 
   if (!post) {
     notFound();
   }
 
-  const t = await getTranslations({ locale, namespace: `blogPosts.${post.slug}` });
+  let title = post.title;
+  let metaDescription = post.excerpt || "";
+
+  try {
+    const t = await getTranslations({ locale, namespace: `blogPosts.${post.slug}` });
+    title = title || t("title");
+    metaDescription = metaDescription || t("metaDescription");
+  } catch {
+    // Dynamic post without static translation file
+  }
+
   const tPeople = await getTranslations({ locale, namespace: "blogPeople" });
   const tBlog = await getTranslations({ locale, namespace: "blog" });
   const url = localizedUrl(locale, blogHref(post.slug));
 
+  let authorName = post.authorName;
+  if (!authorName) {
+    try {
+      authorName = tPeople(`authors.${post.author}.name` as never);
+    } catch {
+      authorName = typeof post.author === "string" ? post.author : "Optimark Team";
+    }
+  }
+
   const blogPosting = blogPostingJsonLd({
-    headline: t("title"),
-    description: t("metaDescription"),
+    headline: title || post.slug,
+    description: metaDescription,
     url,
     locale,
     publishedAt: post.publishedAt,
     updatedAt: post.updatedAt,
     cover: post.cover,
-    keywords: post.tags.map((tag) => tBlog(`tags.${tag}`)),
+    keywords: post.tags.map((tag) => {
+      try {
+        return (tBlog as unknown as (k: string) => string)(`tags.${tag}`) || tag;
+      } catch {
+        return tag;
+      }
+    }),
     author: {
-      name: tPeople(`authors.${post.author}.name`),
+      name: authorName,
       url: localizedUrl(locale, authorHref(post.author)),
     },
   });
+
+  const relatedPosts = cmsData?.relatedPosts
+    ? cmsData.relatedPosts.map(cmsArticleToBlogPost)
+    : undefined;
 
   return (
     <div className="min-h-screen bg-white">
@@ -116,12 +159,12 @@ export default async function BlogPostPage({ params }: Props) {
         data={breadcrumbJsonLd([
           { name: tBlog("profile.breadcrumbHome"), url: localizedUrl(locale, "/") },
           { name: tBlog("profile.breadcrumbBlog"), url: localizedUrl(locale, "/blog") },
-          { name: t("title"), url },
+          { name: title || post.slug, url },
         ])}
       />
-      <Header subnav={<BlogTocBar slug={post.slug} />} />
+      <Header subnav={<BlogTocBar slug={post.slug} content={post.content} />} />
       <main className="relative pt-36 sm:pt-40 lg:pt-24">
-        <BlogPostView slug={post.slug} />
+        <BlogPostView slug={post.slug} initialPost={post} relatedPosts={relatedPosts} />
       </main>
       <Footer />
       <ScrollUpButton threshold={SCROLL_UP_THRESHOLD} />

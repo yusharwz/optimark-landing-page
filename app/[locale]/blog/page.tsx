@@ -9,12 +9,13 @@ import {
   localeAlternates,
   localizedUrl,
 } from "@/lib/seo";
-import { blogHref, getBlogOverviewPosts } from "@/config/blog";
+import { blogHref } from "@/config/blog";
 import { getSeoKeywords } from "@/config/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
+import { cmsArticleToBlogPost, fetchCmsPosts } from "@/lib/cms";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -69,8 +70,11 @@ export default async function BlogPage({ params }: Props) {
 
   const t = await getTranslations({ locale, namespace: "blogMetadata" });
   const tBlog = await getTranslations({ locale, namespace: "blog" });
-  const tPosts = await getTranslations({ locale, namespace: "blogPosts" });
   const url = localizedUrl(locale, "/blog");
+
+  // Ingest real dynamic posts from CMS API with static fallback
+  const cmsRes = await fetchCmsPosts({ limit: 1000 });
+  const posts = cmsRes.data.map(cmsArticleToBlogPost);
 
   return (
     <div className="min-h-screen bg-white">
@@ -86,15 +90,15 @@ export default async function BlogPage({ params }: Props) {
           description: t("description"),
           url,
           locale,
-          items: getBlogOverviewPosts().map((post) => ({
-            name: tPosts(`${post.slug}.title`),
+          items: posts.map((post) => ({
+            name: post.title || post.slug,
             url: localizedUrl(locale, blogHref(post.slug)),
           })),
         })}
       />
       <Header />
       <main className="relative pt-24">
-        <BlogIndexSection />
+        <BlogIndexSection initialPosts={posts} />
       </main>
       <Footer />
     </div>
