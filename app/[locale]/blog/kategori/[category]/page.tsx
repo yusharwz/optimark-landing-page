@@ -10,7 +10,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
 import { Footer } from "@/components/Footer";
-import { cmsArticleToBlogPost, fetchCmsPosts } from "@/lib/cms";
+import { cmsArticleToBlogPost, fetchCmsCategoryBySlug, fetchCmsPosts } from "@/lib/cms";
 
 export const dynamic = "force-dynamic";
 
@@ -26,23 +26,54 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, category } = await params;
-  if (!isBlogCategoryId(category)) return {};
   const locale = resolveLocale(localeParam);
-  const t = await getTranslations({ locale, namespace: `blog.categoryPages.${category}` });
+
+  const cmsCategory = await fetchCmsCategoryBySlug(category);
+  if (!isBlogCategoryId(category) && !cmsCategory) return {};
+
+  let title =
+    locale === "en"
+      ? cmsCategory?.nameEn || cmsCategory?.name
+      : cmsCategory?.nameId || cmsCategory?.name;
+  let description =
+    locale === "en"
+      ? cmsCategory?.descriptionEn || cmsCategory?.description
+      : cmsCategory?.descriptionId || cmsCategory?.description;
+  let metaTitle =
+    locale === "en"
+      ? cmsCategory?.metaTitleEn || cmsCategory?.nameEn || cmsCategory?.name
+      : cmsCategory?.metaTitleId || cmsCategory?.nameId || cmsCategory?.name;
+  let metaDescription =
+    locale === "en"
+      ? cmsCategory?.metaDescriptionEn || cmsCategory?.descriptionEn || cmsCategory?.description
+      : cmsCategory?.metaDescriptionId || cmsCategory?.descriptionId || cmsCategory?.description;
+
+  try {
+    const t = await getTranslations({ locale, namespace: "blog" });
+    const tAny = t as any;
+    title = title || tAny(`categoryPages.${category}.title`);
+    description = description || tAny(`categoryPages.${category}.description`);
+    metaTitle = metaTitle || tAny(`categoryPages.${category}.metaTitle`);
+    metaDescription = metaDescription || tAny(`categoryPages.${category}.metaDescription`);
+  } catch {}
+
+  title = title || category;
+  metaTitle = metaTitle || title;
+  metaDescription = metaDescription || description || "";
 
   const ogImage = buildOgImageUrl({
-    title: t("title"),
-    description: t("metaDescription"),
+    title,
+    description: metaDescription,
     locale,
   });
 
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title: metaTitle,
+    description: metaDescription,
     alternates: localeAlternates(locale, blogCategoryHref(category)),
     openGraph: {
-      title: t("metaTitle"),
-      description: t("metaDescription"),
+      title: metaTitle,
+      description: metaDescription,
       type: "website",
       images: [
         {
@@ -50,15 +81,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
           secureUrl: ogImage,
           width: 1200,
           height: 630,
-          alt: t("title"),
+          alt: title,
           type: "image/png",
         },
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: t("metaTitle"),
-      description: t("metaDescription"),
+      title: metaTitle,
+      description: metaDescription,
       images: [ogImage],
     },
   };
@@ -69,12 +100,30 @@ export default async function BlogCategoryPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  if (!isBlogCategoryId(category)) {
+  const cmsCategory = await fetchCmsCategoryBySlug(category);
+  if (!isBlogCategoryId(category) && !cmsCategory) {
     notFound();
   }
 
   const t = await getTranslations({ locale, namespace: "blog" });
   const url = localizedUrl(locale, blogCategoryHref(category));
+
+  let categoryTitle =
+    locale === "en"
+      ? cmsCategory?.nameEn || cmsCategory?.name
+      : cmsCategory?.nameId || cmsCategory?.name;
+  let categoryDesc =
+    locale === "en"
+      ? cmsCategory?.descriptionEn || cmsCategory?.description
+      : cmsCategory?.descriptionId || cmsCategory?.description;
+
+  try {
+    const tAny = t as any;
+    categoryTitle = categoryTitle || tAny(`categoryPages.${category}.title`);
+    categoryDesc = categoryDesc || tAny(`categoryPages.${category}.description`);
+  } catch {}
+
+  categoryTitle = categoryTitle || category;
 
   // Ingest real dynamic posts from CMS API for this category
   const cmsRes = await fetchCmsPosts({ categorySlug: category, limit: 1000 });
@@ -86,13 +135,13 @@ export default async function BlogCategoryPage({ params }: Props) {
         data={breadcrumbJsonLd([
           { name: t("profile.breadcrumbHome"), url: localizedUrl(locale, "/") },
           { name: t("profile.breadcrumbBlog"), url: localizedUrl(locale, "/blog") },
-          { name: t(`categories.${category}`), url },
+          { name: categoryTitle, url },
         ])}
       />
       <JsonLd
         data={collectionPageJsonLd({
-          name: t(`categoryPages.${category}.title`),
-          description: t(`categoryPages.${category}.description`),
+          name: categoryTitle,
+          description: categoryDesc || "",
           url,
           locale,
           items: posts.map((post) => ({
@@ -103,7 +152,11 @@ export default async function BlogCategoryPage({ params }: Props) {
       />
       <Header />
       <main className="relative pt-24">
-        <BlogIndexSection category={category} initialPosts={posts} />
+        <BlogIndexSection
+          category={category as any}
+          initialPosts={posts}
+          categoryInfo={{ name: categoryTitle, description: categoryDesc }}
+        />
       </main>
       <Footer />
     </div>

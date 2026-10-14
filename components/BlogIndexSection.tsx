@@ -26,7 +26,7 @@ import { heroDescription, heroTitle } from "@/lib/animations";
 import { resolveLocale, type AppLocale } from "@/lib/locale";
 import { cx } from "@/utils/cx";
 
-type Filter = BlogCategoryId | "all";
+type Filter = BlogCategoryId | string | "all";
 
 const sidebarItem = (active: boolean) =>
   cx(
@@ -48,10 +48,12 @@ export function BlogIndexSection({
   category,
   tag,
   initialPosts,
+  categoryInfo,
 }: {
-  category?: BlogCategoryId;
+  category?: BlogCategoryId | string;
   tag?: BlogTagId;
   initialPosts?: BlogPost[];
+  categoryInfo?: { name: string; description?: string | null };
 } = {}) {
   const t = useTranslations("blog");
   const tPosts = useTranslations("blogPosts");
@@ -106,8 +108,12 @@ export function BlogIndexSection({
       ? t(`tags.${tag}`)
       : filter === "all"
         ? t("latestLabel")
-        : t(`categories.${filter}`);
-  const crumb = tag ? t(`tags.${tag}`) : category ? t(`categories.${category}`) : null;
+        : categoryInfo?.name || (t as any)(`categories.${filter}`) || filter;
+  const crumb = tag
+    ? t(`tags.${tag}`)
+    : category
+      ? categoryInfo?.name || (t as any)(`categories.${category}`) || category
+      : null;
 
   return (
     <section className="relative pb-20 lg:pb-24">
@@ -158,7 +164,9 @@ export function BlogIndexSection({
               animate="visible"
               className="text-display text-display-xs sm:text-display-md"
             >
-              {category ? t(`categoryPages.${category}.title`) : t("title")}
+              {category
+                ? categoryInfo?.name || (t as any)(`categoryPages.${category}.title`) || category
+                : t("title")}
             </motion.h1>
             <motion.p
               variants={heroDescription}
@@ -166,7 +174,11 @@ export function BlogIndexSection({
               animate="visible"
               className="text-lead mt-2 max-w-3xl text-md sm:text-lg"
             >
-              {category ? t(`categoryPages.${category}.description`) : t("description")}
+              {category
+                ? categoryInfo?.description ||
+                  (t as any)(`categoryPages.${category}.description`) ||
+                  ""
+                : t("description")}
             </motion.p>
           </div>
         )}
@@ -223,7 +235,9 @@ export function BlogIndexSection({
                           aria-current={active ? "page" : undefined}
                           className={sidebarItem(active)}
                         >
-                          {value === "all" ? t("allCategories") : t(`categories.${value}`)}
+                          {value === "all"
+                            ? t("allCategories")
+                            : (t as any)(`categories.${value}`) || value}
                         </Link>
                       );
                     })}

@@ -1,3 +1,4 @@
+import { cache } from "react";
 import {
   BLOG_AUTHOR_IDS,
   BLOG_CATEGORY_IDS,
@@ -8,6 +9,11 @@ import {
 } from "@/config/blog";
 
 export function getCmsBaseUrl(): string {
+  if (process.env.INTERNAL_CMS_API_URL) {
+    let internal = process.env.INTERNAL_CMS_API_URL.replace(/\/+$/, "");
+    if (!internal.endsWith("/api")) internal += "/api";
+    return internal;
+  }
   let url =
     process.env.CMS_API_URL?.replace(/\/+$/, "") ||
     process.env.NEXT_PUBLIC_CMS_API_URL?.replace(/\/+$/, "") ||
@@ -157,7 +163,7 @@ export async function fetchCmsPosts(params?: {
   return {
     data: items.map((p) => ({
       id: p.slug,
-      title: p.slug,
+      title: "",
       slug: p.slug,
       excerpt: null,
       coverImageUrl: p.cover,
@@ -181,56 +187,57 @@ export async function fetchCmsPosts(params?: {
 }
 
 /**
- * Fetch a single post by slug from Headless CMS API.
+ * Fetch a single post by slug from Headless CMS API (cached per-request).
  */
-export async function fetchCmsPostBySlug(
-  slug: string,
-): Promise<{ post: CmsArticleDetail; relatedPosts: CmsArticleSummary[] } | null> {
-  const baseUrl = getCmsBaseUrl();
-  const url = `${baseUrl}/public/posts/${encodeURIComponent(slug)}`;
+export const fetchCmsPostBySlug = cache(
+  async (
+    slug: string,
+  ): Promise<{ post: CmsArticleDetail; relatedPosts: CmsArticleSummary[] } | null> => {
+    const baseUrl = getCmsBaseUrl();
+    const url = `${baseUrl}/public/posts/${encodeURIComponent(slug)}`;
 
-  try {
-    const res = await fetch(url, {
-      headers: { Accept: "application/json" },
-      next: { revalidate: 60, tags: [`cms-post-${slug}`] },
-      signal: AbortSignal.timeout(4000),
-    });
+    try {
+      const res = await fetch(url, {
+        headers: { Accept: "application/json" },
+        cache: "no-store",
+        signal: AbortSignal.timeout(3000),
+      });
 
-    if (res.ok) {
-      return await res.json();
+      if (res.ok) {
+        return await res.json();
+      }
+    } catch {
+      // Fallback below
     }
-  } catch {
-    // Fallback below
-  }
 
-  const local = BLOG_POSTS.find((p) => p.slug === slug);
-  if (!local) return null;
+    const local = BLOG_POSTS.find((p) => p.slug === slug);
+    if (!local) return null;
 
-  return {
-    post: {
-      id: local.slug,
-      title: local.slug,
-      slug: local.slug,
-      excerpt: null,
-      content: null,
-      coverImageUrl: local.cover,
-      coverImageAlt: local.slug,
-      readMinutes: local.readMinutes,
-      featured: false,
-      tags: local.tags,
-      publishedAt: local.publishedAt,
-      contentUpdatedAt: local.updatedAt,
-      updatedAt: local.updatedAt,
-      category: { id: local.category, name: local.category, slug: local.category },
-      author: { id: local.author, name: local.author, slug: local.author },
-    },
-    relatedPosts: BLOG_POSTS.filter((p) => p.slug !== slug && p.category === local.category)
-      .slice(0, 3)
-      .map((p) => ({
-        id: p.slug,
-        title: p.slug,
-        slug: p.slug,
+    return {
+      post: {
+        id: local.slug,
+        title: "",
+        slug: local.slug,
         excerpt: null,
+        content: null,
+        coverImageUrl: local.cover,
+        coverImageAlt: local.slug,
+        readMinutes: local.readMinutes,
+        featured: false,
+        tags: local.tags,
+        publishedAt: local.publishedAt,
+        contentUpdatedAt: local.updatedAt,
+        updatedAt: local.updatedAt,
+        category: { id: local.category, name: local.category, slug: local.category },
+        author: { id: local.author, name: local.author, slug: local.author },
+      },
+      relatedPosts: BLOG_POSTS.filter((p) => p.slug !== slug && p.category === local.category)
+        .slice(0, 3)
+        .map((p) => ({
+          id: p.slug,
+          title: "",
+          slug: p.slug,
+          excerpt: null,
         coverImageUrl: p.cover,
         coverImageAlt: p.slug,
         readMinutes: p.readMinutes,
@@ -241,7 +248,7 @@ export async function fetchCmsPostBySlug(
         updatedAt: p.updatedAt,
       })),
   };
-}
+});
 
 /**
  * Get published posts metadata for XML sitemaps.
@@ -367,11 +374,63 @@ export async function fetchCmsPersonBySlug(slug: string): Promise<CmsPerson | nu
   }
 }
 
+export interface CmsCategory {
+  id: string;
+  name: string;
+  nameId?: string | null;
+  nameEn?: string | null;
+  slug: string;
+  description?: string | null;
+  descriptionId?: string | null;
+  descriptionEn?: string | null;
+  metaTitleId?: string | null;
+  metaTitleEn?: string | null;
+  metaDescriptionId?: string | null;
+  metaDescriptionEn?: string | null;
+  sortOrder: number;
+  _count?: {
+    articles: number;
+  };
+}
+
+export const fetchCmsCategories = cache(async (): Promise<CmsCategory[]> => {
+  try {
+    const res = await fetch(`${getCmsBaseUrl()}/public/categories`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(3000),
+    });
+    if (res.ok) return (await res.json()) as CmsCategory[];
+  } catch {}
+  return [];
+});
+
+export const fetchCmsCategoryBySlug = cache(async (slug: string): Promise<CmsCategory | null> => {
+  try {
+    const res = await fetch(`${getCmsBaseUrl()}/public/categories/${encodeURIComponent(slug)}`, {
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+      signal: AbortSignal.timeout(3000),
+    });
+    if (res.ok) return (await res.json()) as CmsCategory;
+  } catch {}
+  return null;
+});
+
 /**
- * Get categories for sitemap.
+ * Get categories for sitemap dynamically from CMS.
  */
 export async function getCategoriesForSitemap(): Promise<string[]> {
-  return BLOG_CATEGORY_IDS as readonly string[] as string[];
+  try {
+    const cats = await fetchCmsCategories();
+    const slugs = new Set<string>([...BLOG_CATEGORY_IDS]);
+    for (const c of cats) {
+      if (c.slug) slugs.add(c.slug);
+    }
+    return Array.from(slugs);
+  } catch {
+    return BLOG_CATEGORY_IDS as readonly string[] as string[];
+  }
 }
 
 /**

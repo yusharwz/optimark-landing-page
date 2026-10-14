@@ -58,15 +58,15 @@ export function BlogPostView({
   if (!post) return null;
 
   let title = post.title;
-  if (!title) {
+  if (!title || title === post.slug) {
     try {
       if (tBlogPosts.has(`${slug}.title` as never)) {
         title = tBlogPosts(`${slug}.title` as never);
       } else {
-        title = post.slug;
+        title = post.title && post.title !== post.slug ? post.title : post.slug;
       }
     } catch {
-      title = post.slug;
+      title = post.title && post.title !== post.slug ? post.title : post.slug;
     }
   }
 
@@ -237,7 +237,20 @@ export function BlogPostView({
               </div>
             )}
 
-            <article id={ARTICLE_ID}>
+            <article id={ARTICLE_ID} className="flex flex-col gap-6">
+              {post.excerpt && (
+                <div className="rounded-2xl border border-[#94C748]/40 bg-[#F9FBF6] p-5 sm:p-6 shadow-xs">
+                  <div className="mb-2 flex items-center gap-2">
+                    <span className="size-2 rounded-full bg-[#769F3A]" />
+                    <h2 className="text-xs font-bold uppercase tracking-wider text-[#59772B]">
+                      {locale === "en" ? "Executive Summary" : "Ringkasan Eksekutif"}
+                    </h2>
+                  </div>
+                  <p className="text-base leading-relaxed text-[#344054] sm:text-lg font-medium italic">
+                    "{post.excerpt}"
+                  </p>
+                </div>
+              )}
               <BlogArticle slug={slug} content={post.content} />
             </article>
 
