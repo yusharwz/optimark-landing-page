@@ -102,7 +102,7 @@ export async function fetchCmsPosts(params?: {
     filtered = filtered.filter((p) => p.category === params.categorySlug);
   }
   if (params?.tag) {
-    filtered = filtered.filter((p) => p.tags.includes(params.tag as any));
+    filtered = filtered.filter((p) => (p.tags as readonly string[]).includes(params.tag!));
   }
   if (params?.search) {
     const q = params.search.toLowerCase();
