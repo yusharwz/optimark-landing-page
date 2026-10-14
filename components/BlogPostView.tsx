@@ -247,7 +247,7 @@ export function BlogPostView({
                     </h2>
                   </div>
                   <p className="text-base leading-relaxed text-[#344054] sm:text-lg font-medium italic">
-                    "{post.excerpt}"
+                    &ldquo;{post.excerpt}&rdquo;
                   </p>
                 </div>
               )}

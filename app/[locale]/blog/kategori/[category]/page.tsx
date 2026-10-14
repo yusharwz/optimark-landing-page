@@ -4,7 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
 import { buildOgImageUrl } from "@/lib/og";
-import { BLOG_CATEGORY_IDS, blogCategoryHref, blogHref, isBlogCategoryId } from "@/config/blog";
+import {
+  BLOG_CATEGORY_IDS,
+  blogCategoryHref,
+  blogHref,
+  isBlogCategoryId,
+  type BlogCategoryId,
+} from "@/config/blog";
 import { breadcrumbJsonLd, collectionPageJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
@@ -50,7 +56,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   try {
     const t = await getTranslations({ locale, namespace: "blog" });
-    const tAny = t as any;
+    const tAny = t as unknown as (k: string) => string;
     title = title || tAny(`categoryPages.${category}.title`);
     description = description || tAny(`categoryPages.${category}.description`);
     metaTitle = metaTitle || tAny(`categoryPages.${category}.metaTitle`);
@@ -118,7 +124,7 @@ export default async function BlogCategoryPage({ params }: Props) {
       : cmsCategory?.descriptionId || cmsCategory?.description;
 
   try {
-    const tAny = t as any;
+    const tAny = t as unknown as (k: string) => string;
     categoryTitle = categoryTitle || tAny(`categoryPages.${category}.title`);
     categoryDesc = categoryDesc || tAny(`categoryPages.${category}.description`);
   } catch {}
@@ -153,7 +159,7 @@ export default async function BlogCategoryPage({ params }: Props) {
       <Header />
       <main className="relative pt-24">
         <BlogIndexSection
-          category={category as any}
+          category={category as BlogCategoryId}
           initialPosts={posts}
           categoryInfo={{ name: categoryTitle, description: categoryDesc }}
         />

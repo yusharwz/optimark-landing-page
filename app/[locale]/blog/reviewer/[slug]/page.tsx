@@ -12,6 +12,7 @@ import {
   isBlogReviewerId,
   getPostsByReviewer,
   type BlogReviewerId,
+  type BlogPost,
 } from "@/config/blog";
 import {
   breadcrumbJsonLd,
@@ -21,7 +22,11 @@ import {
   localizedUrl,
   profilePageJsonLd,
 } from "@/lib/seo";
-import { fetchCmsPersonBySlug, cmsArticleToBlogPost, type CmsPerson } from "@/lib/cms";
+import {
+  fetchCmsPersonBySlug,
+  cmsArticleToBlogPost,
+  type CmsArticleSummary,
+} from "@/lib/cms";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogProfileView } from "@/components/BlogProfileView";
@@ -56,7 +61,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const rawBio = locale === "en" ? cmsPerson.bioEn || cmsPerson.bio : cmsPerson.bioId || cmsPerson.bio;
     description = firstParagraph(rawBio || `Profil peninjau editorial Optimark: ${fullName}.`);
   } else if (isStatic) {
-    const tPerson = (await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` as any })) as any;
+    const tPeople = await getTranslations({ locale, namespace: "blogPeople" });
+    const tPerson = (k: string) => (tPeople as unknown as (k: string) => string)(`reviewers.${slug}.${k}`);
     fullName = tPerson("fullName");
     description = firstParagraph(tPerson("bio"));
   }
@@ -118,23 +124,29 @@ export default async function BlogReviewerPage({ params }: Props) {
     expertise = locale === "en"
       ? cmsPerson.expertiseEn?.length ? cmsPerson.expertiseEn : cmsPerson.expertiseId || []
       : cmsPerson.expertiseId?.length ? cmsPerson.expertiseId : cmsPerson.expertiseEn || [];
-    linkedin = cmsPerson.linkedinUrl || (BLOG_PERSON_LINKEDIN as any)[slug] || undefined;
+    linkedin =
+      cmsPerson.linkedinUrl ||
+      (BLOG_PERSON_LINKEDIN as Record<string, string>)[slug] ||
+      undefined;
   } else {
-    const tPerson = (await getTranslations({ locale, namespace: `blogPeople.reviewers.${slug}` as any })) as any;
+    const tPeople = await getTranslations({ locale, namespace: "blogPeople" });
+    const tPerson = (k: string) => (tPeople as unknown as (k: string) => string)(`reviewers.${slug}.${k}`);
     name = tPerson("fullName");
     role = tPerson("role");
     bio = tPerson("bio");
     image = BLOG_PERSON_PHOTOS[slug as keyof typeof BLOG_PERSON_PHOTOS] || "";
-    expertise = tPerson.raw("expertise") as string[];
-    linkedin = (BLOG_PERSON_LINKEDIN as any)[slug] || undefined;
+    expertise = (tPeople.raw(`reviewers.${slug}.expertise` as never) as string[]) || [];
+    linkedin = (BLOG_PERSON_LINKEDIN as Record<string, string>)[slug] || undefined;
   }
 
   const url = localizedUrl(locale, reviewerHref(slug));
 
   // Collect articles: CMS articles first, then merge static fallback if any
-  const cmsArticles = (cmsPerson?.reviewedArticles || []).map(cmsArticleToBlogPost);
+  const cmsArticles = (cmsPerson?.reviewedArticles || []).map((item) =>
+    cmsArticleToBlogPost(item as unknown as CmsArticleSummary),
+  );
   const staticArticles = isStatic ? getPostsByReviewer(slug as BlogReviewerId) : [];
-  const articleMap = new Map<string, any>();
+  const articleMap = new Map<string, BlogPost>();
   for (const a of [...cmsArticles, ...staticArticles]) {
     if (!articleMap.has(a.slug)) {
       articleMap.set(a.slug, a);

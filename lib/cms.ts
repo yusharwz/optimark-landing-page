@@ -346,8 +346,8 @@ export interface CmsPerson {
   avatarUrl?: string | null;
   linkedinUrl?: string | null;
   type: 'AUTHOR' | 'REVIEWER' | 'BOTH';
-  authoredArticles?: any[];
-  reviewedArticles?: any[];
+  authoredArticles?: unknown[];
+  reviewedArticles?: unknown[];
 }
 
 export async function fetchCmsPeople(): Promise<CmsPerson[]> {

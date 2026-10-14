@@ -55,16 +55,15 @@ const focusRing =
  */
 export function BlogProfileView(props: BlogProfileViewProps) {
   const t = useTranslations("blog.profile");
-  const tPeople = useTranslations("blogPeople") as any;
-  const locale = resolveLocale(useLocale());
+  const tPeople = useTranslations("blogPeople");
 
   const isReviewer = props.kind === "reviewer";
   const personKey = isReviewer ? `reviewers.${props.id}` : `authors.${props.id}`;
 
   const fullName = props.cmsPerson?.name
     ? props.cmsPerson.name
-    : tPeople.has(personKey)
-    ? tPeople(`${personKey}.fullName`)
+    : tPeople.has(personKey as never)
+    ? (tPeople as unknown as (k: string) => string)(`${personKey}.fullName`)
     : props.id;
 
   const fallbackPosts = isReviewer
@@ -120,23 +119,24 @@ export function BlogProfileView(props: BlogProfileViewProps) {
 
 function ProfileCard(props: BlogProfileViewProps) {
   const t = useTranslations("blog.profile");
-  const tPeople = useTranslations("blogPeople") as any;
+  const tPeople = useTranslations("blogPeople");
   const locale = resolveLocale(useLocale());
 
   const isReviewer = props.kind === "reviewer";
   const personKey = isReviewer ? `reviewers.${props.id}` : `authors.${props.id}`;
+  const tPeopleFn = tPeople as unknown as (k: string) => string;
 
-  const hasStatic = tPeople.has(personKey);
+  const hasStatic = tPeople.has(personKey as never);
   const cp = props.cmsPerson;
 
-  const fullName = cp?.name || (hasStatic ? tPeople(`${personKey}.fullName`) : props.id);
+  const fullName = cp?.name || (hasStatic ? tPeopleFn(`${personKey}.fullName`) : props.id);
 
   const role = cp
     ? locale === "en"
       ? cp.roleEn || cp.role
       : cp.roleId || cp.role
     : hasStatic
-    ? tPeople(`${personKey}.role`)
+    ? tPeopleFn(`${personKey}.role`)
     : "";
 
   const position = cp
@@ -144,7 +144,7 @@ function ProfileCard(props: BlogProfileViewProps) {
       ? cp.positionEn || cp.positionId || ""
       : cp.positionId || cp.positionEn || ""
     : hasStatic
-    ? tPeople(`${personKey}.position`)
+    ? tPeopleFn(`${personKey}.position`)
     : "";
 
   const bio = cp
@@ -152,10 +152,11 @@ function ProfileCard(props: BlogProfileViewProps) {
       ? cp.bioEn || cp.bio || ""
       : cp.bioId || cp.bio || ""
     : hasStatic
-    ? tPeople(`${personKey}.bio`)
+    ? tPeopleFn(`${personKey}.bio`)
     : "";
 
-  const linkedin = cp?.linkedinUrl || (BLOG_PERSON_LINKEDIN as any)[props.id];
+  const linkedin =
+    cp?.linkedinUrl || (BLOG_PERSON_LINKEDIN as Record<string, string>)[props.id];
 
   const expertiseList: string[] = cp
     ? locale === "en"
@@ -166,7 +167,7 @@ function ProfileCard(props: BlogProfileViewProps) {
       ? cp.expertiseId
       : cp.expertiseEn || []
     : hasStatic
-    ? (tPeople.raw(`${personKey}.expertise`) as string[])
+    ? (tPeople.raw(`${personKey}.expertise` as never) as string[])
     : [];
 
   const expertise = expertiseList.join(", ");
@@ -177,7 +178,7 @@ function ProfileCard(props: BlogProfileViewProps) {
         ? cp.experienceEn || cp.experienceId || []
         : cp.experienceId || cp.experienceEn || []
       : hasStatic && isReviewer
-      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.experience`) as HistoryEntry[])
+      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.experience` as never) as HistoryEntry[])
       : []
   ) as HistoryEntry[];
 
@@ -187,7 +188,7 @@ function ProfileCard(props: BlogProfileViewProps) {
         ? cp.educationEn || cp.educationId || []
         : cp.educationId || cp.educationEn || []
       : hasStatic && isReviewer
-      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.education`) as HistoryEntry[])
+      ? (tPeople.raw(`reviewers.${props.id as BlogReviewerId}.education` as never) as HistoryEntry[])
       : []
   ) as HistoryEntry[];
 
@@ -195,14 +196,17 @@ function ProfileCard(props: BlogProfileViewProps) {
     <aside className="flex w-full shrink-0 flex-col gap-5 rounded-2xl bg-[#FAFAFA] p-6 lg:w-120">
       <div className="flex flex-col items-start gap-3">
         {cp?.avatarUrl ? (
-          <img
+          <Image
             src={cp.avatarUrl}
             alt={fullName}
+            width={150}
+            height={150}
+            unoptimized
             className="h-37.5 w-37.5 rounded-full object-cover border border-[#eaecf0]"
           />
         ) : (
           <BlogPersonAvatar
-            id={props.id as any}
+            id={props.id as BlogAuthorId}
             name={fullName}
             size="xl"
             kind={props.kind}

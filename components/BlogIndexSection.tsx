@@ -56,6 +56,7 @@ export function BlogIndexSection({
   categoryInfo?: { name: string; description?: string | null };
 } = {}) {
   const t = useTranslations("blog");
+  const tAny = t as unknown as (k: string) => string;
   const tPosts = useTranslations("blogPosts");
   const locale = resolveLocale(useLocale());
 
@@ -108,11 +109,11 @@ export function BlogIndexSection({
       ? t(`tags.${tag}`)
       : filter === "all"
         ? t("latestLabel")
-        : categoryInfo?.name || (t as any)(`categories.${filter}`) || filter;
+        : categoryInfo?.name || tAny(`categories.${filter}`) || filter;
   const crumb = tag
     ? t(`tags.${tag}`)
     : category
-      ? categoryInfo?.name || (t as any)(`categories.${category}`) || category
+      ? categoryInfo?.name || tAny(`categories.${category}`) || category
       : null;
 
   return (
@@ -165,7 +166,7 @@ export function BlogIndexSection({
               className="text-display text-display-xs sm:text-display-md"
             >
               {category
-                ? categoryInfo?.name || (t as any)(`categoryPages.${category}.title`) || category
+                ? categoryInfo?.name || tAny(`categoryPages.${category}.title`) || category
                 : t("title")}
             </motion.h1>
             <motion.p
@@ -176,7 +177,7 @@ export function BlogIndexSection({
             >
               {category
                 ? categoryInfo?.description ||
-                  (t as any)(`categoryPages.${category}.description`) ||
+                  tAny(`categoryPages.${category}.description`) ||
                   ""
                 : t("description")}
             </motion.p>
@@ -237,7 +238,7 @@ export function BlogIndexSection({
                         >
                           {value === "all"
                             ? t("allCategories")
-                            : (t as any)(`categories.${value}`) || value}
+                            : tAny(`categories.${value}`) || value}
                         </Link>
                       );
                     })}
