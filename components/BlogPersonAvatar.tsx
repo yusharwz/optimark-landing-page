@@ -6,6 +6,7 @@ import {
   type BlogReviewerId,
 } from "@/config/blog";
 import { cx } from "@/utils/cx";
+import { normalizeMediaUrl } from "@/lib/cms";
 
 const SIZES = {
   xs: "h-6 w-6 text-[0.5625rem]",
@@ -37,7 +38,7 @@ export function BlogPersonAvatar({
     (id && id in BLOG_PERSON_PHOTOS
       ? BLOG_PERSON_PHOTOS[id as keyof typeof BLOG_PERSON_PHOTOS]
       : undefined);
-  const photo = rawPhoto ? rawPhoto.replace(/\.(?:jpg|jpeg|png)$/i, '.webp') : undefined;
+  const photo = rawPhoto ? normalizeMediaUrl(rawPhoto) : undefined;
 
   return (
     <span

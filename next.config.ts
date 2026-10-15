@@ -13,7 +13,12 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "optimark-staging-media.dritech.co.id",
+        hostname: "**.dritech.co.id",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.optimark.ai",
         pathname: "/**",
       },
       {

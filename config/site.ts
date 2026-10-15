@@ -104,3 +104,22 @@ export const SITE_URL = {
   endsWith: (searchString: string) => getSiteUrl().endsWith(searchString),
   includes: (searchString: string) => getSiteUrl().includes(searchString),
 } as unknown as string;
+
+/**
+ * Dynamic Media CDN URL resolver.
+ * Adapts automatically to NEXT_PUBLIC_MEDIA_URL, MEDIA_URL, or derives from the site host.
+ */
+export function getMediaBaseUrl(): string {
+  if (typeof process !== "undefined") {
+    const envMedia = process.env.NEXT_PUBLIC_MEDIA_URL || process.env.MEDIA_URL;
+    if (envMedia && envMedia.trim()) {
+      return envMedia.trim().replace(/\/+$/, "");
+    }
+  }
+  const siteUrl = getSiteUrl();
+  if (siteUrl.includes("staging")) {
+    return "https://optimark-staging-media.dritech.co.id";
+  }
+  return "https://media.optimark.ai";
+}
+

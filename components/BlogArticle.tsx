@@ -10,6 +10,7 @@ import { buildBlogToc } from "@/lib/blog";
 import { markdownToBlocks } from "@/lib/markdown";
 import type { BlogBlock } from "@/types/blog";
 import { cx } from "@/utils/cx";
+import { normalizeMediaUrl } from "@/lib/cms";
 
 /** Renders a post body from its message blocks; all styling lives here, not in the JSON. */
 export function BlogArticle({
@@ -131,25 +132,28 @@ function renderBlock(
         </ol>
       );
 
-    case "figure":
+    case "figure": {
+      const imageUrl = normalizeMediaUrl(block.image);
+      const altText = block.caption || "Ilustrasi artikel Optimark";
       return (
-        <figure className={cx(mt, "flex flex-col gap-3")}>
-          <div className="relative h-50 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-90">
+        <figure className={cx(mt, "flex flex-col gap-3 my-6")}>
+          <div className="relative h-60 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-96 w-full bg-gray-50">
             <Image
-              src={block.image}
-              alt={block.caption ?? ""}
+              src={imageUrl}
+              alt={altText}
               fill
               sizes="(min-width: 768px) 680px, 100vw"
               className="object-cover"
             />
           </div>
           {block.caption && (
-            <figcaption className="text-sm tracking-tight text-[#717680]">
+            <figcaption className="text-sm tracking-tight text-[#717680] text-center italic">
               {block.caption}
             </figcaption>
           )}
         </figure>
       );
+    }
 
     case "quote":
       return (
@@ -186,6 +190,10 @@ function renderInline(text: string): ReactNode {
   for (const match of text.matchAll(LINK_PATTERN)) {
     const [whole, label, href] = match;
     const start = match.index ?? 0;
+    if (start > 0 && text[start - 1] === "!") {
+      // Skip if preceded by '!' (image markdown handled elsewhere)
+      continue;
+    }
     if (start > last) parts.push(text.slice(last, start));
     parts.push(
       href.startsWith("/") ? (

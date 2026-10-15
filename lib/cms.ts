@@ -75,16 +75,48 @@ export interface CmsArticleDetail extends CmsArticleSummary {
   } | null;
 }
 
-function normalizeMediaUrl(url?: string | null): string | undefined {
-  if (!url) return undefined;
-  return url.replace(/\.(?:jpg|jpeg|png)$/i, '.webp');
+import { getMediaBaseUrl } from "@/config/site";
+
+export function normalizeMediaUrl(url?: string | null): string {
+  if (!url) return "";
+  const trimmed = url.trim();
+  if (!trimmed) return "";
+
+  const mediaBase = getMediaBaseUrl();
+
+  if (/^https?:\/\//i.test(trimmed)) {
+    return trimmed.replace(/\.(?:jpg|jpeg|png)([\?#]|$)/i, ".webp$1");
+  }
+
+  if (trimmed.startsWith("/optimark/") || trimmed.startsWith("optimark/")) {
+    const cleanPath = trimmed.startsWith("/") ? trimmed : `/${trimmed}`;
+    return `${mediaBase}${cleanPath}`;
+  }
+
+  if (trimmed.startsWith("/images/blog/")) {
+    const file = trimmed.replace(/^\/images\/blog\//, "").replace(/\.[^.]+$/, "");
+    return `${mediaBase}/optimark/blog/${file}.webp`;
+  }
+
+  return trimmed;
 }
 
-function normalizeContentImages(content?: string | null): string | undefined {
+export function normalizeContentImages(content?: string | null): string | undefined {
   if (!content) return undefined;
+  const mediaBase = getMediaBaseUrl();
+
   return content
-    .replace(/\/images\/blog\/([a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png)/gi, 'https://optimark-staging-media.dritech.co.id/optimark/blog/$1.webp')
-    .replace(/(https:\/\/optimark-staging-media\.dritech\.co\.id\/optimark\/blog\/[a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png)/gi, '$1.webp');
+    .replace(/https?:\/\/optimark-staging-media\.dritech\.co\.id/g, mediaBase)
+    .replace(/\/images\/blog\/([a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png|webp)/gi, `${mediaBase}/optimark/blog/$1.webp`)
+    .replace(
+      /(https?:\/\/[^\s\)"']+\.(?:jpg|jpeg|png))(?=[\s\)"']|$)/gi,
+      (match) => {
+        if (match.includes("dritech.co.id") || match.includes("optimark.ai") || match.includes(mediaBase)) {
+          return match.replace(/\.(?:jpg|jpeg|png)$/i, ".webp");
+        }
+        return match;
+      }
+    );
 }
 
 export function cmsArticleToBlogPost(item: CmsArticleDetail | CmsArticleSummary): BlogPost {

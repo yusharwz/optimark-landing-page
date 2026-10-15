@@ -78,14 +78,31 @@ export function markdownToBlocks(markdown: string): BlogBlock[] {
         }
       }
       blocks.push({ type: "quote", text: quoteText });
-    } else if (trimmed.startsWith("![")) {
-      flushAll();
-      const imgMatch = trimmed.match(/^!\[(.*?)\]\((.*?)\)/);
-      if (imgMatch) {
+    } else if (trimmed.includes("![") && /!\[(.*?)\]\((.*?)\)/.test(trimmed)) {
+      const imgMatch = trimmed.match(/!\[(.*?)\]\((.*?)\)/);
+      if (imgMatch && imgMatch.index !== undefined) {
+        const before = trimmed.substring(0, imgMatch.index).trim();
+        const after = trimmed.substring(imgMatch.index + imgMatch[0].length).trim();
+        if (before) currentParagraph.push(before);
+        flushAll();
         blocks.push({
           type: "figure",
           caption: imgMatch[1] || undefined,
           image: imgMatch[2],
+        });
+        if (after) currentParagraph.push(after);
+      } else {
+        currentParagraph.push(trimmed);
+      }
+    } else if (/<img[^>]+src=["']/i.test(trimmed)) {
+      const srcMatch = trimmed.match(/src=["']([^"']+)["']/i);
+      const altMatch = trimmed.match(/alt=["']([^"']*)["']/i);
+      if (srcMatch) {
+        flushAll();
+        blocks.push({
+          type: "figure",
+          caption: altMatch ? altMatch[1] : undefined,
+          image: srcMatch[1],
         });
       } else {
         currentParagraph.push(trimmed);
