@@ -199,12 +199,13 @@ export const SITEMAP_XSL = `<?xml version="1.0" encoding="UTF-8"?>
         </div>
 
         <div class="content-wrap">
-          <div id="sitemap-navigation" class="back-nav-container">
-            <div class="back-nav-links">
+          <div id="sitemap-navigation" class="back-nav-container" style="display:none;">
+            <div class="back-nav-links" id="sitemap-back-links">
               <a href="/sitemap.xml" id="sitemap-back-btn" class="back-nav-btn">&#8592; Back to Sitemap Index</a>
+              <a href="/sitemap.xml" id="sitemap-root-btn" class="back-nav-btn" style="color:#64748b;display:none;">&#8593; Root Index</a>
             </div>
             <div class="breadcrumbs" id="sitemap-breadcrumbs">
-              <a href="/sitemap.xml">Sitemap Index</a>
+              <a href="/sitemap.xml">Root Index</a>
             </div>
           </div>
           <xsl:apply-templates />
@@ -216,75 +217,108 @@ export const SITEMAP_XSL = `<?xml version="1.0" encoding="UTF-8"?>
             function initNav() {
               var path = window.location.pathname || '';
               var nav = document.getElementById('sitemap-navigation');
-              if (!nav) return;
+              var backBtn = document.getElementById('sitemap-back-btn');
+              var rootBtn = document.getElementById('sitemap-root-btn');
+              var breadcrumbs = document.getElementById('sitemap-breadcrumbs');
+              if (!nav || !backBtn) return;
 
+              // Rule: Back button on ALL pages EXCEPT root (/sitemap.xml)
               var isRoot = path === '/sitemap.xml' || path === '' || path === '/';
-              var parentUrl = '/sitemap.xml';
-              var parentLabel = 'Main Sitemap Index';
-              var crumbs = [{ label: 'Root Index', url: '/sitemap.xml' }];
-
               if (isRoot) {
-                nav.innerHTML = '<div class="back-nav-links">' +
-                  '<a href="/" class="back-nav-btn">&#8592; Back to Optimark Home</a>' +
-                '</div>' +
-                '<div class="breadcrumbs"><span class="current">Root Sitemap Index (/sitemap.xml)</span></div>';
+                nav.style.display = 'none';
                 return;
               }
+
+              nav.style.display = 'flex';
+
+              var parentUrl = '/sitemap.xml';
+              var parentLabel = 'Root Index';
+              var crumbs = [{ label: 'Root Index', url: '/sitemap.xml' }];
 
               if (path.indexOf('category-sitemap') !== -1) {
                 if (path === '/category-sitemap.xml') {
                   parentUrl = '/sitemap.xml';
-                  parentLabel = 'Main Sitemap Index';
-                  crumbs.push({ label: 'Category Sitemaps', url: '/category-sitemap.xml' });
+                  parentLabel = 'Root Index';
+                  crumbs.push({ label: 'Category Sitemaps', url: '' });
                 } else {
                   parentUrl = '/category-sitemap.xml';
                   parentLabel = 'Category Sitemap Index';
                   crumbs.push({ label: 'Category Sitemaps', url: '/category-sitemap.xml' });
                   var isEn = path.indexOf('en-') !== -1;
-                  crumbs.push({ label: isEn ? 'English Category Sitemap' : 'Indonesian Category Sitemap', url: path });
+                  crumbs.push({ label: isEn ? 'English Category Sitemap' : 'Indonesian Category Sitemap', url: '' });
                 }
               } else if (path.indexOf('article-sitemap') !== -1 || path.indexOf('blog-sitemap') !== -1) {
                 if (path === '/article-sitemap.xml' || path === '/blog-sitemap.xml') {
                   parentUrl = '/sitemap.xml';
-                  parentLabel = 'Main Sitemap Index';
-                  crumbs.push({ label: 'Article Sitemaps', url: '/article-sitemap.xml' });
+                  parentLabel = 'Root Index';
+                  crumbs.push({ label: 'Article Sitemaps', url: '' });
                 } else {
                   parentUrl = '/article-sitemap.xml';
                   parentLabel = 'Article Sitemap Index';
                   crumbs.push({ label: 'Article Sitemaps', url: '/article-sitemap.xml' });
                   var isEn = path.indexOf('en-') !== -1;
-                  crumbs.push({ label: isEn ? 'English Article Sitemap' : 'Indonesian Article Sitemap', url: path });
+                  crumbs.push({ label: isEn ? 'English Article Sitemap' : 'Indonesian Article Sitemap', url: '' });
                 }
               } else if (path.indexOf('page-sitemap') !== -1) {
                 if (path === '/page-sitemap.xml') {
                   parentUrl = '/sitemap.xml';
-                  parentLabel = 'Main Sitemap Index';
-                  crumbs.push({ label: 'Page Sitemaps', url: '/page-sitemap.xml' });
+                  parentLabel = 'Root Index';
+                  crumbs.push({ label: 'Page Sitemaps', url: '' });
                 } else {
                   parentUrl = '/page-sitemap.xml';
                   parentLabel = 'Page Sitemap Index';
                   crumbs.push({ label: 'Page Sitemaps', url: '/page-sitemap.xml' });
                   var isEn = path.indexOf('en-') !== -1;
-                  crumbs.push({ label: isEn ? 'English Page Sitemap' : 'Indonesian Page Sitemap', url: path });
+                  crumbs.push({ label: isEn ? 'English Page Sitemap' : 'Indonesian Page Sitemap', url: '' });
                 }
               } else if (path.indexOf('tag-sitemap') !== -1) {
                 parentUrl = '/sitemap.xml';
-                parentLabel = 'Main Sitemap Index';
-                crumbs.push({ label: 'Tag Sitemap', url: '/tag-sitemap.xml' });
+                parentLabel = 'Root Index';
+                crumbs.push({ label: 'Tag Sitemap', url: '' });
+              } else {
+                parentUrl = '/sitemap.xml';
+                parentLabel = 'Root Index';
+                crumbs.push({ label: path.replace(/^\//, ''), url: '' });
               }
 
-              var crumbHtml = crumbs.map(function(c, i) {
-                if (i === crumbs.length - 1) {
-                  return '<span class="current">' + c.label + '</span>';
-                }
-                return '<a href="' + c.url + '">' + c.label + '</a><span class="sep">&#8250;</span>';
-              }).join(' ');
+              backBtn.setAttribute('href', parentUrl);
+              backBtn.textContent = '← Back to ' + parentLabel;
 
-              nav.innerHTML = '<div class="back-nav-links">' +
-                '<a href="' + parentUrl + '" class="back-nav-btn">&#8592; Back to ' + parentLabel + '</a>' +
-                (parentUrl !== '/sitemap.xml' ? '<a href="/sitemap.xml" class="back-nav-btn" style="color:#64748b;">&#8593; Root Index</a>' : '') +
-              '</div>' +
-              '<div class="breadcrumbs">' + crumbHtml + '</div>';
+              if (rootBtn) {
+                if (parentUrl !== '/sitemap.xml') {
+                  rootBtn.setAttribute('href', '/sitemap.xml');
+                  rootBtn.textContent = '↑ Root Index';
+                  rootBtn.style.display = 'inline-flex';
+                } else {
+                  rootBtn.style.display = 'none';
+                }
+              }
+
+              if (breadcrumbs) {
+                while (breadcrumbs.firstChild) {
+                  breadcrumbs.removeChild(breadcrumbs.firstChild);
+                }
+                var ns = breadcrumbs.namespaceURI || 'http://www.w3.org/1999/xhtml';
+                for (var i = 0; i < crumbs.length; i++) {
+                  var c = crumbs[i];
+                  if (i === crumbs.length - 1) {
+                    var span = document.createElementNS ? document.createElementNS(ns, 'span') : document.createElement('span');
+                    span.className = 'current';
+                    span.textContent = c.label;
+                    breadcrumbs.appendChild(span);
+                  } else {
+                    var a = document.createElementNS ? document.createElementNS(ns, 'a') : document.createElement('a');
+                    a.setAttribute('href', c.url);
+                    a.textContent = c.label;
+                    breadcrumbs.appendChild(a);
+
+                    var sep = document.createElementNS ? document.createElementNS(ns, 'span') : document.createElement('span');
+                    sep.className = 'sep';
+                    sep.textContent = ' › ';
+                    breadcrumbs.appendChild(sep);
+                  }
+                }
+              }
             }
 
             if (document.readyState === 'loading') {
@@ -292,6 +326,7 @@ export const SITEMAP_XSL = `<?xml version="1.0" encoding="UTF-8"?>
             } else {
               initNav();
             }
+            setTimeout(initNav, 50);
           })();
           ]]>
         </script>
