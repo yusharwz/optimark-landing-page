@@ -5,20 +5,31 @@ import { getPathname, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { cx } from "@/utils/cx";
 
-interface LanguageSwitcherProps {
+export interface LanguageSwitcherProps {
   /**
    * Render the light-on-dark treatment used while the header floats over the
    * dark hero (before the white bar fades in on scroll).
    */
   onDark?: boolean;
+  alternateHrefs?: Partial<Record<"id" | "en", string>>;
 }
 
-export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ onDark = false, alternateHrefs }: LanguageSwitcherProps) {
   const t = useTranslations("localeSwitcher");
   const locale = useLocale();
   const pathname = usePathname();
 
   const getTargetHref = (targetLocale: "id" | "en") => {
+    if (alternateHrefs && alternateHrefs[targetLocale]) {
+      const targetPath = alternateHrefs[targetLocale]!;
+      if (targetLocale === "en") {
+        return targetPath.startsWith("/en") ? targetPath : `/en${targetPath.startsWith("/") ? "" : "/"}${targetPath}`;
+      } else {
+        const cleanPath = targetPath.startsWith("/en/") ? targetPath.replace(/^\/en/, "") : targetPath;
+        return cleanPath.startsWith("/id/") ? cleanPath.replace(/^\/id/, "") : cleanPath;
+      }
+    }
+
     if (targetLocale === "en") {
       if (pathname === "/perencana-konten" || pathname === "/features/perencana-konten") {
         return "/en/content-planner";
@@ -43,16 +54,16 @@ export function LanguageSwitcher({ onDark = false }: LanguageSwitcherProps) {
         <a
           key={loc}
           href={getTargetHref(loc)}
-          hrefLang={loc}
-          aria-label={t(loc)}
           aria-current={locale === loc ? "true" : undefined}
           className={cx(
-            "rounded-md px-2 py-1 text-xs font-semibold uppercase tracking-wide transition-colors sm:px-2.5",
+            "rounded-md px-2 py-1 text-xs font-semibold uppercase transition-all duration-200",
             locale === loc
-              ? "bg-[#94C748] text-white shadow-sm"
+              ? onDark
+                ? "bg-white text-gray-900 shadow-sm"
+                : "bg-white text-gray-900 shadow-sm"
               : onDark
-                ? "text-white/60 hover:bg-white/10 hover:text-white"
-                : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                ? "text-white/80 hover:bg-white/10 hover:text-white"
+                : "text-gray-500 hover:bg-gray-100 hover:text-gray-900",
           )}
         >
           {loc}

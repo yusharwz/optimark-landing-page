@@ -34,6 +34,30 @@ export function localeAlternates(locale: AppLocale, path: string): Metadata["alt
 }
 
 /**
+ * Multilingual hreflang alternates where different locales have distinct paths/slugs.
+ * E.g. id: /blog/insight-instagram, en: /en/blog/reading-instagram-insights
+ */
+export function multilingualLocaleAlternates(
+  currentLocale: AppLocale,
+  pathsByLocale: Partial<Record<AppLocale, string>>,
+): Metadata["alternates"] {
+  const defaultPath = pathsByLocale[routing.defaultLocale] || Object.values(pathsByLocale)[0] || "/";
+  const currentPath = pathsByLocale[currentLocale] || defaultPath;
+
+  const languages: Record<string, string> = {};
+  for (const loc of routing.locales) {
+    const locPath = pathsByLocale[loc] || defaultPath;
+    languages[loc] = localizedUrl(loc, locPath);
+  }
+  languages["x-default"] = localizedUrl(routing.defaultLocale, defaultPath);
+
+  return {
+    canonical: localizedUrl(currentLocale, currentPath),
+    languages,
+  };
+}
+
+/**
  * Dynamic robots configuration for optimal indexing and rich SERP snippets.
  */
 export function defaultRobots(index: boolean = true): Metadata["robots"] {

@@ -35,7 +35,13 @@ const FEATURE_PATHS = [
   "/features",
 ];
 
-export function Header({ subnav }: { subnav?: ReactNode } = {}) {
+export function Header({
+  subnav,
+  alternateHrefs,
+}: {
+  subnav?: ReactNode;
+  alternateHrefs?: Partial<Record<"id" | "en", string>>;
+} = {}) {
   const t = useTranslations("header");
   const tf = useTranslations("features");
   const locale = useLocale();
@@ -202,7 +208,7 @@ export function Header({ subnav }: { subnav?: ReactNode } = {}) {
             </nav>
 
             <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-              <LanguageSwitcher onDark={overDarkHero} />
+              <LanguageSwitcher onDark={overDarkHero} alternateHrefs={alternateHrefs} />
               <div className="hidden lg:block">
                 <Button href={GET_STARTED_URL} color="primary" size="sm" className="text-white">
                   {t("getStarted")}

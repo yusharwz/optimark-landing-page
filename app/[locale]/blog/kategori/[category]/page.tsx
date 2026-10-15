@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
@@ -11,7 +11,12 @@ import {
   isBlogCategoryId,
   type BlogCategoryId,
 } from "@/config/blog";
-import { breadcrumbJsonLd, collectionPageJsonLd, localeAlternates, localizedUrl } from "@/lib/seo";
+import {
+  breadcrumbJsonLd,
+  collectionPageJsonLd,
+  multilingualLocaleAlternates,
+  localizedUrl,
+} from "@/lib/seo";
 import { JsonLd } from "@/components/JsonLd";
 import { Header } from "@/components/Header";
 import { BlogIndexSection } from "@/components/BlogIndexSection";
@@ -31,7 +36,14 @@ type Props = {
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    BLOG_CATEGORY_IDS.map((category) => ({ locale, category })),
+    BLOG_CATEGORY_IDS.map((catId) => {
+      let slug: string = catId;
+      if (locale === "id") {
+        if (catId === "social-media") slug = "media-sosial";
+        if (catId === "visual-content") slug = "konten-visual";
+      }
+      return { locale, category: slug };
+    }),
   );
 }
 
@@ -39,8 +51,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, category } = await params;
   const locale = resolveLocale(localeParam);
 
-  const cmsCategory = await fetchCmsCategoryBySlug(category);
+  const cmsCategory = await fetchCmsCategoryBySlug(category, locale);
   if (!isBlogCategoryId(category) && !cmsCategory) return {};
+
+  const idSlug = cmsCategory?.slugId || cmsCategory?.slug || category;
+  const enSlug = cmsCategory?.slugEn || cmsCategory?.slug || category;
+  const canonicalSlug = locale === "en" ? enSlug : idSlug;
 
   let title =
     locale === "en"
@@ -81,10 +97,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: metaTitle,
     description: metaDescription,
-    alternates: localeAlternates(locale, blogCategoryHref(category)),
+    alternates: multilingualLocaleAlternates(locale, {
+      id: blogCategoryHref(idSlug),
+      en: blogCategoryHref(enSlug),
+    }),
     openGraph: {
       title: metaTitle,
       description: metaDescription,
+      url: localizedUrl(locale, blogCategoryHref(canonicalSlug)),
       type: "website",
       images: [
         {
@@ -111,13 +131,21 @@ export default async function BlogCategoryPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  const cmsCategory = await fetchCmsCategoryBySlug(category);
+  const cmsCategory = await fetchCmsCategoryBySlug(category, locale);
   if (!isBlogCategoryId(category) && !cmsCategory) {
     notFound();
   }
 
+  const idSlug = cmsCategory?.slugId || cmsCategory?.slug || category;
+  const enSlug = cmsCategory?.slugEn || cmsCategory?.slug || category;
+  const canonicalSlug = locale === "en" ? enSlug : idSlug;
+
+  if (category !== canonicalSlug && (cmsCategory?.slugId || cmsCategory?.slugEn)) {
+    redirect(locale === "en" ? `/en/blog/kategori/${canonicalSlug}` : `/blog/kategori/${canonicalSlug}`);
+  }
+
   const t = await getTranslations({ locale, namespace: "blog" });
-  const url = localizedUrl(locale, blogCategoryHref(category));
+  const url = localizedUrl(locale, blogCategoryHref(canonicalSlug));
 
   let categoryTitle =
     locale === "en"
@@ -138,12 +166,12 @@ export default async function BlogCategoryPage({ params }: Props) {
 
   // Ingest real dynamic posts and all dynamic categories from CMS API
   const [cmsRes, cmsCategories] = await Promise.all([
-    fetchCmsPosts({ categorySlug: category, limit: 1000 }),
-    fetchCmsCategories(),
+    fetchCmsPosts({ categorySlug: category, limit: 1000, locale }),
+    fetchCmsCategories(locale),
   ]);
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
   const categories = cmsCategories.map((c) => ({
-    id: c.slug,
+    id: (locale === "en" ? c.slugEn || c.slug : c.slugId || c.slug) || c.slug,
     name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,
   }));
 
@@ -168,10 +196,15 @@ export default async function BlogCategoryPage({ params }: Props) {
           })),
         })}
       />
-      <Header />
+      <Header
+        alternateHrefs={{
+          id: blogCategoryHref(idSlug),
+          en: blogCategoryHref(enSlug),
+        }}
+      />
       <main className="relative pt-24">
         <BlogIndexSection
-          category={category as BlogCategoryId}
+          category={canonicalSlug as BlogCategoryId}
           initialPosts={posts}
           categories={categories}
           categoryInfo={{ name: categoryTitle, description: categoryDesc }}

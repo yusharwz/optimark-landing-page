@@ -22,6 +22,7 @@ import {
   getPeopleForSitemap,
   getPublishedPostsForSitemap,
 } from "@/lib/cms";
+import { localizedUrl } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
 
@@ -30,31 +31,77 @@ export async function GET(request: NextRequest) {
   const now = new Date();
   const entries: UrlsetEntry[] = [];
 
-  // 1. Dynamic Blog Posts
+  // 1. Dynamic Multilingual Blog Posts
   const dbPosts = await getPublishedPostsForSitemap();
-  const postMap = new Map<string, Date>();
+  const postMap = new Map<string, { idSlug: string; enSlug: string; lastmod: Date }>();
 
   if (dbPosts.length === 0) {
     for (const post of BLOG_POSTS) {
       const date = post.updatedAt ? new Date(post.updatedAt) : new Date(post.publishedAt);
-      postMap.set(post.slug, isNaN(date.getTime()) ? now : date);
+      const idSlug = post.slugId || post.slug;
+      const enSlug = post.slugEn || post.slug;
+      postMap.set(idSlug, { idSlug, enSlug, lastmod: isNaN(date.getTime()) ? now : date });
     }
   } else {
     for (const post of dbPosts) {
-      postMap.set(post.slug, post.contentUpdatedAt ?? post.updatedAt ?? post.publishedAt ?? now);
+      const idSlug = post.slugId || post.slug;
+      const enSlug = post.slugEn || post.slug;
+      postMap.set(idSlug, {
+        idSlug,
+        enSlug,
+        lastmod: post.contentUpdatedAt ?? post.updatedAt ?? post.publishedAt ?? now,
+      });
     }
   }
 
-  for (const [slug, lastmod] of postMap.entries()) {
-    entries.push(...expandBilingualEntries(blogHref(slug), lastmod, origin));
+  for (const { idSlug, enSlug, lastmod } of postMap.values()) {
+    const idUrl = localizedUrl("id", blogHref(idSlug), origin);
+    const enUrl = localizedUrl("en", blogHref(enSlug), origin);
+    const alternates = {
+      id: idUrl,
+      en: enUrl,
+      "x-default": idUrl,
+    };
+
+    // Indonesian entry
+    entries.push({
+      loc: idUrl,
+      lastmod,
+      alternates,
+    });
+
+    // English entry
+    entries.push({
+      loc: enUrl,
+      lastmod,
+      alternates,
+    });
   }
 
-  // 2. Dynamic Categories
+  // 2. Dynamic Multilingual Categories
   const dbCategories = await getCategoriesForSitemap();
-  const categories =
-    dbCategories.length > 0 ? dbCategories : (BLOG_CATEGORY_IDS as readonly string[]);
-  for (const catSlug of categories) {
-    entries.push(...expandBilingualEntries(blogCategoryHref(catSlug), now, origin));
+  for (const cat of dbCategories) {
+    const idSlug = typeof cat === "string" ? cat : cat.slugId || cat.slug;
+    const enSlug = typeof cat === "string" ? cat : cat.slugEn || cat.slug;
+    const idUrl = localizedUrl("id", blogCategoryHref(idSlug), origin);
+    const enUrl = localizedUrl("en", blogCategoryHref(enSlug), origin);
+    const alternates = {
+      id: idUrl,
+      en: enUrl,
+      "x-default": idUrl,
+    };
+
+    entries.push({
+      loc: idUrl,
+      lastmod: now,
+      alternates,
+    });
+
+    entries.push({
+      loc: enUrl,
+      lastmod: now,
+      alternates,
+    });
   }
 
   // 3. Dynamic Authors & Reviewers

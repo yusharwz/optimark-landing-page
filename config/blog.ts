@@ -189,12 +189,21 @@ export type BlogPost = {
   reviewerAvatar?: string;
   categoryName?: string;
   tableOfContents?: Array<{ id: string; text: string; level: number }>;
+  slugId?: string;
+  slugEn?: string;
+  alternateSlugs?: {
+    id: string;
+    en: string;
+  };
 };
 
 /** Newest first. Order here is the order the index renders. */
 export const BLOG_POSTS: BlogPost[] = [
   {
     slug: "riset-keyword-bisnis-lokal",
+    slugId: "riset-keyword-bisnis-lokal",
+    slugEn: "how-to-research-keywords-local-business",
+    alternateSlugs: { id: "riset-keyword-bisnis-lokal", en: "how-to-research-keywords-local-business" },
     category: "seo",
     publishedAt: "2026-10-01",
     updatedAt: "2026-10-02",
@@ -207,6 +216,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "jadwal-posting-instagram-umkm-kuliner",
+    slugId: "jadwal-posting-instagram-umkm-kuliner",
+    slugEn: "best-instagram-posting-schedule-food-smb",
+    alternateSlugs: { id: "jadwal-posting-instagram-umkm-kuliner", en: "best-instagram-posting-schedule-food-smb" },
     category: "social-media",
     publishedAt: "2026-09-29",
     readMinutes: 4,
@@ -217,6 +229,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "foto-produk-ai-smartphone",
+    slugId: "foto-produk-ai-smartphone",
+    slugEn: "smartphone-ai-product-photography-guide",
+    alternateSlugs: { id: "foto-produk-ai-smartphone", en: "smartphone-ai-product-photography-guide" },
     category: "visual-content",
     publishedAt: "2026-09-26",
     readMinutes: 5,
@@ -227,6 +242,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "strategi-content-pillar",
+    slugId: "strategi-content-pillar",
+    slugEn: "content-pillar-strategy-small-brands",
+    alternateSlugs: { id: "strategi-content-pillar", en: "content-pillar-strategy-small-brands" },
     category: "content-marketing",
     publishedAt: "2026-09-23",
     readMinutes: 7,
@@ -237,6 +255,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "website-belum-muncul-di-google",
+    slugId: "website-belum-muncul-di-google",
+    slugEn: "why-website-not-ranking-on-google",
+    alternateSlugs: { id: "website-belum-muncul-di-google", en: "why-website-not-ranking-on-google" },
     category: "seo",
     publishedAt: "2026-09-19",
     readMinutes: 8,
@@ -247,6 +268,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "warna-feed-instagram",
+    slugId: "warna-feed-instagram",
+    slugEn: "instagram-feed-color-palette-guide",
+    alternateSlugs: { id: "warna-feed-instagram", en: "instagram-feed-color-palette-guide" },
     category: "visual-content",
     publishedAt: "2026-09-16",
     readMinutes: 4,
@@ -257,6 +281,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "caption-tiktok",
+    slugId: "caption-tiktok",
+    slugEn: "write-engaging-tiktok-captions",
+    alternateSlugs: { id: "caption-tiktok", en: "write-engaging-tiktok-captions" },
     category: "social-media",
     publishedAt: "2026-09-12",
     readMinutes: 3,
@@ -267,6 +294,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "artikel-jadi-konten-media-sosial",
+    slugId: "artikel-jadi-konten-media-sosial",
+    slugEn: "turn-one-blog-post-into-ten-social-posts",
+    alternateSlugs: { id: "artikel-jadi-konten-media-sosial", en: "turn-one-blog-post-into-ten-social-posts" },
     category: "content-marketing",
     publishedAt: "2026-09-09",
     readMinutes: 7,
@@ -277,6 +307,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "video-promosi-singkat",
+    slugId: "video-promosi-singkat",
+    slugEn: "create-engaging-promo-videos-without-editor",
+    alternateSlugs: { id: "video-promosi-singkat", en: "create-engaging-promo-videos-without-editor" },
     category: "visual-content",
     publishedAt: "2026-09-02",
     readMinutes: 5,
@@ -287,6 +320,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "target-audiens",
+    slugId: "target-audiens",
+    slugEn: "define-target-audience-online-business",
+    alternateSlugs: { id: "target-audiens", en: "define-target-audience-online-business" },
     category: "content-marketing",
     publishedAt: "2026-08-28",
     readMinutes: 4,
@@ -297,6 +333,9 @@ export const BLOG_POSTS: BlogPost[] = [
   },
   {
     slug: "insight-instagram",
+    slugId: "insight-instagram",
+    slugEn: "reading-instagram-insights-effective-content",
+    alternateSlugs: { id: "insight-instagram", en: "reading-instagram-insights-effective-content" },
     category: "social-media",
     publishedAt: "2026-08-25",
     readMinutes: 6,

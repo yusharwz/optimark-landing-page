@@ -76,12 +76,12 @@ export default async function BlogPage({ params }: Props) {
 
   // Ingest real dynamic posts and categories from CMS API with fallback
   const [cmsRes, cmsCategories] = await Promise.all([
-    fetchCmsPosts({ limit: 1000 }),
-    fetchCmsCategories(),
+    fetchCmsPosts({ limit: 1000, locale }),
+    fetchCmsCategories(locale),
   ]);
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
   const categories = cmsCategories.map((c) => ({
-    id: c.slug,
+    id: (locale === "en" ? c.slugEn || c.slug : c.slugId || c.slug) || c.slug,
     name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,
   }));
 

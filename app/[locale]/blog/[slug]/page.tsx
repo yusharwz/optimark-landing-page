@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { resolveLocale } from "@/lib/locale";
@@ -16,7 +16,7 @@ import {
   blogPostingJsonLd,
   breadcrumbJsonLd,
   defaultRobots,
-  localeAlternates,
+  multilingualLocaleAlternates,
   localizedUrl,
 } from "@/lib/seo";
 import { SCROLL_UP_THRESHOLD } from "@/config/site";
@@ -34,7 +34,10 @@ export const dynamicParams = true;
  */
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    BLOG_POSTS.map((post) => ({ locale, slug: post.slug })),
+    BLOG_POSTS.map((post) => ({
+      locale,
+      slug: locale === "en" ? post.slugEn || post.slug : post.slugId || post.slug,
+    })),
   );
 }
 
@@ -42,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, slug } = await params;
   const locale = resolveLocale(localeParam);
 
-  const cmsData = await fetchCmsPostBySlug(slug);
+  const cmsData = await fetchCmsPostBySlug(slug, locale);
   const entry = cmsData ? cmsArticleToBlogPost(cmsData.post) : getBlogPost(slug);
   if (!entry) return {};
 
@@ -84,13 +87,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       locale,
     });
 
-  const canonicalUrl = localizedUrl(locale, blogHref(entry.slug));
+  const idSlug = cmsData?.post?.alternateSlugs?.id || entry.slugId || entry.slug;
+  const enSlug = cmsData?.post?.alternateSlugs?.en || entry.slugEn || entry.slug;
+  const canonicalSlug = locale === "en" ? enSlug : idSlug;
+  const canonicalUrl = localizedUrl(locale, blogHref(canonicalSlug));
 
   return {
     title: metaTitle,
     description: metaDescription,
     robots: defaultRobots(true),
-    alternates: localeAlternates(locale, blogHref(entry.slug)),
+    alternates: multilingualLocaleAlternates(locale, {
+      id: blogHref(idSlug),
+      en: blogHref(enSlug),
+    }),
     openGraph: {
       title: metaTitle,
       description: metaDescription,
@@ -123,11 +132,24 @@ export default async function BlogPostPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  const cmsData = await fetchCmsPostBySlug(slug);
+  const cmsData = await fetchCmsPostBySlug(slug, locale);
+  if (cmsData?.redirect) {
+    redirect(cmsData.redirect.targetPath);
+  }
+
   const post = cmsData ? cmsArticleToBlogPost(cmsData.post) : getBlogPost(slug);
 
   if (!post) {
     notFound();
+  }
+
+  const idSlug = cmsData?.post?.alternateSlugs?.id || post.slugId || post.slug;
+  const enSlug = cmsData?.post?.alternateSlugs?.en || post.slugEn || post.slug;
+  const canonicalSlug = locale === "en" ? enSlug : idSlug;
+
+  // Enforce canonical slug redirect per locale if requested with wrong language slug
+  if (slug !== canonicalSlug && (post.slugId || post.slugEn)) {
+    redirect(locale === "en" ? `/en/blog/${canonicalSlug}` : `/blog/${canonicalSlug}`);
   }
 
   let title = post.title && post.title !== post.slug ? post.title : "";
@@ -155,7 +177,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   const tPeople = await getTranslations({ locale, namespace: "blogPeople" });
   const tBlog = await getTranslations({ locale, namespace: "blog" });
-  const url = localizedUrl(locale, blogHref(post.slug));
+  const url = localizedUrl(locale, blogHref(canonicalSlug));
 
   let authorName = post.authorName;
   if (!authorName) {
@@ -201,9 +223,15 @@ export default async function BlogPostPage({ params }: Props) {
           { name: title || post.slug, url },
         ])}
       />
-      <Header subnav={<BlogTocBar slug={post.slug} content={post.content} />} />
+      <Header
+        subnav={<BlogTocBar slug={canonicalSlug} content={post.content} />}
+        alternateHrefs={{
+          id: blogHref(idSlug),
+          en: blogHref(enSlug),
+        }}
+      />
       <main className="relative pt-36 sm:pt-40 lg:pt-24">
-        <BlogPostView slug={post.slug} initialPost={post} relatedPosts={relatedPosts} />
+        <BlogPostView slug={canonicalSlug} initialPost={post} relatedPosts={relatedPosts} />
       </main>
       <Footer />
       <ScrollUpButton threshold={SCROLL_UP_THRESHOLD} />
