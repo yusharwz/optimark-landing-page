@@ -83,8 +83,8 @@ export async function GET(request: NextRequest) {
   for (const cat of dbCategories) {
     const idSlug = typeof cat === "string" ? cat : cat.slugId || cat.slug;
     const enSlug = typeof cat === "string" ? cat : cat.slugEn || cat.slug;
-    const idUrl = localizedUrl("id", blogCategoryHref(idSlug), origin);
-    const enUrl = localizedUrl("en", blogCategoryHref(enSlug), origin);
+    const idUrl = localizedUrl("id", blogCategoryHref(idSlug, "id"), origin);
+    const enUrl = localizedUrl("en", blogCategoryHref(enSlug, "en"), origin);
     const alternates = {
       id: idUrl,
       en: enUrl,

@@ -167,7 +167,7 @@ function Preview({
     return (
       <Image
         src={preview.src}
-        alt=""
+        alt={`Ilustrasi fitur ${id} Optimark`}
         fill
         sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 80vw"
         className={cx(

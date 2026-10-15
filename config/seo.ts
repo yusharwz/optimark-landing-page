@@ -9,6 +9,7 @@
  */
 
 import type { AppLocale } from "@/lib/locale";
+import { getSiteUrl } from "@/config/site";
 
 export interface SeoItemData {
   page?: string;
@@ -543,7 +544,15 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
 };
 
 export function getSeoData(key: SeoPageKey, locale: AppLocale): SeoItemData {
-  return SEO_CONFIG[key]?.[locale] ?? SEO_CONFIG[key]?.id;
+  const raw = SEO_CONFIG[key]?.[locale] ?? SEO_CONFIG[key]?.id;
+  if (!raw) return raw;
+  const siteUrl = getSiteUrl();
+  return {
+    ...raw,
+    canonical: raw.canonical ? raw.canonical.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.canonical,
+    link: raw.link ? raw.link.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.link,
+    linkBefore: raw.linkBefore ? raw.linkBefore.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.linkBefore,
+  };
 }
 
 export function getSeoKeywords(key: SeoPageKey, locale: AppLocale): string[] {

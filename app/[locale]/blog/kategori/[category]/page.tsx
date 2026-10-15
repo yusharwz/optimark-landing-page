@@ -98,13 +98,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: metaTitle,
     description: metaDescription,
     alternates: multilingualLocaleAlternates(locale, {
-      id: blogCategoryHref(idSlug),
-      en: blogCategoryHref(enSlug),
+      id: blogCategoryHref(idSlug, "id"),
+      en: blogCategoryHref(enSlug, "en"),
     }),
     openGraph: {
       title: metaTitle,
       description: metaDescription,
-      url: localizedUrl(locale, blogCategoryHref(canonicalSlug)),
+      url: localizedUrl(locale, blogCategoryHref(canonicalSlug, locale)),
       type: "website",
       images: [
         {
@@ -140,21 +140,19 @@ export default async function BlogCategoryPage({ params }: Props) {
   const enSlug = cmsCategory?.slugEn || cmsCategory?.slug || category;
   const canonicalSlug = locale === "en" ? enSlug : idSlug;
 
+  if (locale === "en") {
+    redirect(`/en/blog/category/${enSlug}`);
+  }
+
   if (category !== canonicalSlug && (cmsCategory?.slugId || cmsCategory?.slugEn)) {
-    redirect(locale === "en" ? `/en/blog/kategori/${canonicalSlug}` : `/blog/kategori/${canonicalSlug}`);
+    redirect(`/blog/kategori/${canonicalSlug}`);
   }
 
   const t = await getTranslations({ locale, namespace: "blog" });
-  const url = localizedUrl(locale, blogCategoryHref(canonicalSlug));
+  const url = localizedUrl("id", blogCategoryHref(canonicalSlug, "id"));
 
-  let categoryTitle =
-    locale === "en"
-      ? cmsCategory?.nameEn || cmsCategory?.name
-      : cmsCategory?.nameId || cmsCategory?.name;
-  let categoryDesc =
-    locale === "en"
-      ? cmsCategory?.descriptionEn || cmsCategory?.description
-      : cmsCategory?.descriptionId || cmsCategory?.description;
+  let categoryTitle = cmsCategory?.nameId || cmsCategory?.name;
+  let categoryDesc = cmsCategory?.descriptionId || cmsCategory?.description;
 
   try {
     const tAny = t as unknown as (k: string) => string;
@@ -166,13 +164,13 @@ export default async function BlogCategoryPage({ params }: Props) {
 
   // Ingest real dynamic posts and all dynamic categories from CMS API
   const [cmsRes, cmsCategories] = await Promise.all([
-    fetchCmsPosts({ categorySlug: category, limit: 1000, locale }),
-    fetchCmsCategories(locale),
+    fetchCmsPosts({ categorySlug: category, limit: 1000, locale: "id" }),
+    fetchCmsCategories("id"),
   ]);
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
   const categories = cmsCategories.map((c) => ({
-    id: (locale === "en" ? c.slugEn || c.slug : c.slugId || c.slug) || c.slug,
-    name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,
+    id: c.slugId || c.slug || "",
+    name: c.nameId || c.name || c.slug || "",
   }));
 
   return (
@@ -198,8 +196,8 @@ export default async function BlogCategoryPage({ params }: Props) {
       />
       <Header
         alternateHrefs={{
-          id: blogCategoryHref(idSlug),
-          en: blogCategoryHref(enSlug),
+          id: blogCategoryHref(idSlug, "id"),
+          en: blogCategoryHref(enSlug, "en"),
         }}
       />
       <main className="relative pt-24">

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { routing } from "@/i18n/routing";
 import type { AppLocale } from "@/lib/locale";
-import { GET_STARTED_URL, SITE, SITE_URL, SOCIAL_LINKS } from "@/config/site";
+import { GET_STARTED_URL, SITE, SITE_URL, getSiteUrl, SOCIAL_LINKS } from "@/config/site";
 
 /** Absolute URL of `path` (no locale prefix) in `locale`. */
-export function localizedUrl(locale: AppLocale, path: string, origin: string = SITE_URL): string {
+export function localizedUrl(locale: AppLocale, path: string, origin: string = getSiteUrl()): string {
+  // Multilingual static paths mapping
   if (
     path === "/perencana-konten" ||
     path === "/content-planner" ||
@@ -13,6 +14,39 @@ export function localizedUrl(locale: AppLocale, path: string, origin: string = S
   ) {
     return locale === "en" ? `${origin}/en/content-planner` : `${origin}/perencana-konten`;
   }
+  if (path === "/kebijakan-privasi" || path === "/privacy-policy") {
+    return locale === "en" ? `${origin}/en/privacy-policy` : `${origin}/kebijakan-privasi`;
+  }
+  if (path === "/syarat-ketentuan" || path === "/terms-of-service") {
+    return locale === "en" ? `${origin}/en/terms-of-service` : `${origin}/syarat-ketentuan`;
+  }
+  if (path === "/tentang-kami" || path === "/about") {
+    return locale === "en" ? `${origin}/en/about` : `${origin}/tentang-kami`;
+  }
+  if (path === "/kontak" || path === "/contact") {
+    return locale === "en" ? `${origin}/en/contact` : `${origin}/kontak`;
+  }
+  if (path === "/harga" || path === "/pricing") {
+    return locale === "en" ? `${origin}/en/pricing` : `${origin}/harga`;
+  }
+
+  // Category routes mapping
+  if (path.startsWith("/blog/kategori/") || path.startsWith("/blog/category/")) {
+    const rawCategory = path.replace(/^\/blog\/(kategori|category)\//, "");
+    let idCategory = rawCategory;
+    let enCategory = rawCategory;
+    if (rawCategory === "social-media" || rawCategory === "media-sosial") {
+      idCategory = "media-sosial";
+      enCategory = "social-media";
+    } else if (rawCategory === "visual-content" || rawCategory === "konten-visual") {
+      idCategory = "konten-visual";
+      enCategory = "visual-content";
+    }
+    return locale === "en"
+      ? `${origin}/en/blog/category/${enCategory}`
+      : `${origin}/blog/kategori/${idCategory}`;
+  }
+
   const cleanPath = path.startsWith("/features/") ? path.replace("/features/", "/") : path;
   const prefix = locale === routing.defaultLocale ? "" : `/${locale}`;
   const suffix = cleanPath === "/" ? "" : cleanPath;
@@ -22,13 +56,21 @@ export function localizedUrl(locale: AppLocale, path: string, origin: string = S
 /**
  * Self-referencing canonical plus hreflang for every locale, with
  * `x-default` pointing at the Indonesian (default) URL.
+ * Emits both short (id, en) and regional (id-ID, en-US) language alternates.
  */
-export function localeAlternates(locale: AppLocale, path: string): Metadata["alternates"] {
+export function localeAlternates(locale: AppLocale, path: string, origin: string = getSiteUrl()): Metadata["alternates"] {
+  const urlId = localizedUrl("id", path, origin);
+  const urlEn = localizedUrl("en", path, origin);
+  const canonical = locale === "en" ? urlEn : urlId;
+
   return {
-    canonical: localizedUrl(locale, path),
+    canonical,
     languages: {
-      ...Object.fromEntries(routing.locales.map((loc) => [loc, localizedUrl(loc, path)])),
-      "x-default": localizedUrl(routing.defaultLocale, path),
+      id: urlId,
+      "id-ID": urlId,
+      en: urlEn,
+      "en-US": urlEn,
+      "x-default": urlId,
     },
   };
 }
@@ -40,20 +82,24 @@ export function localeAlternates(locale: AppLocale, path: string): Metadata["alt
 export function multilingualLocaleAlternates(
   currentLocale: AppLocale,
   pathsByLocale: Partial<Record<AppLocale, string>>,
+  origin: string = getSiteUrl(),
 ): Metadata["alternates"] {
   const defaultPath = pathsByLocale[routing.defaultLocale] || Object.values(pathsByLocale)[0] || "/";
   const currentPath = pathsByLocale[currentLocale] || defaultPath;
 
-  const languages: Record<string, string> = {};
-  for (const loc of routing.locales) {
-    const locPath = pathsByLocale[loc] || defaultPath;
-    languages[loc] = localizedUrl(loc, locPath);
-  }
-  languages["x-default"] = localizedUrl(routing.defaultLocale, defaultPath);
+  const urlId = pathsByLocale.id ? localizedUrl("id", pathsByLocale.id, origin) : localizedUrl("id", defaultPath, origin);
+  const urlEn = pathsByLocale.en ? localizedUrl("en", pathsByLocale.en, origin) : localizedUrl("en", defaultPath, origin);
+  const canonical = localizedUrl(currentLocale, currentPath, origin);
 
   return {
-    canonical: localizedUrl(currentLocale, currentPath),
-    languages,
+    canonical,
+    languages: {
+      id: urlId,
+      "id-ID": urlId,
+      en: urlEn,
+      "en-US": urlEn,
+      "x-default": urlId,
+    },
   };
 }
 

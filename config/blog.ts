@@ -378,7 +378,10 @@ export function getPopularTags(exclude?: BlogTagId, limit = 5): BlogTagId[] {
     .map(({ id }) => id);
 }
 
-export function blogCategoryHref(id: BlogCategoryId | string): string {
+export function blogCategoryHref(id: BlogCategoryId | string, locale?: string): string {
+  if (locale === "en") {
+    return `/blog/category/${id}`;
+  }
   return `/blog/kategori/${id}`;
 }
 

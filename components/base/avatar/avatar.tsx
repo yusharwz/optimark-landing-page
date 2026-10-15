@@ -114,7 +114,7 @@ export const Avatar = ({
           data-avatar-img
           className="size-full rounded-full object-cover"
           src={src}
-          alt={alt}
+          alt={alt || "Avatar Pengguna"}
           onError={() => setIsFailed(true)}
         />
       );

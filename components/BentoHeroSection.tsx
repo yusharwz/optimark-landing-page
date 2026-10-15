@@ -143,7 +143,7 @@ export function BentoHeroSection() {
                   <div className="absolute inset-0 opacity-10 transition-opacity group-hover:opacity-20">
                     <Image
                       src={meta.coverImage}
-                      alt=""
+                      alt={tFeatures(`items.${id}.title`) || "Fitur Optimark"}
                       fill
                       className="object-cover"
                     />

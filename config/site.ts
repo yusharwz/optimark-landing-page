@@ -83,7 +83,24 @@ export const GA_MEASUREMENT_ID = "G-YNXD0DYDQ0";
  * this has to be correct at build time, and a build arg that nobody remembers
  * to set produces a silently wrong site rather than a failure.
  */
-export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ||
-  process.env.SITE_URL?.replace(/\/$/, "") ||
-  "https://optimark.ai";
+export function getSiteUrl(): string {
+  if (typeof process !== "undefined") {
+    const envUrl = process.env.SITE_URL || process.env.NEXT_PUBLIC_SITE_URL;
+    if (envUrl && envUrl.trim()) {
+      return envUrl.trim().replace(/\/$/, "");
+    }
+  }
+  if (typeof window !== "undefined" && window.location?.origin) {
+    return window.location.origin;
+  }
+  return "https://optimark.ai";
+}
+
+export const SITE_URL = {
+  toString: () => getSiteUrl(),
+  valueOf: () => getSiteUrl(),
+  replace: (pattern: any, replacement: any) => getSiteUrl().replace(pattern, replacement),
+  startsWith: (searchString: string) => getSiteUrl().startsWith(searchString),
+  endsWith: (searchString: string) => getSiteUrl().endsWith(searchString),
+  includes: (searchString: string) => getSiteUrl().includes(searchString),
+} as unknown as string;

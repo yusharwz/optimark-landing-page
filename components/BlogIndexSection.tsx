@@ -271,7 +271,7 @@ export function BlogIndexSection({
                       return (
                         <Link
                           key={cat.id}
-                          href={cat.id === "all" ? "/blog" : blogCategoryHref(cat.id)}
+                          href={cat.id === "all" ? "/blog" : blogCategoryHref(cat.id, locale)}
                           aria-current={active ? "page" : undefined}
                           className={sidebarItem(active)}
                         >
@@ -307,7 +307,7 @@ export function BlogIndexSection({
                       locale={locale}
                       action={
                         <Link
-                          href={blogCategoryHref(id)}
+                          href={blogCategoryHref(id, locale)}
                           className="rounded text-md font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#5E7F2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
                         >
                           {t("viewAll")}
@@ -333,7 +333,7 @@ export function BlogIndexSection({
                         locale={locale}
                         action={
                           <Link
-                            href={blogCategoryHref(cat.id)}
+                            href={blogCategoryHref(cat.id, locale)}
                             className="rounded text-md font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#5E7F2E] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#94C748]"
                           >
                             {t("viewAll")}

@@ -145,7 +145,7 @@ export async function fetchCmsPosts(params?: {
   try {
     const res = await fetch(url, {
       headers: { Accept: "application/json" },
-      cache: "no-store",
+      next: { revalidate: 60, tags: ["cms-posts"] },
       signal: AbortSignal.timeout(4000),
     });
 
@@ -215,7 +215,7 @@ export const fetchCmsPostBySlug = cache(
     try {
       const res = await fetch(url, {
         headers: { Accept: "application/json" },
-        cache: "no-store",
+        next: { revalidate: 60, tags: ["cms-posts", `cms-post-${slug}`] },
         signal: AbortSignal.timeout(3000),
       });
 
@@ -388,7 +388,7 @@ export interface CmsPerson {
 export async function fetchCmsPeople(): Promise<CmsPerson[]> {
   try {
     const res = await fetch(`${getCmsBaseUrl()}/people`, {
-      cache: 'no-store',
+      next: { revalidate: 300, tags: ['cms-people'] },
     });
     if (!res.ok) return [];
     return (await res.json()) as CmsPerson[];
@@ -400,7 +400,7 @@ export async function fetchCmsPeople(): Promise<CmsPerson[]> {
 export async function fetchCmsPersonBySlug(slug: string): Promise<CmsPerson | null> {
   try {
     const res = await fetch(`${getCmsBaseUrl()}/people/${slug}`, {
-      cache: 'no-store',
+      next: { revalidate: 300, tags: ['cms-people'] },
     });
     if (!res.ok) return null;
     return (await res.json()) as CmsPerson;
@@ -434,7 +434,7 @@ export const fetchCmsCategories = cache(async (locale?: string): Promise<CmsCate
   try {
     const query = locale ? `?locale=${encodeURIComponent(locale)}` : "";
     const res = await fetch(`${getCmsBaseUrl()}/public/categories${query}`, {
-      cache: "no-store",
+      next: { revalidate: 300, tags: ["cms-categories"] },
       headers: { Accept: "application/json" },
       signal: AbortSignal.timeout(3000),
     });
@@ -447,7 +447,7 @@ export const fetchCmsCategoryBySlug = cache(async (slug: string, locale?: string
   try {
     const query = locale ? `?locale=${encodeURIComponent(locale)}` : "";
     const res = await fetch(`${getCmsBaseUrl()}/public/categories/${encodeURIComponent(slug)}${query}`, {
-      cache: "no-store",
+      next: { revalidate: 300, tags: ["cms-categories"] },
       headers: { Accept: "application/json" },
       signal: AbortSignal.timeout(3000),
     });

@@ -176,7 +176,7 @@ export function BentoFeatureCard({
 
       {!illustration && coverImage && (
         <div className="relative z-10 h-full min-h-[200px] w-full transition-all duration-300 group-hover:scale-105">
-          <Image src={coverImage} alt="" fill className="object-contain" />
+          <Image src={coverImage} alt={title || "Preview fitur Optimark"} fill className="object-contain" />
         </div>
       )}
     </>

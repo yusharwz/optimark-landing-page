@@ -243,7 +243,7 @@ function ProfileCard(props: BlogProfileViewProps) {
               focusRing,
             )}
           >
-            <Image src="/images/connect/linkedin.svg" alt="" width={16} height={16} />
+            <Image src="/images/connect/linkedin.svg" alt="LinkedIn icon" width={16} height={16} />
             LinkedIn
           </a>
         )}

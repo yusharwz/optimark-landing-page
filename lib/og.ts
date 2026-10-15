@@ -1,16 +1,10 @@
-import { SITE_URL } from "@/config/site";
+import { getSiteUrl } from "@/config/site";
 
 /**
  * Canonical origin for absolute URLs.
- *
- * This used to walk `NEXT_PUBLIC_SITE_URL` → Vercel env vars → localhost. The
- * Vercel branches were dead (this deploys to Docker), and the localhost
- * fallback was actively harmful: .env is excluded from the image, so the
- * container build never saw the variable and silently baked
- * `http://localhost:3000` into every prerendered page.
  */
 export function getBaseUrl(): string {
-  return SITE_URL;
+  return getSiteUrl();
 }
 
 export function buildOgImageUrl({

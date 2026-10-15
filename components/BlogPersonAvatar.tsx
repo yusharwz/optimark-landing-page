@@ -53,7 +53,7 @@ export function BlogPersonAvatar({
       )}
     >
       {photo ? (
-        <Image src={photo} alt="" fill sizes={`${PIXELS[size]}px`} className="object-cover" />
+        <Image src={photo} alt={name || "Foto profil kontributor Optimark"} fill sizes={`${PIXELS[size]}px`} className="object-cover" />
       ) : (
         initialsOf(name)
       )}

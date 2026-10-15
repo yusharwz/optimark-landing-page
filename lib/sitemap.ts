@@ -1,6 +1,6 @@
 import { localizedUrl } from "@/lib/seo";
 import { routing } from "@/i18n/routing";
-import { SITE_URL } from "@/config/site";
+import { getSiteUrl } from "@/config/site";
 
 export function getRequestOrigin(request: Request): string {
   const host = request.headers.get("x-forwarded-host") || request.headers.get("host");
@@ -9,7 +9,7 @@ export function getRequestOrigin(request: Request): string {
   if (host) {
     return `${proto}://${host}`;
   }
-  return SITE_URL;
+  return getSiteUrl();
 }
 
 export function formatSitemapDate(date: Date | string): string {
@@ -101,7 +101,7 @@ export function renderUrlsetXml(entries: UrlsetEntry[]): string {
 export function expandBilingualEntries(
   path: string,
   lastmod: Date | string,
-  origin: string = SITE_URL,
+  origin: string = getSiteUrl(),
 ): UrlsetEntry[] {
   const normalizedPath = path || "/";
   const languages: Record<string, string> = {

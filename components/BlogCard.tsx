@@ -135,7 +135,7 @@ export function BlogCard({
             }
             return (
               <Link
-                href={blogCategoryHref(post.category)}
+                href={blogCategoryHref(post.category, locale)}
                 className={cx(
                   "w-fit rounded text-sm font-semibold tracking-tight text-[#769F3A] transition-colors hover:text-[#59772B]",
                   focusRing,

@@ -20,11 +20,11 @@ const SHOTS = [
 export function AiImageShowcase() {
   return (
     <div aria-hidden className="grid h-full w-full grid-cols-2 grid-rows-2">
-      {SHOTS.map((src) => (
+      {SHOTS.map((src, idx) => (
         <div key={src} className="relative overflow-hidden">
           <Image
             src={src}
-            alt=""
+            alt={`Contoh kreasi foto produk AI Optimark ${idx + 1}`}
             fill
             sizes="(min-width: 1024px) 320px, 50vw"
             className="object-cover"

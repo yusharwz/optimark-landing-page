@@ -154,7 +154,7 @@ export function BlogPostView({
                   }
                   return (
                     <Link
-                      href={blogCategoryHref(post.category)}
+                      href={blogCategoryHref(post.category, locale)}
                       className={cx(
                         "rounded font-semibold text-[#769F3A] transition-colors hover:text-[#59772B]",
                         focusRing,
