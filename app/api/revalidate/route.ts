@@ -34,6 +34,15 @@ export async function POST(request: NextRequest) {
     if (path === "/sitemap.xml") {
       revalidatePath("/sitemap.xml");
       revalidatePath("/page-sitemap.xml");
+      revalidatePath("/id-page-sitemap.xml");
+      revalidatePath("/en-page-sitemap.xml");
+      revalidatePath("/article-sitemap.xml");
+      revalidatePath("/id-article-sitemap.xml");
+      revalidatePath("/en-article-sitemap.xml");
+      revalidatePath("/category-sitemap.xml");
+      revalidatePath("/id-category-sitemap.xml");
+      revalidatePath("/en-category-sitemap.xml");
+      revalidatePath("/tag-sitemap.xml");
       revalidatePath("/blog-sitemap.xml");
     } else if (path) {
       revalidatePath(path);

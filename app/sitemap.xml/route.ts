@@ -31,8 +31,16 @@ export async function GET(request: NextRequest) {
       lastmod: now,
     },
     {
-      loc: `${origin}/blog-sitemap.xml`,
+      loc: `${origin}/article-sitemap.xml`,
       lastmod: latestBlogDate,
+    },
+    {
+      loc: `${origin}/category-sitemap.xml`,
+      lastmod: now,
+    },
+    {
+      loc: `${origin}/tag-sitemap.xml`,
+      lastmod: now,
     },
   ];
 

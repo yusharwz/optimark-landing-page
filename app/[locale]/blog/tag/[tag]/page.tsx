@@ -24,11 +24,10 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale: localeParam, tag } = await params;
-  if (!isBlogTagId(tag)) return {};
   const locale = resolveLocale(localeParam);
   const t = await getTranslations({ locale, namespace: "blog" });
 
-  const label = t(`tags.${tag}`);
+  const label = t.has(`tags.${tag}` as never) ? t(`tags.${tag}` as never) : tag;
   const title = t("tagMetaTitle", { tag: label });
   const description = t("tagMetaDescription", { tag: label });
   const ogImage = buildOgImageUrl({ title: label, description, locale });
@@ -61,21 +60,21 @@ export default async function BlogTagPage({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
-  if (!isBlogTagId(tag)) {
-    notFound();
-  }
-
-  const t = await getTranslations({ locale, namespace: "blog" });
-  const label = t(`tags.${tag}`);
-  const url = localizedUrl(locale, blogTagHref(tag));
-
   // Ingest dynamic posts and categories from CMS API
   const [cmsRes, cmsCategories] = await Promise.all([
     fetchCmsPosts({ tag, limit: 1000 }),
     fetchCmsCategories(),
   ]);
+
+  if (!isBlogTagId(tag) && cmsRes.data.length === 0) {
+    notFound();
+  }
+
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const label = t.has(`tags.${tag}` as never) ? t(`tags.${tag}` as never) : tag;
+  const url = localizedUrl(locale, blogTagHref(tag));
   const posts = cmsRes.data.map(cmsArticleToBlogPost);
-  const displayPosts = posts.length > 0 ? posts : getPostsByTag(tag);
+  const displayPosts = posts.length > 0 ? posts : (isBlogTagId(tag) ? getPostsByTag(tag) : []);
   const categories = cmsCategories.map((c) => ({
     id: c.slug,
     name: (locale === "en" ? c.nameEn || c.name : c.nameId || c.name) || c.slug,

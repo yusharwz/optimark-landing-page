@@ -220,7 +220,6 @@ export function BlogPostView({
                   />
                 )}
               </div>
-              <BlogSocialShare url={shareUrl} title={title} variant="compact" />
             </div>
           </div>
         </div>
@@ -288,9 +287,9 @@ export function BlogPostView({
                   <ul className="flex flex-wrap gap-2">
                     {tags.map((tag) => {
                       let tagLabel = tag;
-                      try {
-                        tagLabel = (t as unknown as (k: string) => string)(`tags.${tag}`) || tag;
-                      } catch {}
+                      if (t.has(`tags.${tag}` as never)) {
+                        tagLabel = t(`tags.${tag}` as never);
+                      }
                       return (
                         <li key={tag}>
                           <Link

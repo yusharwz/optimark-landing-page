@@ -197,11 +197,10 @@ export default async function BlogPostPage({ params }: Props) {
     updatedAt: post.updatedAt,
     cover: post.cover,
     keywords: post.tags.map((tag) => {
-      try {
-        return (tBlog as unknown as (k: string) => string)(`tags.${tag}`) || tag;
-      } catch {
-        return tag;
+      if (tBlog.has(`tags.${tag}` as never)) {
+        return tBlog(`tags.${tag}` as never);
       }
+      return tag;
     }),
     author: {
       name: authorName,

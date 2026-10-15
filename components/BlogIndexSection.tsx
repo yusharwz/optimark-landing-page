@@ -18,6 +18,7 @@ import {
   blogTagHref,
   getPopularTags,
   getPostsByTag,
+  isBlogTagId,
   type BlogCategoryId,
   type BlogPost,
   type BlogTagId,
@@ -52,7 +53,7 @@ export function BlogIndexSection({
   categories,
 }: {
   category?: BlogCategoryId | string;
-  tag?: BlogTagId;
+  tag?: BlogTagId | string;
   initialPosts?: BlogPost[];
   categoryInfo?: { name: string; description?: string | null };
   categories?: Array<{ id: string; name: string }>;
@@ -93,7 +94,7 @@ export function BlogIndexSection({
   }, [allPosts, filter, tag, query, locale, tPosts]);
 
   const isOverview = filter === "all" && !tag && !query.trim();
-  const popularTags = tag ? getPopularTags(tag) : [];
+  const popularTags = tag && isBlogTagId(tag) ? getPopularTags(tag) : [];
 
   const onSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

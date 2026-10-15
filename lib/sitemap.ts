@@ -95,6 +95,44 @@ export function renderUrlsetXml(entries: UrlsetEntry[]): string {
   return xml;
 }
 
+export const STATIC_PAGE_ROUTES = [
+  "",
+  "/ai-content-maker",
+  "/perencana-konten", // localizedUrl maps to /en/content-planner for EN
+  "/seo-analyzer",
+  "/ai-image",
+  "/ai-video",
+  "/pricing",
+  "/blog",
+  "/about",
+  "/contact",
+  "/privacy-policy",
+  "/terms-of-service",
+] as const;
+
+/**
+ * Helper to generate a single localized entry with complete hreflang alternates.
+ */
+export function createLocalizedEntry(
+  path: string,
+  targetLocale: "id" | "en",
+  lastmod: Date | string,
+  origin: string = getSiteUrl(),
+): UrlsetEntry {
+  const normalizedPath = path || "/";
+  const languages: Record<string, string> = {
+    id: localizedUrl("id", normalizedPath, origin),
+    en: localizedUrl("en", normalizedPath, origin),
+    "x-default": localizedUrl("id", normalizedPath, origin),
+  };
+
+  return {
+    loc: localizedUrl(targetLocale, normalizedPath, origin),
+    lastmod,
+    alternates: languages,
+  };
+}
+
 /**
  * Helper to expand a canonical route into bilingual (ID & EN) sitemap entries with alternates.
  */

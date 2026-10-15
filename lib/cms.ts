@@ -287,6 +287,7 @@ export async function getPublishedPostsForSitemap(): Promise<
     publishedAt: Date;
     updatedAt?: Date | null;
     contentUpdatedAt?: Date | null;
+    tags?: string[];
   }>
 > {
   const baseUrl = getCmsBaseUrl();
@@ -308,6 +309,7 @@ export async function getPublishedPostsForSitemap(): Promise<
           publishedAt: Date;
           updatedAt?: Date | null;
           contentUpdatedAt?: Date | null;
+          tags?: string[];
         }
       >();
 
@@ -320,6 +322,7 @@ export async function getPublishedPostsForSitemap(): Promise<
           publishedAt: new Date(p.publishedAt),
           updatedAt: p.updatedAt ? new Date(p.updatedAt) : null,
           contentUpdatedAt: null,
+          tags: [...p.tags],
         });
       }
 
@@ -335,6 +338,7 @@ export async function getPublishedPostsForSitemap(): Promise<
             publishedAt: new Date(item.publishedAt),
             updatedAt: item.updatedAt ? new Date(item.updatedAt) : null,
             contentUpdatedAt: item.contentUpdatedAt ? new Date(item.contentUpdatedAt) : null,
+            tags: Array.isArray(item.tags) ? item.tags : [],
           });
         }
       }
@@ -351,7 +355,8 @@ export async function getPublishedPostsForSitemap(): Promise<
     slugEn: p.slugEn || p.slug,
     publishedAt: new Date(p.publishedAt),
     updatedAt: p.updatedAt ? new Date(p.updatedAt) : null,
-    contentUpdatedAt: p.updatedAt ? new Date(p.updatedAt) : null,
+    contentUpdatedAt: null,
+    tags: [...p.tags],
   }));
 }
 
