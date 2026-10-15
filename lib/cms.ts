@@ -107,7 +107,7 @@ export function normalizeContentImages(content?: string | null): string | undefi
 
   return content
     .replace(/https?:\/\/optimark-staging-media\.dritech\.co\.id/g, mediaBase)
-    .replace(/\/optimark\/blog-uploads\/warna-feed-instagram\.webp/gi, `${mediaBase}/optimark/blog/warna-feed-instagram.webp`)
+    .replace(/\/blog-uploads\/warna-feed-instagram\.webp/gi, '/blog/warna-feed-instagram.webp')
     .replace(/\/images\/blog\/([a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png|webp)/gi, `${mediaBase}/optimark/blog/$1.webp`)
     .replace(
       /(https?:\/\/[^\s\)"']+\.(?:jpg|jpeg|png))(?=[\s\)"']|$)/gi,
