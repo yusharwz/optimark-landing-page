@@ -127,13 +127,28 @@ The easiest way to deploy:
 
 ### Environment Variables
 
-Create `.env.production`:
+Copy `.env.example` to `.env.local`:
 
 ```bash
-NODE_ENV=production
-NEXT_PUBLIC_API_URL=https://api.optimark.com
-# Add other environment variables as needed
+cp .env.example .env.local
 ```
+
+| Variable | Required | Default | Description |
+|---|---|---|---|
+| `NEXT_PUBLIC_SITE_URL` | **Yes** | `https://optimark.ai` | Canonical domain for SEO, sitemaps, and Open Graph |
+| `CMS_API_URL` | **Yes** | `http://localhost:3001` | Public URL of the NestJS CMS Backend API |
+| `INTERNAL_CMS_API_URL` | No | `""` | Direct private container URL (e.g. `http://cms-backend:3001`) for Docker/K8s networks |
+| `REVALIDATE_SECRET` | **Yes** | — | Shared secret matching CMS Backend for on-demand ISR revalidation |
+| `NEXT_PUBLIC_MEDIA_URL` | No | `https://media.optimark.ai` | Custom Cloudflare R2 media CDN domain (if customized) |
+| `RECAPTCHA_SECRET_KEY` | No | `""` | Optional Google reCAPTCHA v3 secret for blog comment anti-spam |
+
+### CMS Integration & Architecture
+
+The landing page statically prerenders all pages and blog articles at build time and on-demand via Next.js Incremental Static Regeneration (ISR):
+- **Bilingual Blogs**: Articles are queried from the CMS Backend at `/api/public/articles` and served at `/[locale]/blog/[slug]` in Indonesian (`id`) and English (`en`).
+- **On-Demand Cache Purge**: When an article or media asset is edited in CMS, the backend calls `/api/revalidate` with `REVALIDATE_SECRET` to invalidate that specific path instantly across CDN and server caches.
+- **Hierarchical Sitemaps**: Dynamic XML sitemaps (`/sitemap.xml`, `/page-sitemap.xml`, `/article-sitemap.xml`, etc.) are styled with native XSLT (`/sitemap.xsl`) and auto-linked with back buttons on all non-root paths.
+- **Blog Comments**: Comments submit to `/api/blog/comments` with honeypot protection and forward directly to the CMS Backend moderation queue.
 
 ## Development Guidelines
 
