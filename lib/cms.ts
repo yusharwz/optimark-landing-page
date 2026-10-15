@@ -86,6 +86,7 @@ export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail)
     slugEn: item.slugEn,
     alternateSlugs: item.alternateSlugs,
     title: item.title,
+    metaDescription: ("metaDescription" in item && item.metaDescription) || undefined,
     excerpt: item.excerpt || undefined,
     content: ("content" in item && item.content) || undefined,
     category: categorySlug,

@@ -81,15 +81,13 @@ export function BlogIndexSection({
       if (tag && !post.tags.includes(tag)) return false;
       if (!needle) return true;
       let title = post.title || "";
-      let excerpt = post.excerpt || "";
-      if (!title || !excerpt) {
+      if (!title) {
         try {
           const tp = tPosts as unknown as (k: string) => string;
           title = title || tp(`${post.slug}.title`);
-          excerpt = excerpt || tp(`${post.slug}.excerpt`);
         } catch {}
       }
-      const haystack = `${title} ${excerpt} ${post.slug}`;
+      const haystack = `${title} ${post.slug}`;
       return haystack.toLocaleLowerCase(locale).includes(needle);
     });
   }, [allPosts, filter, tag, query, locale, tPosts]);

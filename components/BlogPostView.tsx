@@ -174,12 +174,6 @@ export function BlogPostView({
                 {title}
               </h1>
 
-              {post.excerpt && (
-                <p className="text-lg leading-relaxed text-[#535862] sm:text-xl font-normal">
-                  {post.excerpt}
-                </p>
-              )}
-
               <dl className="flex items-center gap-2.5 text-sm tracking-tight text-[#535862]">
                 <div className="sm:flex sm:gap-1">
                   <dt className="font-semibold">{tPost("published")}</dt>

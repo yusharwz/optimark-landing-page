@@ -179,6 +179,7 @@ export type BlogPost = {
   // Dynamic fields from CMS
   id?: string;
   title?: string;
+  metaDescription?: string;
   excerpt?: string;
   content?: string;
   authorName?: string;

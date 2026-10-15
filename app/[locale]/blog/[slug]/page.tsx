@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!entry) return {};
 
   let title = entry.title && entry.title !== entry.slug ? entry.title : "";
-  let metaDescription = entry.excerpt || "";
+  let metaDescription = entry.metaDescription || "";
   let metaTitle = entry.title && entry.title !== entry.slug ? entry.title : "";
 
   try {
@@ -153,7 +153,7 @@ export default async function BlogPostPage({ params }: Props) {
   }
 
   let title = post.title && post.title !== post.slug ? post.title : "";
-  let metaDescription = post.excerpt || "";
+  let metaDescription = post.metaDescription || "";
 
   try {
     const t = await getTranslations({ locale, namespace: "blogPosts" });
