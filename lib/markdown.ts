@@ -87,7 +87,8 @@ export function markdownToBlocks(markdown: string): BlogBlock[] {
         flushAll();
         blocks.push({
           type: "figure",
-          caption: imgMatch[1] || undefined,
+          alt: imgMatch[1]?.trim() || undefined,
+          caption: undefined,
           image: imgMatch[2],
         });
         if (after) currentParagraph.push(after);
@@ -101,7 +102,8 @@ export function markdownToBlocks(markdown: string): BlogBlock[] {
         flushAll();
         blocks.push({
           type: "figure",
-          caption: altMatch ? altMatch[1] : undefined,
+          alt: altMatch ? altMatch[1]?.trim() : undefined,
+          caption: undefined,
           image: srcMatch[1],
         });
       } else {

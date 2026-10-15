@@ -12,7 +12,7 @@ export type BlogBlock =
   | { type: "p"; text: string }
   | { type: "ul"; items: string[] }
   | { type: "ol"; items: string[] }
-  | { type: "figure"; image: string; caption?: string }
+  | { type: "figure"; image: string; caption?: string; alt?: string }
   | { type: "quote"; text: string; cite?: string }
   | { type: "callout"; title: string; text: string };
 

@@ -134,7 +134,8 @@ function renderBlock(
 
     case "figure": {
       const imageUrl = normalizeMediaUrl(block.image);
-      const altText = block.caption || "Ilustrasi artikel Optimark";
+      const altText = block.alt || block.caption || "";
+      const showCaption = Boolean(block.caption && block.caption !== block.alt);
       return (
         <figure className={cx(mt, "flex flex-col gap-3 my-6")}>
           <div className="relative h-60 overflow-hidden rounded-2xl border-[0.5px] border-black/10 sm:h-96 w-full bg-gray-50">
@@ -146,7 +147,7 @@ function renderBlock(
               className="object-cover"
             />
           </div>
-          {block.caption && (
+          {showCaption && (
             <figcaption className="text-sm tracking-tight text-[#717680] text-center italic">
               {block.caption}
             </figcaption>
