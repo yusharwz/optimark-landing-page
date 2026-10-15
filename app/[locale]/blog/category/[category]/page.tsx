@@ -106,6 +106,11 @@ export default async function BlogCategoryPageEn({ params }: Props) {
   const locale = resolveLocale(localeParam);
   setRequestLocale(locale);
 
+  // If accessed in Indonesian, redirect to canonical /blog/kategori/{category}
+  if (locale === "id") {
+    redirect(`/blog/kategori/${category}`);
+  }
+
   const cmsCategory = await fetchCmsCategoryBySlug(category, locale);
   if (!isBlogCategoryId(category) && !cmsCategory) {
     notFound();
@@ -114,11 +119,6 @@ export default async function BlogCategoryPageEn({ params }: Props) {
   const idSlug = cmsCategory?.slugId || cmsCategory?.slug || category;
   const enSlug = cmsCategory?.slugEn || cmsCategory?.slug || category;
   const canonicalSlug = locale === "en" ? enSlug : idSlug;
-
-  // If accessed in Indonesian, redirect to canonical /blog/kategori/{idSlug}
-  if (locale === "id") {
-    redirect(`/blog/kategori/${idSlug}`);
-  }
 
   // If slug is not canonical for English, redirect to correct English slug
   if (category !== canonicalSlug && (cmsCategory?.slugId || cmsCategory?.slugEn)) {
