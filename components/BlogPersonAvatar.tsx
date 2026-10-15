@@ -32,11 +32,12 @@ export function BlogPersonAvatar({
   kind?: "author" | "reviewer";
   className?: string;
 }) {
-  const photo =
+  const rawPhoto =
     avatarUrl ||
     (id && id in BLOG_PERSON_PHOTOS
       ? BLOG_PERSON_PHOTOS[id as keyof typeof BLOG_PERSON_PHOTOS]
       : undefined);
+  const photo = rawPhoto ? rawPhoto.replace(/\.(?:jpg|jpeg|png)$/i, '.webp') : undefined;
 
   return (
     <span

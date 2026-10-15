@@ -75,7 +75,19 @@ export interface CmsArticleDetail extends CmsArticleSummary {
   } | null;
 }
 
-export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail): BlogPost {
+function normalizeMediaUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  return url.replace(/\.(?:jpg|jpeg|png)$/i, '.webp');
+}
+
+function normalizeContentImages(content?: string | null): string | undefined {
+  if (!content) return undefined;
+  return content
+    .replace(/\/images\/blog\/([a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png)/gi, 'https://optimark-staging-media.dritech.co.id/optimark/blog/$1.webp')
+    .replace(/(https:\/\/optimark-staging-media\.dritech\.co\.id\/optimark\/blog\/[a-zA-Z0-9_-]+)\.(?:jpg|jpeg|png)/gi, '$1.webp');
+}
+
+export function cmsArticleToBlogPost(item: CmsArticleDetail | CmsArticleSummary): BlogPost {
   const authorSlug = item.author?.slug || "rafi-rizky";
   const reviewerSlug = ("reviewer" in item && item.reviewer?.slug) || "jonathan-anderson";
   const categorySlug = (item.category?.slug as BlogCategoryId) || "seo";
@@ -88,23 +100,23 @@ export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail)
     title: item.title,
     metaDescription: ("metaDescription" in item && item.metaDescription) || undefined,
     excerpt: item.excerpt || undefined,
-    content: ("content" in item && item.content) || undefined,
+    content: normalizeContentImages(("content" in item && item.content) || undefined),
     category: categorySlug,
     categoryName: item.category?.name || undefined,
     publishedAt: item.publishedAt,
     updatedAt: item.contentUpdatedAt || item.updatedAt || undefined,
     readMinutes: item.readMinutes || 5,
-    cover: item.coverImageUrl || undefined,
+    cover: normalizeMediaUrl(item.coverImageUrl) || undefined,
     coverAlt: item.coverImageAlt || item.title,
     tags: (item.tags as string[]) || [],
     author: authorSlug,
     authorName: item.author?.name || undefined,
     authorRole: item.author?.role || undefined,
-    authorAvatar: item.author?.avatarUrl || undefined,
+    authorAvatar: normalizeMediaUrl(item.author?.avatarUrl) || undefined,
     reviewer: reviewerSlug,
     reviewerName: ("reviewer" in item && item.reviewer?.name) || undefined,
     reviewerRole: ("reviewer" in item && item.reviewer?.role) || undefined,
-    reviewerAvatar: ("reviewer" in item && item.reviewer?.avatarUrl) || undefined,
+    reviewerAvatar: normalizeMediaUrl(("reviewer" in item && item.reviewer?.avatarUrl) || undefined),
     tableOfContents: ("tableOfContents" in item && item.tableOfContents) || undefined,
   };
 }
@@ -392,13 +404,25 @@ export interface CmsPerson {
   reviewedArticles?: unknown[];
 }
 
+function normalizePerson(person: CmsPerson): CmsPerson {
+  return {
+    ...person,
+    avatarUrl: normalizeMediaUrl(person.avatarUrl),
+    experienceId: person.experienceId?.map((i) => ({ ...i, logo: normalizeMediaUrl(i.logo) })),
+    experienceEn: person.experienceEn?.map((i) => ({ ...i, logo: normalizeMediaUrl(i.logo) })),
+    educationId: person.educationId?.map((i) => ({ ...i, logo: normalizeMediaUrl(i.logo) })),
+    educationEn: person.educationEn?.map((i) => ({ ...i, logo: normalizeMediaUrl(i.logo) })),
+  };
+}
+
 export async function fetchCmsPeople(): Promise<CmsPerson[]> {
   try {
     const res = await fetch(`${getCmsBaseUrl()}/people`, {
       next: { revalidate: 300, tags: ['cms-people'] },
     });
     if (!res.ok) return [];
-    return (await res.json()) as CmsPerson[];
+    const data = (await res.json()) as CmsPerson[];
+    return Array.isArray(data) ? data.map(normalizePerson) : [];
   } catch {
     return [];
   }
@@ -410,7 +434,8 @@ export async function fetchCmsPersonBySlug(slug: string): Promise<CmsPerson | nu
       next: { revalidate: 300, tags: ['cms-people'] },
     });
     if (!res.ok) return null;
-    return (await res.json()) as CmsPerson;
+    const data = (await res.json()) as CmsPerson;
+    return data ? normalizePerson(data) : null;
   } catch {
     return null;
   }
