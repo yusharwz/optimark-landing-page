@@ -39,17 +39,39 @@ export function escapeXml(unsafe: string): string {
   });
 }
 
+export interface SitemapNavOptions {
+  parent?: string;
+  parentTitle?: string;
+  breadcrumbParent?: string;
+  breadcrumbCurrent?: string;
+}
+
 export interface SitemapIndexEntry {
   loc: string;
   lastmod?: Date | string;
 }
 
-export function renderSitemapIndexXml(entries: SitemapIndexEntry[]): string {
+export function renderSitemapIndexXml(entries: SitemapIndexEntry[], nav?: SitemapNavOptions): string {
   const xslUrl = "/sitemap.xsl";
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<?xml-stylesheet type="text/xsl" href="${xslUrl}"?>\n`;
-  xml += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+  let rootAttrs = `xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"`;
+  if (nav?.parent) {
+    rootAttrs += ` parent="${escapeXml(nav.parent)}"`;
+  }
+  if (nav?.parentTitle) {
+    rootAttrs += ` parent-title="${escapeXml(nav.parentTitle)}"`;
+  }
+  if (nav?.breadcrumbParent) {
+    rootAttrs += ` breadcrumb-parent="${escapeXml(nav.breadcrumbParent)}"`;
+  }
+  if (nav?.breadcrumbCurrent) {
+    rootAttrs += ` breadcrumb-current="${escapeXml(nav.breadcrumbCurrent)}"`;
+  }
+
+  xml += `<sitemapindex ${rootAttrs}>\n`;
 
   for (const entry of entries) {
     xml += `  <sitemap>\n`;
@@ -70,12 +92,27 @@ export interface UrlsetEntry {
   alternates?: Record<string, string>;
 }
 
-export function renderUrlsetXml(entries: UrlsetEntry[]): string {
+export function renderUrlsetXml(entries: UrlsetEntry[], nav?: SitemapNavOptions): string {
   const xslUrl = "/sitemap.xsl";
 
   let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
   xml += `<?xml-stylesheet type="text/xsl" href="${xslUrl}"?>\n`;
-  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
+
+  let rootAttrs = `xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml"`;
+  if (nav?.parent) {
+    rootAttrs += ` parent="${escapeXml(nav.parent)}"`;
+  }
+  if (nav?.parentTitle) {
+    rootAttrs += ` parent-title="${escapeXml(nav.parentTitle)}"`;
+  }
+  if (nav?.breadcrumbParent) {
+    rootAttrs += ` breadcrumb-parent="${escapeXml(nav.breadcrumbParent)}"`;
+  }
+  if (nav?.breadcrumbCurrent) {
+    rootAttrs += ` breadcrumb-current="${escapeXml(nav.breadcrumbCurrent)}"`;
+  }
+
+  xml += `<urlset ${rootAttrs}>\n`;
 
   for (const entry of entries) {
     xml += `  <url>\n`;

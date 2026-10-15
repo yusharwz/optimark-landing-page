@@ -31,7 +31,11 @@ export async function GET(request: NextRequest) {
     lastmod: now,
   }));
 
-  const xml = renderUrlsetXml(entries);
+  const xml = renderUrlsetXml(entries, {
+    parent: "/sitemap.xml",
+    parentTitle: "Root Sitemap Index",
+    breadcrumbCurrent: "Tag Sitemap",
+  });
 
   return new NextResponse(xml, {
     status: 200,

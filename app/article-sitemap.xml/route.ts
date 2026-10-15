@@ -36,7 +36,11 @@ export async function GET(request: NextRequest) {
     },
   ];
 
-  const xml = renderSitemapIndexXml(entries);
+  const xml = renderSitemapIndexXml(entries, {
+    parent: "/sitemap.xml",
+    parentTitle: "Root Sitemap Index",
+    breadcrumbCurrent: "Article Sitemaps",
+  });
 
   return new NextResponse(xml, {
     status: 200,

@@ -29,7 +29,12 @@ export async function GET(request: NextRequest) {
     });
   }
 
-  const xml = renderUrlsetXml(entries);
+  const xml = renderUrlsetXml(entries, {
+    parent: "/category-sitemap.xml",
+    parentTitle: "Category Sitemap Index",
+    breadcrumbParent: "Category Sitemaps",
+    breadcrumbCurrent: "Indonesian Category Sitemap",
+  });
 
   return new NextResponse(xml, {
     status: 200,

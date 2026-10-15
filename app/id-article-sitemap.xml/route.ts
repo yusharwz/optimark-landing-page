@@ -74,7 +74,12 @@ export async function GET(request: NextRequest) {
     entries.push(createLocalizedEntry(reviewerHref(reviewerSlug), "id", now, origin));
   }
 
-  const xml = renderUrlsetXml(entries);
+  const xml = renderUrlsetXml(entries, {
+    parent: "/article-sitemap.xml",
+    parentTitle: "Article Sitemap Index",
+    breadcrumbParent: "Article Sitemaps",
+    breadcrumbCurrent: "Indonesian Article Sitemap",
+  });
 
   return new NextResponse(xml, {
     status: 200,

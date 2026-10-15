@@ -18,7 +18,12 @@ export async function GET(request: NextRequest) {
     entries.push(createLocalizedEntry(route, "id", now, origin));
   }
 
-  const xml = renderUrlsetXml(entries);
+  const xml = renderUrlsetXml(entries, {
+    parent: "/page-sitemap.xml",
+    parentTitle: "Page Sitemap Index",
+    breadcrumbParent: "Page Sitemaps",
+    breadcrumbCurrent: "Indonesian Page Sitemap",
+  });
 
   return new NextResponse(xml, {
     status: 200,
