@@ -29,13 +29,14 @@
             text-decoration: none;
           }
           a:hover {
-            color: #135e96;
             text-decoration: underline;
           }
           .header-banner {
             background-color: #3b71ca;
             color: #ffffff;
-            padding: 32px 20px;
+            padding: 28px 20px;
+            margin-bottom: 24px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
           }
           .header-banner-inner {
             max-width: 960px;
@@ -48,15 +49,15 @@
             color: #ffffff;
           }
           .header-banner p {
-            font-size: 13.5px;
-            line-height: 1.5;
-            color: #ffffff;
-            margin-bottom: 4px;
-            max-width: 900px;
+            font-size: 13px;
+            color: #f0f4f8;
+            margin-bottom: 6px;
+            max-width: 800px;
           }
           .header-banner a {
             color: #ffffff;
             text-decoration: underline;
+            font-weight: 600;
           }
           .header-banner a:hover {
             color: #e0e7ff;
@@ -66,75 +67,117 @@
             margin: 0 auto;
             padding: 24px 20px;
           }
-          .back-nav {
-            margin-bottom: 14px;
+          .back-nav-container {
+            margin-bottom: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 10px 16px;
           }
-          .back-nav a {
+          .back-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+          }
+          .back-nav-btn {
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            text-decoration: none;
+            font-size: 12.5px;
             font-weight: 600;
-            color: #2271b1;
+            transition: all 0.15s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+          }
+          .back-nav-btn:hover {
+            background-color: #3b71ca;
+            border-color: #3b71ca;
+            color: #ffffff;
+            text-decoration: none;
+          }
+          .breadcrumbs {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 12px;
+            color: #64748b;
+            flex-wrap: wrap;
+          }
+          .breadcrumbs a {
+            color: #2563eb;
+            text-decoration: none;
+          }
+          .breadcrumbs a:hover {
+            text-decoration: underline;
+          }
+          .breadcrumbs .sep {
+            color: #94a3b8;
+          }
+          .breadcrumbs .current {
+            color: #0f172a;
+            font-weight: 600;
           }
           .expl {
             font-size: 13.5px;
             color: #444444;
             margin-bottom: 16px;
           }
-          .expl strong {
-            color: #111827;
-            font-weight: 700;
-          }
           .table-responsive {
+            width: 100%;
             overflow-x: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 4px;
+            margin-bottom: 24px;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
           }
           table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
+            font-size: 13px;
           }
           thead th {
             background-color: #3b71ca;
             color: #ffffff;
-            font-size: 13px;
             font-weight: 600;
             padding: 10px 14px;
             border: none;
           }
-          thead th:last-child {
-            width: 220px;
-          }
-          tbody tr {
-            border-bottom: 1px solid #e5e7eb;
-            transition: background-color 0.1s ease;
+          tbody td {
+            padding: 9px 14px;
+            border-bottom: 1px solid #eef2f6;
           }
           tbody tr:nth-child(even) {
-            background-color: #f9fafb;
+            background-color: #f8fafc;
           }
           tbody tr:hover {
-            background-color: #f3f4f6;
+            background-color: #f1f5f9;
           }
-          tbody td {
-            padding: 10px 14px;
-            font-size: 13px;
-            color: #374151;
-            vertical-align: middle;
-          }
-          tbody td.url-cell a {
+          .url-cell {
             word-break: break-all;
           }
-          tbody td.date-cell {
-            color: #6b7280;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 12.5px;
+          .date-cell {
             white-space: nowrap;
+            color: #64748b;
+            font-size: 12px;
           }
           .footer-note {
-            margin-top: 24px;
+            margin-top: 32px;
+            padding-top: 16px;
+            border-top: 1px solid #eef2f6;
+            color: #94a3b8;
             font-size: 12px;
-            color: #9ca3af;
+            text-align: center;
           }
         </style>
       </head>
@@ -148,9 +191,102 @@
         </div>
 
         <div class="content-wrap">
+          <div id="sitemap-navigation" class="back-nav-container">
+            <div class="back-nav-links">
+              <a href="/sitemap.xml" id="sitemap-back-btn" class="back-nav-btn">&#8592; Back to Sitemap Index</a>
+            </div>
+            <div class="breadcrumbs" id="sitemap-breadcrumbs">
+              <a href="/sitemap.xml">Sitemap Index</a>
+            </div>
+          </div>
           <xsl:apply-templates />
           <p class="footer-note">Optimark AI — Dynamic XML Sitemap</p>
         </div>
+        <script type="text/javascript">
+          <![CDATA[
+          (function() {
+            function initNav() {
+              var path = window.location.pathname || '';
+              var nav = document.getElementById('sitemap-navigation');
+              if (!nav) return;
+
+              var isRoot = path === '/sitemap.xml' || path === '' || path === '/';
+              var parentUrl = '/sitemap.xml';
+              var parentLabel = 'Main Sitemap Index';
+              var crumbs = [{ label: 'Root Index', url: '/sitemap.xml' }];
+
+              if (isRoot) {
+                nav.innerHTML = '<div class="back-nav-links">' +
+                  '<a href="/" class="back-nav-btn">&#8592; Back to Optimark Home</a>' +
+                '</div>' +
+                '<div class="breadcrumbs"><span class="current">Root Sitemap Index (/sitemap.xml)</span></div>';
+                return;
+              }
+
+              if (path.indexOf('category-sitemap') !== -1) {
+                if (path === '/category-sitemap.xml') {
+                  parentUrl = '/sitemap.xml';
+                  parentLabel = 'Main Sitemap Index';
+                  crumbs.push({ label: 'Category Sitemaps', url: '/category-sitemap.xml' });
+                } else {
+                  parentUrl = '/category-sitemap.xml';
+                  parentLabel = 'Category Sitemap Index';
+                  crumbs.push({ label: 'Category Sitemaps', url: '/category-sitemap.xml' });
+                  var isEn = path.indexOf('en-') !== -1;
+                  crumbs.push({ label: isEn ? 'English Category Sitemap' : 'Indonesian Category Sitemap', url: path });
+                }
+              } else if (path.indexOf('article-sitemap') !== -1 || path.indexOf('blog-sitemap') !== -1) {
+                if (path === '/article-sitemap.xml' || path === '/blog-sitemap.xml') {
+                  parentUrl = '/sitemap.xml';
+                  parentLabel = 'Main Sitemap Index';
+                  crumbs.push({ label: 'Article Sitemaps', url: '/article-sitemap.xml' });
+                } else {
+                  parentUrl = '/article-sitemap.xml';
+                  parentLabel = 'Article Sitemap Index';
+                  crumbs.push({ label: 'Article Sitemaps', url: '/article-sitemap.xml' });
+                  var isEn = path.indexOf('en-') !== -1;
+                  crumbs.push({ label: isEn ? 'English Article Sitemap' : 'Indonesian Article Sitemap', url: path });
+                }
+              } else if (path.indexOf('page-sitemap') !== -1) {
+                if (path === '/page-sitemap.xml') {
+                  parentUrl = '/sitemap.xml';
+                  parentLabel = 'Main Sitemap Index';
+                  crumbs.push({ label: 'Page Sitemaps', url: '/page-sitemap.xml' });
+                } else {
+                  parentUrl = '/page-sitemap.xml';
+                  parentLabel = 'Page Sitemap Index';
+                  crumbs.push({ label: 'Page Sitemaps', url: '/page-sitemap.xml' });
+                  var isEn = path.indexOf('en-') !== -1;
+                  crumbs.push({ label: isEn ? 'English Page Sitemap' : 'Indonesian Page Sitemap', url: path });
+                }
+              } else if (path.indexOf('tag-sitemap') !== -1) {
+                parentUrl = '/sitemap.xml';
+                parentLabel = 'Main Sitemap Index';
+                crumbs.push({ label: 'Tag Sitemap', url: '/tag-sitemap.xml' });
+              }
+
+              var crumbHtml = crumbs.map(function(c, i) {
+                if (i === crumbs.length - 1) {
+                  return '<span class="current">' + c.label + '</span>';
+                }
+                return '<a href="' + c.url + '">' + c.label + '</a><span class="sep">&#8250;</span>';
+              }).join(' ');
+
+              nav.innerHTML = '<div class="back-nav-links">' +
+                '<a href="' + parentUrl + '" class="back-nav-btn">&#8592; Back to ' + parentLabel + '</a>' +
+                (parentUrl !== '/sitemap.xml' ? '<a href="/sitemap.xml" class="back-nav-btn" style="color:#64748b;">&#8593; Root Index</a>' : '') +
+              '</div>' +
+              '<div class="breadcrumbs">' + crumbHtml + '</div>';
+            }
+
+            if (document.readyState === 'loading') {
+              document.addEventListener('DOMContentLoaded', initNav);
+            } else {
+              initNav();
+            }
+          })();
+          ]]>
+        </script>
       </body>
     </html>
   </xsl:template>
@@ -203,9 +339,6 @@
 
   <!-- Urlset Template -->
   <xsl:template match="sitemap:urlset">
-    <div class="back-nav">
-      <a href="/sitemap.xml">&#8592; Back to Sitemap Index</a>
-    </div>
     <p class="expl">
       This XML Sitemap contains <strong><xsl:value-of select="count(sitemap:url)"/></strong> URLs.
     </p>
