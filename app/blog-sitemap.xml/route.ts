@@ -7,7 +7,6 @@ import {
 } from "@/lib/sitemap";
 import {
   BLOG_AUTHOR_IDS,
-  BLOG_CATEGORY_IDS,
   BLOG_TAG_IDS,
   BLOG_POSTS,
   BLOG_REVIEWER_IDS,

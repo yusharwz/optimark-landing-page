@@ -99,7 +99,7 @@ export function getSiteUrl(): string {
 export const SITE_URL = {
   toString: () => getSiteUrl(),
   valueOf: () => getSiteUrl(),
-  replace: (pattern: any, replacement: any) => getSiteUrl().replace(pattern, replacement),
+  replace: (pattern: string | RegExp, replacement: string) => getSiteUrl().replace(pattern, replacement),
   startsWith: (searchString: string) => getSiteUrl().startsWith(searchString),
   endsWith: (searchString: string) => getSiteUrl().endsWith(searchString),
   includes: (searchString: string) => getSiteUrl().includes(searchString),

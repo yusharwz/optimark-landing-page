@@ -6,6 +6,7 @@ import {
   BLOG_REVIEWER_IDS,
   type BlogCategoryId,
   type BlogPost,
+  type BlogSlug,
 } from "@/config/blog";
 
 export function getCmsBaseUrl(): string {
@@ -80,7 +81,7 @@ export function cmsArticleToBlogPost(item: CmsArticleSummary | CmsArticleDetail)
   const categorySlug = (item.category?.slug as BlogCategoryId) || "seo";
   return {
     id: item.id,
-    slug: item.slug as any,
+    slug: item.slug as unknown as BlogSlug,
     slugId: item.slugId,
     slugEn: item.slugEn,
     alternateSlugs: item.alternateSlugs,
