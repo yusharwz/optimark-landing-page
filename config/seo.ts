@@ -140,7 +140,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "ai content maker gratis",
         "ai content generator",
       ],
-      metaTitle: "AI Content Maker - Buat Konten Otomatis dengan AI | Optimark",
+      metaTitle: "Optimark AI Content Maker",
       metaDescription:
         "Buat artikel, copy marketing, caption, dan ide konten dengan AI Content Maker Optimark. Sesuaikan konten dengan kebutuhan dan gaya brand Anda.",
       canonical: "https://optimark.ai/ai-content-maker",
@@ -162,7 +162,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "free ai content generator",
         "ai copywriting tool",
       ],
-      metaTitle: "AI Content Maker - Create Content with AI | Optimark",
+      metaTitle: "Optimark AI Content Maker",
       metaDescription:
         "Create articles, marketing copy, captions, and content ideas with Optimark AI Content Maker. Customize your content to match your brand and business needs.",
       canonical: "https://optimark.ai/en/ai-content-maker",
@@ -182,7 +182,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
       mainKeyword: "perencanaan konten",
       sv: 150,
       secondaryKeywords: ["ai social media scheduler", "tools manajemen konten"],
-      metaTitle: "Perencanaan Konten - Atur Jadwal Konten dengan AI | Optimark",
+      metaTitle: "Optimark Perencana Konten",
       metaDescription:
         "Rencanakan dan kelola konten media sosial dengan lebih teratur menggunakan Optimark dalam satu platform untuk mendukung aktivitas marketing bisnis.",
       canonical: "https://optimark.ai/perencana-konten",
@@ -204,7 +204,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "ai social media scheduler",
         "content planning tools",
       ],
-      metaTitle: "Content Planner - Plan & Schedule Content with AI | Optimark",
+      metaTitle: "Optimark Content Planner",
       metaDescription:
         "Plan and manage your social media content with Optimark Content Planner. Organize content and schedules in one platform for your marketing needs.",
       canonical: "https://optimark.ai/en/content-planner",
@@ -224,7 +224,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
       mainKeyword: "ai seo analyzer",
       sv: 1000,
       secondaryKeywords: ["tools audit seo", "riset kata kunci ai", "cek seo website"],
-      metaTitle: "AI SEO Analyzer - Audit SEO Website dengan AI | Optimark",
+      metaTitle: "Optimark SEO Analyzer",
       metaDescription:
         "Audit SEO website, riset kata kunci, dan temukan peluang optimasi dengan AI SEO Analyzer Optimark untuk membantu meningkatkan performa traffic organik.",
       canonical: "https://optimark.ai/seo-analyzer",
@@ -237,7 +237,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
       mainKeyword: "ai seo analyzer tool",
       sv: 1100,
       secondaryKeywords: ["website seo audit", "ai keyword research", "check website seo"],
-      metaTitle: "AI SEO Analyzer - Audit Your Website with AI | Optimark",
+      metaTitle: "Optimark SEO Analyzer",
       metaDescription:
         "Audit your website, analyze keywords, and discover SEO opportunities with Optimark AI SEO Analyzer to improve your organic search performance.",
       canonical: "https://optimark.ai/en/seo-analyzer",
@@ -261,7 +261,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "generator visual marketing ai",
         "ai image generator untuk bisnis",
       ],
-      metaTitle: "AI Image Generator - Buat Gambar dengan AI | Optimark",
+      metaTitle: "Optimark AI Image",
       metaDescription:
         "Buat gambar dengan AI untuk kebutuhan konten dan marketing. AI Image Optimark membantu mengubah ide menjadi gambar sesuai kebutuhan bisnis Anda.",
       canonical: "https://optimark.ai/ai-image",
@@ -283,7 +283,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "ai marketing visual generator",
         "ai image generator for business",
       ],
-      metaTitle: "AI Image Generator - Create Images with AI | Optimark",
+      metaTitle: "Optimark AI Image",
       metaDescription:
         "Create images with AI for your content and marketing needs. Optimark AI Image helps turn your ideas into images for your business.",
       canonical: "https://optimark.ai/en/ai-image",
@@ -307,7 +307,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "ai video maker untuk konten",
         "ai video generator untuk bisnis",
       ],
-      metaTitle: "AI Video Generator - Buat Video dengan AI | Optimark",
+      metaTitle: "Optimark AI Video",
       metaDescription:
         "Buat video dengan AI untuk kebutuhan konten dan marketing bisnis. AI Video Optimark membantu mengubah ide menjadi video yang siap digunakan.",
       canonical: "https://optimark.ai/ai-video",
@@ -329,7 +329,7 @@ export const SEO_CONFIG: Record<SeoPageKey, PageSeoConfig> = {
         "ai video maker for content",
         "ai video generator for business",
       ],
-      metaTitle: "AI Video Generator - Create Videos with AI | Optimark",
+      metaTitle: "Optimark AI Video",
       metaDescription:
         "Create videos with AI for your content and marketing needs. Optimark AI Video helps turn your ideas into videos ready for your business content.",
       canonical: "https://optimark.ai/en/ai-video",
@@ -549,9 +549,13 @@ export function getSeoData(key: SeoPageKey, locale: AppLocale): SeoItemData {
   const siteUrl = getSiteUrl();
   return {
     ...raw,
-    canonical: raw.canonical ? raw.canonical.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.canonical,
+    canonical: raw.canonical
+      ? raw.canonical.replace(/^https?:\/\/optimark\.ai/, siteUrl)
+      : raw.canonical,
     link: raw.link ? raw.link.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.link,
-    linkBefore: raw.linkBefore ? raw.linkBefore.replace(/^https?:\/\/optimark\.ai/, siteUrl) : raw.linkBefore,
+    linkBefore: raw.linkBefore
+      ? raw.linkBefore.replace(/^https?:\/\/optimark\.ai/, siteUrl)
+      : raw.linkBefore,
   };
 }
 

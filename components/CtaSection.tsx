@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/base/buttons/button";
+import { GET_STARTED_URL } from "@/config/site";
 import { gsap, useGSAP } from "@/lib/gsap";
 
 export function CtaSection() {
@@ -26,10 +27,10 @@ export function CtaSection() {
             trigger: contentRef.current,
             start: "top 85%",
           },
-        }
+        },
       );
     },
-    { scope: containerRef }
+    { scope: containerRef },
   );
 
   return (
@@ -71,7 +72,7 @@ export function CtaSection() {
           {t("description")}
         </p>
         <div className="mt-10">
-          <Button href="/pricing" size="xl" className="sm:px-10 text-white">
+          <Button href={GET_STARTED_URL} size="xl" className="sm:px-10 text-white">
             {t("button")}
           </Button>
         </div>

@@ -17,7 +17,6 @@ import {
   CalendarCheck,
   Clock,
   PenTool,
-  Bookmark,
   MessageSquare,
   Wand2,
 } from "lucide-react";
@@ -26,7 +25,7 @@ import { useTranslations } from "next-intl";
 
 export default function AiContentMakerPage() {
   const t = useTranslations("featureDetail");
-  const cardIcons = [Bookmark, MessageSquare, Wand2, Clock, CalendarCheck, PenTool];
+  const cardIcons = [MessageSquare, Wand2, Clock, CalendarCheck, PenTool];
   const mockups = [
     {
       key: "caption",

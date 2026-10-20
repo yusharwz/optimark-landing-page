@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/base/buttons/button";
+import { GET_STARTED_URL } from "@/config/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { cx } from "@/utils/cx";
 
@@ -61,8 +62,7 @@ export function VideoShowcaseSection() {
     setSlideState(([s]) => [(s + dir + CARDS.length) % CARDS.length, dir]);
   const next = () => paginate(1);
   const prev = () => paginate(-1);
-  const goToSlide = (i: number) =>
-    setSlideState(([s]) => [i, i > s ? 1 : -1]);
+  const goToSlide = (i: number) => setSlideState(([s]) => [i, i > s ? 1 : -1]);
 
   // Real ratios read off the loaded videos, keyed by card id. Until a clip
   // reports in, its hardcoded `ratio` stands in.
@@ -94,7 +94,7 @@ export function VideoShowcaseSection() {
           </div>
           <div className="shrink-0">
             <Button
-              href="/pricing"
+              href={GET_STARTED_URL}
               size="lg"
               className="text-white"
               iconTrailing={<ArrowRight className="size-5" />}
@@ -125,12 +125,10 @@ export function VideoShowcaseSection() {
                   if (swipe < -50 || velocity < -300) next();
                   else if (swipe > 50 || velocity > 300) prev();
                 }}
-                style={
-                  { "--ar": ratio, aspectRatio: "var(--ar)" } as CSSProperties
-                }
+                style={{ "--ar": ratio, aspectRatio: "var(--ar)" } as CSSProperties}
                 className={cx(
                   "shrink-0 cursor-grab touch-pan-y select-none active:cursor-grabbing",
-                  CARD_SIZE
+                  CARD_SIZE,
                 )}
               >
                 <VideoCard
@@ -174,9 +172,7 @@ export function VideoShowcaseSection() {
               onClick={() => goToSlide(i)}
               className={cx(
                 "h-2 rounded-full transition-all duration-300",
-                i === slide
-                  ? "w-6 bg-[#1e280e]"
-                  : "w-2 bg-gray-300 hover:bg-gray-400"
+                i === slide ? "w-6 bg-[#1e280e]" : "w-2 bg-gray-300 hover:bg-gray-400",
               )}
             />
           ))}
@@ -230,7 +226,7 @@ function VideoCard({ src, title, description, onRatio }: VideoCardProps) {
           video.pause();
         }
       },
-      { threshold: 0.25 }
+      { threshold: 0.25 },
     );
 
     observer.observe(video);
@@ -259,9 +255,7 @@ function VideoCard({ src, title, description, onRatio }: VideoCardProps) {
         <h3 className="text-base font-bold tracking-tight text-white sm:text-lg lg:text-xl">
           {title}
         </h3>
-        <p className="mt-1 text-xs leading-snug text-white/80 sm:text-sm">
-          {description}
-        </p>
+        <p className="mt-1 text-xs leading-snug text-white/80 sm:text-sm">{description}</p>
       </div>
     </div>
   );

@@ -14,6 +14,9 @@ import {
   Search,
   FileCheck,
   TrendingUp,
+  Link2,
+  Target,
+  Bot,
   Activity,
 } from "lucide-react";
 import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
@@ -21,7 +24,7 @@ import { useTranslations } from "next-intl";
 
 export default function SeoAnalyzerPage() {
   const t = useTranslations("featureDetail");
-  const cardIcons = [Search, FileCheck, TrendingUp];
+  const cardIcons = [Search, FileCheck, TrendingUp, Link2, Target, Bot];
   const checks = t.raw("seo.checks") as string[];
   const deepFeatures = (t.raw("seo.cards") as { title: string; description: string }[]).map(
     (card, i) => ({ ...card, icon: cardIcons[i] }),
@@ -179,7 +182,7 @@ export default function SeoAnalyzerPage() {
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, margin: "-100px" }}
-              className="grid gap-8 md:grid-cols-3"
+              className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
             >
               {deepFeatures.map((feat, idx) => (
                 <motion.div
