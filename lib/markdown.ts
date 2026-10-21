@@ -41,20 +41,23 @@ export function markdownToBlocks(markdown: string): BlogBlock[] {
 
   for (const line of lines) {
     const trimmed = line.trim();
-    if (!trimmed) {
+    if (!trimmed || /^#{1,6}\s*$/.test(trimmed)) {
       flushAll();
       continue;
     }
 
     if (trimmed.startsWith("### ")) {
       flushAll();
-      blocks.push({ type: "h3", text: trimmed.replace(/^###\s+/, "") });
+      const text = trimmed.replace(/^###\s+/, "").trim();
+      if (text) blocks.push({ type: "h3", text });
     } else if (trimmed.startsWith("## ")) {
       flushAll();
-      blocks.push({ type: "h2", text: trimmed.replace(/^##\s+/, "") });
+      const text = trimmed.replace(/^##\s+/, "").trim();
+      if (text) blocks.push({ type: "h2", text });
     } else if (trimmed.startsWith("# ")) {
       flushAll();
-      blocks.push({ type: "h2", text: trimmed.replace(/^#\s+/, "") });
+      const text = trimmed.replace(/^#\s+/, "").trim();
+      if (text) blocks.push({ type: "h2", text });
     } else if (trimmed.startsWith("- ") || trimmed.startsWith("* ")) {
       flushParagraph();
       flushOl();
