@@ -263,7 +263,7 @@ export const fetchCmsPostBySlug = cache(
       const res = await fetch(url, {
         headers: { Accept: "application/json" },
         next: { revalidate: 60, tags: ["cms-posts", `cms-post-${slug}`] },
-        signal: AbortSignal.timeout(3000),
+        signal: AbortSignal.timeout(5000),
       });
 
       if (res.ok) {
